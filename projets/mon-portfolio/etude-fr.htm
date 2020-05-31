@@ -1,0 +1,97 @@
+<p>Le design de mon portfolio est le résultat d'un challenge que je me suis posé :</p>
+
+<ul>
+  <li>mes autres projets récents ayant un style visuel assez plat et minimaliste, j'ai voulu tenter d'exagérer ce style encore plus en supprimant les ombres et les bordures</li>
+  <li>j'ai aussi voulu essayer de ne pas utiliser de fond blanc ou gris, mais plutôt d'utiliser majoritairement des couleurs vives</li>
+</ul>
+
+<p>Il me restait donc à jouer avec des surfaces rectangulaires colorées, des lignes droites, sans bordures et sans ombres, dans un style plutôt brutaliste. Sur mobile, une ligne oblique coupe la page en deux, plus ou moins penchée selon la taille de l'écran (pour ne pas prendre trop de place verticalement).</p>
+
+<figure>
+  <div style="--w: 1000; --h: 589;"><img src="/mon-portfolio/projets/mon-portfolio/images/ligne-oblique-pc.jpg" width="1000" height="589" alt="" loading="lazy"></div>
+  <div style="--largeur-max: 20rem; --w: 400; --h: 700;"><img src="/mon-portfolio/projets/mon-portfolio/images/ligne-oblique-mobile.jpg" width="400" height="700" alt="" loading="lazy"></div>
+</figure>
+
+<p>L'angle de cette ligne se retrouve dans différents éléments du portfolio. L'effet n'est pas présent sur un écran trop large, où la ligne oblique prendrait trop de place verticalement</p>
+
+<div class="separator"></div>
+
+<p>Mon but était aussi de rendre ce style "vivant" grâce à des animations lorsque le visiteur interagit avec les différents éléments du site.</p>
+
+<p>Dans cette optique, la couleur de fond des boutons s'étend légèrement au survol de la souris ; en cliquant dessus, cette couleur se répand sur tout l'écran, comme si le bouton lui-même contenait la section qu'il appelle et s'étendait jusqu'à remplir toute la fenêtre avant de faire apparaître cette section.</p>
+
+<figure>
+  <div style="--w: 720; --h: 424;"><video loop muted controls width="720" height="424">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/changement-section.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>Le bouton s'étend pour remplir l'écran et faire apparaître la section demandée (vidéo ralentie)</figcaption>
+</figure>
+
+<p>Pour réaliser cette animation de manière fluide, lorsque le visiteur clique sur un bouton, un rectangle coloré est placé derrière celui-ci et redimensionné selon la taille exacte du bouton. Une animation en deux parties simultanées est alors jouée :</p>
+
+<ul>
+  <li>le rectangle coloré est déplacé vers le coin supérieur gauche de la fenêtre</li>
+  <li>en même temps, l'échelle de ce rectangle est agrandie jusqu'à ce qu'il fasse lui-même la taille de la fenêtre</li>
+</ul>
+
+<p>La combinaison de ces deux effets donne l'impression que le bouton s'étend dans toutes les directions jusqu'à remplir la fenêtre entière.</p>
+
+<div class="separator"></div>
+
+<p>De même, la section exposant les détails d'un projet du portfolio s'agrandit à partir du bouton qui l'appelle. Cette animation respecte la forme originale du bouton : rectangle sur PC, parallélogramme sur mobile.</p>
+
+<figure>
+  <div style="--w: 720; --h: 538;"><video loop muted controls width="720" height="538">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/expansion-projet-pc.mp4" type="video/mp4">
+  </video></div>
+  <div style="--largeur-max: 20rem; --w: 640; --h: 966;"><video loop muted controls width="640" height="966">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/expansion-projet-mobile.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>Expansion de la section d'un projet sur PC et mobile (vidéo ralentie)</figcaption>
+</figure>
+
+<p>Pour fluidifier au maximum l'animation d'apparition de cette section, les détails du projet (le "pourquoi du comment") commencent à charger dès le début de l'animation, mais ne sont affichés qu'à la fin de celle-ci. Ces données sont ensuite stockées dans le cache du navigateur pour un chargement encore plus rapide aux prochaines ouvertures de la section.</p>
+
+<div class="separator"></div>
+
+<p>La liste de mes compétences présente celles-ci sous forme d'un graphique montrant depuis quelle année j'ai commencé à développer chaque compétence. Ce graphique est constitué de rectangles colorés qui apparaissent avec une animation qui leur donne un côté moins brut. Encore une fois, sur mobile, les rectangles sont obliques.</p>
+
+<figure>
+  <div style="--w: 580; --h: 698;"><video loop muted controls width="580" height="698">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/apparition-competences-pc.mp4" type="video/mp4">
+  </video></div>
+  <div style="--largeur-max: 20rem; --w: 528; --h: 992;"><video loop muted controls width="528" height="992">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/apparition-competences-mobile.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>Apparition des compétences sur PC et mobile</figcaption>
+</figure>
+
+<p>Dernier exemple : sur le formulaire qui permet de m'envoyer un mail, le bouton d'envoi brutalement rectangulaire se révèle être constitué de trois points qui s'animent pour signifier le chargement pendant l'envoi du message.</p>
+
+<figure>
+  <div style="--largeur-max: 20rem; --w: 544; --h: 754;"><video loop muted controls width="544" height="754">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/envoyer-mail.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>Animation d'envoi d'un e-mail</figcaption>
+</figure>
+
+<div class="separator"></div>
+
+<p>Une grande partie du contenu du site fonctionne grâce à JavaScript. Je me suis donc lancé le défi d'adapter le site, en faisant le moins de changements possibles, pour qu'il fonctionne même pour un visiteur qui aurait désactivé JavaScript. Et c'est chose faite ! (Je tenais à le mentionner.)</p>
+
+<p>Seule la page de détails d'un projet (comme celle que vous lisez en ce moment-même) reste inaccessible quand JavaScript est désactivé. À la place, cliquer sur une miniature de projet dans le portfolio mène directement vers le projet en question.</p>
+
+<div class="separator"></div>
+
+<p>J'aimerais terminer en mentionnant la <a href="https://remiscan.fr/oups" target="_blank" rel="noopener">page d'erreur 404</a> que j'ai conçue. Je voulais quelque chose de visuellement très simple, et j'ai eu l'idée de représenter de la pluie sur fond noir.</p>
+
+<figure>
+  <div style="--w: 720; --h: 414;"><video loop muted controls width="720" height="414">
+    <source src="/mon-portfolio/projets/mon-portfolio/images/pluie-404.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>La pluie tombe dans une boucle infinie</figcaption>
+</figure>
+
+<p>Des gouttes de pluie sont positionnées aléatoirement sur l'écran, puis leur chute est animée. J'ai essayé de donner une impression de profondeur en appliquant un effet de perspective sur le sol, et en changeant la taille et la couleur des gouttes selon leur profondeur apparente.</p>
+
+<p>J'ai tenté deux approches différentes pour l'animation des gouttes : une simple animation CSS qui boucle à l'infini (c'est-à-dire que ce sont les mêmes gouttes qui tombent en boucle), et le remplacement de chaque goutte par une nouvelle goutte positionnée différemment une fois qu'elle est tombée. Les deux approches fonctionnent, mais la première est utilisée par défaut pour des raisons de performance (le CPU est moins sollicité).</p>

@@ -1,0 +1,344 @@
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! LAYOUT BIO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+#bio {
+  grid-template-rows: 1fr;
+  grid-template-columns: 1.2rem 1fr 3.6rem 1fr 1.2rem;
+}
+
+#bio article + article h4.sous-section {
+  align-self: flex-end;
+  box-shadow: 5rem 0 0 0 var(--teinte);
+  padding-left: 0.7em;
+  padding-right: 0;
+}
+
+
+
+/*
+ * PC pas large
+ */
+
+ @media screen and (max-width: 1200px) {
+  #bio article + article h4.sous-section {
+    align-self: flex-start;
+    box-shadow: -5rem 0 0 0 var(--teinte);
+    padding-left: 0;
+    padding-right: 0.7em;
+  }
+
+  #bio {
+    grid-template-columns: 1.2rem 1fr 1.2rem;
+    grid-template-rows: 1fr 1.2rem;
+  }
+}
+
+
+
+/*
+ * Mobile
+ */
+
+@media screen and (max-width: 620px) {
+  #bio {
+    grid-template-columns: calc(100vw - 2.4rem);
+    grid-template-rows: 1fr 1.2rem;
+  }
+}
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! BIOGRAPHIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+#presentation_texte {
+  grid-row: 1 / 2;
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.biographie {
+  display: block;
+}
+
+
+
+/*
+ * Ma photo
+ */
+
+#photo {
+  --width: 8rem;
+  width: var(--width);
+  height: calc(var(--width) + 1.5rem);
+  background-color: rgba(0, 0, 0, .3);
+  background-size: cover;
+  background-position: 45% 50%;
+  float: left;
+  margin: 0 1.2rem .6rem 0;
+  position: relative;
+}
+
+#photo::before {
+  content: '';
+  width: calc(8rem - 6px);
+  height: calc(9.5rem - 6px);
+  box-shadow: inset 0 0 0 2px var(--article-color);
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  z-index: 6;
+  pointer-events: none;
+}
+
+#photosecret {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  opacity: 0;
+  z-index: 5;
+}
+
+#photosecret:not(.nope) {
+  background-image:
+    url('/mon-portfolio/images/cake.png'),
+    linear-gradient(to right, rgba(6, 21, 69, 0.7) 0%, rgba(6, 21, 69, 0.7) 100%);
+  background-position:
+    center 20%,
+    center center;
+  background-size:
+    40% 40%,
+    cover;
+  background-repeat:
+    no-repeat,
+    no-repeat;
+}
+
+@supports not (clip-path: circle(40%)) {
+  #photosecret {
+    display: none;
+  }
+}
+
+
+
+/*
+ * PC pas large
+ */
+
+ @media screen and (max-width: 1200px) {
+  #presentation_texte {
+    grid-row: 3 / 4;
+    grid-column: 2 / 3;
+  }
+}
+
+
+
+/*
+ * Mobile
+ */
+
+@media screen and (max-width: 620px) {
+  #presentation_texte {
+    grid-row: 3 / 4;
+    grid-column: 1 / 2;
+  }
+
+  #photosecret {
+    display: none;
+  }
+}
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! COMPÉTENCES !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+#exp {
+  grid-row: 1 / 2;
+  grid-column: 4 / 5;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+@supports (clip-path: circle(1%))
+{
+  #exp {
+    position: relative;
+  }
+}
+
+.liste-competences {
+  position: relative;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, calc(2.8rem + 5%)) 1fr;
+  grid-template-rows: 1.2rem;
+  --competence-anim-bg-duree: .5s;
+}
+
+.competences-frise-separateur {
+  grid-row: 1 / 7;
+  grid-column-start: var(--colonne);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  height: 100%;
+  border-left: 2px dashed rgba(255, 255, 255, .3);
+  padding-left: 0.2rem;
+  z-index: 1;
+}
+
+.competence-conteneur {
+  grid-row: var(--ligne);
+  grid-column: var(--colonne) / 7;
+  width: 100%;
+  height: 5rem;
+  background: transparent;
+  padding: 0.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.competence-conteneur.mini {
+  height: 4rem;
+}
+
+.competence-background {
+  background: var(--competence-color);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  transform-origin: left center;
+  transform: scaleX(0) translateZ(0);
+  transition: transform var(--competence-anim-bg-duree) cubic-bezier(0.55, 0.055, 0.675, 0.19);
+}
+
+.colored .competence-background {
+  transform: scaleX(1) translateZ(0);
+}
+
+.competence-intro {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2ch;
+}
+
+.competence-texte {
+  transform: translateX(-1rem);
+  opacity: 0;
+  --competence-anim-texte-duree: .3s;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  box-sizing: border-box;
+  position: relative;
+  transition: opacity var(--competence-anim-texte-duree) ease-out var(--competence-anim-bg-duree),
+              transform var(--competence-anim-texte-duree) ease-out var(--competence-anim-bg-duree);
+}
+
+.colored .competence-texte {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.competence-exemples {
+  display: block;
+  padding-right: 2ch;
+  line-height: 1em;
+  text-align: right;
+  opacity: .7;
+}
+
+.competence-exemples li {
+  margin: 0;
+}
+
+
+
+/*
+ * PC pas large
+ */
+
+@media screen and (max-width: 1200px) {
+  #exp {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+  }
+}
+
+
+
+/*
+ * Mobile
+ */
+
+@media screen and (max-width: 620px) {
+  #exp {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+  }
+
+  .liste-competences {
+    width: 100vw;
+    left: -1.2rem;
+    margin: 0 auto calc(2rem + 1px) auto;
+    --competence-anim-bg-duree: .5s;
+  }
+
+  .competences-frise-separateur {
+    --r: calc(0.028 * var(--rem) / var(--vw)); 
+    --decalage: calc(2rem - 2rem * (var(--colonne) - 1) * (var(--r) + 0.05)); /* calcul dans backups/calculs-css-sans-js.txt */
+    height: calc(100% + var(--decalage));
+  }
+
+  .competence-conteneur {
+    height: calc(6rem + 2rem);
+    --r: calc(0.028 * var(--rem) / var(--vw)); 
+    --angle-competence-conteneur: calc(2rem - 2rem * (var(--colonne) - 1) * (var(--r) + 0.05)); /* calcul dans backups/calculs-css-sans-js.txt */
+    -webkit-clip-path: polygon(0 var(--angle-competence-conteneur), 100% 0, 100% calc(100% - var(--angle-competence-conteneur)), 0 100%);
+    clip-path: polygon(0 var(--angle-competence-conteneur), 100% 0, 100% calc(100% - var(--angle-competence-conteneur)), 0 100%);
+    margin: 0 0 calc(-1 * var(--angle-competence-conteneur) - 1px) 0;
+    box-sizing: border-box;
+    padding-bottom: 1.4rem;
+  }
+
+  .competence-intro {
+    padding-right: 2ch;
+  }
+
+  .competence-exemples {
+    max-width: calc(100vw - 12ch - 10%);
+    box-sizing: border-box;
+    font-size: calc(1rem / var(--mod));
+  }
+
+  .competence-conteneur.mini {
+    height: calc(4rem + 2rem);
+  }
+}

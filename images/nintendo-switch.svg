@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 425" style="--console-color: #2F3234; --attache-color: #27292C;">
+  <g id="joycon-gauche">
+    <rect x="0" y="10" width="139" height="99" >
+  </g>
+
+  <g id="joycon-droite">
+  </g>
+
+  <rect x="0" y="0" width="100%" height="100%" fill="#321A32"/>
+  <rect width="60%" height="60%" x="20%" y="20%" fill="#8C488C" transform="rotate(-10 256 256)"/>
+  <text x="80" y="468" font-family="Roboto Thin" font-size="400" fill="#321A32" transform="rotate(-10)">R</text>
+</svg>

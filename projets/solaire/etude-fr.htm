@@ -1,0 +1,93 @@
+<p>Solaire a été inspiré à la fois par ma fascination pour l'astronomie et par des projets comme <a href="https://www.nomanssky.com" target="_blank" rel="noopener">No Man's Sky</a>. Avec Solaire, mon but était d'utiliser mes connaissances en développement web pour créer une expérience contemplative simple : un système planétaire dans un style minimaliste, différent à chaque visite.</p>
+
+<figure>
+  <div style="--w: 1198; --h: 780;"><img src="/mon-portfolio/projets/solaire/images/exemple-systeme-1.png" width="1198" height="780" alt="" loading="lazy"></div>
+  <div style="--w: 1198; --h: 780;"><img src="/mon-portfolio/projets/solaire/images/exemple-systeme-2.png" width="1198" height="780" alt="" loading="lazy"></div>
+  <figcaption>Deux exemples de systèmes planétaires générés aléatoirement</figcaption>
+</figure>
+
+<p>Pour cela, j'utilise Javascript pour générer différents objets : une étoile, ses planètes, leurs lunes et leurs anneaux. Chaque objet a des propriétés déterminées aléatoirement : taille, vitesse, couleur, etc. Chaque objet est ensuite animé pour donner vie au système planétaire.</p>
+
+<p>La première version de Solaire utilisait PHP pour générer un système sur le serveur à chaque visite. Mais j'ai voulu faire de Solaire une application web qui puisse être installée sur téléphone ou PC et fonctionner sans connexion internet ; j'ai donc converti la génération du système en Javascript pour pouvoir générer une infinité de systèmes à la demande sans jamais contacter le serveur.</p>
+
+<figure>
+  <div style="--w: 182; --h: 182;"><img src="/mon-portfolio/projets/solaire/images/exemple-planete-1.jpg" width="182" height="182" alt="" loading="lazy"></div>
+  <div style="--w: 182; --h: 182;"><img src="/mon-portfolio/projets/solaire/images/exemple-planete-2.jpg" width="182" height="182" alt="" loading="lazy"></div>
+  <div style="--w: 182; --h: 182;"><img src="/mon-portfolio/projets/solaire/images/exemple-planete-3.jpg" width="182" height="182" alt="" loading="lazy"></div>
+  <figcaption>Quelques planètes générées aléatoirement</figcaption>
+</figure>
+
+<div class="separator"></div>
+
+<p>En développant Solaire, j'ai déterminé qu'elle devait avoir deux utilités principales :</p>
+
+<ul>
+  <li>la plus simple, un but contemplatif : observer un système planétaire</li>
+  <li>mais aussi découvrir de nouvelles choses à chaque visite</li>
+</ul>
+
+<p>Pour rendre l'observation du système plus intéressante, j'ai décidé de donner accès à diverses options d'affichage qui peuvent changer son apparence.</p>
+
+<figure>
+  <div style="--w: 262; --h: 471;"><img src="/mon-portfolio/projets/solaire/images/options.png" width="262" height="471" alt="" loading="lazy"></div>
+  <figcaption>Options d'affichage</figcaption>
+</figure>
+
+<p>Prenons l'exemple des ombres des planètes. La longueur de chaque ombre n'est pas aléatoire, elle est calculée selon la distance de la planète à l'étoile et la taille de celle-ci.</p>
+
+<p>Une lune qui passe dans l'ombre d'une planète produisait à l'origine une ombre plus sombre (les deux ombres superposées s'additionnaient). J'ai décidé de corriger ce phénomène pour qu'une lune passant dans l'ombre d'une planète cesse d'être éclairée par l'étoile.</p>
+
+<figure>
+  <div style="--w: 310; --h: 265;"><img src="/mon-portfolio/projets/solaire/images/ombres-superposees.jpg" width="310" height="265" alt="" loading="lazy"></div>
+  <div style="--w: 310; --h: 265;"><img src="/mon-portfolio/projets/solaire/images/ombres-fusionnees.jpg" width="310" height="265" alt="" loading="lazy"></div>
+  <figcaption>La superposition des ombres (première image) n'a pas lieu. À la place, un astre qui traverse l'ombre d'un autre astre n'est plus éclairé et ne produit donc pas sa propre ombre (deuxième image)</figcaption>
+</figure>
+
+<p>Pour arriver à cet effet visuel en CSS uniquement, j'ai dû utiliser une petite astuce : les ombres ne sont pas attachées aux planètes, mais elles vivent dans leur propre plan. Chaque ombre est d'un noir opaque, et c'est leur conteneur commun qui est transparent. Ainsi, une ombre opaque superposée à une autre ombre opaque reste opaque, puis la transparence du conteneur lui est appliquée (observé sur la deuxième image ci-dessus).</p>
+
+<p>De plus, le mouvement des ombres des lunes a bénéficié d'une attention particulière. À l'origine, les lunes tournaient simplement autour de leur planète, et leur ombre était donc parallèle à celle de leur planète. Une telle approximation paraît raisonnable lorsqu'on imagine un véritable système planétaire, mais les planètes et les distances de Solaire sont beaucoup plus grandes (par rapport à la taille de l'étoile) que dans la réalité. Les ombres des lunes donnaient donc l'impression d'être incorrectement alignées (première image ci-dessous).</p>
+
+<figure>
+  <div style="--w: 360; --h: 572;"><img src="/mon-portfolio/projets/solaire/images/ombres-non-independantes.png" width="360" height="572" alt="" loading="lazy"></div>
+  <div style="--w: 360; --h: 572;"><img src="/mon-portfolio/projets/solaire/images/ombres-independantes.png" width="360" height="572" alt="" loading="lazy"></div>
+  <figcaption>Les ombres des lunes n'étaient à l'origine pas alignées avec l'étoile (première image), mais elles le sont désormais (deuxième image)</figcaption>
+</figure>
+
+<p>Pour corriger l'alignement des ombres, j'ai dû effectuer quelques calculs mathématiques pour déterminer l'animation exacte que l'on s'attend intuitivement à voir appliquée aux ombres des lunes, qui est en réalité la combinaison de trois animations :</p>
+
+<ul>
+  <li>la rotation de la lune autour de sa planète, à vitesse constante</li>
+  <li>l'oscillation de l'ombre selon la position de la lune par rapport à sa planète</li>
+  <li>la variation de longueur de l'ombre selon la distance de la lune à l'étoile</li>
+</ul>
+
+<p>Après avoir programmé en CSS une animation correspondant au résultat mathématique attendu, les ombres des lunes sont maintenant correctement alignées selon la direction de leur éclairage (deuxième image ci-dessus).</p>
+
+<div class="separator"></div>
+
+<p>Quant à la découverte de nouvelles choses à chaque visite, j'ai décidé d'incorporer un "carnet de découvertes" qui listerait les astres particuliers découverts lors de l'exploration de différents systèmes. Cette fonctionnalité est inspirée des "succès" que l'on débloque dans certains jeux vidéo en découvrant ou accomplissant certaines choses.</p>
+
+<figure>
+  <div style="--w: 462; --h: 609;"><img src="/mon-portfolio/projets/solaire/images/carnet.png" width="462" height="609" alt="" loading="lazy"></div>
+  <figcaption>Le carnet de découvertes</figcaption>
+</figure>
+
+<p>La présence d'un tel carnet de découvertes m'a donné deux idées :</p>
+
+<ul>
+  <li>donner une description de chaque découverte, pour donner un côté légèrement éducatif / informatif à Solaire et susciter la curiosité du visiteur envers des phénomènes astronomiques réels</li>
+  <li>sauvegarder le système dans lequel chaque découverte a été faite, afin de pouvoir le visiter à nouveau n'importe quand</li>
+</ul>
+
+<p>Concevoir ce système de sauvegarde de systèmes a permis non seulement de rendre chaque système revisitable, mais aussi de permettre à n'importe qui de partager un système avec quelqu'un d'autre en donnant son adresse (via un bouton de partage). Ainsi, chaque système peut être partagé pour que n'importe qui d'autre puisse visiter ce système exact.</p>
+
+<figure>
+  <div style="--w: 1207; --h: 880;"><img src="/mon-portfolio/projets/solaire/images/exemple-systeme-adresse.png" width="1207" height="880" alt="" loading="lazy"></div>
+  <figcaption><a href="https://remiscan.fr/solaire/systeme/85398025394613800" target="_blank" rel="noopener">Cliquez ici pour visiter le système exact visible sur la photo</a></figcaption>
+</figure>
+
+<p>L'adresse du système de l'image ci-dessus est "85398025394613800" : c'est simplement un nombre. Chaque système est généré ainsi, à partir d'un simple nombre. Pour garantir qu'une adresse génère toujours le même système, ce nombre est utilisé comme "graine" dans un <a href="https://github.com/pigulla/mersennetwister" target="_blank" rel="noopener">générateur de nombres pseudo-aléatoires Mersenne-Twister</a>, qui génère chaque donnée du système planétaire.</p>
+
+<div class="separator"></div>
+
+<p>Toutes ces fontionnalités étant accessibles via des boutons sur l'interface, j'ai aussi placé un bouton (en forme d'œil) qui permet de cacher cette interface, afin que si le visiteur le désire, il puisse observer le système planétaire sans distraction. De plus, afin que le visiteur puisse zoomer sur le système sans que l'interface elle-même ne grossisse, j'ai dû développer ma propre fonctionnalité de zoom (utilisable avec la molette de la souris, ou en pinçant / écartant deux doigts sur écran tactile) plutôt que de me reposer sur celle incluse par défaut dans le navigateur du visiteur.</p>

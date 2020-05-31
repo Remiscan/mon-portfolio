@@ -1,0 +1,64 @@
+<style>
+  .pc {
+    --width: 100vw;
+    width: var(--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .pc-screen-border {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    width: var(--width);
+    --height-wo-title: calc(0.615 - 0.014 + 0.014 * var(--titlebar, 1));
+    height: calc(var(--height-wo-title) * var(--width));
+    position: relative;
+    border-radius: calc(0.0038 * var(--width));
+    background-color: var(--color, #000);
+  }
+  .pc-screen {
+    position: absolute;
+    width: calc(0.98 * var(--width));
+    --height-wo-title: calc(0.58 - 0.014 + 0.014 * var(--titlebar, 1));
+    height: calc(0.98 * var(--height-wo-title) * var(--width));
+    background-image: var(--image);
+    top: calc(0.01 * var(--width));
+    left: calc(0.01 * var(--width));
+    background-color: #0D0D0D;
+    background-size: cover;
+    background-position: center bottom;
+  }
+  .pc-ear {
+    --size: calc(0.015 * var(--width));
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    background-color: #101010;
+    position: absolute;
+    bottom: calc(0.5 * 0.035 * var(--width) - 0.5 * var(--size));
+  }
+  .pc-foot {
+    --foot-width: calc(0.5 * var(--width));
+    width: var(--foot-width);
+    --arm-width: calc(var(--foot-width)/4);
+    --arm-height: calc(0.615 * var(--width) / 20);
+    box-shadow: inset 0 calc(-1 * 0.0038 * var(--width)) 0 calc(-0.5 * 0.0038 * var(--width)) var(--color, #000);
+    position: relative;
+    z-index: -1;
+    align-self: center;
+  }
+  .pc-arm {
+    width: var(--arm-width);
+    height: var(--arm-height);
+    box-sizing: border-box;
+    margin: 0 auto;
+    background: var(--color, black) linear-gradient(to right, rgba(0, 0, 0, .15), rgba(0, 0, 0, .15) 100%);
+    clip-path: polygon(10% 0, 90% 0, 100% 100%, 0% 100%);
+    position: relative;
+    z-index: -1;
+    top: calc(-0.001 * var(--width));
+  }
+</style>

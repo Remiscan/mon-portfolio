@@ -1,0 +1,43 @@
+<p>Lorsque j'ai commencé à travailler sur le design de mon portfolio, je voulais placer sur la page d'accueil différentes illustrations représentant mes centres d'intérêt. J'ai eu l'idée de représenter une Nintendo Switch, puis de l'animer avec des manettes détachables.</p>
+
+<p>Le design du portfolio a évolué, ne laissant plus de place à cette illustration. J'ai donc décidé de récupérer cette idée pour en faire un petit projet à part : une page web qui permettrait de visualiser une Nintendo Switch avec toutes les combinaisons de couleurs possibles pour les manettes. C'est ainsi qu'est né CSSwitch.</p>
+
+<p>Grâce à HTML et CSS, j'ai dessiné une Nintendo Switch dans un style minimaliste, en me basant sur des images promotionnelles de la vraie console pour que les proportions soient proches de la réalité. Ensuite, grâce à CSS et Javascript, j'ai programmé l'animation de détachement et d'attachement des manettes. J'y ai même joint le bruit caractéristique de l'attachement des manettes de la Switch.</p>
+
+<figure>
+  <div style="--w: 720; --h: 454;"><video loop controls width="720" height="454">
+    <source src="/mon-portfolio/projets/csswitch/images/animation-complete.mp4" type="video/mp4">
+  </video></div>
+  <figcaption>L'animation complète, avec le son !</figcaption>
+</figure>
+
+<p>Ainsi, cliquer sur le bouton sous une manette la détache, puis fait apparaître le menu de choix des couleurs. Choisir une option change la couleur de la manette, puis celle-ci se rattache à la console et le bruit est joué.</p>
+
+<div class="separator"></div>
+
+<p>J'ai aussi programmé un mini-jeu, auquel on peut jouer en allumant la console (en appuyant sur son bouton Home). Une fois allumée, un menu semblable à celui de la véritable Nintendo Switch apparaît, sur lequel on peut choisir quel jeu lancer (il n'y en a qu'un seul pour l'instant, mais j'en ajouterai peut-être d'autres à l'avenir).</p>
+
+<figure>
+  <div style="--w: 720; --h: 361;"><img src="/mon-portfolio/projets/csswitch/images/menu.jpg" width="720" height="361" alt="" loading="lazy"></div>
+  <figcaption>Le bouton Home, illuminé sur la manette de droite, affiche le menu</figcaption>
+</figure>
+
+<p>Le jeu est simple : il faut appuyer sur le bouton au centre de l'écran le plus tôt possible après avoir entendu un bruit ou après avoir vu le bouton changer de couleur (les deux événements ont lieu en même temps). Le meilleur score est enregistré, et persiste lors de prochaines visites de la page.</p>
+
+<figure>
+  <div style="--w: 720; --h: 360;"><img src="/mon-portfolio/projets/csswitch/images/mini-jeu.jpg" width="720" height="360" alt="" loading="lazy"></div>
+  <figcaption>Le mini-jeu</figcaption>
+</figure>
+
+<p>Et impossible de tricher en appuyant sur le bouton en boucle : si on appuie dessus alors que le bruit n'a pas été joué, il devient intouchable pendant 3 secondes et le prochain bruit est reporté.</p>
+
+<div class="separator"></div>
+
+<p>Afin de s'adapter à vos préférences, CSSwitch détecte automatiquement si vous avez activé le mode sombre des applications (par exemple via les paramètres Windows).</p>
+
+<figure>
+  <div style="--w: 720; --h: 343;"><img src="/mon-portfolio/projets/csswitch/images/mode-sombre.png" width="720" height="343" alt="" loading="lazy"></div>
+  <figcaption>Le mode sombre</figcaption>
+</figure>
+
+<p>La page détecte aussi, selon les réglages de votre navigateur, si elle doit s'afficher en français ou en anglais.</p>

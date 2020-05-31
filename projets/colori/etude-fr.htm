@@ -1,0 +1,48 @@
+<p>En m'intéressant à l'utilisation de couleurs vives pour réaliser l'interface de mes différents projets (comme ce portfolio, ou Solaire), je me suis rendu compte que chacun des formats dans lesquels les couleurs peuvent être exprimées en CSS a ses intérêts et ses inconvénients. Afin d'expliquer cela, je vais parler de l'interface de la page de démonstration de colori.js.</p>
+
+<p>Colori étant un projet dont le but est la manipulation des couleurs, il m'a semblé intéressant de réaliser une interface qui puisse se colorer dans n'importe quelle teinte. En arrivant sur la page de démonstration de Colori, une couleur est choisie aléatoirement et utilisée pour générer l'interface. Ensuite, chaque couleur entrée dans le champ prévu à cet effet change la couleur de la page (essayez 'red', 'green' et 'blue' par exemple).</p>
+
+<figure>
+  <div style="--largeur-max: 20rem; --w: 250; --h: 400;"><img src="/mon-portfolio/projets/colori/images/teinte-red.png" width="250" height="400" alt="" loading="lazy"></div>
+  <div style="--largeur-max: 20rem; --w: 250; --h: 400;"><img src="/mon-portfolio/projets/colori/images/teinte-green.png" width="250" height="400" alt="" loading="lazy"></div>
+  <div style="--largeur-max: 20rem; --w: 250; --h: 400;"><img src="/mon-portfolio/projets/colori/images/teinte-blue.png" widt="250" height="400" alt="" loading="lazy"></div>
+  <figcaption>L'interface en rouge, vert et bleu - 3 teintes parmi les 360 possibles !</figcaption>
+</figure>
+
+<p>Ma première approche a été d'exprimer toutes les couleurs de l'interface au format HSL (teinte, saturation, luminosité). En fixant la luminosité et la saturation pour chaque élément, il me suffisait alors de changer la teinte pour recolorer toute la page. Problème : à saturation et luminosité égales, différentes teintes produisent des couleurs qui paraissent plus ou moins vives, et qui ont plus ou moins de contraste avec le texte affiché par-dessus. Varier la teinte seule n'allait donc pas suffire. Mais adapter manuellement saturation et luminosité pour chacune des teintes possibles prendrait beaucoup trop de temps. À l'inverse, restreindre la quantité de teintes possibles pour l'interface ne m'intéressait pas : je voulais vraiment qu'elle puisse s'adapter à n'importe quelle couleur choisie.</p>
+
+<p>Le format HWB (teinte, blancheur, noirceur) m'a paru plus intuitif pour régler ce problème de contraste. Mais là, autre problème : le format HWB n'est pas naturellement reconnu par les navigateurs web pour l'instant. Si je voulais manipuler les couleurs au format HWB, il allait falloir que je les convertisse vers le format HSL ensuite.</p>
+
+<p>Ce genre de questionnement m'a poussé à intégrer diverses fonctions à Colori : convertir une couleur entre ses différents formats (RGB, HSL, HWB), calculer le contraste entre deux couleurs, fusionner deux couleurs, ou encore éditer des propriétés d'une couleur en recalculant dynamiquement les autres. L'API rendant tout ceci possible est expliquée sur la page de démonstration.</p>
+
+<div class="separator"></div>
+
+<p>Voici un exemple de l'adaptation automatique des couleurs de l'interface pour éviter des problèmes de contraste : lorsque la couleur affichée en aperçu devient trop proche de la couleur de fond, le fond s'éclaircit pour maintenir un contraste suffisant.</p>
+
+<figure>
+  <div style="--w: 400; --h: 291;"><img src="/mon-portfolio/projets/colori/images/fond-normal.png" width="400" height="291" alt="" loading="lazy"></div>
+  <div style="--w: 400; --h: 291;"><img src="/mon-portfolio/projets/colori/images/fond-adapte.png" width="400" height="291" alt="" loading="lazy"></div>
+  <figcaption>Le bleu de la deuxième image est plus foncée et se fondrait légèrement dans la couleur de fond, si celle-ci ne s'était pas éclaircie</figcaption>
+</figure>
+
+<p>De même, la couleur de fond de la documentation s'adapte automatiquement pour que le contraste avec le texte soit suffisant. Le texte reste ainsi lisible quelle que soit la couleur de l'interface.</p>
+
+<p>Ce genre d'adaptation automatique en fonction du contraste se retrouve aussi sur mon portfolio : la section que vous lisez en ce moment-même change de couleur selon le projet choisi ; Colori calcule le contraste entre la couleur de fond et le texte et adapte la première en conséquence.</p>
+
+<div class="separator"></div>
+
+<p>Remarquez l'alignement des titres avec leur section, et l'ombre allongée qu'ils projettent.</p>
+
+<figure>
+  <div style="--w: 759; --h: 247;"><img src="/mon-portfolio/projets/colori/images/alignement-titre.png" width="759" height="247" alt="" loading="lazy"></div>
+  <figcaption>Le titre "Documentation" est précisément aligné avec le haut de sa section</figcaption>
+</figure>
+
+<p>Cet effet visuel particulier, qui est obtenu suite à une mesure précise de la police utilisée, est une idée que je souhaite implémenter depuis longtemps. Un effet semblable se trouvait déjà sur un prototype de portfolio développé il y a quelques années.</p>
+
+<figure>
+  <div style="--w: 493; --h: 609;"><img src="/mon-portfolio/projets/colori/images/prototype-portfolio.png" width="493" height="609" alt="" loading="lazy"></div>
+  <figcaption>Une première idée de design pour mon portfolio utilisait un effet similaire</figcaption>
+</figure>
+
+<p>J'ai longtemps souhaité trouver une place à cet effet en-dehors de ce prototype, et je suis content que ce soit chose faite grâce à Colori.</p>

@@ -1,0 +1,56 @@
+<style>
+  .phone {
+    --width: 100vw;
+    --height: calc(2.055 * var(--width));
+    width: var(--width);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 3;
+    border-radius: calc(0.067 * var(--width));
+    --top-bezel: calc(0.0325 * 2.055 * var(--width));
+    background-color: var(--color, #000);
+  }
+  .phone-screen {
+    border-radius: calc(0.5 * var(--top-bezel));
+    border: calc(0.005 * var(--width)) solid black;
+    width: calc(0.96 * var(--width));
+    height: calc((0.96 - 0.059 - 0.029 + var(--navbar, 1) * 0.059 + var(--statusbar, 1) * 0.029) * 2.055 * var(--width));
+    background-image: var(--image);
+    background-size: cover;
+    --position-wo-status: calc(0.029 * var(--height) * (var(--statusbar, 1) - 1));
+    background-position: center var(--position-wo-status, 0);
+    background-repeat: no-repeat;
+    background-color: #0D0D0D;
+    position: relative;
+    margin: var(--top-bezel) 0;
+  }
+  .phone-ear {
+    width: calc(0.167 * var(--width));
+    height: calc(0.25 * var(--top-bezel));
+    background-color: #101010;
+    border-radius: var(--top-bezel);
+    position: absolute;
+    top: calc(0.375 * var(--top-bezel));
+  }
+  .phone-camera {
+    width: calc(0.5 * var(--top-bezel));
+    height: calc(0.5 * var(--top-bezel));
+    border-radius: 50%;
+    position: absolute;
+    top: calc(0.25 * var(--top-bezel));
+    right: 25%;
+    background-color: #121212;
+  }
+  .phone-sensor {
+    width: calc(0.3 * var(--top-bezel));
+    height: calc(0.3 * var(--top-bezel));
+    border-radius: 50%;
+    position: absolute;
+    top: calc(0.35 * var(--top-bezel));
+    right: 20%;
+    background-color: #121220;
+  }
+</style>

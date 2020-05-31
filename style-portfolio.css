@@ -1,0 +1,208 @@
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! LAYOUT PORTFOLIO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+#portfolio {
+  grid-template-rows: 1fr;
+  grid-template-columns: 1.2rem 1fr 1.2rem;
+}
+
+#projets-personnels, #projets-professionnels {
+  grid-column: 2 / 3;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  overflow: visible;
+}
+
+
+
+/*
+ * Mobile
+ */
+
+@media screen and (max-width: 620px) {
+  #portfolio {
+    grid-template-columns: calc(100vw - 2.4rem);
+  }
+
+  #projets-personnels {
+    grid-column: 1 / 2;
+  }
+
+  #projets-professionnels {
+    margin-bottom: 0 !important;
+  }
+}
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! LISTE DE PROJETS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+.liste-projets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  grid-gap: 2.4rem;
+  width: 100%;
+  position: relative;
+}
+
+/*
+ * Aperçu d'un projet
+ */
+
+.projet-conteneur {
+  display: block;
+  width: 100%;
+  padding-top: 50%;
+  height: 0;
+  --couleur: var(--projet-color);
+  background-color: var(--couleur);
+  cursor: pointer;
+}
+
+.projet-conteneur.expandable:hover::before {
+  transform: scale(1.06);
+}
+
+.projet-conteneur-enfant {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  grid-template-columns: 1fr 1fr;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.projet-image {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+
+.projet-titre {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+
+.projet-image, .projet-titre {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.projet-actual-image {
+  background-color: rgba(0, 0, 0, .3);
+  width: 90%;
+  height: 90%;
+}
+
+.actual-image {
+  width: 100%;
+  height: 100%;
+  background-image: none;
+  background-size: cover;
+  background-position: center center;
+  opacity: 0;
+}
+
+.projet-image::after {
+  content: '';
+  width: 0;
+  height: 0;
+  position: absolute;
+  top: calc(50% - 1rem);
+  right: 4.5%;
+  border: 1rem solid transparent;
+  border-right: 1rem solid var(--projet-color);
+}
+
+.projet-titre>span {
+  margin-top: 0.6rem;
+  text-align: center;
+  max-width: 90%;
+}
+
+
+
+/*
+ * Mobile
+ */
+
+@media screen and (max-width: 620px) {
+  .liste-projets {
+    grid-template-columns: 1fr;
+    grid-gap: 0;
+    width: 100vw;
+    position: relative;
+    left: 0;
+    top: -1.2rem;
+    padding-bottom: .2rem;
+  }
+
+  .projet-conteneur {
+    padding-top: calc(50% + 2rem);
+    --angle-projet-conteneur: 2rem; /* calcul dans backups/calculs-css-sans-js.txt */
+    -webkit-clip-path: polygon(0 var(--angle-projet-conteneur), 100% 0, 100% calc(100% - var(--angle-projet-conteneur)), 0 100%);
+    clip-path: polygon(0 var(--angle-projet-conteneur), 100% 0, 100% calc(100% - var(--angle-projet-conteneur)), 0 100%);
+    margin: 0 0 calc(-1 * var(--angle-projet-conteneur) - 1px) 0;
+  }
+
+  .projet-conteneur:nth-child(2n) .projet-image {
+    grid-column: 2 / 3;
+  }
+
+  .projet-conteneur:nth-child(2n) .projet-titre {
+    grid-column: 1 / 2;
+  }
+
+  .projet-conteneur:hover, .projet-conteneur:active {
+    box-shadow: none;
+  }
+
+  .projet-image {
+    padding-top: 1rem;
+  }
+
+  .projet-titre {
+    padding-bottom: 1rem;
+  }
+
+  .projet-titre span {
+    font-size: calc(1rem / var(--mod));
+  }
+
+  .projet-conteneur:nth-child(2n) .projet-image {
+    padding-top: 0;
+    padding-bottom: 1rem;
+  }
+
+  .projet-conteneur:nth-child(2n) .projet-titre {
+    padding-bottom: 0;
+    padding-top: 1rem;
+  }
+
+  .projet-conteneur:nth-child(2n) .projet-image::after {
+    top: unset;
+    bottom: calc(50% - 1rem);
+    left: 4.5%;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid var(--projet-color);
+  }
+
+  .projet-actual-image {
+    --angle-projet-image: .9rem; /* calcul dans backups/calculs-css-sans-js.txt */
+    -webkit-clip-path: polygon(0 var(--angle-projet-image), 100% 0, 100% calc(100% - var(--angle-projet-image)), 0 100%);
+    clip-path: polygon(0 var(--angle-projet-image), 100% 0, 100% calc(100% - var(--angle-projet-image)), 0 100%);
+  }
+}
