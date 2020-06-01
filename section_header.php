@@ -20,9 +20,9 @@
     <h3 class="h4" data-string="me-contacter" aria-hidden="true" hidden><?=$Textes->getString('me-contacter')?></h3>
 
     <a id="nav_contact" href="/contact"
-        class="focusable expandable nav" tabindex="0"
-        data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
-        style="--social-color:<?=$c_email->hsl()?>; 
+       class="focusable expandable nav" tabindex="0"
+       data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
+       style="--social-color:<?=$c_email->hsl()?>; 
               --article-color:<?=$c_email->hsl()?>;">
       <i class="svg"><svg viewBox="0 0 24 24" id="svg-email"><use href="#email-closed" /></svg></i>
       <div class="underline"></div>
@@ -30,38 +30,38 @@
 
     <noscript>
       <a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener"
-        class="focusable expandable" tabindex="0"
-        data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
-        style="--social-color:<?=$c_email->hsl()?>;">
+         class="focusable expandable" tabindex="0"
+         data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
+         style="--social-color:<?=$c_email->hsl()?>;">
         <i class="svg"><svg viewBox="0 0 24 24" id="svg-email"><use href="#email-closed" /></svg></i>
       </a>
     </noscript>
 
+    <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
+       class="focusable expandable" tabindex="0"
+       data-label="contact-github" aria-label="<?=$Textes->getString('contact-github')?>"
+       style="--social-color:<?=$c_github->hsl()?>;">
+      <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 16 16"><use href="#github" /></svg></i>
+    </a>
+
     <!--<a href="https://www.facebook.com/remiscan" target="_blank" rel="noopener"
-        class="focusable expandable" tabindex="0"
-        data-label="contact-facebook" aria-label="<?=$Textes->getString('contact-facebook')?>"
-        style="--social-color:<?=$c_facebook->hsl()?>;">
+         class="focusable expandable" tabindex="0"
+         data-label="contact-facebook" aria-label="<?=$Textes->getString('contact-facebook')?>"
+         style="--social-color:<?=$c_facebook->hsl()?>;">
       <i class="svg" style="width: 1.7rem; height: 1.7rem;"><svg viewBox="0 0 266.893 266.895"><use href="#facebook" /></svg></i>
     </a>-->
 
     <a href="https://www.linkedin.com/in/remiscan" target="_blank" rel="noopener"
-        class="focusable expandable" tabindex="0"
-        data-label="contact-linkedin" aria-label="<?=$Textes->getString('contact-linkedin')?>"
-        style="--social-color:<?=$c_linkedin->hsl()?>;">
+       class="focusable expandable" tabindex="0"
+       data-label="contact-linkedin" aria-label="<?=$Textes->getString('contact-linkedin')?>"
+       style="--social-color:<?=$c_linkedin->hsl()?>;">
       <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 24 24"><use href="#linkedin" /></svg></i>
     </a>
 
-    <!--<a href="https://github.com/Remiscan" target="_blank" rel="noopener"
-        class="focusable expandable" tabindex="0"
-        data-label="contact-github" aria-label="<?=$Textes->getString('contact-github')?>"
-        style="--social-color:<?=$c_github->hsl()?>;">
-      <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 16 16"><use href="#github" /></svg></i>
-    </a>-->
-
     <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
-      class="focusable expandable" tabindex="0"
-      data-label="contact-twitter" aria-label="<?=$Textes->getString('contact-twitter')?>"
-      style="--social-color:<?=$c_twitter->hsl()?>;">
+       class="focusable expandable" tabindex="0"
+       data-label="contact-twitter" aria-label="<?=$Textes->getString('contact-twitter')?>"
+       style="--social-color:<?=$c_twitter->hsl()?>;">
       <i class="svg" style="width: 1.7rem; height: 1.7rem; transform: scale(1.3)"><svg viewBox="0 0 400 400"><use href="#twitter" /></svg></i>
     </a>
   </div>
@@ -70,18 +70,18 @@
 
 <nav>
   <a id="nav_bio" class="focusable expandable nav"
-      href="/bio"
-      tabindex="0" data-label="nav-bio" aria-label="<?=$Textes->getString('nav-bio')?>"
-      style="--article-color:<?=$c_section_parcours->hsl()?>;"
+     href="/bio"
+     tabindex="0" data-label="nav-bio" aria-label="<?=$Textes->getString('nav-bio')?>"
+     style="--article-color:<?=$c_section_parcours->hsl()?>;"
   >
     <h3 data-string="nav-bio"><?=$Textes->getString('nav-bio')?></h3>
     <div class="underline"></div>
   </a>
 
   <a id="nav_portfolio" class="focusable expandable nav"
-      href="/portfolio"
-      tabindex="0" data-label="nav-portfolio" aria-label="<?=$Textes->getString('nav-portfolio')?>"
-      style="--article-color:<?=$c_section_portfolio->hsl()?>;"
+     href="/portfolio"
+     tabindex="0" data-label="nav-portfolio" aria-label="<?=$Textes->getString('nav-portfolio')?>"
+     style="--article-color:<?=$c_section_portfolio->hsl()?>;"
   >
     <h3 data-string="nav-portfolio"><?=$Textes->getString('nav-portfolio')?></h3>
     <div class="underline"></div>
