@@ -193,7 +193,6 @@
     </header>
 
     <main id="bottom">
-
       <section id="accueil" data-label="nav-accueil" aria-label="<?=$Textes->getString('nav-accueil')?>"></section>
 
       <section id="bio" aria-labelledby="nav_bio">
