@@ -114,9 +114,9 @@
     <link rel="preload" as="fetch" href="/mon-portfolio/strings--<?=version(__DIR__, 'strings.json')?>.json" crossorigin
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
-    <?php $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__));
+    <?php $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/<?=$mod?>--<?=version(__DIR__, $mod.'.js.php')?>.js.php">
+    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>--<?=version(__DIR__.'/modules', $mod.'.js.php')?>.js.php">
     <?php } ?>
 
     <?php if ($css_critique_methode == 'push') { ?>

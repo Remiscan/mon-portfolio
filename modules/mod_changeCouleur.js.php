@@ -4,7 +4,7 @@
 import { Params } from './mod_Params.js.php';
 
 /*<?php $imports = ob_get_clean();
-require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
+require_once dirname(__DIR__, 2).'/_common/php/versionize-js-imports.php';
 echo versionizeImports($imports, __DIR__); ?>*/
 
 

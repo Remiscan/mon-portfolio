@@ -2,13 +2,20 @@
 /*<?php ob_start();?>*/
 
 import { traduire, switchLangage } from '../_common/js/traduction.js';
-import { Params, recalcOnResize, simulateClick } from './mod_Params.js.php';
-import { naviguer, getNavActuelle, setNavActuelle, getTitrePage } from './mod_navigation.js.php';
-import { closeProjet } from './mod_projets.js.php';
 
 /*<?php $imports = ob_get_clean();
 require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
 echo versionizeImports($imports, __DIR__); ?>*/
+
+/*<?php ob_start();?>*/
+
+import { Params, recalcOnResize, simulateClick } from './modules/mod_Params.js.php';
+import { naviguer, getNavActuelle, setNavActuelle, getTitrePage } from './modules/mod_navigation.js.php';
+import { closeProjet } from './modules/mod_projets.js.php';
+
+/*<?php $imports = ob_get_clean();
+require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
+echo versionizeImports($imports, __DIR__.'/modules'); ?>*/
 
 
 

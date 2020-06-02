@@ -1,7 +1,7 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { getString } from '../_common/js/traduction.js';
+import { getString } from '../../_common/js/traduction.js';
 import { Params } from './mod_Params.js.php';
 import { changeCouleur } from './mod_changeCouleur.js.php';
 import { champsContact, verifyForm } from './mod_contact.js.php';
@@ -10,7 +10,7 @@ import { placeholderNoMore, loadMaPhoto, loadProjetImages } from './mod_loadImag
 import { focusable } from './mod_a11y.js.php';
 
 /*<?php $imports = ob_get_clean();
-require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
+require_once dirname(__DIR__, 2).'/_common/php/versionize-js-imports.php';
 echo versionizeImports($imports, __DIR__); ?>*/
 
 
