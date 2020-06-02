@@ -114,19 +114,10 @@
     <link rel="preload" as="fetch" href="/mon-portfolio/strings--<?=version(__DIR__, 'strings.json')?>.json" crossorigin
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
-    <?php 
-    $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__));
+    <?php $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__));
     foreach($mods as $mod) { ?>
     <link rel="modulepreload" href="/mon-portfolio/<?=$mod?>--<?=version(__DIR__, $mod.'.js.php')?>.js.php">
     <?php } ?>
-    <!--<link rel="modulepreload" href="/mon-portfolio/mod_a11y--<?=version(__DIR__, 'mod_a11y.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_animations--<?=version(__DIR__, 'mod_animations.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_changeCouleur--<?=version(__DIR__, 'mod_changeCouleur.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_contact--<?=version(__DIR__, 'mod_contact.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_loadImages--<?=version(__DIR__, 'mod_loadImages.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_navigation--<?=version(__DIR__, 'mod_navigation.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_Params--<?=version(__DIR__, 'mod_Params.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_projets--<?=version(__DIR__, 'mod_projets.js.php')?>.js.php">-->
 
     <?php if ($css_critique_methode == 'push') { ?>
     
