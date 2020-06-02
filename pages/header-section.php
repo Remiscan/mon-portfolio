@@ -69,7 +69,7 @@
        class="focusable expandable" tabindex="0"
        data-label="contact-github" aria-label="<?=$Textes->getString('contact-codepen')?>"
        style="--social-color:<?=$c_codepen->hsl()?>;">
-      <i class="svg" style="width: 1.4rem; height: 1.4rem;"><svg viewBox="20 20 80 80"><use href="#codepen" /></svg></i>
+      <i class="svg" style="width: 1.5rem; height: 1.5rem;"><svg viewBox="20 20 80 80"><use href="#codepen" /></svg></i>
     </a>
   </div>
   
