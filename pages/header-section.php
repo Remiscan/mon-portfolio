@@ -41,7 +41,7 @@
        class="focusable expandable" tabindex="0"
        data-label="contact-github" aria-label="<?=$Textes->getString('contact-github')?>"
        style="--social-color:<?=$c_github->hsl()?>;">
-      <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 16 16"><use href="#github" /></svg></i>
+      <i class="svg" style="width: 1.4rem; height: 1.4rem;"><svg viewBox="0 0 16 16"><use href="#github" /></svg></i>
     </a>
 
     <!--<a href="https://www.facebook.com/remiscan" target="_blank" rel="noopener"
