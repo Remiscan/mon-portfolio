@@ -16,7 +16,7 @@
       $en_exists = file_exists($etudes[1]);
 
       $imageProjet = 'projets/' . $projet->id . '/preview' . $projet->image_preview;
-      $versionImageProjet = version(__DIR__, $imageProjet.'.png');
+      $versionImageProjet = version(__DIR__.'/..', $imageProjet.'.png');
       $imageProjet = $imageProjet . '--' . $versionImageProjet . '.png';
 
       $couleurProjet = $projet->couleur->change('l', '50%', true);
@@ -35,7 +35,7 @@
           data-id="<?=$projet->id?>"
           data-lien="<?=$projet->lien?>"
           data-en-exists="<?=$en_exists?>"
-          data-version="<?=version(__DIR__, $etudes)?>">
+          data-version="<?=version(__DIR__.'/..', $etudes)?>">
 
         <div class="projet-conteneur-enfant">
           <div class="projet-image">
