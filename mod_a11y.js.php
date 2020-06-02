@@ -28,16 +28,21 @@ focusable.forEach(e => {
   // Quand le focus est placé sur un élément, on le met dans la variable focused
   e.addEventListener('focus', () => iFocus(e));
 
-  // Quand on appuie sur entrée alors qu'un élément est en focus, on simule un clic dessus
-  // sauf si c'est un a avec attribut href.
+  // Quand on appuie sur entrée ou espace alors qu'un élément est en focus, on simule un clic dessus
   e.addEventListener('keydown', event => {
     if (focused === e && e.tagName.toLowerCase() != 'button')
     {
       const key = event.which || event.keyCode;
-      if (key === 13 || key === 32)
+      // Entrée
+      if (key === 13)
       {
-        if (!e.getAttribute('href'))
+        if (!e.getAttribute('href')) // a avec attribut href => comportement par défaut
           simulateClick(e, 1, 1);
+      }
+      // Espace
+      else if (key === 32)
+      {
+        simulateClick(e, 1, 1);
       }
     }
   });
