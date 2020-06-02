@@ -11,6 +11,7 @@ $c_linkedin = new Couleur('#0077B5');
 $c_twitter = new Couleur('hsl(205, 99%, 55%)');
 $c_google = new Couleur('hsl(5, 69%, 56%)');
 $c_github = new Couleur('#6e5494');
+$c_codepen = new Couleur('hsl(275, 70%, 40%)');
 $c_section_parcours = new Couleur('hsl(355, 50%, 32%)');
 $c_section_portfolio = new Couleur('hsl(238, 50%, 32%)');
 $c_competence_html = new Couleur('rgb(228, 77, 38)');
