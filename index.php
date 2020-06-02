@@ -79,9 +79,9 @@
     //// On demande au serveur de PUSH le css critique avec HTTP2
     $linkHeader = 'Link: ';
     foreach($styles_critiques as $k => $section) {
-      $versionStyle = version(__DIR__, 'style-' . $section . '.css');
+      $versionStyle = version(__DIR__.'/pages', $section . '-style.css');
       if ($k > 0) $linkHeader .= ', ';
-      $linkHeader .= '</mon-portfolio/style-' . $section . '--' . $versionStyle . '.css>; rel=preload; as=style';
+      $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
     }
     header($linkHeader);
   }
@@ -114,21 +114,26 @@
     <link rel="preload" as="fetch" href="/mon-portfolio/strings--<?=version(__DIR__, 'strings.json')?>.json" crossorigin
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
-    <link rel="modulepreload" href="/mon-portfolio/mod_a11y--<?=version(__DIR__, 'mod_a11y.js.php')?>.js.php">
+    <?php 
+    $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__));
+    foreach($mods as $mod) { ?>
+    <link rel="modulepreload" href="/mon-portfolio/<?=$mod?>--<?=version(__DIR__, $mod.'.js.php')?>.js.php">
+    <?php } ?>
+    <!--<link rel="modulepreload" href="/mon-portfolio/mod_a11y--<?=version(__DIR__, 'mod_a11y.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_animations--<?=version(__DIR__, 'mod_animations.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_changeCouleur--<?=version(__DIR__, 'mod_changeCouleur.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_contact--<?=version(__DIR__, 'mod_contact.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_loadImages--<?=version(__DIR__, 'mod_loadImages.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_navigation--<?=version(__DIR__, 'mod_navigation.js.php')?>.js.php">
     <link rel="modulepreload" href="/mon-portfolio/mod_Params--<?=version(__DIR__, 'mod_Params.js.php')?>.js.php">
-    <link rel="modulepreload" href="/mon-portfolio/mod_projets--<?=version(__DIR__, 'mod_projets.js.php')?>.js.php">
+    <link rel="modulepreload" href="/mon-portfolio/mod_projets--<?=version(__DIR__, 'mod_projets.js.php')?>.js.php">-->
 
     <?php if ($css_critique_methode == 'push') { ?>
     
       <!-- CSS critique (pushed) -->
       <?php foreach($styles_critiques as $section) {
-        $versionStyle = version(__DIR__, 'style-' . $section . '.css'); ?>
-        <link rel="stylesheet" href="/mon-portfolio/style-<?=$section?>--<?=$versionStyle?>.css">
+        $versionStyle = version(__DIR__.'/pages', $section . '-style.css'); ?>
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style--<?=$versionStyle?>.css">
       <?php } ?>
 
     <?php } else { ?>
@@ -137,7 +142,7 @@
       <?php
       echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
       foreach($styles_critiques as $section) {
-        include __DIR__ . '/style-' . $section . '.css';
+        include __DIR__ . '/pages/' . $section . '-style.css';
       }
       echo '</style>';
       ?>
@@ -148,7 +153,7 @@
     <?php
     foreach($styles_non_critiques as $section) {
       ?>
-      <link rel="preload" as="style" href="/mon-portfolio/style-<?=$section?>--<?=version(__DIR__, 'style-' . $section . '.css')?>.css"
+      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style--<?=version(__DIR__.'/pages', $section . '-style.css')?>.css"
             onload="this.onload=null; this.rel='stylesheet'">
       <?php
     }
@@ -189,27 +194,27 @@
 
     <!-- CONTENU DU SITE -->
     <header>
-      <?php include './section_header.php'; ?>
+      <?php include './pages/header-section.php'; ?>
     </header>
 
     <main id="bottom">
       <section id="accueil" data-label="nav-accueil" aria-label="<?=$Textes->getString('nav-accueil')?>"></section>
 
       <section id="bio" aria-labelledby="nav_bio">
-        <?php include './section_bio.php'; ?>
+        <?php include './pages/bio-section.php'; ?>
       </section>
 
       <section id="portfolio" aria-labelledby="nav_portfolio">
-        <?php include './section_portfolio.php'; ?>
+        <?php include './pages/portfolio-section.php'; ?>
       </section>
 
       <section id="contact" aria-labelledby="nav_contact">
-        <?php include './section_contact.php'; ?>
+        <?php include './pages/contact-section.php'; ?>
       </section>
     </main>
 
     <section id="projet" data-label="nav-projet" aria-label="<?=$Textes->getString('nav-projet')?>" aria-hidden="true" hidden>
-      <?php include './section_projet.php'; ?>
+      <?php include './pages/projet-section.php'; ?>
     </section>
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
