@@ -328,6 +328,8 @@ export function closeProjet()
     animProjet(false, true);
     apparitionProjetConteneur.addEventListener('finish', hideProjet);
   }
+  document.querySelector(`.projet-conteneur[data-id=${currentProjet}`).focus();
+  document.querySelector(`.projet-conteneur[data-id=${currentProjet}`).blur();
 
   function hideProjet()
   {
