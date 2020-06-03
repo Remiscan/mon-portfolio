@@ -328,7 +328,7 @@ export function closeProjet()
     animProjet(false, true);
     apparitionProjetConteneur.addEventListener('finish', hideProjet);
   }
-  const lastOpened = document.querySelector(`.projet-conteneur[data-id=${currentProjet}`);
+  const lastOpened = document.querySelector(`.projet-conteneur[data-id=${currentProjet}]`);
   lastOpened.focus();
   lastOpened.blur();
 
