@@ -51,12 +51,12 @@
       <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 24 24"><use href="#linkedin" /></svg></i>
     </a>
 
-    <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
+    <!--<a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
        class="focusable expandable" tabindex="0"
        data-label="contact-twitter" aria-label="<?=$Textes->getString('contact-twitter')?>"
        style="--social-color:<?=$c_twitter->hsl()?>;">
       <i class="svg" style="width: 1.7rem; height: 1.7rem; transform: scale(1.3)"><svg viewBox="0 0 400 400"><use href="#twitter" /></svg></i>
-    </a>
+    </a>-->
 
     <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
        class="focusable expandable" tabindex="0"
