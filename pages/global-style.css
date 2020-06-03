@@ -692,6 +692,27 @@ nav>a:hover, nav>a:active {
 
 
 
+/*
+ * Mobile
+ */
+
+ @media screen and (max-width: 620px) {
+  html.actif #liens_contact>a {
+    opacity: .85;
+  }
+
+  html.actif #liens_contact>a.selected {
+    opacity: 1;
+  }
+
+  #liens_contact>a:hover,
+  #liens_contact>a:active {
+    opacity: 1 !important;
+  }
+}
+
+
+
 
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
