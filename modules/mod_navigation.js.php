@@ -247,7 +247,7 @@ export function naviguer(event, nav, start = false, historique = true)
         enveloppeSvg.innerHTML = enveloppeSvg.innerHTML.replace('#email-closed', '#email-open');
       }
 
-      if (nav.id != 'nav_bio')
+      if (nav.id == 'nav_bio')
         anim_competences(false);
 
       // On rend les éléments focusables ou non selon la section
