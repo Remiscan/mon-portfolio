@@ -9,6 +9,7 @@ echo versionizeImports($imports, __DIR__); ?>*/
 
 /*<?php ob_start();?>*/
 
+import './modules/comp_mediaProjet.js.php';
 import { Params, recalcOnResize, simulateClick } from './modules/mod_Params.js.php';
 import { naviguer, getNavActuelle, setNavActuelle, getTitrePage } from './modules/mod_navigation.js.php';
 import { closeProjet } from './modules/mod_projets.js.php';

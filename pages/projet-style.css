@@ -443,6 +443,7 @@ figure + .separator {
   }
 }
 
+media-projet>div,
 #projet-details-pourquoi>figure>div {
   width: calc(var(--w) * 1px);
   --largeur-max: 100%;
@@ -452,6 +453,7 @@ figure + .separator {
   margin: 1.2rem .6rem;
 }
 
+media-projet>div::before,
 #projet-details-pourquoi>figure>div::before {
   content: '';
   display: block;
@@ -459,10 +461,13 @@ figure + .separator {
   background-color: rgba(0, 0, 0, .3);
 }
 
+media-projet>div.loading::before,
 #projet-details-pourquoi>figure>div.loading::before {
   background-color: transparent;
 }
 
+media-projet>div>img,
+media-projet>div>video,
 #projet-details-pourquoi>figure>div>img,
 #projet-details-pourquoi>figure>div>video {
   object-fit: contain;
