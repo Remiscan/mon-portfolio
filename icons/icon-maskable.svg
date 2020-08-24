@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <style>
+    @font-face {
+      font-style: normal;
+      font-weight: 400;
+      font-family: 'Roboto';
+      src: url("data:application/font-woff;charset=utf-8;base64,d09GMgABAAAAAAU0ABIAAAAACLQAAATZAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGiYbIBw2BmAAWAhUCYM8EQwKgTyBTQsGABIMATYCJAMIBCAFgnQHIAyCSRuHB8jE58up/ZHGhAkrMAqgZQfBfbFD4HjzpHDbABWItIynfb117KV0AeFEJwDwT/eq3r3wBs1+YolQCH9e5t1lzo65MS1gQSuyF61hG6wChYjY1aTtIW6XPBEEApwImlNBvJQAlH0kiBDHWZGFHJBQZ38UZtCv84mEKvjJWoUa0P+UufnAzjUULO6cX0XB2sbdW1HwMy1PF+lZch0MgOEOQzVAcg9t4jtYiDopfBU9jih2RN9IstvNu4aGuhAEEv8Z8b81d8F0hwAGcu/rbWiTgYOBQTQe2ogsiRPh1moLqBFBoVcqkqb+SCKRuHQbzDf9uiJv8cjmdQjKcDeOQ8d+vI85DGIc5zCLMdQILXgccVyD5ykl/z/Lmwh3gokybLQJyfRquA0cycZ0pJD74TE+DafxExhD/zMcvj5uGVZjhFyjrZPEGX46O2YRZ6YVTnyMhZdDnMwqXPBxUiYrXPSxTi4WdkbUfI3pTO+Z01knW9o4x2lhJ1vaOBdR8+d1LcA4RtVlxhFVZR7UpOXz2HlNa1I4DUNHU7pGja1s/Fu34ndd/lO4wdf3fLFoWB1R+fGQxIMhTZJlFuZPD6v86ZAka5rCjembwFj4yHJ6SplpwFimcLN6l1GVByUOTddvDsiX+XFdl/R8Tbw8ve46gecRnMfFwvA6OT78su14vixxqXw5X9YkWQsp3OLrG1XDIUm2fk3hVh8vCSvc5uOlYYXbfbFicp7po+rlICg2r5txPqpeRon45XZN4vmjKmfn190YUQ5v6vDx4Pl1hnE1VoqQdBml4pchTekp480QEgm4Wkqw0cbpSaT78YI2RI988wcLLss+O7Ueclz5OY6/H12Gda/jyo/IiQ/H7E/2jw08AwP/4nfzpx+ev+GVk5VXLNvfvP6r4msv3nj43H3X3ooi9b0QN6RneLyN3ODmqW+DI6xyGpBiNKdNu+KCXvByB3e0xd1U+OMa7kAMhFvLVflj6VctbgN94UPdsdR8RWWj76cWIzWeThDyvY/sqPt6xtXymznDnJu253/0+KdnfkAiv/4t/feBpcK8C4ClABg5w7T2vx2w9Pwt/d9rqehaK5YLBfEqzNHvcNH4IlyLVERh+EU672tCAeKumLHQidPUImq6W9OlTGCXIDSQxVdoFF81UuwGFGG/3Ygs3HN7J6J4FB3Yhu04gJ1YxiKWsBsMVahAJSr93i5swzbbvIZ59x5sxWb4l2/AGtbAEFGoXTez57EL89iJvc7Wc/Ajgm3YhG3Y7dOHnRaxB2vYiJ0Y+6W8C8uorfFx/3A16tEc++p67VqKUIw77cZ2NCGAAPatev3YiO0yejOWMA+/LXb6PFBexmZfbU3bTXYhgH70oANhDGIUYShxq4qB0z/aKLGCOSzfmdvLOcoRJ26hnMQ9RCgnj3iaKgolN8zleIR0N/vlZJjLHxHU7oaSExIjHTWFqYhOD7SUZyBDnS8vw4WMO6Y6qyRkun7fZFM+Mh9dHG7M7LdEw3VFBpB172xfXXaH7dTc4C/I/klc39yCHMluu8WInC1VxVmeflewpjRbV3MPb0jRAsS9NlM5x3A1Nt6eSXbFZ7ZwjAUsu+NDsA2uhUuQYLlyz8+wB/ZoZFw5OgJ+YLkacga4Ft6CBGvXkNuYG2BkV3wbI7sA");
+    }
+  </style>
+  <rect x="0" y="0" width="100%" height="100%" fill="#321A32"/>
+  <g transform="scale(0.8)" transform-origin="256 256">
+    <rect width="60%" height="60%" x="20%" y="20%" fill="#8C488C" transform="rotate(-10 256 256)"/>
+    <text x="80" y="468" font-family="Roboto" font-size="400" fill="#321A32" transform="rotate(-10)">R</text>
+  </g>
+</svg>
