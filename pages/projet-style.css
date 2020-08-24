@@ -172,6 +172,7 @@
   box-sizing: border-box;
   scroll-snap-type: x mandatory;
   scroll-padding: 1.5rem;
+  scrollbar-width: thin;
 }
 
 #projet-details-images_conteneur {
