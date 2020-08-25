@@ -443,6 +443,12 @@ figure + .separator {
   }
 }
 
+media-projet {
+  --largeur-max: 100%;
+  max-width: calc(var(--largeur-max) - 2.4rem);
+  position: relative;
+}
+
 media-projet>div,
 #projet-details-pourquoi>figure>div {
   width: calc(var(--w) * 1px);
