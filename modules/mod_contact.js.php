@@ -1,7 +1,7 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { getString } from '../../_common/js/traduction.js';
+import { getString } from './mod_traduction.js.php';
 import { simulateClick } from './mod_Params.js.php';
 
 /*<?php $imports = ob_get_clean();

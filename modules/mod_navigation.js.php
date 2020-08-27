@@ -1,8 +1,8 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { getString } from '../../_common/js/traduction.js';
 import { Params } from './mod_Params.js.php';
+import { getTitrePage } from './mod_traduction.js.php';
 import { changeCouleur } from './mod_changeCouleur.js.php';
 import { champsContact, verifyForm } from './mod_contact.js.php';
 import { anim_competences } from './mod_animations.js.php';
@@ -361,46 +361,6 @@ export function getNavActuelle() { return nav_actuelle; }
 
 
 
-/////////////////////////////////////
-// Donne le titre de la page en cours
-export function getTitrePage(o = false, titre = false)
-{
-  const titrePrefix = 'Rémi S., ' + getString('job');
-  const titreSeparator = ' — ';
-
-  if (titre)
-    return titre + titreSeparator + titrePrefix;
-  
-  let titreCore;
-  switch (o)
-  {
-    case 'competences':
-    case 'quijesuis':
-    case 'biographie':
-    case 'bio':
-      titreCore = getString('nav-bio');
-      break;
-    case 'portfolio':
-      titreCore = getString('nav-portfolio');
-      break;
-    case 'contact':
-      titreCore = getString('nav-contact');
-      break;
-    case 'projet':
-      titreCore = getString('titre-projet') + history.state.oprojet_titre;
-      break;
-    default:
-      titreCore = false;
-  }
-
-  if (titreCore)
-    return titreCore + titreSeparator + titrePrefix;
-  else
-    return titrePrefix;
-}
-
-
-
 ///////////////////////////////////////
 // On écoute les demandes de navigation
 navs.forEach(e => document.getElementById(e).addEventListener('click', event => {
@@ -411,3 +371,30 @@ navs.forEach(e => document.getElementById(e).addEventListener('click', event => 
   }
   naviguer(event, event.currentTarget);
 }));
+
+
+
+////////////////////////////////////////////////////////////////////
+// Gère les appuis sur les boutons précédent / suivant du navigateur
+window.addEventListener('popstate', event => {
+  const elProjet = document.getElementById('projet');
+  const onav = event.state.onav;
+  if (onav == 'projet')
+  {
+    if (elProjet.style.display != 'none' && elProjet.style.display)
+      closeProjet();
+
+    const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
+    entrees.forEach(e => {
+      if (e.dataset.id == event.state.oprojet_id)
+        return simulateClick(e);
+    });
+  }
+  else
+  {
+    if (document.getElementById('projet').classList.contains('on'))
+      closeProjet();
+    
+    simulateClick(document.getElementById(onav));
+  }
+}, false);

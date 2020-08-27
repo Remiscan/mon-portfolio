@@ -1,18 +1,11 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { traduire, switchLangage } from '../_common/js/traduction.js';
-
-/*<?php $imports = ob_get_clean();
-require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
-echo versionizeImports($imports, __DIR__); ?>*/
-
-/*<?php ob_start();?>*/
-
 import './modules/comp_mediaProjet.js.php';
-import { Params, recalcOnResize, simulateClick } from './modules/mod_Params.js.php';
-import { naviguer, getNavActuelle, setNavActuelle, getTitrePage } from './modules/mod_navigation.js.php';
-import { closeProjet } from './modules/mod_projets.js.php';
+import { Traduction, initLanguageButtons, getTitrePage } from './modules/mod_traduction.js.php';
+import { Params, simulateClick } from './modules/mod_Params.js.php';
+import { naviguer, getNavActuelle, setNavActuelle } from './modules/mod_navigation.js.php';
+import { initProjets } from './modules/mod_projets.js.php';
 
 /*<?php $imports = ob_get_clean();
 require_once dirname(__DIR__, 1).'/_common/php/versionize-js-imports.php';
@@ -20,114 +13,46 @@ echo versionizeImports($imports, __DIR__.'/modules'); ?>*/
 
 
 
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!! TEXTE ET TRADUCTION !!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+document.addEventListener('DOMContentLoaded', async event => {
+  if (Params.startSection == 'accueil')
+    history.replaceState({onav: 'nav_accueil'}, '', '/');
 
+  await Traduction.traduire();
+  initLanguageButtons();
 
-/////////////////////////////////////////////
-// On expand la fonction traduire() du module
-// (si y a des trucs supplémentaires à traduire qui ne sont pas universels au module)
-function textualiser()
-{
-  return traduire('mon-portfolio');
-}
+  // Supprime le contenu 'noscript' quand JavaScript est activé
+  Array.from(document.querySelectorAll('noscript')).forEach(e => e.remove());
+  Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => { e.href = '/projet/' + e.dataset.id; e.removeAttribute('target'); });
+  // -- fin --
 
+  initProjets();
 
-///////////////////////////////////////////
-// Active le bouton de changement de langue
-Array.from(document.querySelectorAll('.bouton-langage')).forEach(bouton => {
-  bouton.addEventListener('click', () => {
-    switchLangage(bouton.dataset.lang)
-    .then(textualiser)
-    .then(() => {
-      recalcOnResize();
-      document.title = getTitrePage(history.state.onav.replace('nav_', ''));
-    })
-  });
-});
+  // Supprime l'écran de chargement
+  setTimeout(() => {
+    if (document.getElementById('loading'))
+    {
+      document.getElementById('loading').remove();
+      document.body.style.setProperty('--load-color', null);
+    }
+  }, 100);
 
-
-
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!! NAVIGATION !!!!!!!!!!!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
-
-////////////////////////////////////////////////////////////////////
-// Gère les appuis sur les boutons précédent / suivant du navigateur
-const elProjet = document.getElementById('projet');
-
-window.addEventListener('popstate', event => {
-  const onav = event.state.onav;
-  if (onav == 'projet')
+  setNavActuelle('nav_' + Params.startSection);
+  
+  if (Params.startSection == 'accueil')
   {
-    if (elProjet.style.display != 'none' && elProjet.style.display)
-      closeProjet();
+    document.documentElement.style.overflowY = 'auto';
+    return;
+  }
 
+  await naviguer(event, document.getElementById(getNavActuelle()), true);
+  const elProjet = document.getElementById('projet');
+  if (Params.startProjet && !elProjet.classList.contains('on'))
+  {
     const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
     entrees.forEach(e => {
-      if (e.dataset.id == event.state.oprojet_id)
-        return simulateClick(e);
+      if (e.dataset.id == Params.startProjet)
+        simulateClick(e);
     });
   }
-  else
-  {
-    if (document.getElementById('projet').classList.contains('on'))
-      closeProjet();
-    
-    simulateClick(document.getElementById(onav));
-  }
-}, false);
-
-
-
-
-/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!! QUAND TOUT EST PRÊT !!!!!!!!!!!!
-!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
-
-
-document.addEventListener('DOMContentLoaded', event => {
-  return textualiser()
-  .then(() => {
-    recalcOnResize();
-    // Supprime le contenu 'noscript' quand JavaScript est activé
-    Array.from(document.querySelectorAll('noscript')).forEach(e => e.remove());
-    Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => { e.href = '/projet/' + e.dataset.id; e.removeAttribute('target'); });
-    // -- fin --
-    setTimeout(() => {
-      if (document.getElementById('loading'))
-      {
-        document.getElementById('loading').remove();
-        document.body.style.setProperty('--load-color', null);
-      }
-    }, 100);
-
-    setNavActuelle('nav_' + Params.startSection);
-    
-    if (Params.startSection == 'accueil')
-    {
-      history.replaceState({onav: 'nav_accueil'}, '', '/');
-      document.title = getTitrePage(history.state.onav.replace('nav_', ''));
-      document.documentElement.style.overflowY = 'auto';
-    }
-    else
-    {
-      Promise.resolve()
-      .then(() => naviguer(event, document.getElementById(getNavActuelle()), true))
-      .then(() => {
-        const elProjet = document.getElementById('projet');
-        document.title = getTitrePage(history.state.onav.replace('nav_', ''));
-        if (Params.startProjet && !elProjet.classList.contains('on'))
-        {
-          const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
-          entrees.forEach(e => {
-            if (e.dataset.id == Params.startProjet)
-              simulateClick(e);
-          });
-        }
-      });
-    }
-  });
+  return;
 });

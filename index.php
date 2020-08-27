@@ -111,8 +111,10 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" media="print" onload="this.media='all'">
 
+    <!-- Préchargement des textes -->
     <link rel="preload" as="fetch" href="/mon-portfolio/strings--<?=version(__DIR__, 'strings.json')?>.json" crossorigin
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
+    <!-- Préchargement des modules -->
     <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
     <?php $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>

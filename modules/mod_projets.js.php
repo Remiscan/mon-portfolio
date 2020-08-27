@@ -1,9 +1,9 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { getString, getLangage } from '../../_common/js/traduction.js';
+import { Traduction, getString, getTitrePage } from './mod_traduction.js.php';
 import { Params, isVisible, wait } from './mod_Params.js.php';
-import { naviguer, getNavActuelle, getTitrePage } from './mod_navigation.js.php';
+import { naviguer, getNavActuelle } from './mod_navigation.js.php';
 import { changeThemeColor } from './mod_changeCouleur.js.php';
 import { placeholderNoMore } from './mod_loadImages.js.php';
 import { focusable } from './mod_a11y.js.php';
@@ -195,7 +195,7 @@ export function openProjet(event)
       }
 
       // On récupère le "pourquoi du comment" sur le serveur ou dans le cache
-      fetchEtude(getLangage())
+      fetchEtude(Traduction.language)
       .catch(() => fetchEtude('fr'))
       .then(response => response.text())
       .then(data => resolve(data))
@@ -276,19 +276,20 @@ export function openProjet(event)
 
 ///////////////////////////////////////////////////
 // On écoute les demandes de navigation vers projet
-Array.from(document.querySelectorAll('.projet-conteneur')).forEach(e => {
-  e.addEventListener('click', event => openProjet(event));
-});
-
 let isProjetClosing = 0;
+export function initProjets() {
+  Array.from(document.querySelectorAll('.projet-conteneur')).forEach(e => {
+    e.addEventListener('click', event => openProjet(event));
+  });
 
-projetObfuscator.addEventListener('click', () => {
-  if (isProjetClosing == 1) return;
-  isProjetClosing = 1;
-  closeProjet();
-  history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
-  document.title = getTitrePage('portfolio');
-}, {passive: true});
+  projetObfuscator.addEventListener('click', () => {
+    if (isProjetClosing == 1) return;
+    isProjetClosing = 1;
+    closeProjet();
+    history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
+    document.title = getTitrePage('portfolio');
+  }, {passive: true});
+}
 
 
 
