@@ -116,7 +116,7 @@
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <!-- Préchargement des modules -->
     <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
-    <?php $mods = preg_filter('/(.+).js.php/', '$1', scandir(__DIR__.'/modules'));
+    <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>
     <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>--<?=version(__DIR__.'/modules', $mod.'.js.php')?>.js.php">
     <?php } ?>

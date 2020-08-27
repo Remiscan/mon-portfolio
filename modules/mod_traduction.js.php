@@ -29,19 +29,6 @@ export const getString = Traduction.getString.bind(Traduction);
 
 
 
-/////////////////////////////////////////////
-// Active les boutons de changement de langue
-export function initLanguageButtons() {
-  Array.from(document.querySelectorAll('.bouton-langage')).forEach(bouton => {
-    bouton.addEventListener('click', async () => {
-      await Traduction.switchLanguage(bouton.dataset.lang);
-      await Traduction.traduire();
-    });
-  });
-}
-
-
-
 /////////////////////////////////////
 // Donne le titre de la page en cours
 export function getTitrePage(o = false, titre = false)

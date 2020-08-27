@@ -2,7 +2,7 @@
 /*<?php ob_start();?>*/
 
 import './modules/comp_mediaProjet.js.php';
-import { Traduction, initLanguageButtons, getTitrePage } from './modules/mod_traduction.js.php';
+import { Traduction } from './modules/mod_traduction.js.php';
 import { Params, simulateClick } from './modules/mod_Params.js.php';
 import { naviguer, getNavActuelle, setNavActuelle } from './modules/mod_navigation.js.php';
 import { initProjets } from './modules/mod_projets.js.php';
@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async event => {
     history.replaceState({onav: 'nav_accueil'}, '', '/');
 
   await Traduction.traduire();
-  initLanguageButtons();
+  await Traduction.initLanguageButtons();
 
   // Supprime le contenu 'noscript' quand JavaScript est activé
   Array.from(document.querySelectorAll('noscript')).forEach(e => e.remove());
