@@ -1,4 +1,4 @@
-<?php 
+<?php
   include __DIR__ . '/fonctions.php';
   $Textes = new Textes('mon-portfolio');
 
@@ -111,22 +111,24 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" media="print" onload="this.media='all'">
 
+    <!-- ▼ Fichiers cache-busted grâce à PHP -->
+    <!--<?php ob_start();?>-->
+
     <!-- Préchargement des textes -->
-    <link rel="preload" as="fetch" href="/mon-portfolio/strings--<?=version(__DIR__, 'strings.json')?>.json" crossorigin
+    <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="../_common/js/traduction--<?=version($commonDir.'/js', 'traduction.js')?>.js">
+    <link rel="modulepreload" href="/_common/js/traduction.js">
     <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>--<?=version(__DIR__.'/modules', $mod.'.js.php')?>.js.php">
+    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
     <?php } ?>
 
     <?php if ($css_critique_methode == 'push') { ?>
     
       <!-- CSS critique (pushed) -->
-      <?php foreach($styles_critiques as $section) {
-        $versionStyle = version(__DIR__.'/pages', $section . '-style.css'); ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style--<?=$versionStyle?>.css">
+      <?php foreach($styles_critiques as $section) { ?>
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css">
       <?php } ?>
 
     <?php } else { ?>
@@ -146,11 +148,15 @@
     <?php
     foreach($styles_non_critiques as $section) {
       ?>
-      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style--<?=version(__DIR__.'/pages', $section . '-style.css')?>.css"
+      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style.css"
             onload="this.onload=null; this.rel='stylesheet'">
       <?php
     }
     ?>
+
+    <!--<?php $imports = ob_get_clean();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+    echo versionizeFiles($imports, __DIR__); ?>-->
 
     <script id="preload-polyfill">
       {
@@ -216,7 +222,10 @@
     <div id="hauteurpage" style="width: 0; height: 100vh; position: absolute;" aria-hidden="true"></div>
 
     <!-- SCRIPTS -->
-    <script src="/_common/js/test-support--<?=version($commonDir.'/js', 'test-support.js')?>.js" id="test-support-script"></script>
+    <!-- ▼ Fichiers cache-busted grâce à PHP -->
+    <!--<?php ob_start();?>-->
+
+    <script src="/_common/js/test-support.js" id="test-support-script"></script>
     <script id="test-support-script-exe">
       TestSupport.getSupportResults([
         { name: 'CSS clip-path', priority: 0 },
@@ -228,7 +237,11 @@
         { name: 'ES modules', priority: 1 }
       ]);
     </script>
-    <script type="module" src="/mon-portfolio/scripts--<?=version(__DIR__, 'scripts.js.php')?>.js.php"></script>
+    <script type="module" src="/mon-portfolio/scripts.js.php"></script>
+
+    <!--<?php $imports = ob_get_clean();
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+    echo versionizeFiles($imports, __DIR__); ?>-->
 
   </body>
 </html>

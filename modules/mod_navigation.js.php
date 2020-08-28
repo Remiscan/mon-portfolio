@@ -10,8 +10,8 @@ import { placeholderNoMore, loadMaPhoto, loadProjetImages } from './mod_loadImag
 import { focusable } from './mod_a11y.js.php';
 
 /*<?php $imports = ob_get_clean();
-require_once dirname(__DIR__, 2).'/_common/php/versionize-js-imports.php';
-echo versionizeImports($imports, __DIR__); ?>*/
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 
