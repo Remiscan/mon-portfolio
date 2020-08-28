@@ -21,6 +21,7 @@ class ExtTraduction extends DefTraduction {
     await super.traduire(element);
     recalcOnResize();
     document.title = getTitrePage(history.state.onav.replace('nav_', ''));
+    return;
   }
 }
 
