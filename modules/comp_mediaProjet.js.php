@@ -70,4 +70,4 @@ class mediaProjet extends HTMLElement {
     this.update([name]);
   }
 }
-customElements.define('media-projet', mediaProjet);
+if (!customElements.get('media-projet')) customElements.define('media-projet', mediaProjet);
