@@ -371,30 +371,3 @@ navs.forEach(e => document.getElementById(e).addEventListener('click', event => 
   }
   naviguer(event, event.currentTarget);
 }));
-
-
-
-////////////////////////////////////////////////////////////////////
-// Gère les appuis sur les boutons précédent / suivant du navigateur
-window.addEventListener('popstate', event => {
-  const elProjet = document.getElementById('projet');
-  const onav = event.state.onav;
-  if (onav == 'projet')
-  {
-    if (elProjet.style.display != 'none' && elProjet.style.display)
-      closeProjet();
-
-    const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
-    entrees.forEach(e => {
-      if (e.dataset.id == event.state.oprojet_id)
-        return simulateClick(e);
-    });
-  }
-  else
-  {
-    if (document.getElementById('projet').classList.contains('on'))
-      closeProjet();
-    
-    simulateClick(document.getElementById(onav));
-  }
-}, false);
