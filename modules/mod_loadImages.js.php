@@ -1,17 +1,67 @@
+export class Loader {
+  constructor(...urls) {
+    this.urls = urls;
+    this.controller = new AbortController();
+    this.aborted = false;
+    this.check = new Object();
+  }
+
+  async load() {
+    window.addEventListener('fetchabort', event => {
+      if (event.detail.check === this.check) this.controller.abort();
+    });
+
+    const signal = this.controller.signal;
+    return await Promise.all(this.urls.map(async url => {
+      try {
+        const response = await fetch(url, { signal });
+        if (response.status == 200) return url;
+        else throw url;
+      }
+      catch(error) {
+        if (error.name === 'AbortError') return;
+        else throw `Loading failed: ${error}`;
+      }
+    }));
+  }
+
+  abort() {
+    window.dispatchEvent(new CustomEvent('fetchabort', { detail: { check: this.check } }));
+    this.aborted = true;
+  }
+}
+
+
+
 ///////////////////////////////////////////////
 // Charge toutes les images de l'array d'entrée
-export function loadAllImages(liste)
-{
-  let promises = [];
-  liste.forEach((e, k) => {
-    promises[k] = new Promise((resolve, reject) => {
-      const img = new Image();
-      img.src = e;
-      img.onload = () => { resolve(k) }
-      img.onerror = () => { reject(k) }
-    });
+export async function loadAllImages(liste) {
+  const loader = new Loader(...liste);
+  return await loader.load();
+}
+
+
+
+//////////////////////////////////////////////
+// Remplace un placeholder par l'image chargée
+export async function dePlaceholder(conteneur, url) {
+  conteneur.style.setProperty('--image', `url('${url}')`);
+
+  const actualImage = document.createElement('div');
+  actualImage.classList.add('actual-image');
+  conteneur.appendChild(actualImage);
+
+  conteneur.classList.add('loaded');
+  const loadImg = conteneur.querySelector('.actual-image').animate([
+    { opacity: 0 },
+    { opacity: 1 }
+  ], {
+      easing: 'ease-out',
+      duration: 300,
+      fill: 'forwards'
   });
-  return Promise.all(promises);
+
+  return await new Promise(resolve => loadImg.onfinish = resolve);
 }
 
 

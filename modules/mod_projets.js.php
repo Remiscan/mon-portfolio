@@ -1,11 +1,12 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
+import { cancelableAsync } from '../../_common/js/cancelable-async.js';
 import { Traduction, getString, getTitrePage } from './mod_traduction.js.php';
 import { Params, isVisible, wait } from './mod_Params.js.php';
 import { naviguer, getNavActuelle } from './mod_navigation.js.php';
 import { changeThemeColor } from './mod_changeCouleur.js.php';
-import { placeholderNoMore } from './mod_loadImages.js.php';
+import { Loader, dePlaceholder, placeholderNoMore } from './mod_loadImages.js.php';
 import { focusable } from './mod_a11y.js.php';
 
 /*<?php $imports = ob_get_clean();
@@ -29,7 +30,7 @@ let lastProjetNav;
 
 /////////////////////////
 // Navigation vers projet
-export function openProjet(event)
+export function* openProjet(event)
 {
   event.preventDefault();
   
@@ -50,27 +51,27 @@ export function openProjet(event)
   elProjet.removeAttribute('aria-hidden');
   elProjet.removeAttribute('hidden');
 
-  const iconeProjet = document.getElementById('projet-details-icone');
-  const iconeProjetLien = ['/' + id + '/icons/icon.svg'];
-  placeholderNoMore([iconeProjetLien], [iconeProjet]);
-
-  const listeImages = [`/mon-portfolio/projets/${id}/preview-phone.png`, `/mon-portfolio/projets/${id}/preview-pc.png`];
-  const listeConteneurs = [document.getElementById('projet-details-image-phone'), document.getElementById('projet-details-image-pc')];
-  placeholderNoMore(listeImages, listeConteneurs);
+  const images = [{
+    url: '/' + id + '/icons/icon.svg',
+    conteneur: document.getElementById('projet-details-icone')
+  }, {
+    url: `/mon-portfolio/projets/${id}/preview-phone.png`,
+    conteneur: document.getElementById('projet-details-image-phone')
+  }, {
+    url: `/mon-portfolio/projets/${id}/preview-pc.png`,
+    conteneur: document.getElementById('projet-details-image-pc')
+  }];
 
   let directionPreview = [0, 2];
 
-  return Promise.resolve()
-  .then(() => {
+  try {
+
     // On navigue vers le portfolio avant d'ouvrir le projet, si on n'y est pas déjà
     if (getNavActuelle() != 'nav_portfolio')
-      return naviguer(event, document.getElementById('nav_portfolio'), true, false);
-    else
-      return;
-  })
-  .then(() => {
-    if (thisProjetNav != lastProjetNav)
-      throw 'expired';
+      yield naviguer(event, document.getElementById('nav_portfolio'), true, false);
+
+    /*if (thisProjetNav != lastProjetNav)
+      throw 'expired';*/
 
     // Si l'event est un vrai clic (vs simulation par popstate event), on ajoute à l'historique
     if (history.state.onav != 'projet' || history.state.oprojet_id != id)
@@ -94,87 +95,90 @@ export function openProjet(event)
 
     // On anime l'interface des projets et on récupère le "pourquoi du comment" en même temps
     // et quand les deux seront finis, on placera le "pourquoi du comment" dans l'interface
-    //// Promesse 1 : animation de l'interface
-    const promiseInterface = new Promise((resolve, reject) => {
-      animProjet(id)
-      .then(provenance => {
-        //directionPreview = provenance;
-        
-        // On écoute le bouton Échap pour fermer le projet
-        window.addEventListener('keydown', window.cp = event => {
-          const key = event.which || event.keyCode;
-          const button = document.getElementById('projet-close');
-          if (key == 27) simulateClick(button, 1, 1);
-        });
+    //// Promesse 1 : chargement des images
+    const loadImages = async () => {
+      return await Promise.all(images.map(async img => {
+        const loader = new Loader(img.url);
+        await loader.load();
+        if (thisProjetNav != lastProjetNav) throw 'expired';
+        return dePlaceholder(img.conteneur, img.url);
+      }));
+    };
 
-        if (thisProjetNav != lastProjetNav)
-          throw 'expired';
+    //// Promesse 2 : animation de l'interface
+    const loadInterface = async () => {
+      //const directionPreview = await animProjet(id);
+      await animProjet(id);
         
-        // On anime l'apparition des infos de base du projet choisi
-        changeThemeColor(couleur);
-        projetContenu.style.opacity = 1;
-        projetTransition.style.display = 'none';
-    
-        focusable.forEach(function(e) {
-          if (elProjet.contains(e))
-            e.tabIndex = 0;
-          else
-          {
-            e.dataset.savedTabIndex = e.tabIndex;
-            e.tabIndex = -1;
-          }
-        });
-        
-        // On insère les infos basiques du projet
-        const boutonFermer = document.getElementById('projet-close');
-        boutonFermer.addEventListener('click', boutonFermer.clickhandler = () => {
-          closeProjet();
-          history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
-          document.title = getTitrePage('portfolio');
-        });
-        
-        const boutonVisiter = document.getElementById('projet-details-lien');
-        document.getElementById('projet-details-titre').innerHTML = titre;
-        document.getElementById('projet-details-description').innerHTML = description;
-        document.getElementById('projet-details-longue_description').innerHTML = longueDescription;
-        if (lien == '')
-          boutonVisiter.style.display = 'none';
-        else
-        {
-          boutonVisiter.style.display = 'unset';
-          boutonVisiter.href = lien;
+      // On écoute le bouton Échap pour fermer le projet
+      window.addEventListener('keydown', window.cp = event => {
+        const key = event.which || event.keyCode;
+        const button = document.getElementById('projet-close');
+        if (key == 27) simulateClick(button, 1, 1);
+      });
+
+      if (thisProjetNav != lastProjetNav) throw 'expired';
+      
+      // On anime l'apparition des infos de base du projet choisi
+      changeThemeColor(couleur);
+      projetContenu.style.opacity = 1;
+      projetTransition.style.display = 'none';
+  
+      focusable.forEach(e => {
+        if (elProjet.contains(e))
+          e.tabIndex = 0;
+        else {
+          e.dataset.savedTabIndex = e.tabIndex;
+          e.tabIndex = -1;
         }
-    
-        projetContenu.style.display = 'block';
-        projetContenu.scrollTop = 0;
-    
-        const projetKeyframes = [
-          { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
-          { opacity: '1', transform: 'translate3D(0, 0, 0) '}
-        ];
-        const projetOptions = k => {
-          return {
-            easing: Params.easingDecelerate,
-            duration: 100,
-            delay: k * 20,
-            fill: 'backwards'
-          };
+      });
+      
+      // On insère les infos basiques du projet
+      const boutonFermer = document.getElementById('projet-close');
+      boutonFermer.addEventListener('click', boutonFermer.clickhandler = () => {
+        closeProjet();
+        history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
+        document.title = getTitrePage('portfolio');
+      });
+      
+      const boutonVisiter = document.getElementById('projet-details-lien');
+      document.getElementById('projet-details-titre').innerHTML = titre;
+      document.getElementById('projet-details-description').innerHTML = description;
+      document.getElementById('projet-details-longue_description').innerHTML = longueDescription;
+      if (lien == '')
+        boutonVisiter.style.display = 'none';
+      else {
+        boutonVisiter.style.display = 'unset';
+        boutonVisiter.href = lien;
+      }
+  
+      projetContenu.style.display = 'block';
+      projetContenu.scrollTop = 0;
+  
+      const projetKeyframes = [
+        { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
+        { opacity: '1', transform: 'translate3D(0, 0, 0) '}
+      ];
+      const projetOptions = k => {
+        return {
+          easing: Params.easingDecelerate,
+          duration: 100,
+          delay: k * 20,
+          fill: 'backwards'
         };
-    
-        const toAnimate = ['projet-details-top', 'projet-details-images', 'projet-details-longue_description', 'projet-details-ligne', 'projet-details'];
-    
-        // On anime chaque sous-section, et on signale quand la dernière a terminé
-        toAnimate.forEach((e, k) => {
-          const anim = document.getElementById(e).animate(projetKeyframes, projetOptions(k));
-          if (k == toAnimate.length - 1) // si c'est la dernière sous-section
-            anim.addEventListener('finish', resolve);
-        });
-      })
-      .catch(error => reject(error));
-    });
+      };
+  
+      const toAnimate = ['projet-details-top', 'projet-details-images', 'projet-details-longue_description', 'projet-details-ligne', 'projet-details'];
+  
+      // On anime chaque sous-section, et on signale quand la dernière a terminé
+      return await Promise.all(Array.from(toAnimate.entries()).map(([k, e]) => {
+        const anim = document.getElementById(e).animate(projetKeyframes, projetOptions(k));
+        return new Promise(resolve => anim.onfinish = resolve);
+      }));
+    };
 
-    //// Promesse 2 : récupération du "pourquoi du comment"
-    const promiseEtude = new Promise((resolve, reject) => {
+    //// Promesse 3 : récupération du "pourquoi du comment"
+    const loadEtude = async () => {
       // On affiche les points de chargement si le chargement prend du temps
       waitForEtude = setTimeout(() => {
         projetDetailsLoading.classList.add('needstoload');
@@ -183,94 +187,84 @@ export function openProjet(event)
       }, 1000);
 
       // Récupère le "pourquoi du comment" dans la langue demandée
-      function fetchEtude(lang) {
+      const fetchEtude = async lang => {
         if (lang == 'en' && !source.dataset.enExists) return Promise.reject('etude-en.htm inexistant');
-        return fetch('/mon-portfolio/projets/' + id + '/etude-' + lang + '--' + versionProjet + '.htm')
-        .then(response => {
-          if (response.status == 200)
-            return response;
-          else
-            throw '[:(] Erreur ' + response.status + ' lors de la requête';
-        });
+        const response = await fetch('/mon-portfolio/projets/' + id + '/etude-' + lang + '--' + versionProjet + '.htm');
+        if (response.status == 200) return Promise.resolve(response);
+        else return Promise.reject('[:(] Erreur ' + response.status + ' lors de la requête');
       }
 
       // On récupère le "pourquoi du comment" sur le serveur ou dans le cache
-      fetchEtude(Traduction.language)
+      return fetchEtude(Traduction.language)
       .catch(() => fetchEtude('fr'))
       .then(response => response.text())
-      .then(data => resolve(data))
       .catch(error => {
         console.error(error);
-        reject('fetch failed');
-      })
-    });
+        throw 'fetch failed';
+      });
+    };
   
-    return Promise.all([promiseInterface, promiseEtude]);
-  })
-  .then(result => {
-    const data = result[1];
+    const result = yield Promise.all([loadImages(), loadInterface(), loadEtude()]);
+    const data = result[2];
     clearTimeout(waitForEtude);
     
-    let delay = 0;
+    let delay = (projetDetailsLoading.classList.contains('needstoload')) ? 250 : 0;
     let animDelay = 100;
-    if (projetDetailsLoading.classList.contains('needstoload'))
-      delay = 250;
     
     // On affiche les données, mais seulement quand la section projet est encore ouverte
-    if (elProjet.classList.contains('on') && currentProjet == id)
-    {
+    if (thisProjetNav != lastProjetNav) throw 'expired';
+
+    if (elProjet.classList.contains('on') && currentProjet == id) {
       projetDetailsLoading.classList.add('loaded');
 
-      return wait(delay)
-      .then(() => {
-        projetDetailsLoading.classList.remove('needstoload');
-        projetDetailsLoading.classList.remove('loadingnow');
-        projetDetailsPourquoi.innerHTML = data;
-        Array.from(projetDetailsPourquoi.querySelectorAll('a')).forEach(e => e.classList.add('focusable'));
+      yield wait(delay);
 
-        const anim_projetDetails = projetDetailsPourquoi.animate([
-          { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
-          { opacity: '1', transform: 'translate3D(0, 0, 0) '}
-        ], {
-            easing: Params.easingDecelerate,
-            duration: 150,
-            delay: animDelay,
-            fill: 'both'
-        });
+      projetDetailsLoading.classList.remove('needstoload');
+      projetDetailsLoading.classList.remove('loadingnow');
+      projetDetailsPourquoi.innerHTML = data;
+      Array.from(projetDetailsPourquoi.querySelectorAll('a')).forEach(e => e.classList.add('focusable'));
 
-        anim_projetDetails.addEventListener('finish', () => {
-          projetDetailsPourquoi.style.opacity = 1;
-          anim_projetDetails.cancel();
-          [...projetDetailsPourquoi.querySelectorAll('img'), ...projetDetailsPourquoi.querySelectorAll('video')].forEach(img => {
-            img.parentElement.classList.add('loading');
-            const eventType = (img.tagName == 'VIDEO') ? 'loadeddata' : 'load';
-            img.addEventListener(eventType, () => img.parentElement.classList.remove('loading'));
-          });
-          return;
-        });
-      })
+      const anim_projetDetails = projetDetailsPourquoi.animate([
+        { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
+        { opacity: '1', transform: 'translate3D(0, 0, 0) '}
+      ], {
+          easing: Params.easingDecelerate,
+          duration: 150,
+          delay: animDelay,
+          fill: 'both'
+      });
+
+      yield new Promise(resolve => anim_projetDetails.onfinish = resolve);
+
+      projetDetailsPourquoi.style.opacity = 1;
+      anim_projetDetails.cancel();
+      [...projetDetailsPourquoi.querySelectorAll('img'), ...projetDetailsPourquoi.querySelectorAll('video')].forEach(img => {
+        img.parentElement.classList.add('loading');
+        const eventType = (img.tagName == 'VIDEO') ? 'loadeddata' : 'load';
+        img.addEventListener(eventType, () => img.parentElement.classList.remove('loading'));
+      });
+      return;
     }
-    else
-      throw 'La section projet est fermée, les détails ne peuvent pas être affichés.';
-  })
-  .catch(error => {
-    if (error == 'expired')
-    {
+    else throw 'La section projet est fermée, les détails ne peuvent pas être affichés.';
+  }
+  
+  catch(error) {
+    if (error == 'expired') {
       console.log('Ouverture de projet expirée');
-      closeProjet();
+      //closeProjet();
     }
-    else if (error == 'fetch failed')
-    {
+    else if (error == 'fetch failed') {
       clearTimeout(waitForEtude);
       projetDetailsLoading.classList.remove('needstoload');
       projetDetailsLoading.classList.remove('loadingnow');
       projetDetailsPourquoi.innerHTML = '<p>' + getString('projet-etude-erreur-fetch') + '</p>';
       projetDetailsPourquoi.style.opacity = 1;
     }
-    else
-      console.log(error);
-  });
+    else console.log(error);
+  };
 }
+
+openProjet = cancelableAsync(openProjet);
 
 
 

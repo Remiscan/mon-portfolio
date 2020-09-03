@@ -570,6 +570,7 @@ nav>a>h3 {
 nav>a.selected {
   opacity: 1;
   cursor: auto;
+  pointer-events: none;
 }
 
 .selected>.underline {

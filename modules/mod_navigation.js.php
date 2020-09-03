@@ -1,6 +1,7 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
+import { cancelableAsync } from '../../_common/js/cancelable-async.js';
 import { Params } from './mod_Params.js.php';
 import { getTitrePage } from './mod_traduction.js.php';
 import { changeCouleur } from './mod_changeCouleur.js.php';
@@ -29,7 +30,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 ////////////////////////////
 // Navigation entre sections
-export function naviguer(event, nav, start = false, historique = true)
+export function* naviguer(event, nav, start = false, historique = true)
 {
   let needAnimations = false;
   let currentScroll = window.scrollY;
@@ -37,24 +38,20 @@ export function naviguer(event, nav, start = false, historique = true)
   const main = document.querySelector('main');
   const boutonLangage = document.querySelector('.groupe-langages');
 
+  try {
 
-  // ÉTAPE 1 : Navigation autorisée ?
-  return new Promise((resolve, reject) => {
+    // ÉTAPE 1 : Navigation autorisée ?
     // Ne rien faire si :
-    // - on demande à aller sur la section déjà ouverte alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
-    // - on demande à aller sur la section vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
+      // - on demande à aller sur la section déjà ouverte alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
+      // - on demande à aller sur la section vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
     if (!navEnCours && nav_actuelle == nav.id && !start)
-      return reject('Navigation rejetée : la section demandée (' + nav.id + ') est déjà ouverte');
+      throw 'Navigation rejetée : la section demandée (' + nav.id + ') est déjà ouverte';
     else if (navEnCours && lastNav == nav)
-      return reject('Navigation rejetée : navigation déjà en cours vers la section demandée (' + nav.id + ')');
-    else
-      resolve();
-  })
+      throw 'Navigation rejetée : navigation déjà en cours vers la section demandée (' + nav.id + ')';
 
 
-  // ÉTAPE 2.1 : Animations accueil <==> section + couleur
-  // et ÉTAPE 2.2 en parallèle : Masquer les éléments de la vielle section
-  .then(() => {
+    // ÉTAPE 2.1 : Animations accueil <==> section + couleur
+    // et ÉTAPE 2.2 en parallèle : Masquer les éléments de la vielle section
     lastNav = nav;
 
     // Si aucune condition de rejet n'est remplie, on continue :
@@ -87,15 +84,13 @@ export function naviguer(event, nav, start = false, historique = true)
     let dureeTransition = 300;
     let e0, e1;
 
-    if (!Params.sectionOuverte && nav.id != 'nav_accueil')
-    {
+    if (!Params.sectionOuverte && nav.id != 'nav_accueil') {
       needAnimations = true;
       e0 = 0;
       e1 = 1;
       document.getElementById('nav_portfolio').style.setProperty('--diff-scale-navs', 0);
     }
-    else if (Params.sectionOuverte && nav.id == 'nav_accueil')
-    {
+    else if (Params.sectionOuverte && nav.id == 'nav_accueil') {
       needAnimations = true;
       e0 = 1;
       e1 = 0;
@@ -105,8 +100,7 @@ export function naviguer(event, nav, start = false, historique = true)
       currentScroll = 0;
     }
 
-    if (needAnimations)
-    {
+    if (needAnimations) {
       // Paramètres des animations
       const options = {
         easing: Params.easingStandard,
@@ -177,12 +171,10 @@ export function naviguer(event, nav, start = false, historique = true)
 
       // Une fois les animations finies
       headerSize.addEventListener('finish', () => {
-        if (e0 == 1) // si on va sur l'accueil
-        {
+        if (e0 == 1) { // si on va sur l'accueil
           nav_etat = 'accueil';
         }
-        else
-        {
+        else {
           document.documentElement.classList.add('actif');
           nav_etat = 'section';
         }
@@ -194,8 +186,8 @@ export function naviguer(event, nav, start = false, historique = true)
         nav2Move.cancel();
       });
     }
-    else
-    {
+
+    else {
       if (nav.id == 'nav_accueil')
         nav_etat = 'accueil';
       else
@@ -204,12 +196,10 @@ export function naviguer(event, nav, start = false, historique = true)
     }
 
     // Si on navigue vers une section qui existe
-    if (navs.indexOf(nav.id) != -1)
-    {
+    if (navs.indexOf(nav.id) != -1) {
       navs.forEach(e => {
         // 2.2 : On masque toutes les autres sections que celle demandée
-        if (e != nav.id)
-        {
+        if (e != nav.id) {
           const article_id = e.replace('nav_', '');
           const article = document.getElementById(article_id);
           const navlink = document.getElementById(e);
@@ -224,8 +214,7 @@ export function naviguer(event, nav, start = false, historique = true)
           }
           
           // On réinitialise le formulaire de contact
-          if (article_id == 'contact')
-          {
+          if (article_id == 'contact') {
             champsContact.forEach(e => verifyForm(document.getElementById(e + '_mail')));
             const enveloppeSvg = document.getElementById('svg-email');
             enveloppeSvg.innerHTML = enveloppeSvg.innerHTML.replace('#email-open', '#email-closed');
@@ -268,20 +257,15 @@ export function naviguer(event, nav, start = false, historique = true)
       }
       
       // Animation de la propagation de la couleur de section choisie
-      return changeCouleur(event, nav);
+      yield changeCouleur(event, nav);
     }
-    else
-    {
-      throw 'Navigation demandée vers une section inexistante: ' + nav.id;
-    }
-  })
+
+    else throw 'Navigation demandée vers une section inexistante: ' + nav.id;
 
 
-  // ÉTAPE 3 : Affichage de la nouvelle section
-  .then(() => {
+    // ÉTAPE 3 : Affichage de la nouvelle section
     // Si une autre navigation a été déclenchée après celle encore en cours
-    if (lastNav != nav)
-      throw 'expired';
+    //if (lastNav != nav) throw 'expired';
     
     const article_id = nav.id.replace('nav_', '');
     const article = document.getElementById(article_id);
@@ -298,46 +282,40 @@ export function naviguer(event, nav, start = false, historique = true)
     });
     if (start) article_animation.play(); // Empêche Edge d'ignorer l'animation de durée 0
 
-    return new Promise(resolve => {
-      article_animation.addEventListener('finish', () => {
-        main.style.height = 'auto';
-        document.documentElement.style.overflowY = 'auto';
-        window.scrollTo(0, currentScroll);
-        nav_actuelle = 'nav_' + article_id;
-        navEnCours = false;
-        if (start) document.body.removeAttribute('data-start');
-  
-        // Animations et derniers ajustements du contenu de la nouvelle section
-        if (article_id == 'bio')
-        {
-          anim_competences();
-          loadMaPhoto();
-          document.getElementById('photosecret').classList.remove('nope');
-        }
-        else if (article_id == 'portfolio')
-          loadProjetImages();
-        else if (article_id == 'accueil')
-        {
-          boutonLangage.classList.remove('off');
-        }
-        
-        if (article_id != 'portfolio' && document.getElementById('portfolio').querySelector('.actual-image') != null)
-        {
-          const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));
-          placeholderNoMore(false, listeProjets);
-        }
-        if (article_id != 'bio' && document.getElementById('bio').querySelector('.actual-image') != null)
-        {
-          const maPhoto = document.getElementById('photo');
-          placeholderNoMore(false, [maPhoto]);
-        }
+    yield new Promise(resolve => article_animation.onfinish = resolve);
 
-        resolve();
-      });
-    });
-  })
-  .catch(error => {
-    if (error == 'expired')
+    main.style.height = 'auto';
+    document.documentElement.style.overflowY = 'auto';
+    window.scrollTo(0, currentScroll);
+    nav_actuelle = 'nav_' + article_id;
+    navEnCours = false;
+    if (start) document.body.removeAttribute('data-start');
+
+    // Animations et derniers ajustements du contenu de la nouvelle section
+    if (article_id == 'bio') {
+      anim_competences();
+      loadMaPhoto();
+      document.getElementById('photosecret').classList.remove('nope');
+    }
+    else if (article_id == 'portfolio')
+      loadProjetImages();
+    else if (article_id == 'accueil')
+      boutonLangage.classList.remove('off');
+    
+    if (article_id != 'portfolio' && document.getElementById('portfolio').querySelector('.actual-image') != null) {
+      const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));
+      placeholderNoMore(false, listeProjets);
+    }
+    if (article_id != 'bio' && document.getElementById('bio').querySelector('.actual-image') != null) {
+      const maPhoto = document.getElementById('photo');
+      placeholderNoMore(false, [maPhoto]);
+    }
+
+    return;
+  }
+  
+  catch(error) {
+    /*if (error == 'expired')
     {
       console.log('Navigation expirée : navigation plus récente en cours');
       // Quand on voulait aller sur l'accueil mais qu'une navigation plus récente va ailleurs
@@ -347,10 +325,12 @@ export function naviguer(event, nav, start = false, historique = true)
       else if (nav.id != 'nav_accueil' && nav_etat == 'accueil' && document.documentElement.classList.contains('actif'))
         document.documentElement.classList.remove('actif');
     }
-    else
+    else*/
       console.log(error);
-  });
+  };
 }
+
+naviguer = cancelableAsync(naviguer);
 
 
 
