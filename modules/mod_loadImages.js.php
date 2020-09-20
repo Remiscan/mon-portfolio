@@ -4,9 +4,29 @@ export class Loader {
     this.controller = new AbortController();
     this.aborted = false;
     this.check = new Object();
+    this.method = 'img';
   }
 
   async load() {
+    if (this.method == 'fetch') return await this.loadFetch();
+    else                        return await this.loadImg();
+  }
+
+  async loadImg() {
+    return await Promise.all(this.urls.map(url => {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        img.src = url;
+        img.onload = () => { resolve(url) };
+        img.onerror = () => { reject(url) };
+      })
+      .catch(error => {
+        throw `Loading failed: ${error}`;
+      });
+    }));
+  }
+
+  async loadFetch() {
     window.addEventListener('fetchabort', event => {
       if (event.detail.check === this.check) this.controller.abort();
     });
