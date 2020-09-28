@@ -98,6 +98,7 @@ export function* openProjet(event)
     //// Promesse 1 : chargement des images
     const loadImages = async () => {
       return await Promise.all(images.map(async img => {
+        img.conteneur.classList.add('loading');
         const loader = new Loader(img.url);
         await loader.load();
         if (thisProjetNav != lastProjetNav) throw 'expired';
