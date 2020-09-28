@@ -449,8 +449,9 @@ media-projet {
   position: relative;
 }
 
-media-projet>div,
+media-projet,
 #projet-details-pourquoi>figure>div {
+  display: block;
   width: calc(var(--w) * 1px);
   --largeur-max: 100%;
   max-width: calc(var(--largeur-max) - 2.4rem);
@@ -459,7 +460,7 @@ media-projet>div,
   margin: 1.2rem .6rem;
 }
 
-media-projet>div::before,
+media-projet::before,
 #projet-details-pourquoi>figure>div::before {
   content: '';
   display: block;
@@ -467,13 +468,13 @@ media-projet>div::before,
   background-color: rgba(0, 0, 0, .3);
 }
 
-media-projet>div.loading::before,
+media-projet.loading::before,
 #projet-details-pourquoi>figure>div.loading::before {
   background-color: transparent;
 }
 
-media-projet>div>img,
-media-projet>div>video,
+media-projet>img,
+media-projet>video,
 #projet-details-pourquoi>figure>div>img,
 #projet-details-pourquoi>figure>div>video {
   object-fit: contain;

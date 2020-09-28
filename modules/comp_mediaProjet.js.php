@@ -1,17 +1,13 @@
 const templateImg = document.createElement('template');
 templateImg.innerHTML = `
-<div style="">
-  <img alt="" loading="lazy">
-</div>
+<img alt="" loading="lazy">
 `;
 
 const templateVideo = document.createElement('template');
 templateVideo.innerHTML = `
-<div style="">
-  <video loop muted controls>
-    <source type="video/mp4">
-  </video>
-</div>
+<video loop muted controls>
+  <source type="video/mp4">
+</video>
 `;
 
 class mediaProjet extends HTMLElement {
@@ -25,7 +21,6 @@ class mediaProjet extends HTMLElement {
 
   update(attributes = mediaProjet.observedAttributes) {
     if (!this.ready) return;
-    const div = this.querySelector('div');
     const img = this.querySelector('img') || this.querySelector('video');
     const source = this.querySelector('img') || this.querySelector('source');
 
@@ -38,22 +33,22 @@ class mediaProjet extends HTMLElement {
     width: {
       if (!attributes.includes('width')) break width;
       const width = this.getAttribute('width');
-      div.style.setProperty('--w', width);
+      this.style.setProperty('--w', width);
       img.setAttribute('width', width);
     }
 
     height: {
       if (!attributes.includes('height')) break height;
       const height = this.getAttribute('height');
-      div.style.setProperty('--h', height);
+      this.style.setProperty('--h', height);
       img.setAttribute('height', height);
     }
 
     phone: {
       if (!attributes.includes('phone')) break phone;
       const phone = this.getAttribute('phone') != null;
-      if (phone) div.style.setProperty('--largeur-max', '20rem');
-      else       div.style.removeProperty('--largeur-max');
+      if (phone) this.style.setProperty('--largeur-max', '20rem');
+      else       this.style.removeProperty('--largeur-max');
     }
   }
 
