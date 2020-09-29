@@ -766,21 +766,27 @@ textarea::selection {
   background: black;
 }
 
-.focusable:active,
-.focusable:focus:hover {
-  outline-style: none;
+.focusable:active {
+  outline: none;
 }
 .focusable::moz-focus-inner {
   border: none;
 }
-.focusable:focus:not(:hover) {
+.focusable:focus {
   outline: 2px solid white;
 }
-#contact button:focus:not(:hover) {
+.focusable:focus:not(:focus-visible) {
+  outline: none;
+}
+#contact button:focus {
   outline: 2px solid var(--article-color);
   box-shadow: 0 0 0 4px white;
 }
-.mecontacter:focus:not(:hover) {
+#contact button:focus:not(:focus-visible) {
+  outline: none;
+  box-shadow: none;
+}
+.mecontacter:focus {
   outline-offset: 1px;
   text-decoration: none;
 }
