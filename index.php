@@ -119,6 +119,7 @@
           id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
     <!-- Préchargement des modules -->
     <link rel="modulepreload" href="/_common/js/traduction.js">
+    <link rel="modulepreload" href="/_common/js/cancelable-async.js">
     <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>
     <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
