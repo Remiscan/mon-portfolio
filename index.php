@@ -1,93 +1,93 @@
 <?php
-  include __DIR__ . '/fonctions.php';
-  $Textes = new Textes('mon-portfolio');
+$commonDir = dirname(__DIR__, 1).'/_common';
+require_once $commonDir.'/php/autochargeClasses.php';
+require_once $commonDir.'/php/httpLanguage.php';
+require_once $commonDir.'/php/getStrings.php';
+require_once $commonDir.'/php/version.php';
 
-  // Gestion de l'URL demandée et adaptation de la page
 
-  //// Récupération de la section de départ
-  $start_section = 'accueil';
-  if (isset($_GET['onav']))
-  {
-    $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
 
-    if (in_array($onav, array('competences', 'bio', 'portfolio', 'projet', 'contact')))
-      $start_section = $onav;
+// Calcule l'âge d'une date par rapport à aujourd'hui
+function age($date = '1993-10-31') {
+  $origine = date_create($date);
+  $aujourdhui = date_create(date('Y-m-d'));
+  $age = date_diff($origine, $aujourdhui);
+  $age = $age->format('%y');
+  return $age;
+}
+
+// Calcule le temps depuis que je programme
+function agepro() {
+  $mod = 2;
+  $agepro = age('2006-10-31');
+  $agepro = intdiv($agepro, $mod) * $mod;
+  return $agepro;
+}
+
+
+
+$Textes = new Textes('mon-portfolio');
+
+// Gestion de l'URL demandée et adaptation de la page
+
+//// Récupération de la section de départ
+$start_section = 'accueil';
+if (isset($_GET['onav'])) {
+  $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
+
+  if (in_array($onav, array('competences', 'bio', 'portfolio', 'projet', 'contact')))
+    $start_section = $onav;
+}
+$isAccueil = ($start_section == 'accueil');
+
+//// Si l'URL demandée est /
+$titre_page = false;
+
+//// Si une URL différente de / est demandée
+if (!$isAccueil) {
+  switch($start_section) {
+    case 'bio':
+      $titre_page = $Textes->getString('nav-bio');
+      break;
+    case 'projet':
+    case 'portfolio':
+      $titre_page = $Textes->getString('nav-portfolio');
+      break;
+    case 'contact':
+      $titre_page = $Textes->getString('nav-contact');
+      break;
   }
-  $isAccueil = ($start_section == 'accueil');
+}
 
-  //// Récupération du projet de départ
-  $start_projet = '';
-  if (isset($_GET['projet']))
-  {
-    $oprojet = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['projet']);
+//// Donne le titre de la page
+$titre = 'Rémi S., ' . $Textes->getString('job');
+if ($titre_page != false)
+  $titre .= ' — ' . $titre_page;
 
-    $idsProjets = array();
-    foreach($projets as $projet) { $idsProjets[] = $projet->id; }
-    
-    if (in_array($oprojet, $idsProjets))
-      $start_projet = $oprojet;
+//// Liste des fichiers style-*.css critiques ou non
+$styles_critiques = ['global'];
+if ($start_section != 'accueil')
+  $styles_critiques[] = $start_section;
+$styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
+
+// Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
+// (dé/commenter la première ligne pour changer de méthode)
+$css_critique_methode = 'push'; /*
+$css_critique_methode = 'inline'; /**/
+
+if ($css_critique_methode == 'push') {
+  //// On demande au serveur de PUSH le css critique avec HTTP2
+  $linkHeader = 'Link: ';
+  foreach($styles_critiques as $k => $section) {
+    $versionStyle = version(__DIR__.'/pages', $section . '-style.css');
+    if ($k > 0) $linkHeader .= ', ';
+    $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
   }
-
-  //// Si l'URL demandée est /
-  $start_color = $c_default_bgcolor;
-  $start_meta_color = $c_default_bgcolor->change('l', '11%', true);
-  $titre_page = false;
-
-  //// Si une URL différente de / est demandée
-  if (!$isAccueil)
-  {
-    switch($start_section)
-    {
-      case 'bio':
-        $start_color = $c_section_parcours;
-        $titre_page = $Textes->getString('nav-bio');
-        break;
-      case 'projet':
-      case 'portfolio':
-        $start_color = $c_section_portfolio;
-        $titre_page = $Textes->getString('nav-portfolio');
-        break;
-      case 'contact':
-        $start_color = $c_email;
-        $titre_page = $Textes->getString('nav-contact');
-        break;
-    }
-    $start_meta_color = $start_color->change('l', '25%', true);
-  }
-  $load_color = Couleur::blend($c_topcolor, $start_color);
-
-  //// Donne le titre de la page
-  $titre = 'Rémi S., ' . $Textes->getString('job');
-  if ($titre_page != false)
-    $titre .= ' — ' . $titre_page;
-
-  //// Liste des fichiers style-*.css critiques ou non
-  $styles_critiques = ['global'];
-  if ($start_section != 'accueil')
-    $styles_critiques[] = $start_section;
-  if ($start_section == 'projet')
-    $styles_critiques[] = 'portfolio';
-  $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
-
-  // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
-  // (dé/commenter la première ligne pour changer de méthode)
-  $css_critique_methode = 'push'; /*
-  $css_critique_methode = 'inline'; /**/
-
-  if ($css_critique_methode == 'push')
-  {
-    //// On demande au serveur de PUSH le css critique avec HTTP2
-    $linkHeader = 'Link: ';
-    foreach($styles_critiques as $k => $section) {
-      $versionStyle = version(__DIR__.'/pages', $section . '-style.css');
-      if ($k > 0) $linkHeader .= ', ';
-      $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
-    }
-    header($linkHeader);
-  }
+  header($linkHeader);
+}
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" <?=$isAccueil?'':'class="actif"'?>>
+<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>">
 
   <head>
     <meta charset="utf-8">
@@ -101,7 +101,7 @@
     <meta property="og:image" content="https://remiscan.fr/mon-portfolio/images/mosaique-preview.png">
 
     <meta name="viewport" content="initial-scale=1">
-    <meta name="theme-color" content="<?=$start_meta_color->hsl()?>">
+    <meta name="theme-color" content="">
     
     <link rel="icon" type="image/png" href="/mon-portfolio/icons/icon-192.png">
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
@@ -179,43 +179,14 @@
     </noscript>
   </head>
   
-  <body style="--default-color:<?=$c_default_bgcolor->hsl()?>;
-               --load-color:<?=$load_color->hsl()?>;
-               --article-color:<?=$start_color->hsl()?>;"
-        data-start="<?=$start_section?>"
-        data-start-projet="<?=$start_projet?>">
+  <body data-start="<?=$start_section?>">
 
     <!-- DÉFINITION DES SVG -->
     <?php include __DIR__.'/images/social.svg' ?>
 
-    <!-- ÉCRANS DE TRANSITION -->
-    <div id="loading" aria-hidden="true"></div>
-    <div id="couleur" aria-hidden="true"></div>
-
     <!-- CONTENU DU SITE -->
-    <header>
-      <?php include './pages/header-section.php'; ?>
-    </header>
 
-    <main id="bottom">
-      <section id="accueil" data-label="nav-accueil" aria-label="<?=$Textes->getString('nav-accueil')?>"></section>
-
-      <section id="bio" aria-labelledby="nav_bio">
-        <?php include './pages/bio-section.php'; ?>
-      </section>
-
-      <section id="portfolio" aria-labelledby="nav_portfolio">
-        <?php include './pages/portfolio-section.php'; ?>
-      </section>
-
-      <section id="contact" aria-labelledby="nav_contact">
-        <?php include './pages/contact-section.php'; ?>
-      </section>
-    </main>
-
-    <section id="projet" data-label="nav-projet" aria-label="<?=$Textes->getString('nav-projet')?>" aria-hidden="true" hidden>
-      <?php include './pages/projet-section.php'; ?>
-    </section>
+    <!-- FIN : CONTENU DU SITE -->
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
     <div id="defontsize" style="width: 1000rem; height: 0; position: absolute;" aria-hidden="true"></div>
