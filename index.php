@@ -87,7 +87,7 @@ if ($css_critique_methode == 'push') {
 }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>">
+<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" lang="<?=httpLanguage()?>">
 
   <head>
     <meta charset="utf-8">
@@ -108,8 +108,8 @@ if ($css_critique_methode == 'push') {
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap" media="print" onload="this.media='all'">
 
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php ob_start();?>-->
@@ -179,13 +179,52 @@ if ($css_critique_methode == 'push') {
     </noscript>
   </head>
   
-  <body data-start="<?=$start_section?>">
+  <body data-start="<?=$start_section?>" data-section="<?=$start_section?>">
+
+    <div id="couleur"></div>
 
     <!-- DÉFINITION DES SVG -->
     <?php include __DIR__.'/images/social.svg' ?>
 
     <!-- CONTENU DU SITE -->
+    <header>
+      <nav>
+        <a href="/" data-section="accueil" class="logo"><strong>remiscan</strong></a>
+        <a href="/bio" data-section="bio" style="--hue: 350">Qui je suis</a>
+        <a href="/projets" data-section="projets" style="--hue: 230">Projets</a>
+        <a href="/articles" data-section="articles" style="--hue: 20">Articles</a>
+        <a href="/contact" data-section="contact" style="--hue: 100">Contact</a>
+      </nav>
+    </header>
 
+    <main>Contenu</main>
+
+    <footer>
+      <div class="socials">
+        <a href="https://github.com/Remiscan" target="_blank" rel="noopener" style="--color: #6e5494;">
+          <svg viewBox="0 0 16 16"><use href="#github" /></svg>
+          GitHub
+        </a>
+        <a href="https://codepen.io/remiscan" target="_blank" rel="noopener" style="--color: hsl(275, 70%, 40%);">
+          <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
+          CodePen
+        </a>
+        <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener" style="--color: hsl(205, 99%, 55%);">
+          <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
+          Twitter
+        </a>
+        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener" style="--color: #0077B5;">
+          <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
+          LinkedIn
+        </a>
+      </div>
+
+      <div class="options">
+        <a href="#" class="bouton-langage" rel="alternate" lang="fr">Français</a>
+        <a href="#" class="bouton-langage" rel="alternate" lang="en">English</a>
+        <span>☀</span>
+      </div>
+    </footer>
     <!-- FIN : CONTENU DU SITE -->
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
