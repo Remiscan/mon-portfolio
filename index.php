@@ -217,6 +217,10 @@ if ($css_critique_methode == 'push') {
           <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
           LinkedIn
         </a>
+        <a href="/contact" data-section="contact">
+          <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
+          E-mail
+        </a>
       </div>
 
       <div class="options">
