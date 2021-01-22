@@ -202,25 +202,25 @@ if ($css_critique_methode == 'push') {
     <footer>
       <div class="bottom-links">
         <div class="socials">
-          <a href="https://github.com/Remiscan" target="_blank" rel="noopener" style="--color: #6e5494;">
+          <a href="https://github.com/Remiscan" target="_blank" rel="noopener" class="social-link" style="--color: #6e5494;">
             <svg viewBox="0 0 16 16"><use href="#github" /></svg>
-            GitHub
+            <span class="social-name">GitHub</span>
           </a>
-          <a href="https://codepen.io/remiscan" target="_blank" rel="noopener" style="--color: hsl(275, 70%, 40%);">
+          <a href="https://codepen.io/remiscan" target="_blank" rel="noopener" class="social-link" style="--color: hsl(275, 70%, 40%);">
             <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
-            CodePen
+            <span class="social-name">CodePen</span>
           </a>
-          <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener" style="--color: hsl(205, 99%, 55%);">
+          <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener" class="social-link" style="--color: hsl(205, 99%, 55%);">
             <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
-            Twitter
+            <span class="social-name">Twitter</span>
           </a>
-          <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener" style="--color: #0077B5;">
+          <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener" class="social-link" style="--color: #0077B5;">
             <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
-            LinkedIn
+            <span class="social-name">LinkedIn</span>
           </a>
-          <a href="/contact" data-section="contact">
+          <a href="/contact" data-section="contact" class="social-link">
             <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
-            E-mail
+            <span class="social-name">E-mail</span>
           </a>
         </div>
 
