@@ -46,7 +46,12 @@ export function getTitrePage(o = false, titre = false) {
       titreCore = getString('nav-bio');
       break;
     case 'portfolio':
-      titreCore = getString('nav-portfolio');
+    case 'projets':
+      titreCore = getString('nav-projets');
+      break;
+    case 'articles':
+    case 'blog':
+      titreCore = getString('nav-articles');
       break;
     case 'contact':
       titreCore = getString('nav-contact');

@@ -3,7 +3,7 @@
 
 import { wait } from './Params.js.php';
 import { Params } from './Params.js.php';
-import { Traduction } from './traduction.js.php';
+import { Traduction, getTitrePage } from './traduction.js.php';
 
 /*<?php $imports = ob_get_clean();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
@@ -48,7 +48,9 @@ const Navigation = {
 
     const anim2 = await Navigation.changeCouleur(couleur, reversed);
     document.body.dataset.section = section;
-    if (history) window.history.pushState({ section }, '', `/${section}`);
+    document.title = getTitrePage(section);
+    const url = (section == 'accueil') ? '' : section;
+    if (history) window.history.pushState({ section }, '', `/${url}`);
 
     const anim3 = main.animate([
       { transform: `translate3d(${reversed ? -2 : 2}rem, 0, 0)`, opacity: '0' },
