@@ -11,6 +11,10 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 
+const sections = ['accueil', 'bio', 'projets', 'articles', 'contact'];
+
+
+
 const Navigation = {
   init: () => {
     // Liens de navigation
@@ -22,15 +26,19 @@ const Navigation = {
     }
   },
 
-  go: async section => {
+  go: async (section, history = true) => {
     if (document.body.dataset.section == section) return;
+
+    const oldSectionIndex = sections.findIndex(e => e == document.body.dataset.section);
+    const newSectionIndex = sections.findIndex(e => e == section);
+    const reversed = oldSectionIndex > newSectionIndex;
     
     const couleur = getComputedStyle(document.documentElement).getPropertyValue(`--${section}-bg-color`);
     const main = document.querySelector('main');
 
     const anim1 = main.animate([
       { transform: 'translate3d(0, 0, 0)', opacity: '1' },
-      { transform: 'translate3D(-2rem, 0, 0)', opacity: '0' }
+      { transform: `translate3D(${reversed ? 2 : -2}rem, 0, 0)`, opacity: '0' }
     ], {
       duration: 200,
       easing: Params.easingAccelerate,
@@ -38,11 +46,12 @@ const Navigation = {
     });
     await wait(anim1);
 
-    const anim2 = await Navigation.changeCouleur(couleur);
+    const anim2 = await Navigation.changeCouleur(couleur, reversed);
     document.body.dataset.section = section;
+    if (history) window.history.pushState({ section }, '', `/${section}`);
 
     const anim3 = main.animate([
-      { transform: 'translate3d(2rem, 0, 0)', opacity: '0' },
+      { transform: `translate3d(${reversed ? -2 : 2}rem, 0, 0)`, opacity: '0' },
       { transform: 'translate3D(0, 0, 0)', opacity: '1' }
     ], {
       duration: 200,
@@ -55,8 +64,10 @@ const Navigation = {
     for (const a of [anim1, anim2, anim3]) { a.cancel(); }
   },
 
-  changeCouleur: async couleur => {
+  changeCouleur: async (couleur, reversed = false) => {
     const background = document.getElementById('couleur');
+    if (reversed) background.style.setProperty('transform-origin', 'top left');
+    else          background.style.setProperty('transform-origin', 'top right');
     background.style.setProperty('background-color', couleur);
     const animation = background.animate([
       { transform: 'scaleX(0)' },

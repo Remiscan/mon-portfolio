@@ -14,7 +14,8 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 ////////////////////////////////////////////////////////////////////
 // Gère les appuis sur les boutons précédent / suivant du navigateur
 window.addEventListener('popstate', event => {
-
+  const section = event.state.section;
+  Navigation.go(section, false);
 }, false);
 
 
