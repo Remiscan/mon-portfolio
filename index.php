@@ -189,44 +189,46 @@ if ($css_critique_methode == 'push') {
     <!-- CONTENU DU SITE -->
     <header>
       <nav>
-        <a href="/" data-section="accueil" class="logo"><strong>remiscan</strong></a>
-        <a href="/bio" data-section="bio" style="--hue: 350">Qui je suis</a>
-        <a href="/projets" data-section="projets" style="--hue: 230">Projets</a>
-        <a href="/articles" data-section="articles" style="--hue: 20">Articles</a>
-        <a href="/contact" data-section="contact" style="--hue: 100">Contact</a>
+        <a href="/" data-section="accueil" class="logo"><strong></strong></a>
+        <a href="/bio" data-section="bio" style="--hue: 350" data-string="nav-bio"><?=$Textes->getString('nav-bio')?></a>
+        <a href="/projets" data-section="projets" style="--hue: 230" data-string="nav-projets"><?=$Textes->getString('nav-projets')?></a>
+        <a href="/articles" data-section="articles" style="--hue: 20" data-string="nav-articles"><?=$Textes->getString('nav-articles')?></a>
+        <a href="/contact" data-section="contact" style="--hue: 100" data-string="nav-contact"><?=$Textes->getString('nav-contact')?></a>
       </nav>
     </header>
 
     <main>Contenu</main>
 
     <footer>
-      <div class="socials">
-        <a href="https://github.com/Remiscan" target="_blank" rel="noopener" style="--color: #6e5494;">
-          <svg viewBox="0 0 16 16"><use href="#github" /></svg>
-          GitHub
-        </a>
-        <a href="https://codepen.io/remiscan" target="_blank" rel="noopener" style="--color: hsl(275, 70%, 40%);">
-          <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
-          CodePen
-        </a>
-        <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener" style="--color: hsl(205, 99%, 55%);">
-          <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
-          Twitter
-        </a>
-        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener" style="--color: #0077B5;">
-          <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
-          LinkedIn
-        </a>
-        <a href="/contact" data-section="contact">
-          <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
-          E-mail
-        </a>
-      </div>
+      <div class="bottom-links">
+        <div class="socials">
+          <a href="https://github.com/Remiscan" target="_blank" rel="noopener" style="--color: #6e5494;">
+            <svg viewBox="0 0 16 16"><use href="#github" /></svg>
+            GitHub
+          </a>
+          <a href="https://codepen.io/remiscan" target="_blank" rel="noopener" style="--color: hsl(275, 70%, 40%);">
+            <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
+            CodePen
+          </a>
+          <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener" style="--color: hsl(205, 99%, 55%);">
+            <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
+            Twitter
+          </a>
+          <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener" style="--color: #0077B5;">
+            <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
+            LinkedIn
+          </a>
+          <a href="/contact" data-section="contact">
+            <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
+            E-mail
+          </a>
+        </div>
 
-      <div class="options">
-        <a href="#" class="bouton-langage" rel="alternate" lang="fr">Français</a>
-        <a href="#" class="bouton-langage" rel="alternate" lang="en">English</a>
-        <span>☀</span>
+        <div class="options">
+          <a href="#" class="bouton-langage" lang="fr">Français</a>
+          <a href="#" class="bouton-langage" lang="en">English</a>
+          <span>☀</span>
+        </div>
       </div>
     </footer>
     <!-- FIN : CONTENU DU SITE -->

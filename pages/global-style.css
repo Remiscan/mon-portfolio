@@ -248,6 +248,24 @@ html {
   height: 100%;
   overflow-x: hidden;
   overflow-y: hidden;
+
+  --full-bleed-width: 117rem;
+  --partial-bleed-width: 60rem;
+  --text-zone-width: 70ch;
+  --full-bleed-column: calc(0.5 * var(--full-bleed-width) - 0.5 * var(--partial-bleed-width));
+  --partial-bleed-column: calc(0.5 * var(--partial-bleed-width) - 0.5 * var(--text-zone-width));
+}
+
+.full-bleed {
+  grid-column: full-bleed-start / full-bleed-end;
+}
+
+.partial-bleed {
+  grid-column: partial-bleed-start / partial-bleed-end;
+}
+
+.text-zone {
+  grid-column: text-zone-start / text-zone-end;
 }
 
 body[data-section="accueil"] {
@@ -307,34 +325,52 @@ body {
   color: var(--text-color);
 
   display: grid;
-  grid-template-rows: 3rem 1fr 2rem;
-  grid-template-columns: 1fr min(100%, 117rem) 1fr;
+  grid-template-rows: 3rem 1fr auto;
+  grid-template-columns: 1fr [full-bleed-start] min(100%, 117rem) [full-bleed-end] 1fr;
 
   background-color: var(--bg-color);
 }
 
+header,
+main,
+footer {
+  grid-column: full-bleed-start / full-bleed-end;
+  display: grid;
+  grid-template-columns: 
+    [full-bleed-start] 1fr
+    [partial-bleed-start] calc(0.5 * var(--partial-bleed-width) - 0.5 * var(--text-zone-width))
+    [text-zone-start] var(--text-zone-width) [text-zone-end]
+    calc(0.5 * var(--partial-bleed-width) - 0.5 * var(--text-zone-width)) [partial-bleed-end]
+    1fr [full-bleed-end];
+  z-index: 2;
+}
+
+@media (max-width: 60rem) {
+  header,
+  main,
+  footer {
+    grid-template-columns: 
+      [full-bleed-start] 1.2rem [partial-bleed-start] 1fr
+      [text-zone-start] min(calc(100% - 2.4rem), var(--text-zone-width)) [text-zone-end]
+      1fr [partial-bleed-end] 1.2rem [full-bleed-end];
+  }
+}
+
 header {
   grid-row: 1;
-  grid-column: 2 / -2;
-  display: grid;
-  grid-template-columns: 1fr 90ch 1fr;
-  z-index: 2;
+  grid-column: full-bleed-start / full-bleed-end;
 }
 
 main {
   grid-row: 2;
-  grid-column: 2 / -2;
-  display: grid;
-  z-index: 2;
+  grid-column: full-bleed-start / full-bleed-end;
   padding: 1.2rem;
 }
 
 footer {
   grid-row: 3;
-  grid-column: 2 / -2;
-  display: grid;
-  grid-template-columns: 1fr 90ch 1fr;
-  z-index: 2;
+  grid-column: full-bleed-start / full-bleed-end;
+  padding-top: .4rem;
 }
 
 
@@ -361,7 +397,7 @@ footer {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 nav {
-  grid-column: 2;
+  grid-column: partial-bleed-start / partial-bleed-end;
   grid-row: 1;
   justify-self: start;
   align-self: center;
@@ -376,21 +412,21 @@ nav {
   margin-left: 0;
 }
 
+.logo>strong::before {
+  content: "remiscan.fr";
+}
+
+@media (max-width: 35rem) {
+  .logo>strong::before {
+    content: "remi";
+  }
+}
+
 nav>a,
 .socials>a,
 .options>a {
   padding-top: 0;
   margin: auto .7rem;
-}
-
-.options {
-  grid-column: -3;
-  grid-row: 1;
-  justify-self: end;
-  align-self: center;
-  display: flex;
-  margin: auto 0;
-  font-size: .85rem;
 }
 
 
@@ -401,19 +437,25 @@ nav>a,
 !!!!! FOOTER !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
+.bottom-links {
+  grid-column: partial-bleed-start / partial-bleed-end;
+  grid-row: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+}
+
 .socials>a,
 .options>a {
   font-size: .72rem;
-  margin: auto .4rem;
+  margin: auto .4rem .4rem;
 }
 
 .socials {
-  grid-column: 2;
-  grid-row: 1;
+  grid-column: 1;
   justify-self: start;
-  align-self: center;
+  align-self: end;
   display: flex;
-  margin: auto 0;
+  flex-wrap: wrap;
 }
 
 .socials>a {
@@ -425,6 +467,14 @@ nav>a,
 
 .socials>a:hover>svg {
   fill: var(--link-color);
+}
+
+.options {
+  grid-column: 2;
+  justify-self: end;
+  align-self: end;
+  display: flex;
+  font-size: .85rem;
 }
 
 html[lang="fr"] a[lang="fr"],

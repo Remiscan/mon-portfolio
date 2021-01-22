@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async event => {
   history.replaceState({ section: 'accueil' }, '', '/');
 
   Navigation.init();
+  await Traduction.initLanguageButtons();
   await Traduction.traduire();
   
   return;

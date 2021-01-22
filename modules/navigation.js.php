@@ -20,14 +20,6 @@ const Navigation = {
         Navigation.go(lien.dataset.section);
       });
     }
-
-    // Liens de changement de langue
-    for (const lien of [...document.querySelectorAll('a[lang]')]) {
-      lien.addEventListener('click', event => {
-        event.preventDefault();
-        Traduction.switchLanguage(lien.lang);
-      });
-    }
   },
 
   go: async section => {
