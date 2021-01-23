@@ -114,28 +114,28 @@ const html = `
     <circle cx="60" cy="60" r="50" transform="scale(.5)" transform-origin="50% 50%" mask="url(#moon-hole)"/>
     <g id="sun-rays" transform-origin="50% 50%">
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 1">
-        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10"/>
+        <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 3">
-        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(90 60 60)"/>
+        <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(90 60 60)"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 5">
-        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(180 60 60)"/>
+        <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(180 60 60)"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 7">
-        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(270 60 60)"/>
+        <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(270 60 60)"/>
       </g>
-      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 2">
-        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(45 60 60)"/>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 2;">
+        <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(45 60 60)"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 4">
-        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(135 60 60)"/>
+        <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(135 60 60)"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 6">
-        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(225 60 60)"/>
+        <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(225 60 60)"/>
       </g>
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 8">
-        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(315 60 60)"/>
+        <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(315 60 60)"/>
       </g>
     </g>
   </svg>
