@@ -68,9 +68,6 @@ textarea::selection {
 }
 
 /* Éléments focusables */
-*:focus {
-  outline: 2px solid white;
-}
 *:active,
 *:focus:not(:focus-visible) {
   outline: none;

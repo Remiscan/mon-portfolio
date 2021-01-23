@@ -11,6 +11,14 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 const css = `
+*:active,
+*:focus:not(:focus-visible) {
+  outline: none;
+}
+*::moz-focus-inner {
+  border: none;
+}
+
 :host {
   display: grid;
   place-items: center;
