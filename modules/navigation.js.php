@@ -54,8 +54,9 @@ const Navigation = {
     const reversed = oldSectionIndex > newSectionIndex;
 
     // Détecte la complexité de l'animation
-    const moveTo = Params.reducedMotion() ? '0' : reversed ? '2rem' : '-2rem';
-    const moveFrom = Params.reducedMotion() ? '0' : reversed ? '-2rem' : '2rem';
+    const distance = '1ch';
+    const moveTo = Params.reducedMotion() ? '0' : reversed ? distance : `-${distance}`;
+    const moveFrom = Params.reducedMotion() ? '0' : reversed ? `-${distance}` : distance;
     
     // 1e animation : disparition de section
     const main = document.querySelector('main');
