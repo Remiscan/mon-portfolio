@@ -35,7 +35,7 @@ $start_section = 'accueil';
 if (isset($_GET['onav'])) {
   $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
 
-  if (in_array($onav, array('competences', 'bio', 'portfolio', 'projet', 'contact')))
+  if (in_array($onav, array('bio', 'projets', 'articles', 'contact')))
     $start_section = $onav;
 }
 $isAccueil = ($start_section == 'accueil');
@@ -49,9 +49,11 @@ if (!$isAccueil) {
     case 'bio':
       $titre_page = $Textes->getString('nav-bio');
       break;
-    case 'projet':
-    case 'portfolio':
-      $titre_page = $Textes->getString('nav-portfolio');
+    case 'projets':
+      $titre_page = $Textes->getString('nav-projets');
+      break;
+    case 'articles':
+      $titre_page = $Textes->getString('nav-articles');
       break;
     case 'contact':
       $titre_page = $Textes->getString('nav-contact');
@@ -62,7 +64,7 @@ if (!$isAccueil) {
 //// Donne le titre de la page
 $titre = 'Rémi S., ' . $Textes->getString('job');
 if ($titre_page != false)
-  $titre .= ' — ' . $titre_page;
+  $titre = $titre_page . ' — ' . $titre;
 
 //// Liste des fichiers style-*.css critiques ou non
 $styles_critiques = ['global'];
@@ -194,19 +196,19 @@ if ($css_critique_methode == 'push') {
           <strong></strong>
         </a>
         <a href="/bio" data-section="bio" data-string="nav-bio"
-           class="lien-nav" style="--hue: 350">
+           class="lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
           <?=$Textes->getString('nav-bio')?>
         </a>
         <a href="/projets" data-section="projets" data-string="nav-projets"
-           class="lien-nav" style="--hue: 230">
+           class="lien-nav <?=($start_section == 'projets') ? 'on' : ''?>" style="--hue: 230">
           <?=$Textes->getString('nav-projets')?>
         </a>
         <a href="/articles" data-section="articles" data-string="nav-articles"
-           class="lien-nav" style="--hue: 20">
+           class="lien-nav <?=($start_section == 'articles') ? 'on' : ''?>" style="--hue: 20">
           <?=$Textes->getString('nav-articles')?>
         </a>
         <a href="/contact" data-section="contact" data-string="nav-contact"
-           class="lien-nav" style="--hue: 100">
+           class="lien-nav <?=($start_section == 'contact') ? 'on' : ''?>" style="--hue: 100">
           <?=$Textes->getString('nav-contact')?>
         </a>
       </nav>
@@ -245,8 +247,8 @@ if ($css_critique_methode == 'push') {
         </div>
 
         <div class="options">
-          <button class="bouton-langage lien-nav" data-lang="fr">Français</button>
-          <button class="bouton-langage lien-nav" data-lang="en">English</button>
+          <button class="bouton-langage lien-nav" data-lang="fr" disabled tabindex="-1">Français</button>
+          <button class="bouton-langage lien-nav" data-lang="en" disabled tabindex="-1">English</button>
           <theme-selector type="icon"></theme-selector>
         </div>
       </div>

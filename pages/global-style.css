@@ -446,7 +446,7 @@ nav,
 .lien-nav[data-section].on,
 .lien-nav[data-section].on:hover,
 .lien-nav[data-section]:active {
-  color: var(--next-link-color);
+  color: var(--next-link-color, var(--link-color));
   border-bottom-color: white;
 }
 

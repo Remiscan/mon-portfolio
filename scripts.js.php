@@ -34,7 +34,9 @@ window.addEventListener('popstate', event => {
 ////////////////////////////////////////////////
 // Gère la mise en place du site à son ouverture
 document.addEventListener('DOMContentLoaded', async event => {
-  history.replaceState({ section: 'accueil' }, '', '/');
+  const section = document.body.dataset.section;
+  const url = (section == 'accueil') ? '' : section;
+  history.replaceState({ section }, '', `/${url}`);
 
   Navigation.init();
   await Traduction.initLanguageButtons();
