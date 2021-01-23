@@ -68,14 +68,14 @@ textarea::selection {
 }
 
 /* Éléments focusables */
-.focusable:focus {
+*:focus {
   outline: 2px solid white;
 }
-.focusable:active,
-.focusable:focus:not(:focus-visible) {
+*:active,
+*:focus:not(:focus-visible) {
   outline: none;
 }
-.focusable::moz-focus-inner {
+*::moz-focus-inner {
   border: none;
 }
 
@@ -219,9 +219,26 @@ strong {
 
 
 
+/* Boutons */
+
+button {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  line-height: inherit;
+  text-transform: none;
+  -webkit-appearance: button;
+}
+
+
+
 /* Liens */
 
-a {
+a,
+.bouton-langage,
+.lien-nav {
   padding: .25em 1px;
   font-weight: 500;
   text-decoration: none;
@@ -230,7 +247,8 @@ a {
   transition: all .2s var(--easing-standard);
 }
 
-a:hover {
+.bouton-langage:hover,
+.lien-nav:hover {
   color: white;
   border-bottom-color: var(--color, var(--link-color));
 }
@@ -325,7 +343,7 @@ body {
   color: var(--text-color);
 
   display: grid;
-  grid-template-rows: 3rem 1fr auto;
+  grid-template-rows: 3rem 1fr 2.5rem;
   grid-template-columns: 1fr [full-bleed-start] min(100%, 117rem) [full-bleed-end] 1fr;
 
   background-color: var(--bg-color);
@@ -371,6 +389,7 @@ footer {
   grid-row: 3;
   grid-column: full-bleed-start / full-bleed-end;
   padding-top: .4rem;
+  font-size: .72rem;
 }
 
 
@@ -422,11 +441,17 @@ nav {
   }
 }
 
-nav>a,
-.socials>a,
-.options>a {
+nav>.lien-nav,
+.social-link,
+.options>.lien-nav {
   padding-top: 0;
-  margin: auto .7rem;
+  margin: auto 0;
+}
+
+nav,
+.socials,
+.options {
+  gap: 1.65em;
 }
 
 
@@ -444,41 +469,49 @@ nav>a,
   grid-template-columns: 1fr auto;
 }
 
-.socials>a,
-.options>a {
-  font-size: .72rem;
-  margin: auto .4rem .4rem;
+.social-link,
+.options>.lien-nav {
+  margin: auto 0;
 }
 
 .socials {
   grid-column: 1;
   justify-self: start;
-  align-self: end;
+  align-self: center;
   display: flex;
   flex-wrap: wrap;
 }
 
-.socials>a {
+.social-link {
   display: inline-grid;
   align-items: center;
   grid-template-columns: 2.5ch auto;
   gap: .75ch;
 }
 
-.socials>a:hover>svg {
+.social-link:hover>svg {
   fill: var(--link-color);
+}
+
+@media (max-width: 40rem) {
+  .social-link {
+    gap: 0;
+    padding-left: .3rem;
+    padding-right: .3rem;
+  }
+  .social-name {
+    display: none;
+  }
 }
 
 .options {
   grid-column: 2;
   justify-self: end;
-  align-self: end;
+  align-self: center;
   display: flex;
-  font-size: .85rem;
 }
 
-html[lang="fr"] a[lang="fr"],
-html[lang="en"] a[lang="en"] {
+.bouton-langage:disabled {
   opacity: .5;
   filter: grayscale(1);
   pointer-events: none;
