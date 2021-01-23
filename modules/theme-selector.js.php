@@ -191,6 +191,7 @@ class ThemeSelector extends HTMLElement {
         await wait(700);
         svg.classList.remove('animate');
         button.disabled = false;
+        button.focus();
       });
     }
     
