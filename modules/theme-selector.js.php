@@ -1,7 +1,7 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { Traduction } from './traduction.js.php';
+import { Traduction, getString } from './traduction.js.php';
 import Theme from './theme.js.php';
 import { wait } from './Params.js.php';
 
@@ -102,7 +102,7 @@ svg:not(.animate) * {
 `;
 
 const html = `
-<button data-label="theme-button">
+<button>
   <svg viewBox="0 0 120 120" id="test">
     <defs>
       <mask id="moon-hole">
@@ -175,11 +175,14 @@ class ThemeSelector extends HTMLElement {
     const selector = this.shadowRoot.querySelector('.selector');
     const svg = this.shadowRoot.querySelector('svg');
 
+    const currentTheme = Theme.resolve(Theme.get());
+
     // If type 'icon', clicking on the button changes the theme
     if (type == 'icon') {
-      const currentTheme = Theme.resolve(Theme.get());
+      button.dataset.label = `theme-button-${currentTheme == 'dark' ? 'light' : 'dark'}`;
       if (currentTheme == 'dark') svg.classList.remove('dark');
       else                        svg.classList.add('dark');
+
       button.addEventListener('click', async () => {
         button.disabled = true;
         svg.classList.add('animate');
@@ -187,6 +190,8 @@ class ThemeSelector extends HTMLElement {
         const chosenTheme = currentTheme == 'dark' ? 'light' : 'dark';
         if (chosenTheme == 'dark') svg.classList.remove('dark');
         else                       svg.classList.add('dark');
+        button.dataset.label = `theme-button-${currentTheme}`;
+        button.setAttribute('aria-label', getString(button.dataset.label));
         window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: Theme.unresolve(chosenTheme) } }));
         await wait(700);
         svg.classList.remove('animate');
@@ -199,6 +204,7 @@ class ThemeSelector extends HTMLElement {
     // If type 'menu', clicking on the button opens a menu
     // and choosing an option in that menu changes the theme.
     else {
+      button.dataset.label = `theme-button`;
       use.setAttribute('href', `#all`);
       button.addEventListener('click', () => selector.classList.toggle('on'));
       for (const choice of [...selector.querySelectorAll('input')]) {
