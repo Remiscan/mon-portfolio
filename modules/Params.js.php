@@ -7,6 +7,8 @@ export const Params = {
   easingStandard: 'cubic-bezier(0.4, 0.0, 0.2, 1)',
   easingDecelerate: 'cubic-bezier(0.0, 0.0, 0.2, 1)',
   easingAccelerate: 'cubic-bezier(0.4, 0.0, 1, 1)',
+
+  reducedMotion: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches,
 }
 
 

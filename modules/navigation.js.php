@@ -52,12 +52,16 @@ const Navigation = {
     const oldSectionIndex = sections.findIndex(e => e == document.body.dataset.section);
     const newSectionIndex = sections.findIndex(e => e == section);
     const reversed = oldSectionIndex > newSectionIndex;
+
+    // Détecte la complexité de l'animation
+    const moveTo = Params.reducedMotion() ? '0' : reversed ? '2rem' : '-2rem';
+    const moveFrom = Params.reducedMotion() ? '0' : reversed ? '-2rem' : '2rem';
     
     // 1e animation : disparition de section
     const main = document.querySelector('main');
     const anim1 = main.animate([
       { transform: 'translate3d(0, 0, 0)', opacity: '1' },
-      { transform: `translate3D(${reversed ? 2 : -2}rem, 0, 0)`, opacity: '0' }
+      { transform: `translate3D(${moveTo}, 0, 0)`, opacity: '0' }
     ], {
       duration: 100,
       easing: Params.easingAccelerate,
@@ -76,11 +80,10 @@ const Navigation = {
     
     // 3e animation : apparition de section
     const anim3 = main.animate([
-      { transform: `translate3d(${reversed ? -2 : 2}rem, 0, 0)`, opacity: '0' },
+      { transform: `translate3d(${moveFrom}, 0, 0)`, opacity: '0' },
       { transform: 'translate3D(0, 0, 0)', opacity: '1' }
     ], {
       duration: 100,
-      delay: 10,
       easing: Params.easingDecelerate,
       fill: 'both'
     });
@@ -91,14 +94,25 @@ const Navigation = {
   },
 
   async changeCouleur(couleur, reversed = false) {
+    // Détecte la complexité de l'animation
+    let keyframes;
+    if (Params.reducedMotion()) {
+      keyframes = [
+        { opacity: '1', transform: 'scaleX(1)' },
+        { opacity: '0', transform: 'scaleX(1)' }
+      ];
+    } else {
+      keyframes = [
+        { transform: 'scaleX(1)' },
+        { transform: 'scaleX(0)' }
+      ]
+    }
+
     const background = document.getElementById('couleur');
     if (!reversed) background.style.setProperty('transform-origin', 'top left');
     else           background.style.setProperty('transform-origin', 'top right');
     background.style.setProperty('background-color', couleur);
-    const animation = background.animate([
-      { transform: 'scaleX(1)' },
-      { transform: 'scaleX(0)' }
-    ], {
+    const animation = background.animate(keyframes, {
       duration: 250,
       delay: 10,
       endDelay: 10,

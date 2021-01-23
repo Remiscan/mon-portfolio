@@ -396,6 +396,12 @@ footer {
   z-index: 1;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  #couleur {
+    transform: scaleX(1);
+  }
+}
+
 
 
 
