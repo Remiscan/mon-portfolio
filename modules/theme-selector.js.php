@@ -3,6 +3,7 @@
 
 import { Traduction } from './traduction.js.php';
 import Theme from './theme.js.php';
+import { wait } from './Params.js.php';
 
 /*<?php $imports = ob_get_clean();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
@@ -49,6 +50,35 @@ svg {
   fill: var(--fill, white);
 }
 
+/* Animation */
+svg * {
+  transition: all .5s ease;
+}
+.ray {
+  transition-delay: calc(.2s + 8 * 20ms - var(--n) * 20ms);
+  transition-duration: .3s;
+  transform: scale(1);
+  opacity: 1;
+}
+#moon-hole>circle {
+  transform: translate(40 40);
+}
+svg.dark circle {
+  transform: scale(1);
+}
+svg.dark .ray {
+  opacity: 0;
+  transition-delay: calc(var(--n) * 30ms);
+  transform: scale(0);
+}
+svg.dark #moon-hole>circle {
+  transition-delay: .2s;
+  transform: scale(1);
+}
+svg:not(.animate) * {
+  transition: none !important;
+}
+
 .selector {
   display: none;
   position: absolute;
@@ -73,23 +103,41 @@ svg {
 
 const html = `
 <button data-label="theme-button">
-  <svg viewBox="0 0 24 24">
+  <svg viewBox="0 0 120 120" id="test">
     <defs>
-      <g id="all">
-      </g>
-
-      <g id="light">
-        <rect fill="none" height="24" width="24"/>
-        <path d="M12,7c-2.76,0-5,2.24-5,5s2.24,5,5,5s5-2.24,5-5S14.76,7,12,7L12,7z M2,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0 c-0.55,0-1,0.45-1,1S1.45,13,2,13z M20,13l2,0c0.55,0,1-0.45,1-1s-0.45-1-1-1l-2,0c-0.55,0-1,0.45-1,1S19.45,13,20,13z M11,2v2 c0,0.55,0.45,1,1,1s1-0.45,1-1V2c0-0.55-0.45-1-1-1S11,1.45,11,2z M11,20v2c0,0.55,0.45,1,1,1s1-0.45,1-1v-2c0-0.55-0.45-1-1-1 C11.45,19,11,19.45,11,20z M5.99,4.58c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41l1.06,1.06 c0.39,0.39,1.03,0.39,1.41,0s0.39-1.03,0-1.41L5.99,4.58z M18.36,16.95c-0.39-0.39-1.03-0.39-1.41,0c-0.39,0.39-0.39,1.03,0,1.41 l1.06,1.06c0.39,0.39,1.03,0.39,1.41,0c0.39-0.39,0.39-1.03,0-1.41L18.36,16.95z M19.42,5.99c0.39-0.39,0.39-1.03,0-1.41 c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L19.42,5.99z M7.05,18.36 c0.39-0.39,0.39-1.03,0-1.41c-0.39-0.39-1.03-0.39-1.41,0l-1.06,1.06c-0.39,0.39-0.39,1.03,0,1.41s1.03,0.39,1.41,0L7.05,18.36z"/>
-      </g>
-
-      <g id="dark">
-        <rect fill="none" height="24" width="24"/>
-        <path d="M11.01,3.05C6.51,3.54,3,7.36,3,12c0,4.97,4.03,9,9,9c4.63,0,8.45-3.5,8.95-8c0.09-0.79-0.78-1.42-1.54-0.95 c-0.84,0.54-1.84,0.85-2.91,0.85c-2.98,0-5.4-2.42-5.4-5.4c0-1.06,0.31-2.06,0.84-2.89C12.39,3.94,11.9,2.98,11.01,3.05z"/>
-      </g>
+      <mask id="moon-hole">
+        <rect x="0" y="0" width="120" height="120" fill="white"/>
+        <circle cx="90" cy="30" r="40" fill="black" transform-origin="120 0" transform="translate(40 -40)"/>
+      </mask>
     </defs>
 
-    <use href="#auto"/>
+    <circle cx="60" cy="60" r="50" transform="scale(.5)" transform-origin="50% 50%" mask="url(#moon-hole)"/>
+    <g id="sun-rays" transform-origin="50% 50%">
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 1">
+        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 3">
+        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(90 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 5">
+        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(180 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 7">
+        <path d="M 60 10 L 60 24" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(270 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 2">
+        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(45 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 4">
+        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(135 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 6">
+        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(225 60 60)"/>
+      </g>
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 8">
+        <path d="M 60 13 L 60 19" stroke="white" stroke-linecap="round" stroke-width="10" transform="rotate(315 60 60)"/>
+      </g>
+    </g>
   </svg>
 </button>
 
@@ -125,18 +173,25 @@ class ThemeSelector extends HTMLElement {
     // Button displays the selector
     const button = this.shadowRoot.querySelector('button');
     const selector = this.shadowRoot.querySelector('.selector');
-    const use = this.shadowRoot.querySelector('use');
+    const svg = this.shadowRoot.querySelector('svg');
 
     // If type 'icon', clicking on the button changes the theme
     if (type == 'icon') {
       const currentTheme = Theme.resolve(Theme.get());
-      use.setAttribute('href', `#${currentTheme == 'dark' ? 'light' : 'dark'}`);
-      button.addEventListener('click', () => {
+      if (currentTheme == 'dark') svg.classList.remove('dark');
+      else                        svg.classList.add('dark');
+      button.addEventListener('click', async () => {
+        button.disabled = true;
+        svg.classList.add('animate');
         const currentTheme = Theme.resolve(Theme.get());
         const chosenTheme = currentTheme == 'dark' ? 'light' : 'dark';
-        use.setAttribute('href', `#${currentTheme}`);
+        if (chosenTheme == 'dark') svg.classList.remove('dark');
+        else                       svg.classList.add('dark');
         window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: Theme.unresolve(chosenTheme) } }));
-      })
+        await wait(700);
+        svg.classList.remove('animate');
+        button.disabled = false;
+      });
     }
     
 
