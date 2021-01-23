@@ -464,6 +464,30 @@ nav,
   pointer-events: none;
 }
 
+nav>.spacer {
+  display: none;
+}
+
+@media (max-width: 35rem) {
+  .logo>strong::before {
+    content: "rémi";
+  }
+
+  nav,
+  .socials,
+  .options {
+    gap: 1em;
+  }
+
+  nav {
+    width: 100%;
+  }
+
+  nav>.spacer {
+    display: block;
+    flex-grow: 1;
+  }
+}
 
 
 

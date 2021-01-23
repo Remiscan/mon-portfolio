@@ -195,6 +195,7 @@ if ($css_critique_methode == 'push') {
         <a href="/" data-section="accueil" class="logo lien-nav">
           <strong></strong>
         </a>
+        <div class="spacer"></div>
         <a href="/bio" data-section="bio" data-string="nav-bio"
            class="lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
           <?=$Textes->getString('nav-bio')?>
