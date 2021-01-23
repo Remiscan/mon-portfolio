@@ -38,6 +38,7 @@ button {
   line-height: inherit;
   text-transform: none;
   -webkit-appearance: button;
+  cursor: pointer;
 
   display: grid;
   width: 100%;

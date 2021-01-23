@@ -235,6 +235,7 @@ a,
   color: var(--link-color);
   border-bottom: 1px solid var(--link-underline-color);
   transition: all .2s var(--easing-standard);
+  cursor: pointer;
 }
 
 a:hover,
