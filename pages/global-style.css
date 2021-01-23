@@ -97,7 +97,7 @@ textarea::selection {
 }
 
 html {
-  font-family: 'Roboto', system-ui, Helvetica, Arial, sans-serif;
+  font-family: 'Open Sans', system-ui, sans-serif;
   --min-font: 1.1; /* rem */
   --max-font: 1.2; /* rem */
   --min-screen: 60; /* 960px si 1rem = 16px */
@@ -127,6 +127,10 @@ html {
   html {
     font-size: calc(0.2rem + 1.8vh);
   }
+}
+
+header, footer, .accueil-lien {
+  font-family: 'Roboto', system-ui, sans-serif;
 }
 
 
@@ -240,6 +244,7 @@ a,
 
 a:hover,
 .bouton-langage:hover,
+.accueil-lien:hover,
 .lien-nav:hover {
   color: white;
   border-bottom-color: var(--color, var(--link-color));
@@ -295,6 +300,7 @@ body {
   --link-color: hsl(var(--accent-hue), 50%, 80%);
   --link-underline-color: hsl(var(--accent-hue), 100%, 80%, .25);
   --bright-link-color: hsl(var(--accent-hue), 60%, 75%);
+  --secondary-text-color: hsl(var(--primary-hue), 25%, 70%);
 
   width: 100%;
   min-height: 100%;
@@ -356,7 +362,7 @@ footer {
   z-index: 2;
 }
 
-@media (max-width: 60rem) {
+@media (max-width: 80rem) {
   header,
   main,
   footer {
@@ -375,7 +381,7 @@ header {
 main {
   grid-row: 2;
   grid-column: full-bleed-start / full-bleed-end;
-  padding: 1.2rem;
+  padding: 1.2rem 0;
 }
 
 footer {
@@ -431,13 +437,7 @@ nav {
 }
 
 .logo>strong::before {
-  content: "remiscan.fr";
-}
-
-@media (max-width: 35rem) {
-  .logo>strong::before {
-    content: "remi";
-  }
+  content: "remiscan";
 }
 
 nav>.lien-nav,
@@ -488,6 +488,52 @@ nav>.spacer {
     flex-grow: 1;
   }
 }
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! MAIN !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+article {
+  grid-row: 1;
+  grid-column: full-bleed-start / full-bleed-end;
+  display: none;
+  grid-template-rows: 1fr [moi] auto 1fr [projets] auto 1fr;
+  grid-template-columns: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [articles] auto minmax(1.2rem, 1fr);
+}
+
+body[data-section="accueil"] #accueil,
+body[data-section="bio"] #bio,
+body[data-section="projets"] #projets,
+body[data-section="articles"] #articles,
+body[data-section="contact"] #contact {
+  display: grid;
+}
+
+/* PAGE D'ACCUEIL */
+
+.accueil-moi {
+  grid-column: moi;
+  grid-row: moi;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  max-width: 25ch;
+  color: var(--secondary-text-color);
+  font-weight: 400;
+}
+
+/*.accueil-moi strong {
+  font-family: 'Raleway', sans-serif;
+}*/
+
+.accueil-moi>span {
+  font-size: .8em;
+}
+
 
 
 

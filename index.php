@@ -111,8 +111,8 @@ if ($css_critique_methode == 'push') {
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600&display=swap" media="print" onload="this.media='all'">
 
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php ob_start();?>-->
@@ -216,7 +216,14 @@ if ($css_critique_methode == 'push') {
     </header>
 
     <main>
-      <div>Contenu <a href="#">avec un lien</a> pour tester.</div>
+      <!-- Page d'accueil -->
+      <article id="accueil" data-section="accueil">
+        <section class="accueil-moi h1">
+          <span>Je suis <strong>Rémi</strong>,</span>
+          <span class="smaller"><strong>développeur web</strong> autodidacte et amateur de minimalisme.</span>
+          <a href="/bio" data-section="bio" class="accueil-lien h3">En apprendre + sur moi</a>
+        </section>
+      </article>
     </main>
 
     <footer>
@@ -242,11 +249,11 @@ if ($css_critique_methode == 'push') {
             <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
             <span class="social-name">LinkedIn</span>
           </a>
-          <a href="/contact" data-section="contact"
+          <!--<a href="/contact" data-section="contact"
              class="social-link lien-nav">
             <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
             <span class="social-name">E-mail</span>
-          </a>
+          </a>-->
         </div>
 
         <div class="options">
