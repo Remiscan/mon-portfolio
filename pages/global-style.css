@@ -8,29 +8,21 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 55; /*110;*/
   --accueil-bg-color: hsl(var(--accueil-primary-hue), 25%, 10%);
-  --accueil-link-color: hsl(var(--accueil-accent-hue), 85%, 80%);
-  --accueil-link-underline-color: hsl(var(--accueil-accent-hue), 100%, 80%, .25);
 
   /* Bio */
   --bio-primary-hue: 160;
   --bio-accent-hue: 55; /*285;*/
   --bio-bg-color: hsl(var(--bio-primary-hue), 25%, 10%);
-  --bio-link-color: hsl(var(--bio-accent-hue), 85%, 80%);
-  --bio-link-underline-color: hsl(var(--bio-accent-hue), 100%, 80%, .25);
 
   /* Projets */
   --projets-primary-hue: 230;
   --projets-accent-hue: 55; /*335;*/
   --projets-bg-color: hsl(var(--projets-primary-hue), 25%, 10%);
-  --projets-link-color: hsl(var(--projets-accent-hue), 85%, 80%);
-  --projets-link-underline-color: hsl(var(--projets-accent-hue), 100%, 80%, .25);
 
   /* Articles */
   --articles-primary-hue: 10;
   --articles-accent-hue: 55; /*145;*/
   --articles-bg-color: hsl(var(--articles-primary-hue), 25%, 10%);
-  --articles-link-color: hsl(var(--articles-accent-hue), 85%, 80%);
-  --articles-link-underline-color: hsl(var(--articles-accent-hue), 100%, 80%, .25);
 
   /* Contact */
   --contact-primary-hue: 0;
@@ -449,6 +441,17 @@ nav,
 .socials,
 .options {
   gap: 1.65em;
+}
+
+.lien-nav[data-section].on,
+.lien-nav[data-section].on:hover,
+.lien-nav[data-section]:active {
+  color: var(--next-link-color);
+  border-bottom-color: white;
+}
+
+.lien-nav[data-section].on {
+  pointer-events: none;
 }
 
 

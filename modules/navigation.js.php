@@ -1,6 +1,7 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
+import { cancelableAsync } from '../../_common/js/cancelable-async.js';
 import { wait } from './Params.js.php';
 import { Params } from './Params.js.php';
 import { Traduction, getTitrePage } from './traduction.js.php';
@@ -16,7 +17,7 @@ const sections = ['accueil', 'bio', 'projets', 'articles', 'contact'];
 
 
 const Navigation = {
-  init: () => {
+  init() {
     // Liens de navigation
     for (const lien of [...document.querySelectorAll('a[data-section]')]) {
       lien.addEventListener('click', event => {
@@ -26,16 +27,34 @@ const Navigation = {
     }
   },
 
-  go: async (section, history = true) => {
+  *go(section, history = true) {
     if (document.body.dataset.section == section) return;
+    const styles = getComputedStyle(document.documentElement);
+    const oldSection = document.body.dataset.section;
+    const couleur = styles.getPropertyValue(`--${oldSection}-bg-color`);
+    const nextLinkColor = styles.getPropertyValue(`--${section}-link-color`)
+                        ||`hsl(${Number(styles.getPropertyValue(`--${section}-primary-hue`)) + 180}, 50%, 80%)`;
 
+    // Active le bon lien
+    for (const lien of [...document.querySelectorAll(`a[data-section]`)]) {
+      if (lien.dataset.section == section) {
+        lien.classList.add('on');
+        lien.tabIndex = -1;
+        lien.style.setProperty('--next-link-color', nextLinkColor);
+      } else {
+        lien.classList.remove('on');
+        lien.tabIndex = 0;
+        lien.style.setProperty('--next-link-color', '');
+      }
+    }
+
+    // Détecte le sens de l'animation
     const oldSectionIndex = sections.findIndex(e => e == document.body.dataset.section);
     const newSectionIndex = sections.findIndex(e => e == section);
     const reversed = oldSectionIndex > newSectionIndex;
     
-    const couleur = getComputedStyle(document.documentElement).getPropertyValue(`--${section}-bg-color`);
+    // 1e animation : disparition de section
     const main = document.querySelector('main');
-
     const anim1 = main.animate([
       { transform: 'translate3d(0, 0, 0)', opacity: '1' },
       { transform: `translate3D(${reversed ? 2 : -2}rem, 0, 0)`, opacity: '0' }
@@ -44,14 +63,18 @@ const Navigation = {
       easing: Params.easingAccelerate,
       fill: 'both'
     });
-    await wait(anim1);
+    yield wait(anim1);
 
-    const anim2 = await Navigation.changeCouleur(couleur, reversed);
-    document.body.dataset.section = section;
+    // On applique le style, le titre et l'url de la nouvelle section
     document.title = getTitrePage(section);
     const url = (section == 'accueil') ? '' : section;
     if (history) window.history.pushState({ section }, '', `/${url}`);
+    document.body.dataset.section = section;
 
+    // 2e animation : transition colorée
+    const anim2 = yield Navigation.changeCouleur(couleur, reversed);
+    
+    // 3e animation : apparition de section
     const anim3 = main.animate([
       { transform: `translate3d(${reversed ? -2 : 2}rem, 0, 0)`, opacity: '0' },
       { transform: 'translate3D(0, 0, 0)', opacity: '1' }
@@ -61,19 +84,20 @@ const Navigation = {
       easing: Params.easingDecelerate,
       fill: 'both'
     });
-    await wait(anim3);
+    yield wait(anim3);
 
+    // Animations terminées
     for (const a of [anim1, anim2, anim3]) { a.cancel(); }
   },
 
-  changeCouleur: async (couleur, reversed = false) => {
+  async changeCouleur(couleur, reversed = false) {
     const background = document.getElementById('couleur');
-    if (reversed) background.style.setProperty('transform-origin', 'top left');
-    else          background.style.setProperty('transform-origin', 'top right');
+    if (!reversed) background.style.setProperty('transform-origin', 'top left');
+    else           background.style.setProperty('transform-origin', 'top right');
     background.style.setProperty('background-color', couleur);
     const animation = background.animate([
-      { transform: 'scaleX(0)' },
-      { transform: 'scaleX(1)' }
+      { transform: 'scaleX(1)' },
+      { transform: 'scaleX(0)' }
     ], {
       duration: 250,
       delay: 10,
@@ -86,4 +110,5 @@ const Navigation = {
   }
 }
 
+Navigation.go = cancelableAsync(Navigation.go);
 export default Navigation;
