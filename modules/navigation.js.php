@@ -40,7 +40,7 @@ const Navigation = {
       { transform: 'translate3d(0, 0, 0)', opacity: '1' },
       { transform: `translate3D(${reversed ? 2 : -2}rem, 0, 0)`, opacity: '0' }
     ], {
-      duration: 200,
+      duration: 100,
       easing: Params.easingAccelerate,
       fill: 'both'
     });
@@ -56,7 +56,7 @@ const Navigation = {
       { transform: `translate3d(${reversed ? -2 : 2}rem, 0, 0)`, opacity: '0' },
       { transform: 'translate3D(0, 0, 0)', opacity: '1' }
     ], {
-      duration: 200,
+      duration: 100,
       delay: 10,
       easing: Params.easingDecelerate,
       fill: 'both'
@@ -75,8 +75,9 @@ const Navigation = {
       { transform: 'scaleX(0)' },
       { transform: 'scaleX(1)' }
     ], {
-      duration: 300,
+      duration: 250,
       delay: 10,
+      endDelay: 10,
       easing: Params.easingStandard,
       fill: 'both'
     });
