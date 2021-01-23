@@ -214,7 +214,9 @@ if ($css_critique_methode == 'push') {
       </nav>
     </header>
 
-    <main>Contenu</main>
+    <main>
+      <div>Contenu <a href="#">avec un lien</a> pour tester.</div>
+    </main>
 
     <footer>
       <div class="bottom-links">

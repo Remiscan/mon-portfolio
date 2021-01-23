@@ -30,6 +30,7 @@
   --contact-bg-color: hsl(var(--contact-primary-hue), 0%, 10%);
   --contact-link-color: hsl(var(--contact-accent-hue), 0%, 80%);
   --contact-link-underline-color: hsl(var(--contact-accent-hue), 0%, 80%, .25);
+  --contact-bright-link-color: hsl(var(--contact-accent-hue), 0%, 75%);
 
   /* Couleurs */
   --text-color: white;
@@ -236,10 +237,23 @@ a,
   transition: all .2s var(--easing-standard);
 }
 
+a:hover,
 .bouton-langage:hover,
 .lien-nav:hover {
   color: white;
   border-bottom-color: var(--color, var(--link-color));
+}
+
+a {
+  padding: .05em 1px;
+  font-weight: 400;
+  white-space: nowrap;
+  color: var(--bright-link-color);
+}
+
+a:hover {
+  color: var(--link-color);
+  border-bottom-color: var(--bright-link-color, var(--link-color));
 }
 
 
@@ -308,6 +322,7 @@ body[data-section="contact"] {
   --bg-color: var(--contact-bg-color);
   --link-color: var(--contact-link-color);
   --link-underline-color: var(--contact-link-underline-color);
+  --bright-link-color: var(--contact-bright-link-color);
 }
 
 body {
@@ -315,6 +330,7 @@ body {
   --bg-color: hsl(var(--primary-hue), 25%, 10%);
   --link-color: hsl(var(--accent-hue), 50%, 80%);
   --link-underline-color: hsl(var(--accent-hue), 100%, 80%, .25);
+  --bright-link-color: hsl(var(--accent-hue), 60%, 75%);
 
   width: 100%;
   min-height: 100%;
