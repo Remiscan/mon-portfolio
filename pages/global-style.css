@@ -518,6 +518,13 @@ nav,
   --link-underline-color: transparent;
 }
 
+theme-selector {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+
+
+
 
 
 

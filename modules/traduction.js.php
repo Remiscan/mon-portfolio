@@ -18,7 +18,8 @@ class ExtTraduction extends DefTraduction {
 
   async traduire(element = document) {
     await super.traduire(element);
-    document.title = getTitrePage(history.state.section);
+    if (element == document)
+      document.title = getTitrePage(history.state.section);
     return;
   }
 }

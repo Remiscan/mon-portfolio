@@ -87,7 +87,8 @@ if ($css_critique_methode == 'push') {
 }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" lang="<?=httpLanguage()?>">
+<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" lang="<?=httpLanguage()?>"
+      class="<?=$_COOKIE['resolvedTheme']?>">
 
   <head>
     <meta charset="utf-8">
@@ -246,6 +247,7 @@ if ($css_critique_methode == 'push') {
         <div class="options">
           <button class="bouton-langage lien-nav" data-lang="fr">Français</button>
           <button class="bouton-langage lien-nav" data-lang="en">English</button>
+          <theme-selector type="icon"></theme-selector>
         </div>
       </div>
     </footer>

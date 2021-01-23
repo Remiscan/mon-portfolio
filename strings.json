@@ -65,7 +65,12 @@
     "projet-colori-longue-description": "Ce module JavaScript (aussi disponible en PHP) permet de manipuler des couleurs, en extrayant plusieurs de leurs propriétés (teinte, saturation, luminosité, etc.) afin de pouvoir les utiliser et les modifier à la volée.",
     "projet-etude-details": "Le pourquoi du comment",
     "projet-etude-erreur-fetch": "Erreur : récupération des données impossible...",
-    "js-warning": "Ce portfolio, ainsi que les projets qu'il présente, utilisent JavaScript. L'utilisation de JavaScript sur ce site est actuellement désactivée par votre navigateur. Le portfolio ne fonctionnera donc pas correctement."
+    "js-warning": "Ce portfolio, ainsi que les projets qu'il présente, utilisent JavaScript. L'utilisation de JavaScript sur ce site est actuellement désactivée par votre navigateur. Le portfolio ne fonctionnera donc pas correctement.",
+    "theme-button": "Choisir l'apparence de la page",
+    "theme-titre": "Thème",
+    "theme-auto": "Automatique",
+    "theme-light": "Clair",
+    "theme-dark": "Sombre"
   },
   "en": {
     "job": "Web developer",
@@ -122,6 +127,11 @@
     "projet-colori-longue-description": "This JavaScript module (also available in PHP) enables you to manipulate colours, by extracting many of their properties (hue, saturation, luminosity, etc.) in order to use and edit them on the fly.",
     "projet-etude-details": "The why and the how (in French)",
     "projet-etude-erreur-fetch": "Error: couldn't fetch the data...",
-    "js-warning": "This portfolio and the various projects it showcases use JavaScript. Your browser is currently preventing JavaScript code from running on this website, so this portfolio will not work properly."
+    "js-warning": "This portfolio and the various projects it showcases use JavaScript. Your browser is currently preventing JavaScript code from running on this website, so this portfolio will not work properly.",
+    "theme-button": "Choose the appearance of the page",
+    "theme-titre": "Theme",
+    "theme-auto": "Automatic",
+    "theme-light": "Light",
+    "theme-dark": "Dark"
   }
 }
