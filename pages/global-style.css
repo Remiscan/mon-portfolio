@@ -243,10 +243,10 @@ a,
   cursor: pointer;
 }
 
-a:hover,
-.bouton-langage:hover,
-.accueil-lien:hover,
-.lien-nav:hover {
+a:hover, a:focus, a:active,
+.bouton-langage:hover, .bouton-langage:focus, .bouton-langage:active,
+.accueil-lien:hover, .accueil-lien:focus, .accueil-lien:active,
+.lien-nav:hover, .lien-nav:focus, .lien-nav:active {
   color: white;
   border-bottom-color: var(--color, var(--link-color));
 }
@@ -351,6 +351,7 @@ body[data-section="contact"] {
 
 header,
 main,
+article,
 footer {
   grid-column: full-bleed-start / full-bleed-end;
   display: grid;
@@ -366,6 +367,7 @@ footer {
 @media (max-width: 80rem) {
   header,
   main,
+  article,
   footer {
     grid-template-columns: 
       [full-bleed-start] 1.2rem [partial-bleed-start] 1fr
@@ -517,7 +519,7 @@ body[data-section="contact"] #contact {
 #accueil {
   grid-template-rows: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);
   /*grid-template-columns: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [articles] auto minmax(1.2rem, 1fr);*/
-  grid-template-columns: minmax(1.2rem, 1fr) [moi articles] auto minmax(1.2rem, 1fr);
+  /*grid-template-columns: minmax(1.2rem, 1fr) [moi articles] auto minmax(1.2rem, 1fr);*/
 }
 
 .accueil-lien {
@@ -528,7 +530,7 @@ body[data-section="contact"] #contact {
   .accueil-lien {
     --gap: .25ch;
     --arrow-width: 1.5ch;
-    --arrow-color: var(--link-color);
+    --arrow-color: var(--text-color);
 
     display: inline-grid;
     grid-template-columns: auto var(--arrow-width);
@@ -575,7 +577,8 @@ body[data-section="contact"] #contact {
     );
     --step: 1px;
 
-    background-image: var(--gradient);
+    --arrow-color: var(--link-color);
+    /*background-image: var(--gradient);
     background-size: calc(var(--band-number) * 200%) 100%;
     background-position: 0 0;
     background-repeat: repeat;
@@ -595,8 +598,9 @@ body[data-section="contact"] #contact {
 /* Mini-bio */
 
 .accueil-moi {
-  grid-column: moi;
+  /*grid-column: moi;*/
   grid-row: moi;
+  grid-column: text-zone-start / text-zone-end;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -630,9 +634,9 @@ body[data-section="contact"] #contact {
   display: block;
 }
 
-.section-titre>h4, .section-titre-fin {
+/*.section-titre>h4, .section-titre-fin {
   border-bottom: 1px solid var(--secondary-text-color);
-}
+}*/
 
 .section-titre>a {
   margin-top: 0;
@@ -642,7 +646,8 @@ body[data-section="contact"] #contact {
 /* Mini-projets */
 
 .accueil-projets {
-  grid-column: moi / -2;
+  /*grid-column: moi / -2;*/
+  grid-column: partial-bleed-start / partial-bleed-end;
   grid-row: projets;
 }
 
@@ -650,7 +655,7 @@ body[data-section="contact"] #contact {
   #accueil {
     /*grid-template-rows: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [articles] auto minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);*/
     grid-template-rows: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [articles projets] auto minmax(1.2rem, 1fr);
-    grid-template-columns: 1.2rem [moi articles] calc(100% - 2.4rem) 1.2rem;
+    /*grid-template-columns: 1.2rem [moi articles] calc(100% - 2.4rem) 1.2rem;*/
   }
 
   .accueil-articles {

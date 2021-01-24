@@ -222,14 +222,14 @@ if ($css_critique_methode == 'push') {
         <section class="accueil-moi h1">
           <span>Je suis <strong>Rémi</strong>,</span>
           <span class="smaller"><strong>développeur web</strong> autodidacte et amateur de minimalisme.</span>
-          <a href="/bio" data-section="bio" class="accueil-lien h4">En apprendre + sur moi</a>
+          <a href="/bio" data-section="bio" class="accueil-lien h5">En apprendre + sur moi</a>
         </section>
 
         <!-- Mini-articles -->
         <!--<section class="accueil-articles">
           <div class="section-titre">
-            <h4>Articles récents</h4>
-            <a href="/articles" data-section="articles" class="accueil-lien h5">Tout voir</a>
+            <h4>Articles récents :</h4>
+            <a href="/articles" data-section="articles" class="accueil-lien h5">Tous mes articles</a>
             <span class="section-titre-fin"></span>
           </div>
         </section>-->
@@ -237,8 +237,8 @@ if ($css_critique_methode == 'push') {
         <!-- Mini-projets -->
         <section class="accueil-projets">
           <div class="section-titre">
-            <h4>Projets récents</h4>
-            <a href="/projets" data-section="projets" class="accueil-lien h5">Tout voir</a>
+            <h4>Projets récents :</h4>
+            <a href="/projets" data-section="projets" class="accueil-lien h5">Tous mes projets</a>
             <span class="section-titre-fin"></span>
           </div>
         </section>
