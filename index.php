@@ -226,13 +226,13 @@ if ($css_critique_methode == 'push') {
         </section>
 
         <!-- Mini-articles -->
-        <section class="accueil-articles">
+        <!--<section class="accueil-articles">
           <div class="section-titre">
             <h4>Articles récents</h4>
             <a href="/articles" data-section="articles" class="accueil-lien h5">Tout voir</a>
             <span class="section-titre-fin"></span>
           </div>
-        </section>
+        </section>-->
 
         <!-- Mini-projets -->
         <section class="accueil-projets">
