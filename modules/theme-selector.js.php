@@ -56,7 +56,7 @@ svg * {
   transition: all .5s ease;
 }
 .ray {
-  transition-delay: calc(.2s + 8 * 20ms - var(--n) * 20ms);
+  transition-delay: calc(.2s + var(--m, 0) * 60ms);
   transition-duration: .3s;
   transform: scale(1);
   opacity: 1;
@@ -126,16 +126,16 @@ const html = `
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 7">
         <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(270 60 60)"/>
       </g>
-      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 2;">
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 2; --m: 1;">
         <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(45 60 60)"/>
       </g>
-      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 4">
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 4; --m: 1;">
         <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(135 60 60)"/>
       </g>
-      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 6">
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 6; --m: 1;">
         <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(225 60 60)"/>
       </g>
-      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 8">
+      <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 8; --m: 1;">
         <path d="M 60 13 L 60 19" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10" transform="rotate(315 60 60)"/>
       </g>
     </g>
