@@ -61,12 +61,18 @@
 * { -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
 
 /* Sélection de texte */
-::-moz-selection,
+::-moz-selection{
+  color: black;
+  background: white;
+}
 ::selection {
   color: black;
   background: white;
 }
-input::selection,
+input::selection{
+  color: white;
+  background: black;
+}
 textarea::selection {
   color: white;
   background: black;
