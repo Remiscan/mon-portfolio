@@ -216,7 +216,9 @@ if ($css_critique_methode == 'push') {
     </header>
 
     <main>
+      <!-- -------------- -->
       <!-- Page d'accueil -->
+      <!-- -------------- -->
       <article id="accueil" data-section="accueil">
         <!-- Mini-bio -->
         <section class="accueil-moi h1">
@@ -241,7 +243,22 @@ if ($css_critique_methode == 'push') {
             <a href="/projets" data-section="projets" class="accueil-lien h5">Tous mes projets</a>
             <span class="section-titre-fin"></span>
           </div>
+
+          <div class="accueil-conteneur-projets">
+            <a href="/projet/solaire" class="apercu-projet">
+              <img class="apercu-projet-image" data-string="nav-bio">
+            </a>
+
+            <a class="apercu-projet"></a>
+          </div>
         </section>
+      </article>
+
+      <!-- ----------- -->
+      <!-- Qui je suis -->
+      <!-- ----------- -->
+      <article id="bio" data-section="bio">
+        <h1 class="article-titre">Qui je suis</h1>
       </article>
     </main>
 
