@@ -110,10 +110,6 @@ if ($css_critique_methode == 'push') {
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Raleway:wght@600&display=swap" media="print" onload="this.media='all'">
-
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php ob_start();?>-->
 
@@ -222,9 +218,9 @@ if ($css_critique_methode == 'push') {
       <article id="accueil" data-section="accueil">
         <!-- Mini-bio -->
         <section class="accueil-moi h1">
-          <span>Je suis <strong>Rémi</strong>,</span>
-          <span class="smaller"><strong>développeur web</strong> autodidacte et amateur de minimalisme.</span>
-          <a href="/bio" data-section="bio" class="accueil-lien h5">En apprendre + sur moi</a>
+          <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
+          <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
+          <a href="/bio" data-section="bio" class="accueil-lien h5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
         <!-- Mini-articles -->
@@ -239,17 +235,38 @@ if ($css_critique_methode == 'push') {
         <!-- Mini-projets -->
         <section class="accueil-projets">
           <div class="section-titre">
-            <h4>Projets récents :</h4>
-            <a href="/projets" data-section="projets" class="accueil-lien h5">Tous mes projets</a>
+            <h4 data-string="projets-recents"><?=$Textes->getString('projets-recents')?></h4>
+            <a href="/projets" data-section="projets" class="accueil-lien h5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
             <span class="section-titre-fin"></span>
           </div>
 
           <div class="accueil-conteneur-projets">
             <a href="/projet/solaire" class="apercu-projet">
-              <img class="apercu-projet-image" data-string="nav-bio">
+              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/solaire/preview.png')"></div>
+              <div class="apercu-projet-infos">
+                <span class="apercu-projet-titre">Solaire</span>
+                <span class="apercu-projet-description h6" data-string="projet-solaire-description"><?=$Textes->getString('projet-solaire-description')?></span>
+                <span class="accueil-lien apercu-projet-lien h6" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
+              </div>
             </a>
 
-            <a class="apercu-projet"></a>
+            <a href="/projet/colori" class="apercu-projet">
+              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/colori/preview.png')"></div>
+              <div class="apercu-projet-infos">
+                <span class="apercu-projet-titre">Colori</span>
+                <span class="apercu-projet-description h6" data-string="projet-colori-description"><?=$Textes->getString('projet-colori-description')?></span>
+                <span class="accueil-lien apercu-projet-lien h6" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
+              </div>
+            </a>
+
+            <a href="/projet/remidex" class="apercu-projet">
+              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/remidex/preview.png')"></div>
+              <div class="apercu-projet-infos">
+                <span class="apercu-projet-titre">Rémidex</span>
+                <span class="apercu-projet-description h6" data-string="projet-remidex-description"><?=$Textes->getString('projet-remidex-description')?></span>
+                <span class="accueil-lien apercu-projet-lien h6">Voir les détails</span>
+              </div>
+            </a>
           </div>
         </section>
       </article>
@@ -258,7 +275,7 @@ if ($css_critique_methode == 'push') {
       <!-- Qui je suis -->
       <!-- ----------- -->
       <article id="bio" data-section="bio">
-        <h1 class="article-titre">Qui je suis</h1>
+        <h1 class="article-titre h2">Qui je suis</h1>
       </article>
     </main>
 
