@@ -67,7 +67,7 @@ if ($titre_page != false)
   $titre = $titre_page . ' — ' . $titre;
 
 //// Liste des fichiers style-*.css critiques ou non
-$styles_critiques = ['global'];
+$styles_critiques = ['variables', 'global'];
 if ($start_section != 'accueil')
   $styles_critiques[] = $start_section;
 $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
@@ -127,8 +127,10 @@ if ($css_critique_methode == 'push') {
     <?php if ($css_critique_methode == 'push') { ?>
     
       <!-- CSS critique (pushed) -->
-      <?php foreach($styles_critiques as $section) { ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css">
+      <?php foreach($styles_critiques as $section) {
+        $ext = ($section == 'variables') ? 'css.php' : 'css';
+        ?>
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.<?=$ext?>">
       <?php } ?>
 
     <?php } else { ?>
@@ -137,7 +139,8 @@ if ($css_critique_methode == 'push') {
       <?php
       echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
       foreach($styles_critiques as $section) {
-        include __DIR__ . '/pages/' . $section . '-style.css';
+        $ext = ($section == 'variables') ? 'css.php' : 'css';
+        include __DIR__ . '/pages/' . $section . '-style.' . $ext;
       }
       echo '</style>';
       ?>

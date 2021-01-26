@@ -4,38 +4,6 @@
   --easing-decelerate: cubic-bezier(0.0, 0.0, 0.2, 1);
   --easing-accelerate: cubic-bezier(0.4, 0.0, 1, 1);
 
-  /* Accueil */
-  --accueil-primary-hue: 300;
-  --accueil-accent-hue: 55; /*110;*/
-  --accueil-bg-color: hsl(var(--accueil-primary-hue), 25%, 10%);
-
-  /* Bio */
-  --bio-primary-hue: 160;
-  --bio-accent-hue: 55; /*285;*/
-  --bio-bg-color: hsl(var(--bio-primary-hue), 25%, 10%);
-
-  /* Projets */
-  --projets-primary-hue: 230;
-  --projets-accent-hue: 55; /*335;*/
-  --projets-bg-color: hsl(var(--projets-primary-hue), 25%, 10%);
-
-  /* Articles */
-  --articles-primary-hue: 10;
-  --articles-accent-hue: 55; /*145;*/
-  --articles-bg-color: hsl(var(--articles-primary-hue), 25%, 10%);
-
-  /* Contact */
-  --contact-primary-hue: 0;
-  --contact-accent-hue: 55; /*0;*/
-  --contact-bg-color: hsl(var(--contact-primary-hue), 0%, 10%);
-  --contact-link-color: hsl(var(--contact-accent-hue), 0%, 80%);
-  --contact-link-underline-color: hsl(var(--contact-accent-hue), 0%, 80%, .25);
-  --contact-bright-link-color: hsl(var(--contact-accent-hue), 0%, 75%);
-
-  /* Couleurs */
-  --text-color: white;
-  --link-hover-color: white;
-
   /* Main gradient */
   --main-gradient-bands: 6;
   --main-gradient: repeating-linear-gradient(to right,
@@ -58,6 +26,18 @@
   );
 }
 
+:root.dark {
+  --text-color: white;
+  --link-hover-color: white;
+  --inverse-text-color: black;
+}
+
+:root.light {
+  --text-color: black;
+  --link-hover-color: black;
+  --inverse-text-color: white;
+}
+
 
 
 
@@ -71,20 +51,20 @@
 
 /* Sélection de texte */
 ::-moz-selection{
-  color: black;
-  background: white;
+  color: var(--inverse-text-color);
+  background:var(--text-color);
 }
 ::selection {
-  color: black;
-  background: white;
+  color: var(--inverse-text-color);
+  background:var(--text-color);
 }
 input::selection{
-  color: white;
-  background: black;
+  color: var(--text-color);
+  background:var(--inverse-text-color);
 }
 textarea::selection {
-  color: white;
-  background: black;
+  color: var(--text-color);
+  background:var(--inverse-text-color);
 }
 
 /* Éléments focusables */
@@ -292,7 +272,7 @@ a:hover, a:focus, a:active,
 .accueil-lien:hover, .accueil-lien:focus, .accueil-lien:active,
 .apercu-projet:hover .accueil-lien, .apercu-projet:focus .accueil-lien, .apercu-projet:active .accueil-lien,
 .lien-nav:hover, .lien-nav:focus, .lien-nav:active {
-  color: white;
+  color: var(--text-color);
   border-bottom-color: var(--color, var(--link-color));
 }
 
@@ -341,13 +321,6 @@ html {
 }
 
 body {
-  --accent-hue: calc(var(--primary-hue) + 180);
-  --bg-color: hsl(var(--primary-hue), 25%, 10%);
-  --link-color: hsl(var(--accent-hue), 50%, 80%);
-  --link-underline-color: hsl(var(--accent-hue), 100%, 80%, .25);
-  --bright-link-color: hsl(var(--accent-hue), 60%, 75%);
-  --secondary-text-color: hsl(var(--primary-hue), 25%, 70%);
-
   width: 100%;
   min-height: 100%;
   --max-width: 117rem;
@@ -368,30 +341,6 @@ body {
   grid-template-columns: 1fr [full-bleed-start] min(100%, 117rem) [full-bleed-end] 1fr;
 
   background-color: var(--bg-color);
-}
-
-body[data-section="accueil"] {
-  --primary-hue: var(--accueil-primary-hue);
-}
-
-body[data-section="bio"] {
-  --primary-hue: var(--bio-primary-hue);
-}
-
-body[data-section="projets"] {
-  --primary-hue: var(--projets-primary-hue);
-}
-
-body[data-section="articles"] {
-  --primary-hue: var(--articles-primary-hue);
-}
-
-body[data-section="contact"] {
-  --primary-hue: var(--contact-primary-hue);
-  --bg-color: var(--contact-bg-color);
-  --link-color: var(--contact-link-color);
-  --link-underline-color: var(--contact-link-underline-color);
-  --bright-link-color: var(--contact-bright-link-color);
 }
 
 header,
@@ -507,7 +456,7 @@ nav,
 .lien-nav[data-section].on:hover,
 .lien-nav[data-section]:active {
   color: var(--next-link-color, var(--link-color));
-  border-bottom-color: white;
+  border-bottom-color: var(--text-color);
 }
 
 .lien-nav[data-section].on {
@@ -808,7 +757,7 @@ body[data-section="contact"] #contact {
   gap: .3em .6em;
   padding: .2em .4em .1em;
   /*background-color: var(--bg-color);*/
-  background-color: hsl(var(--primary-hue), 25%, 10%, .99);
+  background-color: var(--bg-color);
   color: var(--text-color);
   position: relative;
   z-index: 3;
