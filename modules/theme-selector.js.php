@@ -48,12 +48,13 @@ button {
 svg {
   width: 100%;
   height: 100%;
-  fill: var(--fill, white);
+  fill: var(--fill, var(--text-color));
 }
 
 /* Animation */
 svg * {
-  transition: all .5s ease;
+  transition: transform .5s ease,
+              opacity .5s ease;
 }
 .ray {
   transition-delay: calc(.2s + var(--m, 0) * 60ms);

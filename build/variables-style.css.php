@@ -46,4 +46,4 @@ function generatePagesCSS($sections) {
   return $css;
 }
 
-echo generatePagesCSS($sections);
+file_put_contents(__DIR__.'/../pages/variables-style.css', generatePagesCSS($sections));
