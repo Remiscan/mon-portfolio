@@ -5,6 +5,8 @@ require_once $commonDir.'/php/httpLanguage.php';
 require_once $commonDir.'/php/getStrings.php';
 require_once $commonDir.'/php/version.php';
 
+require_once __DIR__.'/donnees/projets.php';
+
 
 
 // Calcule l'âge d'une date par rapport à aujourd'hui
@@ -241,32 +243,35 @@ if ($css_critique_methode == 'push') {
           </div>
 
           <div class="accueil-conteneur-projets">
-            <a href="/projet/solaire" class="apercu-projet">
-              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/solaire/preview.png')"></div>
+            <?php
+            foreach($PROJETS as $projet) {
+              if ($projet['featured']) {
+                $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
+                $imageLight = __DIR__."/projets/{$projet['id']}/preview-light.png";
+                if (file_exists($imageDark)) {
+                  $versionDark = version(__DIR__, $imageDark);
+                  $versionLight = version(__DIR__, $imageLight);
+                  $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark--{$versionDark}.png";
+                  $imageLight = __DIR__."/projets/{$projet['id']}/preview-light--{$versionLight}.png";
+                  $style = "--image-dark: url('/mon-portfolio/projets/{$projet['id']}/preview-dark--{$versionDark}.png'); --image-light: url('/mon-portfolio/projets/{$projet['id']}/preview-light--{$versionLight}.png');";
+                } else {
+                  $style = "--image: url('/mon-portfolio/projets/{$projet['id']}/preview.png');";
+                }
+                ?>
+
+            <a href="/projet/<?=$projet['id']?>" class="apercu-projet">
+              <div class="apercu-projet-image" style="<?=$style?>"></div>
               <div class="apercu-projet-infos">
-                <span class="apercu-projet-titre">Solaire</span>
-                <span class="apercu-projet-description h6" data-string="projet-solaire-description"><?=$Textes->getString('projet-solaire-description')?></span>
-                <span class="accueil-lien apercu-projet-lien h6" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
+                <span class="apercu-projet-titre"><?=$projet['titre']?></span>
+                <span class="apercu-projet-description h6" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
+                <span class="accueil-lien apercu-projet-lien h6"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
               </div>
             </a>
 
-            <a href="/projet/colori" class="apercu-projet">
-              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/colori/preview.png')"></div>
-              <div class="apercu-projet-infos">
-                <span class="apercu-projet-titre">Colori</span>
-                <span class="apercu-projet-description h6" data-string="projet-colori-description"><?=$Textes->getString('projet-colori-description')?></span>
-                <span class="accueil-lien apercu-projet-lien h6" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
-              </div>
-            </a>
-
-            <a href="/projet/remidex" class="apercu-projet">
-              <div class="apercu-projet-image" style="--image: url('/mon-portfolio/projets/remidex/preview.png')"></div>
-              <div class="apercu-projet-infos">
-                <span class="apercu-projet-titre">Rémidex</span>
-                <span class="apercu-projet-description h6" data-string="projet-remidex-description"><?=$Textes->getString('projet-remidex-description')?></span>
-                <span class="accueil-lien apercu-projet-lien h6">Voir les détails</span>
-              </div>
-            </a>
+                <?php
+              }
+            }
+            ?>
           </div>
         </section>
       </article>
