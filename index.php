@@ -195,7 +195,7 @@ if ($css_critique_methode == 'push') {
         </a>
 
         <div class="spacer"></div>
-        
+
         <a href="/bio" data-section="bio" data-string="nav-bio"
            class="lien-interne lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
           <?=$Textes->getString('nav-bio')?>
@@ -352,14 +352,14 @@ if ($css_critique_methode == 'push') {
           <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
           <span class="social-nom">Twitter</span>
         </a>
-        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
+        <!--<a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
             class="lien-interne lien-social" style="
             --color-dark: <?=(new Couleur('#0077B5'))->betterContrast('black', 8, 1)->hsl()?>;
             --color-light: <?=(new Couleur('#0077B5'))->betterContrast('white', 8, 1)->hsl()?>;
             ">
           <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
           <span class="social-nom">LinkedIn</span>
-        </a>
+        </a>-->
         
         <div class="spacer"></div>
 
