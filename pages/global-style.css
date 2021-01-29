@@ -296,7 +296,7 @@ a:hover {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 html {
-  width: 100%;
+  width: 100vw;
   height: 100%;
   overflow-x: hidden;
   overflow-y: auto;
@@ -499,7 +499,6 @@ article {
   grid-row: 1;
   grid-column: full-bleed-start / full-bleed-end;
   display: none;
-  padding: 3.6rem 0 1.2rem;
   grid-template-rows: auto;
 }
 
@@ -545,49 +544,39 @@ body[data-section="contact"] #contact {
   padding: 0 1px;
 }
 
-@supports (mask: var(--mask)) or (-webkit-mask: var(--mask)) {
-  .accueil-lien {
-    --gap: .25ch;
-    --arrow-width: 1.5ch;
-    --arrow-color: var(--text-color);
+.accueil-lien {
+  --gap: .25ch;
+  --arrow-width: 1.5ch;
+  --arrow-color: var(--text-color);
 
-    display: inline-grid;
-    grid-template-columns: auto var(--arrow-width);
-    gap: var(--gap);
-    position: relative;
-  }
+  display: inline-grid;
+  grid-template-columns: auto var(--arrow-width);
+  gap: var(--gap);
+  position: relative;
+}
 
-  .accueil-lien::after {
-    /*--top: 5%;*/
-    --mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1 -2 22 22'%3E%3Cpath d='M 9 6 L 15 12 L 9 18' stroke='white' stroke-linecap='round' stroke-width='4' fill='transparent'/%3E%3C/svg%3E");
+.accueil-lien::after {
+  --arrow-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1 -2 22 22'%3E%3Cpath d='M 9 6 L 15 12 L 9 18' stroke='white' stroke-linecap='round' stroke-width='4' fill='transparent'/%3E%3C/svg%3E");
+  --arrow-light: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1 -2 22 22'%3E%3Cpath d='M 9 6 L 15 12 L 9 18' stroke='black' stroke-linecap='round' stroke-width='4' fill='transparent'/%3E%3C/svg%3E");
 
-    content: var(--mask);
-    display: block;
-    /*width: 100%;
-    height: calc(100% - 2 * var(--top));*/
-    grid-row: 1;
-    grid-column: -2;
-    /*background: var(--arrow-color);
-    mask: var(--mask);
-    mask-size: 100%;
-    mask-position: baseline;
-    mask-repeat: no-repeat;
-    -webkit-mask: var(--mask);
-    -webkit-mask-size: 100%;
-    -webkit-mask-position: center;
-    -webkit-mask-repeat: no-repeat;
-    position: absolute;
-    top: var(--top);
-    right: 0;*/
-    transition: transform .2s var(--easing-standard);
-    transform: translateX(0);
-  }
+  display: block;
+  grid-row: 1;
+  grid-column: -2;
+  transition: transform .2s var(--easing-standard);
+  transform: translateX(0);
+}
 
-  .apercu-projet:hover .accueil-lien::after, .apercu-projet:focus .accueil-lien::after, .apercu-projet:active .accueil-lien::after,
-  .accueil-lien:hover::after,
-  .accueil-lien:focus::after {
-    --arrow-color: var(--link-color);
-  }
+html.dark .accueil-lien::after {
+  content: var(--arrow-dark);
+}
+html.light .accueil-lien::after {
+  content: var(--arrow-light);
+}
+
+.apercu-projet:hover .accueil-lien::after, .apercu-projet:focus .accueil-lien::after, .apercu-projet:active .accueil-lien::after,
+.accueil-lien:hover::after,
+.accueil-lien:focus::after {
+  --arrow-color: var(--link-color);
 }
 
 @keyframes back-and-forth {
@@ -670,6 +659,7 @@ body[data-section="contact"] #contact {
   overflow: hidden;
 }
 
+.grand-apercu-projet-image::before,
 .apercu-projet::before {
   grid-row: 1 / -1;
   grid-column: 1 / -1;
@@ -687,24 +677,32 @@ body[data-section="contact"] #contact {
   box-shadow: 0 0 0 1px var(--link-color);
 }
 
-.apercu-projet-image {
-  grid-row: 1 / -1;
-  grid-column: 1 / -1;
-  background-image: var(--image);
+.apercu-projet-image,
+.grand-apercu-projet-image::after {
   background-size: cover;
   background-position: center;
   clip-path: inset(1px);
   transition: clip-path .2s var(--easing-standard);
+}
+
+.apercu-projet-image {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
   position: relative;
   z-index: 1;
 }
-html.dark .apercu-projet-image {
+html.dark .apercu-projet-image,
+html.dark .grand-apercu-projet-image::after {
   background-image: var(--image-dark, var(--image));
 }
-html.light .apercu-projet-image {
+html.light .apercu-projet-image,
+html.light .grand-apercu-projet-image::after {
   background-image: var(--image-light, var(--image));
 }
 
+.grand-apercu-projet:hover>.grand-apercu-projet-image::after,
+.grand-apercu-projet:focus>.grand-apercu-projet-image::after,
+.grand-apercu-projet:active>.grand-apercu-projet-image::after,
 .apercu-projet:hover>.apercu-projet-image,
 .apercu-projet:focus>.apercu-projet-image,
 .apercu-projet:active>.apercu-projet-image {
@@ -806,6 +804,77 @@ html.light .apercu-projet-image {
 
 #bio {
   grid-template-rows: auto auto 1fr;
+}
+
+
+
+
+
+/*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! PROJETS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
+
+#projets {
+  grid-template-rows: minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);
+}
+
+.liste-projets {
+  grid-row: projets;
+  grid-column: partial-bleed-start / partial-bleed-end;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.6rem 1.2rem;
+}
+
+@media (max-width: 42rem) {
+  .liste-projets {
+    grid-template-columns: minmax(15rem, 1fr);
+    max-width: 25rem;
+    margin: 0 auto;
+  }
+}
+
+.grand-apercu-projet {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 100%;
+  min-width: calc(50% - .6rem);
+  gap: .6rem;
+  box-shadow: none;
+  border: none;
+}
+
+.grand-apercu-projet-image {
+  grid-row: 1;
+  grid-column: 1;
+  box-shadow: 0 0 0 1px var(--link-underline-color);
+  display: grid;
+}
+
+.grand-apercu-projet-image::after {
+  content: '';
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  display: block;
+}
+
+.grand-apercu-projet:hover>.grand-apercu-projet-image,
+.grand-apercu-projet:focus>.grand-apercu-projet-image,
+.grand-apercu-projet:active>.grand-apercu-projet-image {
+  box-shadow: 0 0 0 1px var(--link-color);
+}
+
+.grand-apercu-projet:nth-child(2n)>.grand-apercu-projet-image {
+  grid-column: 2;
+}
+
+.grand-apercu-projet-infos {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.grand-apercu-projet:nth-child(2n)>.grand-apercu-projet-infos {
+  grid-column: 1;
 }
 
 

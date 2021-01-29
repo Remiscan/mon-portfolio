@@ -282,6 +282,44 @@ if ($css_critique_methode == 'push') {
       <article id="bio" data-section="bio">
         <h1 class="article-titre h2">Qui je suis</h1>
       </article>
+
+      <!-- ----------- -->
+      <!-- Mes projets -->
+      <!-- ----------- -->
+      <article id="projets" data-section="projets">
+        <section class="liste-projets" style="--nombre-lignrd: <?=round(ceil($PROJETS) / 2)?>;">
+          <?php
+            foreach($PROJETS as $projet) {
+              $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
+              $imageLight = __DIR__."/projets/{$projet['id']}/preview-light.png";
+              if (file_exists($imageDark)) {
+                $versionDark = version(__DIR__, $imageDark);
+                $versionLight = version(__DIR__, $imageLight);
+                $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark--{$versionDark}.png";
+                $imageLight = __DIR__."/projets/{$projet['id']}/preview-light--{$versionLight}.png";
+                $style = "--image-dark: url('/mon-portfolio/projets/{$projet['id']}/preview-dark--{$versionDark}.png'); --image-light: url('/mon-portfolio/projets/{$projet['id']}/preview-light--{$versionLight}.png');";
+              } else {
+                $style = "--image: url('/mon-portfolio/projets/{$projet['id']}/preview.png');";
+              }
+              ?>
+
+          <div class="grand-apercu-projet">
+            <a href="/projet/<?=$projet['id']?>" class="apercu-projet">
+              <div class="apercu-projet-image" style="<?=$style?>"></div>
+            </a>
+
+            <div class="grand-apercu-projet-infos">
+              <span class="apercu-projet-titre"><?=$projet['titre']?></span>
+              <span class="accueil-lien apercu-projet-lien"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
+              <span class="apercu-projet-description" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
+            </div>
+          </div>
+
+              <?php
+            }
+            ?>
+        </section>
+      </article>
     </main>
 
     <footer>

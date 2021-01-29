@@ -63,9 +63,12 @@ svg * {
   opacity: 1;
 }
 #moon-hole>circle {
-  transform: translate(40 40);
+  transform: translate(40%, -40%);
 }
-svg.dark circle {
+#sun {
+  transform: scale(.5);
+}
+svg.dark #sun {
   transform: scale(1);
 }
 svg.dark .ray {
@@ -75,7 +78,7 @@ svg.dark .ray {
 }
 svg.dark #moon-hole>circle {
   transition-delay: .2s;
-  transform: scale(1);
+  transform: translate(0, 0);
 }
 svg:not(.animate) * {
   transition: none !important;
@@ -109,11 +112,11 @@ const html = `
     <defs>
       <mask id="moon-hole">
         <rect x="0" y="0" width="120" height="120" fill="white"/>
-        <circle cx="90" cy="30" r="40" fill="black" transform-origin="120 0" transform="translate(40 -40)"/>
+        <circle cx="90" cy="30" r="40" fill="black" transform-origin="120 0"/>
       </mask>
     </defs>
 
-    <circle cx="60" cy="60" r="50" transform="scale(.5)" transform-origin="50% 50%" mask="url(#moon-hole)"/>
+    <circle id="sun" cx="60" cy="60" r="50" transform-origin="50% 50%" mask="url(#moon-hole)"/>
     <g id="sun-rays" transform-origin="50% 50%">
       <g class="ray" width="120" height="120" transform-origin="60 60" style="--n: 1">
         <path d="M 60 10 L 60 24" style="stroke: var(--link-color)" stroke-linecap="round" stroke-width="10"/>
