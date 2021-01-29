@@ -307,7 +307,7 @@ body {
   color: var(--text-color);
 
   display: grid;
-  grid-template-rows: 3rem 1fr 2.5rem;
+  grid-template-rows: auto 1fr auto;
   grid-template-columns: 1fr [full-bleed-start] min(100%, 117rem) [full-bleed-end] 1fr;
 
   background-color: var(--bg-color);
@@ -345,6 +345,7 @@ footer {
 header {
   grid-row: 1;
   grid-column: full-bleed-start / full-bleed-end;
+  padding: .6rem 0;
 }
 
 main {
@@ -356,6 +357,7 @@ footer {
   grid-row: 3;
   grid-column: full-bleed-start / full-bleed-end;
   padding-top: .4rem;
+  padding: .3rem 0;
 }
 
 
@@ -393,6 +395,7 @@ nav {
   justify-self: start;
   align-self: center;
   display: flex;
+  flex-wrap: wrap;
   margin: auto 0;
 }
 
@@ -445,6 +448,7 @@ nav>.spacer {
   .liens-bottom {
     gap: 1em;
     width: 100%;
+    justify-content: flex-end;
   }
 
   nav>.spacer {
@@ -912,17 +916,19 @@ html.light .lien-social {
 
 @media (max-width: 42rem) {
   .lien-social {
-    gap: 0;
-    border: 0;
+    /*gap: 0;
+    grid-template-columns: 0 auto;*/
+    /*border: 0;*/
   }
 
-  .lien-social>svg {
+  /*.lien-social>svg {
     margin-top: 0;
-  }
-
-  .social-nom {
     display: none;
-  }
+  }*/
+
+  /*.social-nom {
+    display: none;
+  }*/
 }
 
 /*.options {
