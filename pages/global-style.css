@@ -933,7 +933,7 @@ html.light .social-link {
   fill: var(--color, var(--link-color));
 }
 
-@media (max-width: 40rem) {
+@media (max-width: 42rem) {
   .social-link {
     gap: 0;
     padding-left: .3rem;
@@ -956,6 +956,12 @@ html.light .social-link {
   filter: grayscale(1);
   pointer-events: none;
   border-bottom: 1px solid transparent;
+}
+
+@media (max-width: 42rem) {
+  .bouton-langage:disabled {
+    display: none;
+  }
 }
 
 theme-selector {
