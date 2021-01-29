@@ -193,21 +193,23 @@ if ($css_critique_methode == 'push') {
         <a href="/" data-section="accueil" class="logo lien-nav">
           <strong></strong>
         </a>
+
         <div class="spacer"></div>
+        
         <a href="/bio" data-section="bio" data-string="nav-bio"
-           class="lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
+           class="lien-interne lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
           <?=$Textes->getString('nav-bio')?>
         </a>
         <a href="/projets" data-section="projets" data-string="nav-projets"
-           class="lien-nav <?=($start_section == 'projets') ? 'on' : ''?>" style="--hue: 230">
+           class="lien-interne lien-nav <?=($start_section == 'projets') ? 'on' : ''?>" style="--hue: 230">
           <?=$Textes->getString('nav-projets')?>
         </a>
         <a href="/articles" data-section="articles" data-string="nav-articles"
-           class="lien-nav <?=($start_section == 'articles') ? 'on' : ''?>" style="--hue: 20">
+           class="lien-interne lien-nav <?=($start_section == 'articles') ? 'on' : ''?>" style="--hue: 20">
           <?=$Textes->getString('nav-articles')?>
         </a>
         <a href="/contact" data-section="contact" data-string="nav-contact"
-           class="lien-nav <?=($start_section == 'contact') ? 'on' : ''?>" style="--hue: 100">
+           class="lien-interne lien-nav <?=($start_section == 'contact') ? 'on' : ''?>" style="--hue: 100">
           <?=$Textes->getString('nav-contact')?>
         </a>
       </nav>
@@ -222,14 +224,14 @@ if ($css_critique_methode == 'push') {
         <section class="accueil-moi s1">
           <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
           <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
-          <a href="/bio" data-section="bio" class="accueil-lien s5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
+          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
         <!-- Mini-articles -->
         <!--<section class="accueil-articles">
           <div class="section-titre">
             <h4>Articles récents :</h4>
-            <a href="/articles" data-section="articles" class="accueil-lien h5">Tous mes articles</a>
+            <a href="/articles" data-section="articles" class="lien-fleche h5">Tous mes articles</a>
             <span class="section-titre-fin"></span>
           </div>
         </section>-->
@@ -238,7 +240,7 @@ if ($css_critique_methode == 'push') {
         <section class="accueil-projets">
           <div class="section-titre">
             <h2 data-string="projets-recents" class="s2"><?=$Textes->getString('projets-recents')?></h2>
-            <a href="/projets" data-section="projets" class="accueil-lien s5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
+            <a href="/projets" data-section="projets" class="lien-interne lien-fleche s5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
             <span class="section-titre-fin"></span>
           </div>
 
@@ -264,7 +266,7 @@ if ($css_critique_methode == 'push') {
               <div class="apercu-projet-infos">
                 <span class="apercu-projet-titre s5"><?=$projet['titre']?></span>
                 <span class="apercu-projet-description s7" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
-                <span class="accueil-lien apercu-projet-lien s7"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
+                <span class="lien-interne lien-fleche apercu-projet-lien s7"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
               </div>
             </a>
 
@@ -310,7 +312,7 @@ if ($css_critique_methode == 'push') {
 
             <div class="grand-apercu-projet-infos">
               <h2 class="apercu-projet-titre s2"><?=$projet['titre']?></h2>
-              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="accueil-lien apercu-projet-lien s5">
+              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="lien-interne lien-fleche apercu-projet-lien s5">
                 <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
               </a>
               <p class="apercu-projet-description s5" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></p>
@@ -325,60 +327,48 @@ if ($css_critique_methode == 'push') {
     </main>
 
     <footer class="s7">
-      <div class="bottom-links">
-        <div class="socials">
-          <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
-             class="social-link lien-nav" style="
-              --color-dark: <?=(new Couleur('#6e5494'))->betterContrast('black', 8, 1)->hsl()?>;
-              --color-light: <?=(new Couleur('#6e5494'))->betterContrast('white', 8, 1)->hsl()?>;
-             ">
-            <svg viewBox="0 0 16 16"><use href="#github" /></svg>
-            <span class="social-name">GitHub</span>
-          </a>
-          <a href="https://codepen.io/remiscan" target="_blank" rel="noopener"
-             class="social-link lien-nav" style="
-              --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->betterContrast('black', 8, 1)->hsl()?>;
-              --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->betterContrast('white', 8, 1)->hsl()?>;
-             ">
-            <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
-            <span class="social-name">CodePen</span>
-          </a>
-          <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
-             class="social-link lien-nav" style="
-              --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->betterContrast('black', 8, 1)->hsl()?>;
-              --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->betterContrast('white', 8, 1)->hsl()?>;
-             ">
-            <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
-            <span class="social-name">Twitter</span>
-          </a>
-          <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
-             class="social-link lien-nav" style="
-              --color-dark: <?=(new Couleur('#0077B5'))->betterContrast('black', 8, 1)->hsl()?>;
-              --color-light: <?=(new Couleur('#0077B5'))->betterContrast('white', 8, 1)->hsl()?>;
-             ">
-            <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
-            <span class="social-name">LinkedIn</span>
-          </a>
-          <!--<a href="/contact" data-section="contact"
-             class="social-link lien-nav">
-            <svg viewBox="0 0 24 24"><use href="#email-closed" /></svg>
-            <span class="social-name">E-mail</span>
-          </a>-->
-        </div>
+      <div class="liens-bottom">
+        <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
+            class="lien-interne lien-social" style="
+            --color-dark: <?=(new Couleur('#6e5494'))->betterContrast('black', 8, 1)->hsl()?>;
+            --color-light: <?=(new Couleur('#6e5494'))->betterContrast('white', 8, 1)->hsl()?>;
+            ">
+          <svg viewBox="0 0 16 16"><use href="#github" /></svg>
+          <span class="social-nom">GitHub</span>
+        </a>
+        <a href="https://codepen.io/remiscan" target="_blank" rel="noopener"
+            class="lien-interne lien-social" style="
+            --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->betterContrast('black', 8, 1)->hsl()?>;
+            --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->betterContrast('white', 8, 1)->hsl()?>;
+            ">
+          <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
+          <span class="social-nom">CodePen</span>
+        </a>
+        <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
+            class="lien-interne lien-social" style="
+            --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->betterContrast('black', 8, 1)->hsl()?>;
+            --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->betterContrast('white', 8, 1)->hsl()?>;
+            ">
+          <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
+          <span class="social-nom">Twitter</span>
+        </a>
+        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
+            class="lien-interne lien-social" style="
+            --color-dark: <?=(new Couleur('#0077B5'))->betterContrast('black', 8, 1)->hsl()?>;
+            --color-light: <?=(new Couleur('#0077B5'))->betterContrast('white', 8, 1)->hsl()?>;
+            ">
+          <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
+          <span class="social-nom">LinkedIn</span>
+        </a>
+        
+        <div class="spacer"></div>
 
-        <div class="options">
-          <button class="bouton-langage lien-nav" data-lang="fr" disabled tabindex="-1">Français</button>
-          <button class="bouton-langage lien-nav" data-lang="en" disabled tabindex="-1">English</button>
-          <theme-selector type="icon"></theme-selector>
-        </div>
+        <button class="lien-interne bouton-langage" data-lang="fr" disabled tabindex="-1">Français</button>
+        <button class="lien-interne bouton-langage" data-lang="en" disabled tabindex="-1">English</button>
+        <theme-selector type="icon"></theme-selector>
       </div>
     </footer>
     <!-- FIN : CONTENU DU SITE -->
-
-    <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
-    <div id="defontsize" style="width: 1000rem; height: 0; position: absolute;" aria-hidden="true"></div>
-    <div id="largeurpage" style="width: 100vw; height: 0; position: absolute;" aria-hidden="true"></div>
-    <div id="hauteurpage" style="width: 0; height: 100vh; position: absolute;" aria-hidden="true"></div>
 
     <!-- SCRIPTS -->
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
