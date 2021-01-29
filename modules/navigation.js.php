@@ -41,10 +41,24 @@ const Navigation = {
         lien.classList.add('on');
         lien.tabIndex = -1;
         lien.style.setProperty('--next-link-color', nextLinkColor);
+
+        if (lien.dataset.section != 'accueil') {
+          const texte = lien.innerHTML;
+          const string = lien.dataset.string;
+          lien.innerHTML = `<h1 data-string="${string}">${texte}</h1>`;
+          lien.removeAttribute('data-string');
+        }
       } else {
         lien.classList.remove('on');
         lien.tabIndex = 0;
         lien.style.setProperty('--next-link-color', '');
+
+        if (lien.dataset.section != 'accueil') {
+          const texte = lien.querySelector('h1')?.innerHTML || lien.innerHTML;
+          const string = lien.querySelector('h1')?.dataset.string || lien.dataset.string;
+          lien.innerHTML = texte;
+          lien.dataset.string = string;
+        }
       }
     }
 

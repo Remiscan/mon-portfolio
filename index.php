@@ -189,7 +189,7 @@ if ($css_critique_methode == 'push') {
 
     <!-- CONTENU DU SITE -->
     <header>
-      <nav>
+      <nav class="s6">
         <a href="/" data-section="accueil" class="logo lien-nav">
           <strong></strong>
         </a>
@@ -219,10 +219,10 @@ if ($css_critique_methode == 'push') {
       <!-- -------------- -->
       <article id="accueil" data-section="accueil">
         <!-- Mini-bio -->
-        <section class="accueil-moi h1">
+        <section class="accueil-moi s1">
           <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
           <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
-          <a href="/bio" data-section="bio" class="accueil-lien h5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
+          <a href="/bio" data-section="bio" class="accueil-lien s5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
         <!-- Mini-articles -->
@@ -237,8 +237,8 @@ if ($css_critique_methode == 'push') {
         <!-- Mini-projets -->
         <section class="accueil-projets">
           <div class="section-titre">
-            <h4 data-string="projets-recents"><?=$Textes->getString('projets-recents')?></h4>
-            <a href="/projets" data-section="projets" class="accueil-lien h5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
+            <h2 data-string="projets-recents" class="s2"><?=$Textes->getString('projets-recents')?></h2>
+            <a href="/projets" data-section="projets" class="accueil-lien s5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
             <span class="section-titre-fin"></span>
           </div>
 
@@ -262,9 +262,9 @@ if ($css_critique_methode == 'push') {
             <a href="/projet/<?=$projet['id']?>" class="apercu-projet">
               <div class="apercu-projet-image" style="<?=$style?>"></div>
               <div class="apercu-projet-infos">
-                <span class="apercu-projet-titre"><?=$projet['titre']?></span>
-                <span class="apercu-projet-description h6" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
-                <span class="accueil-lien apercu-projet-lien h6"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
+                <span class="apercu-projet-titre s5"><?=$projet['titre']?></span>
+                <span class="apercu-projet-description s7" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
+                <span class="accueil-lien apercu-projet-lien s7"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
               </div>
             </a>
 
@@ -280,14 +280,14 @@ if ($css_critique_methode == 'push') {
       <!-- Qui je suis -->
       <!-- ----------- -->
       <article id="bio" data-section="bio">
-        <h1 class="article-titre h2">Qui je suis</h1>
+        <h1 class="article-titre s2">Qui je suis</h1>
       </article>
 
       <!-- ----------- -->
       <!-- Mes projets -->
       <!-- ----------- -->
       <article id="projets" data-section="projets">
-        <section class="liste-projets" style="--nombre-lignrd: <?=round(ceil($PROJETS) / 2)?>;">
+        <section class="liste-projets" style="--nombre-lignes: <?=round(ceil($PROJETS) / 2)?>;">
           <?php
             foreach($PROJETS as $projet) {
               $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
@@ -309,11 +309,11 @@ if ($css_critique_methode == 'push') {
             </a>
 
             <div class="grand-apercu-projet-infos">
-              <span class="apercu-projet-titre"><?=$projet['titre']?></span>
-              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="accueil-lien apercu-projet-lien">
+              <h2 class="apercu-projet-titre s2"><?=$projet['titre']?></h2>
+              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="accueil-lien apercu-projet-lien s5">
                 <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
               </a>
-              <span class="apercu-projet-description" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></span>
+              <p class="apercu-projet-description s5" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></p>
             </div>
           </div>
 
@@ -324,7 +324,7 @@ if ($css_critique_methode == 'push') {
       </article>
     </main>
 
-    <footer>
+    <footer class="s7">
       <div class="bottom-links">
         <div class="socials">
           <a href="https://github.com/Remiscan" target="_blank" rel="noopener"

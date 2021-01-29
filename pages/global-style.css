@@ -81,7 +81,7 @@ textarea::selection {
 
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-!!!!! TYPOGRAPHIE / POLICE FLUIDE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!!!!! TYPOGRAPHIE !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!*/
 
 /* roboto-regular - latin */
@@ -121,6 +121,7 @@ textarea::selection {
        url('/_common/fonts/open-sans/open-sans-v18-latin-600.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+/* Police fluide */
 html {
   font-family: 'Open Sans', system-ui, sans-serif;
   --min-font: 1.1; /* rem */
@@ -128,73 +129,49 @@ html {
   --min-screen: 60; /* 960px si 1rem = 16px */
   --max-screen: 80; /* 1280px si 1rem = 320px */
   font-size: calc(1rem * var(--min-font));
-  --mod: 1.130;
+  --mod-big: 1.58;
+  --mod-small: 1.13;
+  --mod: var(--mod-small);
   -webkit-text-size-adjust: none;
   -moz-text-size-adjust: none;
   text-size-adjust: none;
 }
-
 @media screen and (min-width: 42rem) {
   html {
     font-size: calc(1rem * var(--min-font) + (var(--max-font) - var(--min-font)) * ((100vw - 1rem * var(--min-screen)) / (var(--max-screen) - var(--min-screen))));
-    --mod: 1.333;
+    --mod: var(--mod-big);
   }
 }
-
 @media screen and (min-width: 80rem) {
   html {
     font-size: calc(1rem * var(--max-font));
-    --mod: 1.333;
   }
 }
-
 @media screen and (min-width: 125rem) {
   html {
     font-size: calc(0.2rem + 1.8vh);
   }
 }
 
+/* Police des liens */
 header, footer, .accueil-lien {
   font-family: 'Roboto', system-ui, sans-serif;
 }
 
-
-
-/* Titres et tailles de texte */
-
+/* Enlever le style des headings, pour les utiliser uniquement selon leur signification */
 h1, h2, h3, h4, h5, h6 {
   display: inline;
   margin: 0;
-  font-weight: 400;
+  font: inherit;
 }
 
-h1, .h1 {
-  font-size: calc(var(--mod) * var(--mod) * var(--mod) * var(--mod) * 1rem);
-}
-
-h2, .h2 {
-  font-size: calc(var(--mod) * var(--mod) * var(--mod) * 1rem);
-}
-
-h3, .h3 {
-  font-size: calc(var(--mod) * var(--mod) * 1rem);
-}
-
-h4, .h4 {
-  font-size: calc(var(--mod) * 1rem);
-}
-
-.h5 {
-  font-size: 1rem;
-}
-
-.h6 {
-  font-size: calc(1rem / var(--mod));
-}
-
-.h5 {
-  line-height: 1.6em;
-}
+/* Niveaux de taille de texte */
+.s1 { font-size: calc(var(--mod) * var(--mod) * 1rem) }
+.s2 { font-size: calc(var(--mod-small) * 1rem) }
+.s5 { font-size: 1rem }
+.s6 { font-size: calc(1rem / var(--mod-small)) }
+.s7 { font-size: calc(1rem / var(--mod-small) / var(--mod-small)) }
+p { font-size: 1rem; line-height: 1.6rem; margin: 0; }
 
 
 
@@ -386,7 +363,7 @@ footer {
   grid-row: 3;
   grid-column: full-bleed-start / full-bleed-end;
   padding-top: .4rem;
-  font-size: .72rem;
+  /*font-size: .72rem;*/
 }
 
 
@@ -425,7 +402,7 @@ nav {
   align-self: center;
   display: flex;
   margin: auto 0;
-  font-size: .85rem;
+  /*font-size: .85rem;*/
 }
 
 .logo {
@@ -541,7 +518,7 @@ body[data-section="contact"] #contact {
 
 .accueil-lien {
   margin-top: .5em;
-  padding: 0 1px;
+  padding: .15em 1px;
 }
 
 .accueil-lien {
@@ -600,9 +577,9 @@ html.light .accueil-lien::after {
   font-weight: 400;
 }
 
-.accueil-moi>span {
+/*.accueil-moi>span {
   font-size: .8em;
-}
+}*/
 
 /* Mini-articles */
 
@@ -624,7 +601,6 @@ html.light .accueil-lien::after {
 
 .section-titre>a {
   margin-top: auto;
-  padding: 0;
 }
 
 /* Mini-projets */
@@ -768,7 +744,7 @@ html.light .grand-apercu-projet-image::after {
 .apercu-projet-lien {
   grid-row: 1;
   grid-column: 3;
-  margin: 0;
+  margin-top: auto;
   align-self: baseline;
 }
 
@@ -884,13 +860,13 @@ html.light .grand-apercu-projet-image::after {
 .grand-apercu-projet-infos>.apercu-projet-titre {
   grid-row: 1;
   grid-column: 1;
-  align-self: unset;
+  align-self: center;
 }
 
 .grand-apercu-projet-infos>.apercu-projet-lien {
   grid-row: 1;
   grid-column: -2;
-  align-self: unset;
+  align-self: center;
 }
 
 @media (max-width: 60rem) {
