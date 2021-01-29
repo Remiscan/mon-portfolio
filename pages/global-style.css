@@ -912,6 +912,13 @@ html.light .grand-apercu-projet-image::after {
   gap: .75ch;
 }
 
+html.dark .social-link {
+  --color: var(--color-dark);
+}
+html.light .social-link {
+  --color: var(--color-light);
+}
+
 .social-link>svg {
   fill: var(--text-color);
   transition: fill .2s var(--easing-standard);
