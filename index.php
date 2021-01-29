@@ -304,14 +304,16 @@ if ($css_critique_methode == 'push') {
               ?>
 
           <div class="grand-apercu-projet">
-            <a href="/projet/<?=$projet['id']?>" class="apercu-projet">
+            <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="apercu-projet">
               <div class="apercu-projet-image" style="<?=$style?>"></div>
             </a>
 
             <div class="grand-apercu-projet-infos">
               <span class="apercu-projet-titre"><?=$projet['titre']?></span>
-              <span class="accueil-lien apercu-projet-lien"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
-              <span class="apercu-projet-description" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
+              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="accueil-lien apercu-projet-lien">
+                <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
+              </a>
+              <span class="apercu-projet-description" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></span>
             </div>
           </div>
 
