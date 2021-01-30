@@ -306,17 +306,16 @@ if ($css_critique_methode == 'push') {
               ?>
 
           <div class="grand-apercu-projet">
-            <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="apercu-projet">
-              <div class="apercu-projet-image" style="<?=$style?>"></div>
+            <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="grand-apercu-projet-lien">
+              <h2 class="apercu-projet-titre s2"><?=$projet['titre']?></h2>
+              <span class="lien-interne lien-fleche apercu-projet-lien s5">
+                <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
+              </span>
+
+              <div class="grand-apercu-projet-image" style="<?=$style?>"></div>
             </a>
 
-            <div class="grand-apercu-projet-infos">
-              <h2 class="apercu-projet-titre s2"><?=$projet['titre']?></h2>
-              <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="lien-interne lien-fleche apercu-projet-lien s5">
-                <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
-              </a>
-              <p class="apercu-projet-description s5" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></p>
-            </div>
+            <p class="apercu-projet-description s5" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></p>
           </div>
 
               <?php
