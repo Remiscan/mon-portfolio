@@ -343,6 +343,14 @@ if ($css_critique_methode == 'push') {
           <svg viewBox="20 20 80 80"><use href="#codepen" /></svg>
           <span class="social-nom">CodePen</span>
         </a>
+        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
+            class="lien-interne lien-social" style="
+            --color-dark: <?=(new Couleur('#0077B5'))->betterContrast('black', 8, 1)->hsl()?>;
+            --color-light: <?=(new Couleur('#0077B5'))->betterContrast('white', 8, 1)->hsl()?>;
+            ">
+          <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
+          <span class="social-nom">LinkedIn</span>
+        </a>
         <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
             class="lien-interne lien-social" style="
             --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->betterContrast('black', 8, 1)->hsl()?>;
@@ -351,14 +359,6 @@ if ($css_critique_methode == 'push') {
           <svg viewBox="60 60 280 280"><use href="#twitter" /></svg>
           <span class="social-nom">Twitter</span>
         </a>
-        <!--<a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
-            class="lien-interne lien-social" style="
-            --color-dark: <?=(new Couleur('#0077B5'))->betterContrast('black', 8, 1)->hsl()?>;
-            --color-light: <?=(new Couleur('#0077B5'))->betterContrast('white', 8, 1)->hsl()?>;
-            ">
-          <svg viewBox="-1 -1 30 30"><use href="#linkedin" /></svg>
-          <span class="social-nom">LinkedIn</span>
-        </a>-->
         
         <div class="spacer"></div>
 
