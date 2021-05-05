@@ -78,7 +78,7 @@ const Navigation = {
       { transform: 'translate3d(0, 0, 0)', opacity: '1' },
       { transform: `translate3D(${moveTo}, 0, 0)`, opacity: '0' }
     ], {
-      duration: 100,
+      duration: Params.reducedMotion() ? 0 : 100,
       easing: Params.easingAccelerate,
       fill: 'both'
     });
@@ -98,7 +98,7 @@ const Navigation = {
       { transform: `translate3d(${moveFrom}, 0, 0)`, opacity: '0' },
       { transform: 'translate3D(0, 0, 0)', opacity: '1' }
     ], {
-      duration: 100,
+      duration: Params.reducedMotion() ? 0 : 100,
       easing: Params.easingDecelerate,
       fill: 'both'
     });
@@ -120,7 +120,7 @@ const Navigation = {
       keyframes = [
         { transform: 'scaleX(1)' },
         { transform: 'scaleX(0)' }
-      ]
+      ];
     }
 
     const background = document.getElementById('couleur');
@@ -128,9 +128,9 @@ const Navigation = {
     else           background.style.setProperty('transform-origin', 'top right');
     background.style.setProperty('background-color', couleur);
     const animation = background.animate(keyframes, {
-      duration: 250,
-      delay: 10,
-      endDelay: 10,
+      duration: Params.reducedMotion() ? 0 : 250,
+      delay: Params.reducedMotion() ? 0 : 10,
+      endDelay: Params.reducedMotion() ? 0 : 10,
       easing: Params.easingStandard,
       fill: 'both'
     });
