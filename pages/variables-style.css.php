@@ -4,6 +4,7 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 120;
   --accueil-bg-color: hsl(300, 50%, 94%);
+  --accueil-secondary-bg-color: hsl(300, 57%, 89%);
   --accueil-link-color: hsl(120, 100%, 10%);
   --accueil-link-underline-color: hsl(120, 100%, 9%, 0.25);
   --accueil-link-bright-color: hsl(118, 100%, 10%);
@@ -13,6 +14,7 @@
   --bio-primary-hue: 160;
   --bio-accent-hue: 340;
   --bio-bg-color: hsl(160, 33%, 91%);
+  --bio-secondary-bg-color: hsl(161, 45%, 86%);
   --bio-link-color: hsl(340, 56%, 18%);
   --bio-link-underline-color: hsl(340, 56%, 18%, 0.25);
   --bio-link-bright-color: hsl(341, 79%, 19%);
@@ -22,6 +24,7 @@
   --projets-primary-hue: 230;
   --projets-accent-hue: 50;
   --projets-bg-color: hsl(229, 50%, 94%);
+  --projets-secondary-bg-color: hsl(227, 57%, 89%);
   --projets-link-color: hsl(50, 100%, 9%);
   --projets-link-underline-color: hsl(50, 100%, 9%, 0.25);
   --projets-link-bright-color: hsl(51, 100%, 10%);
@@ -31,6 +34,7 @@
   --articles-primary-hue: 10;
   --articles-accent-hue: 190;
   --articles-bg-color: hsl(11, 50%, 94%);
+  --articles-secondary-bg-color: hsl(13, 57%, 89%);
   --articles-link-color: hsl(190, 91%, 11%);
   --articles-link-underline-color: hsl(191, 89%, 11%, 0.25);
   --articles-link-bright-color: hsl(190, 100%, 12%);
@@ -40,6 +44,7 @@
   --contact-primary-hue: 0;
   --contact-accent-hue: 180;
   --contact-bg-color: hsl(0, 0%, 93%);
+  --contact-secondary-bg-color: hsl(0, 0%, 88%);
   --contact-link-color: hsl(0, 0%, 15%);
   --contact-link-underline-color: hsl(0, 0%, 15%, 0.25);
   --contact-link-bright-color: hsl(0, 0%, 17%);
@@ -53,6 +58,7 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 120;
   --accueil-bg-color: hsl(300, 50%, 94%);
+  --accueil-secondary-bg-color: hsl(300, 57%, 89%);
   --accueil-link-color: hsl(120, 100%, 10%);
   --accueil-link-underline-color: hsl(120, 100%, 9%, 0.25);
   --accueil-link-bright-color: hsl(118, 100%, 10%);
@@ -62,6 +68,7 @@
   --bio-primary-hue: 160;
   --bio-accent-hue: 340;
   --bio-bg-color: hsl(160, 33%, 91%);
+  --bio-secondary-bg-color: hsl(161, 45%, 86%);
   --bio-link-color: hsl(340, 56%, 18%);
   --bio-link-underline-color: hsl(340, 56%, 18%, 0.25);
   --bio-link-bright-color: hsl(341, 79%, 19%);
@@ -71,6 +78,7 @@
   --projets-primary-hue: 230;
   --projets-accent-hue: 50;
   --projets-bg-color: hsl(229, 50%, 94%);
+  --projets-secondary-bg-color: hsl(227, 57%, 89%);
   --projets-link-color: hsl(50, 100%, 9%);
   --projets-link-underline-color: hsl(50, 100%, 9%, 0.25);
   --projets-link-bright-color: hsl(51, 100%, 10%);
@@ -80,6 +88,7 @@
   --articles-primary-hue: 10;
   --articles-accent-hue: 190;
   --articles-bg-color: hsl(11, 50%, 94%);
+  --articles-secondary-bg-color: hsl(13, 57%, 89%);
   --articles-link-color: hsl(190, 91%, 11%);
   --articles-link-underline-color: hsl(191, 89%, 11%, 0.25);
   --articles-link-bright-color: hsl(190, 100%, 12%);
@@ -89,6 +98,7 @@
   --contact-primary-hue: 0;
   --contact-accent-hue: 180;
   --contact-bg-color: hsl(0, 0%, 93%);
+  --contact-secondary-bg-color: hsl(0, 0%, 88%);
   --contact-link-color: hsl(0, 0%, 15%);
   --contact-link-underline-color: hsl(0, 0%, 15%, 0.25);
   --contact-link-bright-color: hsl(0, 0%, 17%);
@@ -103,6 +113,7 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 120;
   --accueil-bg-color: hsl(300, 25%, 10%);
+  --accueil-secondary-bg-color: hsl(300, 35%, 15%);
   --accueil-link-color: hsl(120, 50%, 80%);
   --accueil-link-underline-color: hsl(120, 50%, 80%, 0.25);
   --accueil-link-bright-color: hsl(120, 61%, 75%);
@@ -112,6 +123,7 @@
   --bio-primary-hue: 160;
   --bio-accent-hue: 340;
   --bio-bg-color: hsl(157, 43%, 7%);
+  --bio-secondary-bg-color: hsl(158, 54%, 12%);
   --bio-link-color: hsl(340, 91%, 89%);
   --bio-link-underline-color: hsl(340, 89%, 89%, 0.25);
   --bio-link-bright-color: hsl(338, 100%, 88%);
@@ -121,6 +133,7 @@
   --projets-primary-hue: 230;
   --projets-accent-hue: 50;
   --projets-bg-color: hsl(230, 27%, 11%);
+  --projets-secondary-bg-color: hsl(230, 39%, 16%);
   --projets-link-color: hsl(49, 48%, 79%);
   --projets-link-underline-color: hsl(49, 48%, 79%, 0.25);
   --projets-link-bright-color: hsl(50, 56%, 73%);
@@ -130,6 +143,7 @@
   --articles-primary-hue: 10;
   --articles-accent-hue: 190;
   --articles-bg-color: hsl(9, 25%, 10%);
+  --articles-secondary-bg-color: hsl(9, 35%, 15%);
   --articles-link-color: hsl(191, 56%, 82%);
   --articles-link-underline-color: hsl(192, 56%, 82%, 0.25);
   --articles-link-bright-color: hsl(191, 65%, 77%);
@@ -139,6 +153,7 @@
   --contact-primary-hue: 0;
   --contact-accent-hue: 180;
   --contact-bg-color: hsl(0, 0%, 10%);
+  --contact-secondary-bg-color: hsl(0, 0%, 15%);
   --contact-link-color: hsl(0, 0%, 85%);
   --contact-link-underline-color: hsl(0, 0%, 85%, 0.25);
   --contact-link-bright-color: hsl(0, 0%, 83%);
@@ -152,6 +167,7 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 120;
   --accueil-bg-color: hsl(300, 50%, 94%);
+  --accueil-secondary-bg-color: hsl(300, 57%, 89%);
   --accueil-link-color: hsl(120, 100%, 10%);
   --accueil-link-underline-color: hsl(120, 100%, 9%, 0.25);
   --accueil-link-bright-color: hsl(118, 100%, 10%);
@@ -161,6 +177,7 @@
   --bio-primary-hue: 160;
   --bio-accent-hue: 340;
   --bio-bg-color: hsl(160, 33%, 91%);
+  --bio-secondary-bg-color: hsl(161, 45%, 86%);
   --bio-link-color: hsl(340, 56%, 18%);
   --bio-link-underline-color: hsl(340, 56%, 18%, 0.25);
   --bio-link-bright-color: hsl(341, 79%, 19%);
@@ -170,6 +187,7 @@
   --projets-primary-hue: 230;
   --projets-accent-hue: 50;
   --projets-bg-color: hsl(229, 50%, 94%);
+  --projets-secondary-bg-color: hsl(227, 57%, 89%);
   --projets-link-color: hsl(50, 100%, 9%);
   --projets-link-underline-color: hsl(50, 100%, 9%, 0.25);
   --projets-link-bright-color: hsl(51, 100%, 10%);
@@ -179,6 +197,7 @@
   --articles-primary-hue: 10;
   --articles-accent-hue: 190;
   --articles-bg-color: hsl(11, 50%, 94%);
+  --articles-secondary-bg-color: hsl(13, 57%, 89%);
   --articles-link-color: hsl(190, 91%, 11%);
   --articles-link-underline-color: hsl(191, 89%, 11%, 0.25);
   --articles-link-bright-color: hsl(190, 100%, 12%);
@@ -188,6 +207,7 @@
   --contact-primary-hue: 0;
   --contact-accent-hue: 180;
   --contact-bg-color: hsl(0, 0%, 93%);
+  --contact-secondary-bg-color: hsl(0, 0%, 88%);
   --contact-link-color: hsl(0, 0%, 15%);
   --contact-link-underline-color: hsl(0, 0%, 15%, 0.25);
   --contact-link-bright-color: hsl(0, 0%, 17%);
@@ -200,6 +220,7 @@
   --accueil-primary-hue: 300;
   --accueil-accent-hue: 120;
   --accueil-bg-color: hsl(300, 25%, 10%);
+  --accueil-secondary-bg-color: hsl(300, 35%, 15%);
   --accueil-link-color: hsl(120, 50%, 80%);
   --accueil-link-underline-color: hsl(120, 50%, 80%, 0.25);
   --accueil-link-bright-color: hsl(120, 61%, 75%);
@@ -209,6 +230,7 @@
   --bio-primary-hue: 160;
   --bio-accent-hue: 340;
   --bio-bg-color: hsl(157, 43%, 7%);
+  --bio-secondary-bg-color: hsl(158, 54%, 12%);
   --bio-link-color: hsl(340, 91%, 89%);
   --bio-link-underline-color: hsl(340, 89%, 89%, 0.25);
   --bio-link-bright-color: hsl(338, 100%, 88%);
@@ -218,6 +240,7 @@
   --projets-primary-hue: 230;
   --projets-accent-hue: 50;
   --projets-bg-color: hsl(230, 27%, 11%);
+  --projets-secondary-bg-color: hsl(230, 39%, 16%);
   --projets-link-color: hsl(49, 48%, 79%);
   --projets-link-underline-color: hsl(49, 48%, 79%, 0.25);
   --projets-link-bright-color: hsl(50, 56%, 73%);
@@ -227,6 +250,7 @@
   --articles-primary-hue: 10;
   --articles-accent-hue: 190;
   --articles-bg-color: hsl(9, 25%, 10%);
+  --articles-secondary-bg-color: hsl(9, 35%, 15%);
   --articles-link-color: hsl(191, 56%, 82%);
   --articles-link-underline-color: hsl(192, 56%, 82%, 0.25);
   --articles-link-bright-color: hsl(191, 65%, 77%);
@@ -236,6 +260,7 @@
   --contact-primary-hue: 0;
   --contact-accent-hue: 180;
   --contact-bg-color: hsl(0, 0%, 10%);
+  --contact-secondary-bg-color: hsl(0, 0%, 15%);
   --contact-link-color: hsl(0, 0%, 85%);
   --contact-link-underline-color: hsl(0, 0%, 85%, 0.25);
   --contact-link-bright-color: hsl(0, 0%, 83%);
@@ -249,6 +274,7 @@ body[data-section="accueil"] {
   --primary-hue: var(--accueil-primary-hue);
   --accent-hue: var(--accueil-accent-hue);
   --bg-color: var(--accueil-bg-color);
+  --secondary-bg-color: var(--accueil-secondary-bg-color);
   --link-color: var(--accueil-link-color);
   --link-underline-color: var(--accueil-link-underline-color);
   --link-bright-color: var(--accueil-link-bright-color);
@@ -260,6 +286,7 @@ body[data-section="bio"] {
   --primary-hue: var(--bio-primary-hue);
   --accent-hue: var(--bio-accent-hue);
   --bg-color: var(--bio-bg-color);
+  --secondary-bg-color: var(--bio-secondary-bg-color);
   --link-color: var(--bio-link-color);
   --link-underline-color: var(--bio-link-underline-color);
   --link-bright-color: var(--bio-link-bright-color);
@@ -271,6 +298,7 @@ body[data-section="projets"] {
   --primary-hue: var(--projets-primary-hue);
   --accent-hue: var(--projets-accent-hue);
   --bg-color: var(--projets-bg-color);
+  --secondary-bg-color: var(--projets-secondary-bg-color);
   --link-color: var(--projets-link-color);
   --link-underline-color: var(--projets-link-underline-color);
   --link-bright-color: var(--projets-link-bright-color);
@@ -282,6 +310,7 @@ body[data-section="articles"] {
   --primary-hue: var(--articles-primary-hue);
   --accent-hue: var(--articles-accent-hue);
   --bg-color: var(--articles-bg-color);
+  --secondary-bg-color: var(--articles-secondary-bg-color);
   --link-color: var(--articles-link-color);
   --link-underline-color: var(--articles-link-underline-color);
   --link-bright-color: var(--articles-link-bright-color);
@@ -293,6 +322,7 @@ body[data-section="contact"] {
   --primary-hue: var(--contact-primary-hue);
   --accent-hue: var(--contact-accent-hue);
   --bg-color: var(--contact-bg-color);
+  --secondary-bg-color: var(--contact-secondary-bg-color);
   --link-color: var(--contact-link-color);
   --link-underline-color: var(--contact-link-underline-color);
   --link-bright-color: var(--contact-link-bright-color);

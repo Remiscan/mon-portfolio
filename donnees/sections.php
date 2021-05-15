@@ -23,6 +23,7 @@ class Section {
   public $primaryHue;
   public $accentHue;
   public $bgColor;
+  public $secondaryBgColor;
   public $linkColor;
   public $linkUnderlineColor;
   public $linkBrightColor;
@@ -36,6 +37,10 @@ class Section {
     $this->bgColor = array(
       'dark' => (new Couleur("hsl($this->primaryHue, $s, 10%)"))->betterContrast('black', 1.1757, 1),
       'light' => (new Couleur("hsl($this->primaryHue, $s, 90%)"))->betterContrast('white', 1.1757, 1),
+    );
+    $this->secondaryBgColor = array(
+      'dark' => $this->bgColor['dark']->change('l', '+5%')->change('s', '+10%'),
+      'light' => $this->bgColor['light']->change('l', '-5%')->change('s', '+10%')
     );
     $s = ($id == 'contact') ? '0%' : '50%';
     $this->linkColor = array(

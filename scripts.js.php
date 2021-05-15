@@ -42,6 +42,8 @@ document.addEventListener('DOMContentLoaded', async event => {
   const url = (section == 'accueil') ? '' : section;
   history.replaceState({ section }, '', `/${url}`);
 
+  document.querySelector('theme-selector .selector-title').classList.add('s5');
+
   Navigation.init();
   await Traduction.initLanguageButtons();
   await Traduction.traduire();

@@ -975,8 +975,32 @@ theme-selector {
 
 theme-selector>.selector {
   background-color: var(--bg-color);
-  border: 1px solid var(--link-color);
+  box-shadow: 0 0 0 1px var(--link-color);
+  /*box-shadow: 0 0 0 1px var(--bg-color);*/
   margin-bottom: .6rem;
+  border-radius: .3rem;
+}
+
+theme-selector>.selector::before {
+  content: '';
+  display: block;
+  --size: .6rem;
+  width: var(--size);
+  height: var(--size);
+  background-color: var(--link-color);
+  position: absolute;
+  bottom: calc(-.4 * var(--size));
+  left: calc(50% - .5 * var(--size));
+  transform: rotate(45deg);
+  z-index: -1;
+}
+
+@media (max-width: 80rem) {
+  theme-selector>.selector::before {
+    left: unset;
+    right: calc(.5 * 1.5rem);
+    transform: translate(50%) rotate(45deg);
+  }
 }
 
 input[type="radio"] {
@@ -1006,8 +1030,12 @@ input[type="radio"] + label {
 input[type="radio"] + label:hover,
 input[type="radio"] + label:focus,
 input[type="radio"]:checked + label {
-  background: red;
+  background: var(--link-underline-color);
 }
+
+/*input[type="radio"]:focus-visible + label {
+  box-shadow: inset 0 0 0 1px var(--text-color);
+}*/
 
 input[type="radio"] + label::before {
   content: '';
@@ -1016,31 +1044,38 @@ input[type="radio"] + label::before {
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
-  border: 2px solid var(--secondary-text-color);
-  box-sizing: border-box;
+  /*border: 2px solid var(--secondary-text-color);
+  box-sizing: border-box;*/
+  box-shadow: inset 0 0 0 2px var(--secondary-text-color);
   place-self: center;
   grid-row: 1;
   grid-column: 1;
 }
 
 input[type="radio"]:checked + label::before {
-  border-color: var(--link-color);
+  /*border-color: var(--link-color);
   background-color: var(--text-color);
-  box-shadow: inset 0 0 0 2px var(--bg-color);
+  box-shadow: inset 0 0 0 2px var(--bg-color);*/
+  background-color: var(--link-color);
+  box-shadow: none;
 }
 
-/*input[type="radio"]:checked + label::after {
+input[type="radio"]:checked + label::after {
   content: '';
   display: block;
   --size: .5rem;
   width: var(--size);
-  height: var(--size);
-  border-radius: 50%;
-  background: var(--text-color);
+  height: calc(.5 * var(--size));
+  /*border-radius: 50%;
+  background: var(--text-color);*/
+  border: .2rem solid var(--bg-color);
+  border-top: none;
+  border-right: none;
+  transform: translate(-7%, -28%) rotate(-45deg);
   place-self: center;
   grid-row: 1;
   grid-column: 1;
-}*/
+}
 
 input[type="radio"] + label>span {
   margin: auto 0;
