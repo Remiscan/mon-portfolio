@@ -109,6 +109,7 @@ if ($css_critique_methode == 'push') {
 
     <meta name="viewport" content="initial-scale=1">
     <meta name="theme-color" content="">
+    <meta name="color-scheme" content="light dark">
     
     <link rel="icon" type="image/png" href="/mon-portfolio/icons/icon-192.png">
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">

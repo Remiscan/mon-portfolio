@@ -28,12 +28,14 @@
 
 /*<?php ob_start();?>*/
 :root[data-theme="light"] {
+  color-scheme: light;
   --text-color: black;
   --link-hover-color: black;
   --inverse-text-color: white;
 }
 
 :root[data-theme="dark"] {
+  color-scheme: dark;
   --text-color: white;
   --link-hover-color: white;
   --inverse-text-color: black;
