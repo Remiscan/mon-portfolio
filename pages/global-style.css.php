@@ -347,6 +347,10 @@ footer {
       [text-zone-start] min(calc(100% - 2.4rem), var(--text-zone-width)) [text-zone-end]
       1fr [partial-bleed-end quasi-full-bleed-end] 1.2rem [full-bleed-end];
   }
+
+  theme-selector>.selector {
+    right: 0;
+  }
 }
 
 header {

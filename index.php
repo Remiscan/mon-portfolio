@@ -366,7 +366,7 @@ if ($css_critique_methode == 'push') {
 
         <button class="lien-interne bouton-langage" data-lang="fr" disabled tabindex="-1">Français</button>
         <button class="lien-interne bouton-langage" data-lang="en" disabled tabindex="-1">English</button>
-        <theme-selector type="icon"></theme-selector>
+        <theme-selector icon="reverse" position="top"></theme-selector>
       </div>
     </footer>
     <!-- FIN : CONTENU DU SITE -->
