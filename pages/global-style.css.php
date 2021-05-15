@@ -973,6 +973,79 @@ theme-selector {
   --secondary-color: var(--link-color);
 }
 
+theme-selector>.selector {
+  background-color: var(--bg-color);
+  border: 1px solid var(--link-color);
+  margin-bottom: .6rem;
+}
+
+input[type="radio"] {
+  height: 0;
+  width: 0;
+  opacity: 0;
+  margin: 0;
+  pointer-events: none;
+  position: absolute;
+}
+
+.selector-title,
+input[type="radio"] + label {
+  padding: .6rem .6rem;
+}
+
+.selector-title {
+  place-self: center;
+}
+
+input[type="radio"] + label {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: .6rem;
+}
+
+input[type="radio"] + label:hover,
+input[type="radio"] + label:focus,
+input[type="radio"]:checked + label {
+  background: red;
+}
+
+input[type="radio"] + label::before {
+  content: '';
+  display: block;
+  --size: 1rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  border: 2px solid var(--secondary-text-color);
+  box-sizing: border-box;
+  place-self: center;
+  grid-row: 1;
+  grid-column: 1;
+}
+
+input[type="radio"]:checked + label::before {
+  border-color: var(--link-color);
+  background-color: var(--text-color);
+  box-shadow: inset 0 0 0 2px var(--bg-color);
+}
+
+/*input[type="radio"]:checked + label::after {
+  content: '';
+  display: block;
+  --size: .5rem;
+  width: var(--size);
+  height: var(--size);
+  border-radius: 50%;
+  background: var(--text-color);
+  place-self: center;
+  grid-row: 1;
+  grid-column: 1;
+}*/
+
+input[type="radio"] + label>span {
+  margin: auto 0;
+}
+
 
 
 
