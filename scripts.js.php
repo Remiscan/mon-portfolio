@@ -4,8 +4,8 @@
 import { Params } from './modules/Params.js.php';
 import Navigation from './modules/navigation.js.php';
 import { Traduction } from './modules/traduction.js.php';
-import './modules/theme-selector.js.php';
-import Theme from './modules/theme.js.php';
+import Cookie from './modules/cookies.js.php';
+import '/_common/components/theme-selector/theme-selector.js.php';
 
 /*<?php $imports = ob_get_clean();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
@@ -16,8 +16,12 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 ////////////////////////////////
 // Gère les changements de thème
 window.addEventListener('themechange', event => {
-  const theme = event.detail.theme;
-  Theme.set(theme);
+  const html = document.documentElement;
+  html.dataset.theme = event.detail.theme;
+
+  // Set meta theme-color here
+
+  new Cookie('theme', event.detail.theme);
 });
 
 

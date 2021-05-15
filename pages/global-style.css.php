@@ -26,17 +26,21 @@
   );
 }
 
-:root.dark {
-  --text-color: white;
-  --link-hover-color: white;
-  --inverse-text-color: black;
-}
-
-:root.light {
+/*<?php ob_start();?>*/
+:root[data-theme="light"] {
   --text-color: black;
   --link-hover-color: black;
   --inverse-text-color: white;
 }
+
+:root[data-theme="dark"] {
+  --text-color: white;
+  --link-hover-color: white;
+  --inverse-text-color: black;
+}
+/*<?php $body = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
+echo buildThemesStylesheet($body); ?>*/
 
 
 
@@ -535,12 +539,17 @@ body[data-section="contact"] #contact {
   transform: translateX(0);
 }
 
-html.dark .lien-fleche::after {
-  content: var(--arrow-dark);
-}
-html.light .lien-fleche::after {
+/*<?php ob_start();?>*/
+:root[data-theme="light"] .lien-fleche::after {
   content: var(--arrow-light);
 }
+
+:root[data-theme="dark"] .lien-fleche::after {
+  content: var(--arrow-dark);
+}
+/*<?php $body = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
+echo buildThemesStylesheet($body); ?>*/
 
 .grand-apercu-projet-lien:hover .lien-fleche::after,
 .grand-apercu-projet-lien:focus .lien-fleche::after,
@@ -658,14 +667,28 @@ html.light .lien-fleche::after {
   position: relative;
   z-index: 1;
 }
-html.dark .apercu-projet-image,
-html.dark .grand-apercu-projet-image::after {
-  background-image: var(--image-dark, var(--image));
-}
-html.light .apercu-projet-image,
-html.light .grand-apercu-projet-image::after {
+/*<?php ob_start();?>*/
+:root[data-theme="light"] .apercu-projet-image {
   background-image: var(--image-light, var(--image));
 }
+
+:root[data-theme="dark"] .apercu-projet-image {
+  background-image: var(--image-dark, var(--image));
+}
+/*<?php $body = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
+echo buildThemesStylesheet($body); ?>*/
+/*<?php ob_start();?>*/
+:root[data-theme="light"] .grand-apercu-projet-image::after {
+  background-image: var(--image-light, var(--image));
+}
+
+:root[data-theme="dark"] .grand-apercu-projet-image::after {
+  background-image: var(--image-dark, var(--image));
+}
+/*<?php $body = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
+echo buildThemesStylesheet($body); ?>*/
 
 .grand-apercu-projet-lien:hover>.grand-apercu-projet-image::after,
 .grand-apercu-projet-lien:focus>.grand-apercu-projet-image::after,
@@ -878,12 +901,17 @@ html.light .grand-apercu-projet-image::after {
   position: relative;
 }
 
-html.dark .lien-social {
-  --color: var(--color-dark);
-}
-html.light .lien-social {
+/*<?php ob_start();?>*/
+:root[data-theme="light"] .lien-social {
   --color: var(--color-light);
 }
+
+:root[data-theme="dark"] .lien-social {
+  --color: var(--color-dark);
+}
+/*<?php $body = ob_get_clean();
+require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
+echo buildThemesStylesheet($body); ?>*/
 
 .lien-social>svg {
   grid-column: 1;
@@ -935,6 +963,8 @@ html.light .lien-social {
 theme-selector {
   width: 1.5rem;
   height: 1.5rem;
+  --primary-color: var(--text-color);
+  --secondary-color: var(--link-color);
 }
 
 

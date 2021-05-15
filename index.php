@@ -91,8 +91,10 @@ if ($css_critique_methode == 'push') {
 }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" lang="<?=httpLanguage()?>"
-      class="<?=$_COOKIE['resolvedTheme']?>">
+<html data-version="<?=version(__DIR__)?>"
+      data-http-lang="<?=httpLanguage()?>"
+      lang="<?=httpLanguage()?>"
+      data-theme="<?=$_COOKIE['theme']?>">
 
   <head>
     <meta charset="utf-8">
@@ -130,7 +132,7 @@ if ($css_critique_methode == 'push') {
     
       <!-- CSS critique (pushed) -->
       <?php foreach($styles_critiques as $section) { ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css">
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css.php">
       <?php } ?>
 
     <?php } else { ?>
@@ -139,7 +141,7 @@ if ($css_critique_methode == 'push') {
       <?php
       echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
       foreach($styles_critiques as $section) {
-        include __DIR__ . '/pages/' . $section . '-style.css';
+        include __DIR__ . '/pages/' . $section . '-style.css.php';
       }
       echo '</style>';
       ?>
@@ -150,7 +152,7 @@ if ($css_critique_methode == 'push') {
     <?php
     foreach($styles_non_critiques as $section) {
       ?>
-      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style.css"
+      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style.css.php"
             onload="this.onload=null; this.rel='stylesheet'">
       <?php
     }

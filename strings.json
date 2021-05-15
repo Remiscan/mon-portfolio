@@ -75,7 +75,7 @@
     "theme-button": "Choisir l'apparence de la page",
     "theme-button-light": "Passer au thème clair",
     "theme-button-dark": "Passer au thème sombre",
-    "theme-titre": "Thème",
+    "theme-selector-title": "Thème",
     "theme-auto": "Automatique",
     "theme-light": "Clair",
     "theme-dark": "Sombre"
@@ -145,7 +145,7 @@
     "theme-button": "Choose the appearance of the page",
     "theme-button-light": "Switch to light theme",
     "theme-button-dark": "Switch to dark theme",
-    "theme-titre": "Theme",
+    "theme-selector-title": "Theme",
     "theme-auto": "Automatic",
     "theme-light": "Light",
     "theme-dark": "Dark"
