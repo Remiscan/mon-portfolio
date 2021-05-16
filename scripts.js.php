@@ -16,9 +16,6 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 ////////////////////////////////
 // Gère les changements de thème
 window.addEventListener('themechange', event => {
-  const html = document.documentElement;
-  html.dataset.theme = event.detail.theme;
-
   // Set meta theme-color here
 
   new Cookie('theme', event.detail.theme);
