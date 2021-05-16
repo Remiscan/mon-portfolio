@@ -42,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async event => {
   const url = (section == 'accueil') ? '' : section;
   history.replaceState({ section }, '', `/${url}`);
 
+  // Personnalisation du theme-selector
   document.querySelector('theme-selector .selector-title').classList.add('s5');
 
   Navigation.init();

@@ -975,32 +975,20 @@ theme-selector {
 
 theme-selector>.selector {
   background-color: var(--bg-color);
-  box-shadow: 0 0 0 1px var(--link-color);
+  box-shadow: 0 0 0 1px var(--link-color),
+              -2px -2px 0 0 var(--bg-color),
+              2px -2px 0 0 var(--bg-color);
   /*box-shadow: 0 0 0 1px var(--bg-color);*/
-  margin-bottom: .6rem;
+  margin-bottom: .7rem;
   border-radius: .3rem;
+  overflow: hidden;
+  transform: translateY(.2rem);
+  transition: opacity .2s ease,
+              transform .2s ease;
 }
 
-theme-selector>.selector::before {
-  content: '';
-  display: block;
-  --size: .6rem;
-  width: var(--size);
-  height: var(--size);
-  background-color: var(--link-color);
-  position: absolute;
-  bottom: calc(-.4 * var(--size));
-  left: calc(50% - .5 * var(--size));
-  transform: rotate(45deg);
-  z-index: -1;
-}
-
-@media (max-width: 80rem) {
-  theme-selector>.selector::before {
-    left: unset;
-    right: calc(.5 * 1.5rem);
-    transform: translate(50%) rotate(45deg);
-  }
+theme-selector[open="true"]>.selector {
+  transform: translateY(0);
 }
 
 input[type="radio"] {
@@ -1044,12 +1032,13 @@ input[type="radio"] + label::before {
   width: var(--size);
   height: var(--size);
   border-radius: 50%;
-  /*border: 2px solid var(--secondary-text-color);
-  box-sizing: border-box;*/
   box-shadow: inset 0 0 0 2px var(--secondary-text-color);
   place-self: center;
   grid-row: 1;
   grid-column: 1;
+  /* Rotation forces sub-pixel rendering to make perfect circle,
+     and 3D forces anti-aliasing */
+  transform: rotate3D(0, 0, 1, 360deg);
 }
 
 input[type="radio"]:checked + label::before {
@@ -1057,17 +1046,16 @@ input[type="radio"]:checked + label::before {
   background-color: var(--text-color);
   box-shadow: inset 0 0 0 2px var(--bg-color);*/
   background-color: var(--link-color);
-  box-shadow: none;
+  box-shadow: inset 0 0 0 .1rem var(--link-color),
+              inset 0 0 0 .2rem var(--bg-color);
 }
 
-input[type="radio"]:checked + label::after {
+/*input[type="radio"]:checked + label::after {
   content: '';
   display: block;
   --size: .5rem;
   width: var(--size);
   height: calc(.5 * var(--size));
-  /*border-radius: 50%;
-  background: var(--text-color);*/
   border: .2rem solid var(--bg-color);
   border-top: none;
   border-right: none;
@@ -1075,7 +1063,7 @@ input[type="radio"]:checked + label::after {
   place-self: center;
   grid-row: 1;
   grid-column: 1;
-}
+}*/
 
 input[type="radio"] + label>span {
   margin: auto 0;
