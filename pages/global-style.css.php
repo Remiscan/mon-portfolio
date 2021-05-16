@@ -1038,6 +1038,7 @@ input[type="radio"] + label::before {
 input[type="radio"]:checked + label::before {
   background-color: var(--link-color);
   box-shadow: inset 0 0 0 .1rem var(--link-color),
+              inset 0 0 0 .3rem var(--link-underline-color),
               inset 0 0 0 .2rem var(--bg-color);
 }
 
