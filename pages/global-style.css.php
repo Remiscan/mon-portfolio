@@ -979,7 +979,7 @@ theme-selector>.selector {
               -2px -2px 0 0 var(--bg-color),
               2px -2px 0 0 var(--bg-color);
   /*box-shadow: 0 0 0 1px var(--bg-color);*/
-  margin-bottom: .7rem;
+  margin-bottom: .6rem;
   border-radius: .3rem;
   overflow: hidden;
   transform: translateY(.2rem);
