@@ -978,7 +978,6 @@ theme-selector>.selector {
   box-shadow: 0 0 0 1px var(--link-color),
               -2px -2px 0 0 var(--bg-color),
               2px -2px 0 0 var(--bg-color);
-  /*box-shadow: 0 0 0 1px var(--bg-color);*/
   margin-bottom: .6rem;
   border-radius: .3rem;
   overflow: hidden;
@@ -1016,14 +1015,9 @@ input[type="radio"] + label {
 }
 
 input[type="radio"] + label:hover,
-input[type="radio"] + label:focus,
 input[type="radio"]:checked + label {
   background: var(--link-underline-color);
 }
-
-/*input[type="radio"]:focus-visible + label {
-  box-shadow: inset 0 0 0 1px var(--text-color);
-}*/
 
 input[type="radio"] + label::before {
   content: '';
@@ -1042,28 +1036,10 @@ input[type="radio"] + label::before {
 }
 
 input[type="radio"]:checked + label::before {
-  /*border-color: var(--link-color);
-  background-color: var(--text-color);
-  box-shadow: inset 0 0 0 2px var(--bg-color);*/
   background-color: var(--link-color);
   box-shadow: inset 0 0 0 .1rem var(--link-color),
               inset 0 0 0 .2rem var(--bg-color);
 }
-
-/*input[type="radio"]:checked + label::after {
-  content: '';
-  display: block;
-  --size: .5rem;
-  width: var(--size);
-  height: calc(.5 * var(--size));
-  border: .2rem solid var(--bg-color);
-  border-top: none;
-  border-right: none;
-  transform: translate(-7%, -28%) rotate(-45deg);
-  place-self: center;
-  grid-row: 1;
-  grid-column: 1;
-}*/
 
 input[type="radio"] + label>span {
   margin: auto 0;
