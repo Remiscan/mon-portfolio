@@ -77,6 +77,14 @@ textarea::selection {
 *:active, *:focus:not(:focus-visible) { outline: none; }
 *::moz-focus-inner { border: none; }
 
+/* If animations disabled */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+
 
 
 
