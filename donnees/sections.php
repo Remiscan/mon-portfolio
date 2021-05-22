@@ -35,8 +35,8 @@ class Section {
     $this->accentHue = ($this->primaryHue + 180) % 360;
     $s = ($id == 'contact') ? '0%' : '25%';
     $this->bgColor = array(
-      'dark' => (new Couleur("hsl($this->primaryHue, $s, 10%)"))->betterContrast('black', 1.1757, 1),
-      'light' => (new Couleur("hsl($this->primaryHue, $s, 90%)"))->betterContrast('white', 1.1757, 1),
+      'dark' => (new Couleur("hsl($this->primaryHue, $s, 10%)"))->betterContrast('black', 1.1757, 1, (object)["lower" => true]),
+      'light' => (new Couleur("hsl($this->primaryHue, $s, 90%)"))->betterContrast('white', 1.1757, 1, (object)["lower" => true]),
     );
     $this->secondaryBgColor = array(
       'dark' => $this->bgColor['dark']->change('l', '+5%')->change('s', '+10%'),
@@ -44,8 +44,8 @@ class Section {
     );
     $s = ($id == 'contact') ? '0%' : '50%';
     $this->linkColor = array(
-      'dark' => (new Couleur("hsl($this->accentHue, $s, 80%)"))->betterContrast($this->bgColor['dark'], 12.6, 1),
-      'light' => (new Couleur("hsl($this->accentHue, $s, 20%)"))->betterContrast($this->bgColor['light'], 12.6, 1),
+      'dark' => (new Couleur("hsl($this->accentHue, $s, 80%)"))->betterContrast($this->bgColor['dark'], 12.6, 1, (object)["lower" => true]),
+      'light' => (new Couleur("hsl($this->accentHue, $s, 20%)"))->betterContrast($this->bgColor['light'], 12.6, 1, (object)["lower" => true]),
     );
     $this->linkUnderlineColor = array(
       'dark' => $this->linkColor['dark']->replace('a', .25),
@@ -53,13 +53,13 @@ class Section {
     );
     $s = ($id == 'contact') ? '0%' : '60%';
     $this->linkBrightColor = array(
-      'dark' => (new Couleur("hsl($this->accentHue, $s, 75%)"))->betterContrast($this->bgColor['dark'], 11.973, 1),
-      'light' => (new Couleur("hsl($this->accentHue, $s, 25%)"))->betterContrast($this->bgColor['light'], 11.973, 1),
+      'dark' => (new Couleur("hsl($this->accentHue, $s, 75%)"))->betterContrast($this->bgColor['dark'], 11.973, 1, (object)["lower" => true]),
+      'light' => (new Couleur("hsl($this->accentHue, $s, 25%)"))->betterContrast($this->bgColor['light'], 11.973, 1, (object)["lower" => true]),
     );
     $s = ($id == 'contact') ? '0%' : '25%';
     $this->secondaryTextColor = array(
-      'dark' => (new Couleur("hsl($this->primaryHue, $s, 70%)"))->betterContrast($this->bgColor['dark'], 7.8147, 1),
-      'light' => (new Couleur("hsl($this->primaryHue, $s, 30%)"))->betterContrast($this->bgColor['light'], 7.8147, 1),
+      'dark' => (new Couleur("hsl($this->primaryHue, $s, 70%)"))->betterContrast($this->bgColor['dark'], 7.8147, 1, (object)["lower" => true]),
+      'light' => (new Couleur("hsl($this->primaryHue, $s, 30%)"))->betterContrast($this->bgColor['light'], 7.8147, 1, (object)["lower" => true]),
     );
   }
 
