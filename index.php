@@ -365,8 +365,8 @@ if ($css_critique_methode == 'push') {
         
         <div class="spacer"></div>
 
-        <button class="lien-interne bouton-langage" data-lang="fr" disabled tabindex="-1">Français</button>
-        <button class="lien-interne bouton-langage" data-lang="en" disabled tabindex="-1">English</button>
+        <button type="button" class="lien-interne bouton-langage" data-lang="fr" disabled tabindex="-1">Français</button>
+        <button type="button" class="lien-interne bouton-langage" data-lang="en" disabled tabindex="-1">English</button>
         <theme-selector icon="reverse" position="top"></theme-selector>
       </div>
     </footer>
