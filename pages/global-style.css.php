@@ -982,6 +982,7 @@ theme-selector {
 }
 
 theme-selector>.selector {
+  min-width: 8rem;
   background-color: var(--bg-color);
   box-shadow: 0 0 0 1px var(--link-color),
               0 0 0 2px var(--bg-color);
