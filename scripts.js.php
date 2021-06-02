@@ -18,7 +18,8 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 window.addEventListener('themechange', event => {
   // Set meta theme-color here
 
-  new Cookie('theme', event.detail.theme);
+  if (event.detail.theme != 'auto') new Cookie('theme', event.detail.theme);
+  else                              Cookie.delete('theme');
 });
 
 
@@ -41,6 +42,7 @@ document.addEventListener('DOMContentLoaded', async event => {
 
   // Personnalisation du theme-selector
   document.querySelector('theme-selector .selector-title').classList.add('s5');
+  document.querySelector('theme-selector .selector-cookie-notice').classList.add('s8');
 
   Navigation.init();
   await Traduction.initLanguageButtons();

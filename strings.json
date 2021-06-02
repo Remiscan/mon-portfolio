@@ -78,7 +78,8 @@
     "theme-selector-title": "Apparence",
     "theme-auto": "Automatique",
     "theme-light": "Claire",
-    "theme-dark": "Sombre"
+    "theme-dark": "Sombre",
+    "theme-selector-cookie-notice": "* Ce choix sera stocké dans un cookie."
   },
   "en": {
     "job": "Web developer",
@@ -148,6 +149,7 @@
     "theme-selector-title": "Theme",
     "theme-auto": "Automatic",
     "theme-light": "Light",
-    "theme-dark": "Dark"
+    "theme-dark": "Dark",
+    "theme-selector-cookie-notice": "* This choice will be stored in a cookie."
   }
 }

@@ -94,7 +94,7 @@ if ($css_critique_methode == 'push') {
 <html data-version="<?=version(__DIR__)?>"
       data-http-lang="<?=httpLanguage()?>"
       lang="<?=httpLanguage()?>"
-      data-theme="<?=$_COOKIE['theme']?>">
+      data-theme="<?=$_COOKIE['theme'] ?? 'auto'?>">
 
   <head>
     <meta charset="utf-8">

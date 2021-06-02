@@ -13,4 +13,12 @@ export default class Cookie extends DefCookie {
   constructor(name, value, maxAge = null) {
     super(name, value, '/', maxAge);
   }
+
+  static consent(bool) {
+    super.consent('/', bool);
+  }
+
+  static delete(name) {
+    super.delete('/', name);
+  }
 }
