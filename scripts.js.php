@@ -43,6 +43,9 @@ document.addEventListener('DOMContentLoaded', async event => {
   // Personnalisation du theme-selector
   document.querySelector('theme-selector .selector-title').classList.add('s5');
   document.querySelector('theme-selector .selector-cookie-notice').classList.add('s8');
+  const arrow = document.createElement('div');
+  arrow.classList.add('selector-arrow');
+  document.querySelector('theme-selector .selector').appendChild(arrow);
 
   Navigation.init();
   await Traduction.initLanguageButtons();

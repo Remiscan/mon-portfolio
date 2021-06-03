@@ -357,10 +357,6 @@ footer {
       [text-zone-start] min(calc(100% - 2.4rem), var(--text-zone-width)) [text-zone-end]
       1fr [partial-bleed-end quasi-full-bleed-end] 1.2rem [full-bleed-end];
   }
-
-  theme-selector>.selector {
-    right: 0;
-  }
 }
 
 header {
@@ -988,7 +984,7 @@ theme-selector>.selector {
               0 0 0 2px var(--bg-color);
   margin-bottom: .6rem;
   border-radius: .3rem;
-  overflow: hidden;
+  /*overflow: hidden;*/
   transform: translateY(.2rem);
   transition: opacity .2s ease,
               transform .2s ease;
@@ -996,6 +992,45 @@ theme-selector>.selector {
 
 theme-selector[open="true"]>.selector {
   transform: translateY(0);
+}
+
+theme-selector>.selector>.selector-arrow {
+  position: absolute;
+  top: 100%;
+  --arrow-size: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(1.5 * var(--arrow-size));
+  height: calc(.75 * var(--arrow-size));
+  overflow: hidden;
+  display: grid;
+}
+
+theme-selector>.selector>.selector-arrow::after {
+  content: '';
+  display: block;
+  transform: translateY(-2px) rotate(45deg);
+  width: var(--arrow-size);
+  height: var(--arrow-size);
+  border: 1px solid var(--link-color);
+  position: absolute;
+  align-self: end;
+  justify-self: center;
+  background-color: var(--bg-color);
+  z-index: 2;
+}
+
+@media (max-width: 80rem) {
+  theme-selector>.selector {
+    right: 0;
+    border-radius: .2rem;
+  }
+
+  theme-selector>.selector>.selector-arrow {
+    left: unset;
+    right: calc(.5 * 1.5rem);
+    transform: translateX(50%);
+  }
 }
 
 input[type="radio"] {
