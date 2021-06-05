@@ -28,7 +28,7 @@ function agepro() {
 
 
 
-$lang = $_COOKIE['lang'] ?? httpLanguage();
+$lang = $_COOKIE['lang'] ?? httpLanguage() ?? 'en';
 $Textes = new Textes('mon-portfolio', $lang);
 
 // Gestion de l'URL demandée et adaptation de la page
