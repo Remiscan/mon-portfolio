@@ -28,7 +28,8 @@ function agepro() {
 
 
 
-$Textes = new Textes('mon-portfolio');
+$lang = $_COOKIE['lang'] ?? httpLanguage();
+$Textes = new Textes('mon-portfolio', $lang);
 
 // Gestion de l'URL demandée et adaptation de la page
 
@@ -93,7 +94,7 @@ if ($css_critique_methode == 'push') {
 <!doctype html>
 <html data-version="<?=version(__DIR__)?>"
       data-http-lang="<?=httpLanguage()?>"
-      lang="<?=httpLanguage()?>"
+      lang="<?=$lang?>"
       data-theme="<?=$_COOKIE['theme'] ?? 'auto'?>">
 
   <head>

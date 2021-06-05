@@ -10,12 +10,12 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 export default class Cookie extends DefCookie {
-  constructor(name, value, maxAge = null) {
-    super(name, value, '/', maxAge);
+  constructor(name, value, maxAge = null, consent = false) {
+    super(name, value, '/', maxAge, consent);
   }
 
-  static consent(bool) {
-    super.consent('/', bool);
+  static consent(bool, name = null) {
+    super.consent('/', bool, name);
   }
 
   static delete(name) {

@@ -24,6 +24,14 @@ window.addEventListener('themechange', event => {
 
 
 
+/////////////////////////////////
+// Gère les changements de langue
+window.addEventListener('translate', event => {
+  //new Cookie('lang', event.detail.lang, null, true);
+});
+
+
+
 ////////////////////////////////////////////////////////////////////
 // Gère les appuis sur les boutons précédent / suivant du navigateur
 window.addEventListener('popstate', event => {
