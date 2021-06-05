@@ -1101,7 +1101,7 @@ theme-selector>.selector>label>.theme-cookie-star {
 
 theme-selector .selector-cookie-notice {
   color: var(--secondary-color);
-  padding: .3rem .6rem .6rem;
+  padding: .6rem;
   hyphens: auto;
 }
 
