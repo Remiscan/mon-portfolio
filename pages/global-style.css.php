@@ -274,6 +274,14 @@ a:not(.lien-interne):focus {
   color: var(--bright-link-color);
 }
 
+.grand-apercu-projet-lien:active .lien-interne,
+.apercu-projet:active .lien-interne,
+.lien-interne:active,
+a:active {
+  color: var(--color, var(--link-color));
+  border-bottom-color: var(--text-color);
+}
+
 
 
 
