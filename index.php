@@ -92,9 +92,8 @@ if ($css_critique_methode == 'push') {
 }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>"
-      data-http-lang="<?=httpLanguage()?>"
-      lang="<?=$lang?>"
+<html lang="<?=$lang?>"
+      data-version="<?=version(__DIR__)?>"
       data-theme="<?=$_COOKIE['theme'] ?? 'auto'?>">
 
   <head>

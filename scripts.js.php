@@ -26,8 +26,8 @@ window.addEventListener('themechange', event => {
 
 /////////////////////////////////
 // Gère les changements de langue
-window.addEventListener('translate', event => {
-  //new Cookie('lang', event.detail.lang, null, true);
+window.addEventListener('langchange', event => {
+  new Cookie('lang', event.detail.lang);
 });
 
 
