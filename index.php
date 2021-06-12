@@ -28,7 +28,8 @@ function agepro() {
 
 
 
-$lang = $_COOKIE['lang'] ?? httpLanguage() ?? 'en';
+$urlLang = substr(htmlspecialchars($_GET['lang']), 0, 2);
+$lang = $urlLang ?? $_COOKIE['lang'] ?? httpLanguage() ?? 'en';
 $Textes = new Textes('mon-portfolio', $lang);
 
 // Gestion de l'URL demandée et adaptation de la page
@@ -107,7 +108,7 @@ if ($css_critique_methode == 'push') {
     <meta property="og:url" content="https://remiscan.fr">
     <meta property="og:image" content="https://remiscan.fr/mon-portfolio/images/mosaique-preview.png">
 
-    <meta name="viewport" content="initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="theme-color" content="">
     <meta name="color-scheme" content="light dark">
     
