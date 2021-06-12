@@ -18,7 +18,8 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 window.addEventListener('themechange', event => {
   // Set meta theme-color here
 
-  if (event.detail.theme != 'auto') new Cookie('theme', event.detail.theme);
+  //if (event.detail.theme != 'auto') new Cookie('theme', event.detail.theme);
+  if (event.detail.theme != 'auto') Cookie.submit('theme', event.detail.theme);
   else                              Cookie.delete('theme');
 });
 
@@ -27,7 +28,8 @@ window.addEventListener('themechange', event => {
 /////////////////////////////////
 // Gère les changements de langue
 window.addEventListener('langchange', event => {
-  new Cookie('lang', event.detail.lang);
+  //new Cookie('lang', event.detail.lang);
+  Cookie.submit('lang', event.detail.lang);
 });
 
 

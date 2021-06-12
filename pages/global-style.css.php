@@ -985,13 +985,14 @@ theme-selector {
   --secondary-color: var(--link-color);
 }
 
+cookie-consent-mini,
 theme-selector>.selector {
   min-width: 8rem;
   background-color: var(--bg-color);
   box-shadow: 0 0 0 1px var(--link-color),
               0 0 0 2px var(--bg-color);
   margin-bottom: .6rem;
-  border-radius: .3rem;
+  border-radius: .2rem;
   /*overflow: hidden;*/
   transform: translateY(.2rem);
   transition: opacity .2s ease,
@@ -1031,7 +1032,6 @@ theme-selector>.selector>.selector-arrow::after {
 @media (max-width: 80rem) {
   theme-selector>.selector {
     right: 0;
-    border-radius: .2rem;
   }
 
   theme-selector>.selector>.selector-arrow {
@@ -1111,6 +1111,25 @@ theme-selector .selector-cookie-notice {
   color: var(--secondary-color);
   padding: .6rem;
   hyphens: auto;
+}
+
+cookie-consent-mini {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  align-items: center;
+  padding: .6rem;
+  gap: .3rem;
+  z-index: 100;
+  transform: translate(-50%, .2rem);
+}
+
+cookie-consent-mini[open="true"] {
+  transform: translate(-50%, 0);
+}
+
+cookie-consent-mini>.cookie-consent-mini-info {
+  color: var(--link-color);
 }
 
 
