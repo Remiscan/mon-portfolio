@@ -1117,6 +1117,8 @@ cookie-consent-mini {
   position: fixed;
   bottom: 0;
   left: 50%;
+  width: max-content;
+  max-width: calc(100vw - 2.4rem);
   align-items: center;
   padding: .6rem;
   gap: .3rem;
