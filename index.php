@@ -371,6 +371,8 @@ if ($css_critique_methode == 'push') {
         <theme-selector icon="reverse" position="top"></theme-selector>
       </div>
     </footer>
+
+    <div class="cookie-consent-container"></div>
     <!-- FIN : CONTENU DU SITE -->
 
     <!-- SCRIPTS -->

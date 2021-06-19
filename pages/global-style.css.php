@@ -985,7 +985,6 @@ theme-selector {
   --secondary-color: var(--link-color);
 }
 
-cookie-consent-mini,
 theme-selector>.selector {
   min-width: 8rem;
   background-color: var(--bg-color);
@@ -1113,25 +1112,49 @@ theme-selector .selector-cookie-notice {
   hyphens: auto;
 }
 
-cookie-consent-mini {
+.cookie-consent-container {
   position: fixed;
   bottom: 0;
   left: 50%;
+  transform: translateX(-50%);
   width: max-content;
   max-width: calc(100vw - 2.4rem);
   align-items: center;
-  padding: .6rem;
-  gap: .3rem;
   z-index: 100;
-  transform: translate(-50%, .2rem);
+
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+cookie-consent-mini {
+  min-width: 8rem;
+  background-color: var(--bg-color);
+  margin-bottom: .6rem;
+  
+  transform: translateY(.2rem);
+  transition: opacity .2s ease,
+              transform .2s ease;
 }
 
 cookie-consent-mini[open="true"] {
-  transform: translate(-50%, 0);
+  transform: translateY(0);
+}
+
+cookie-consent-mini>.cookie-consent-mini-question-container {
+  gap: .3rem;
+  padding: .45rem .9rem;
+  border-radius: .2rem;
+  border: 1px solid var(--link-color);
+  box-shadow: 0 0 0 1px var(--bg-color);
 }
 
 cookie-consent-mini>.cookie-consent-mini-info {
+  display: none;
   color: var(--link-color);
+  padding: .15rem .6rem .15rem;
+  border-radius: 0 0 .2rem .2rem;
+  box-shadow: -1px 1px 0 0 var(--secondary-text-color),
+              1px 1px 0 0 var(--secondary-text-color);
 }
 
 
