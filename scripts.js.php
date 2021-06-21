@@ -48,7 +48,7 @@ window.addEventListener('popstate', event => {
 document.addEventListener('DOMContentLoaded', async event => {
   const section = document.body.dataset.section;
   const url = (section == 'accueil') ? '' : section;
-  history.replaceState({ section }, '', `/${url}`);
+  history.replaceState({ section }, '', `/${url}${window.location.search}`);
 
   // Personnalisation du theme-selector
   document.querySelector('theme-selector .selector-title').classList.add('s5');

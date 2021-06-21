@@ -87,7 +87,7 @@ const Navigation = {
     // On applique le style, le titre et l'url de la nouvelle section
     document.title = getTitrePage(section);
     const url = (section == 'accueil') ? '' : section;
-    if (history) window.history.pushState({ section }, '', `/${url}`);
+    if (history) window.history.pushState({ section }, '', `/${url}${window.location.search}`);
     document.body.dataset.section = section;
 
     // 2e animation : transition colorée
