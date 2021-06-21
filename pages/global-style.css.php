@@ -965,7 +965,7 @@ echo buildThemesStylesheet($body); ?>*/
   }
 }
 
-.bouton-langage:disabled {
+.bouton-langage[disabled] {
   opacity: .5;
   filter: grayscale(1);
   pointer-events: none;
@@ -973,7 +973,7 @@ echo buildThemesStylesheet($body); ?>*/
 }
 
 @media (max-width: 42rem) {
-  .bouton-langage:disabled {
+  .bouton-langage[disabled] {
     display: none;
   }
 }
