@@ -370,7 +370,6 @@ footer {
 header {
   grid-row: 1;
   grid-column: full-bleed-start / full-bleed-end;
-  padding: .6rem 0;
 }
 
 main {
@@ -418,15 +417,34 @@ nav {
   grid-row: 1;
   /*justify-self: start;*/
   align-self: center;
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-rows: .6rem auto .6rem;
+  grid-template-columns: auto 1fr auto;
   margin: auto 0;
 }
 
+nav>ul {
+  grid-row: 2;
+  grid-column: -2;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+nav>ul>li {
+  display: inline;
+}
+
 .logo {
+  grid-row: 1 / -1;
+  grid-column: 1;
   font-size: 1.5rem;
   border-bottom: none;
-  margin-left: 0;
+  margin: 0;
 }
 
 .logo>strong::before {
@@ -439,7 +457,7 @@ footer .lien-interne {
   margin: auto 0;
 }
 
-nav,
+nav>ul,
 .liens-bottom {
   gap: 1.65em;
 }
@@ -469,15 +487,11 @@ nav,
     content: "rémi";
   }
 
-  nav,
+  nav>ul,
   .liens-bottom {
     gap: 1em;
     width: 100%;
     justify-content: flex-end;
-  }
-
-  nav>.spacer {
-    display: block;
   }
 }
 
