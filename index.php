@@ -204,17 +204,23 @@ if ($css_critique_methode == 'push') {
               class="lien-interne lien-nav <?=($start_section == 'bio') ? 'on' : ''?>" style="--hue: 350">
               <?=$Textes->getString('nav-bio')?>
             </a>
-          </li><li>
+          </li>
+          <li>
             <a href="/projets" data-section="projets" data-string="nav-projets"
               class="lien-interne lien-nav <?=($start_section == 'projets') ? 'on' : ''?>" style="--hue: 230">
               <?=$Textes->getString('nav-projets')?>
             </a>
-          </li><li>
+          </li>
+          <?php $conditionBlog = false;
+          if ($conditionBlog) { ?>
+          <li>
             <a href="/articles" data-section="articles" data-string="nav-articles"
               class="lien-interne lien-nav <?=($start_section == 'articles') ? 'on' : ''?>" style="--hue: 20">
               <?=$Textes->getString('nav-articles')?>
             </a>
-          </li><li>
+          </li>
+          <?php } ?>
+          <li>
             <a href="/contact" data-section="contact" data-string="nav-contact"
               class="lien-interne lien-nav <?=($start_section == 'contact') ? 'on' : ''?>" style="--hue: 100">
               <?=$Textes->getString('nav-contact')?>
