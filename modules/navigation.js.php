@@ -27,6 +27,7 @@ const Navigation = {
     }
   },
 
+
   *go(section, history = true) {
     if (document.body.dataset.section == section) return;
     const styles = getComputedStyle(document.documentElement);
@@ -86,8 +87,7 @@ const Navigation = {
 
     // On applique le style, le titre et l'url de la nouvelle section
     document.title = getTitrePage(section);
-    const url = (section == 'accueil') ? '' : section;
-    if (history) window.history.pushState({ section }, '', `/${url}${window.location.search}`);
+    if (history) window.history.pushState({ section }, '', Navigation.getUrl(section));
     document.body.dataset.section = section;
 
     // 2e animation : transition colorée
@@ -107,6 +107,7 @@ const Navigation = {
     // Animations terminées
     for (const a of [anim1, anim2, anim3]) { a.cancel(); }
   },
+
 
   async changeCouleur(couleur, reversed = false) {
     // Détecte la complexité de l'animation
@@ -136,6 +137,14 @@ const Navigation = {
     });
     await wait(animation);
     return animation;
+  },
+
+
+  getUrl(section) {
+    const url = (section == 'accueil') ? '' : section;
+    const suffix = new URLSearchParams(window.location.search);
+    if (!document.documentElement.dataset.urlLang) suffix.delete('lang');
+    return `/${url}${suffix.toString() ? `?${suffix.toString()}` : ''}`;
   }
 }
 

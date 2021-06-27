@@ -29,7 +29,8 @@ function agepro() {
 
 
 $urlLang = substr(htmlspecialchars($_GET['lang']), 0, 2);
-$lang = $urlLang ?: $_COOKIE['lang'] ?: httpLanguage() ?: 'en';
+$userLang = $_COOKIE['lang'] ?: httpLanguage() ?: 'en';
+$lang = $urlLang ?: $userLang;
 $Textes = new Textes('mon-portfolio', $lang);
 
 // Gestion de l'URL demandée et adaptation de la page
@@ -94,6 +95,7 @@ if ($css_critique_methode == 'push') {
 ?>
 <!doctype html>
 <html lang="<?=$lang?>"
+      <?php if ($urlLang && $urlLang != $userLang) { ?>data-url-lang="<?=$urlLang?>"<?php } ?>
       data-version="<?=version(__DIR__)?>"
       data-theme="<?=$_COOKIE['theme'] ?? 'auto'?>">
 
