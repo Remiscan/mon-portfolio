@@ -240,6 +240,7 @@ button {
 
 /* Liens */
 
+.bouton,
 .lien-interne,
 a {
   padding: .25em 1px;
@@ -247,12 +248,15 @@ a {
   font-weight: 500;
   text-decoration: none;
   color: var(--link-color);
-  border-bottom: 1px solid var(--link-underline-color);
+  border-bottom: 1px solid;
+  border-color: var(--link-underline-color);
   transition: all .2s var(--easing-standard);
   cursor: pointer;
   white-space: nowrap;
 }
 
+.bouton:hover,
+.bouton:focus,
 .grand-apercu-projet-lien:hover .lien-interne,
 .grand-apercu-projet-lien:focus .lien-interne,
 .apercu-projet:hover .lien-interne,
@@ -262,7 +266,7 @@ a {
 a:hover,
 a:focus {
   color: var(--text-color);
-  border-bottom-color: var(--color, var(--link-color));
+  border-color: var(--color, var(--link-color));
 }
 
 a:not(.lien-interne) {
@@ -274,12 +278,24 @@ a:not(.lien-interne):focus {
   color: var(--bright-link-color);
 }
 
+.bouton:active,
 .grand-apercu-projet-lien:active .lien-interne,
 .apercu-projet:active .lien-interne,
 .lien-interne:active,
 a:active {
   color: var(--color, var(--link-color));
-  border-bottom-color: var(--text-color);
+  border-color: var(--text-color);
+}
+
+.bouton {
+  border-width: 1px;
+  border-style: solid;
+  border-radius: .3rem;
+  padding: .45rem .6rem;
+}
+
+.bouton.small {
+  padding: .225rem .3rem;
 }
 
 
@@ -556,8 +572,6 @@ body[data-section="contact"] #contact {
   grid-template-columns: auto var(--arrow-width);
   gap: var(--gap);
   position: relative;
-  margin-top: .5em;
-  padding: .15em 1px;
 }
 
 .lien-fleche::after {
@@ -598,6 +612,10 @@ echo buildThemesStylesheet($body); ?>*/
   50% { transform: translateX(0); }
   75% { transform: translateX(calc(-1 * var(--step))); }
   100% { transform: translateX(0); }
+}
+
+.accueil-moi>.lien-fleche {
+  margin-top: .5em;
 }
 
 /* Mini-bio */
