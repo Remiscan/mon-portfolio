@@ -239,7 +239,7 @@ if ($css_critique_methode == 'push') {
         <section class="accueil-moi s1">
           <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
           <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
-          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
+          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5 bouton" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
         <!-- Mini-articles -->
