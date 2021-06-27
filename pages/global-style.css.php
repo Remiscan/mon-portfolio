@@ -603,7 +603,8 @@ echo buildThemesStylesheet($body); ?>*/
 .apercu-projet:focus .lien-fleche::after,
 .lien-fleche:hover::after,
 .lien-fleche:focus::after {
-  --arrow-color: var(--link-color);
+  --arrow-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1 -2 22 22'%3E%3Cpath d='M 9 6 L 15 12 L 9 18' stroke='plum' stroke-linecap='round' stroke-width='4' fill='transparent'/%3E%3C/svg%3E");
+  transform: translateX(.2ch);
 }
 
 @keyframes back-and-forth {
