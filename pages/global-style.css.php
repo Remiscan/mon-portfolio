@@ -290,7 +290,7 @@ a:active {
 .bouton {
   border-width: 1px;
   border-style: solid;
-  border-radius: .3rem;
+  border-radius: .2rem;
   padding: .45rem .6rem;
 }
 
@@ -605,6 +605,12 @@ echo buildThemesStylesheet($body); ?>*/
 .lien-fleche:focus::after {
   --arrow-dark: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='1 -2 22 22'%3E%3Cpath d='M 9 6 L 15 12 L 9 18' stroke='plum' stroke-linecap='round' stroke-width='4' fill='transparent'/%3E%3C/svg%3E");
   transform: translateX(.2ch);
+}
+
+.grand-apercu-projet-lien:active .lien-fleche::after,
+.apercu-projet:active .lien-fleche::after,
+.lien-fleche:active::after {
+  transform: translateX(0);
 }
 
 @keyframes back-and-forth {
