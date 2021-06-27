@@ -38,7 +38,7 @@ const Navigation = {
     // Active le bon lien
     for (const lien of [...document.querySelectorAll(`a[data-section]`)]) {
       if (lien.dataset.section == section) {
-        lien.classList.add('on');
+        lien.setAttribute('aria-current', 'page');
         lien.tabIndex = -1;
         lien.style.setProperty('--next-link-color', nextLinkColor);
 
@@ -49,7 +49,7 @@ const Navigation = {
           lien.removeAttribute('data-string');
         }
       } else {
-        lien.classList.remove('on');
+        lien.removeAttribute('aria-current');
         lien.tabIndex = 0;
         lien.style.setProperty('--next-link-color', '');
 

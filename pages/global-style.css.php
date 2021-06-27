@@ -462,14 +462,14 @@ nav>ul,
   gap: 1.65em;
 }
 
-.lien-nav[data-section].on,
-.lien-nav[data-section].on:hover,
+.lien-nav[data-section][aria-current],
+.lien-nav[data-section][aria-current]:hover,
 .lien-nav[data-section]:active {
   color: var(--next-link-color, var(--link-color));
   border-bottom-color: var(--text-color);
 }
 
-.lien-nav[data-section].on {
+.lien-nav[data-section][aria-current] {
   pointer-events: none;
 }
 
