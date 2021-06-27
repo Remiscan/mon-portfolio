@@ -51,15 +51,17 @@ document.addEventListener('DOMContentLoaded', async event => {
   history.replaceState({ section }, '', `/${url}${window.location.search}`);
 
   // Personnalisation du theme-selector
-  document.querySelector('theme-selector .selector-title').classList.add('s5');
-  document.querySelector('theme-selector .selector-cookie-notice').classList.add('s8');
+  const themeSelector = document.querySelector('theme-selector');
+  themeSelector.querySelector('.selector-title').classList.add('s5');
+  themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
   const arrow = document.createElement('div');
   arrow.classList.add('selector-arrow');
-  document.querySelector('theme-selector .selector').appendChild(arrow);
+  themeSelector.querySelector('.selector').appendChild(arrow);
+  //await Traduction.traduire(themeSelector);
 
   Navigation.init();
-  await Traduction.initLanguageButtons();
-  await Traduction.traduire();
+  //await Traduction.initLanguageButtons();
+  await Traduction.traduire(themeSelector);
   
   return;
 });

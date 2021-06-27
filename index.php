@@ -29,7 +29,7 @@ function agepro() {
 
 
 $urlLang = substr(htmlspecialchars($_GET['lang']), 0, 2);
-$lang = $urlLang ?? $_COOKIE['lang'] ?? httpLanguage() ?? 'en';
+$lang = $urlLang ?: $_COOKIE['lang'] ?: httpLanguage() ?: 'en';
 $Textes = new Textes('mon-portfolio', $lang);
 
 // Gestion de l'URL demandée et adaptation de la page
@@ -377,8 +377,8 @@ if ($css_critique_methode == 'push') {
         
         <div class="spacer"></div>
 
-        <a href="?lang=fr" class="lien-interne bouton-langage" data-lang="fr" disabled tabindex="-1">Français</a>
-        <a href="?lang=en" class="lien-interne bouton-langage" data-lang="en" disabled tabindex="-1">English</a>
+        <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
+        <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
         <theme-selector icon="reverse" position="top"></theme-selector>
       </div>
     </footer>
