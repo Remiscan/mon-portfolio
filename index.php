@@ -379,7 +379,7 @@ if ($css_critique_methode == 'push') {
 
         <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
         <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
-        <theme-selector icon="reverse" position="top"></theme-selector>
+        <theme-selector position="top"></theme-selector>
       </div>
     </footer>
 
