@@ -11,7 +11,7 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 
-const Cookie = new CookieMaker('/');
+const Cookie = new CookieMaker('/', ['lang', 'theme']);
 export default Cookie;
 
 class CookieConsentMini extends DefCookieConsentMini {
