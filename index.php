@@ -208,7 +208,7 @@ if ($css_critique_methode == 'push') {
             </a>
           </li>
           <li>
-            <a href="/projets" data-section="projets" data-string="nav-projets"
+            <a href="/<?=($lang == 'fr' ? 'projets' : 'projects')?>" data-section="projets" data-string="nav-projets"
               class="lien-interne lien-nav <?=($start_section == 'projets') ? 'on' : ''?>" style="--hue: 230">
               <?=$Textes->getString('nav-projets')?>
             </a>

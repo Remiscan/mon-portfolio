@@ -141,7 +141,13 @@ const Navigation = {
 
 
   getUrl(section) {
-    const url = (section == 'accueil') ? '' : section;
+    const sectionUrls = {
+      bio: { fr: 'bio', en: 'bio' },
+      projets: { fr: 'projets', en: 'projects' },
+      blog: { fr: 'blog', en: 'blog' },
+      contact: { fr: 'contact', en: 'contact' }
+    };
+    const url = (section == 'accueil') ? '' : sectionUrls[section][Traduction.language];
     const suffix = new URLSearchParams(window.location.search);
     if (!document.documentElement.dataset.urlLang) suffix.delete('lang');
     return `/${url}${suffix.toString() ? `?${suffix.toString()}` : ''}`;
