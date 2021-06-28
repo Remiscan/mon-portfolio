@@ -636,7 +636,6 @@ echo buildThemesStylesheet($body); ?>*/
   display: flex;
   flex-direction: column;
   align-items: start;
-  max-width: 25ch;
   color: var(--secondary-text-color);
   font-weight: 400;
 }
