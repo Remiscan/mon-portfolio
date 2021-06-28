@@ -24,6 +24,9 @@
     hsl(300, 100%, 80%) calc(5 * 100% / var(--main-gradient-bands)),
     hsl(0, 100%, 80%) calc(6 * 100% / var(--main-gradient-bands))
   );
+
+  /* Common measurements */
+  --border-radius: .2rem;
 }
 
 /*<?php ob_start();?>*/
@@ -290,7 +293,7 @@ a:active {
 .bouton {
   border-width: 1px;
   border-style: solid;
-  border-radius: .2rem;
+  border-radius: var(--border-radius);
   padding: .45rem .6rem;
 }
 
@@ -1030,7 +1033,7 @@ theme-selector>.selector {
   box-shadow: 0 0 0 1px var(--link-color),
               0 0 0 2px var(--bg-color);
   margin-bottom: .6rem;
-  border-radius: .2rem;
+  border-radius: var(--border-radius);
   /*overflow: hidden;*/
   transform: translateY(.2rem);
   transition: opacity .2s ease,
@@ -1182,7 +1185,7 @@ cookie-consent-mini[open="true"] {
 cookie-consent-mini>.cookie-consent-mini-question-container {
   gap: .3rem;
   padding: .45rem .9rem;
-  border-radius: .2rem;
+  border-radius: var(--border-radius);
   border: 1px solid var(--link-color);
   box-shadow: 0 0 0 1px var(--bg-color);
 }
@@ -1191,7 +1194,7 @@ cookie-consent-mini>.cookie-consent-mini-info {
   display: none;
   color: var(--link-color);
   padding: .15rem .6rem .15rem;
-  border-radius: 0 0 .2rem .2rem;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
   box-shadow: -1px 1px 0 0 var(--secondary-text-color),
               1px 1px 0 0 var(--secondary-text-color);
 }
