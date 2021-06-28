@@ -12,7 +12,7 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 
 
 
-const sections = ['accueil', 'bio', 'projets', 'articles', 'contact'];
+const sections = ['accueil', 'bio', 'projets', 'blog', 'contact'];
 
 
 

@@ -11,7 +11,7 @@ $sectionsData = array(
   'projets' => array(
     'primary-hue' => 230
   ),
-  'articles' => array(
+  'blog' => array(
     'primary-hue' => 10
   ),
   'contact' => array(

@@ -40,7 +40,7 @@ $start_section = 'accueil';
 if (isset($_GET['onav'])) {
   $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
 
-  if (in_array($onav, array('bio', 'projets', 'articles', 'contact')))
+  if (in_array($onav, array('bio', 'projets', 'blog', 'contact')))
     $start_section = $onav;
 }
 $isAccueil = ($start_section == 'accueil');
@@ -57,7 +57,7 @@ if (!$isAccueil) {
     case 'projets':
       $titre_page = $Textes->getString('nav-projets');
       break;
-    case 'articles':
+    case 'blog':
       $titre_page = $Textes->getString('nav-articles');
       break;
     case 'contact':

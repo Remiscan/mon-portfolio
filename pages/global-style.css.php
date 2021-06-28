@@ -529,7 +529,7 @@ article {
 body[data-section="accueil"] #accueil,
 body[data-section="bio"] #bio,
 body[data-section="projets"] #projets,
-body[data-section="articles"] #articles,
+body[data-section="blog"] #articles,
 body[data-section="contact"] #contact {
   display: grid;
 }
