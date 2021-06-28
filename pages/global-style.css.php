@@ -990,19 +990,28 @@ echo buildThemesStylesheet($body); ?>*/
 }
 
 @media (max-width: 42rem) {
-  .lien-social {
+  /*.lien-social {
     gap: 0;
     grid-template-columns: 2.5ch 0;
-    /*border: 0;*/
+    border: 0;
     padding: .6em .6em .25em;
     margin-bottom: -.6em;
   }
 
   .lien-social>svg {
     margin-top: 0;
+    fill: var(--link-color);
   }
 
+  .lien-social:first-of-type {
+    margin-left: -.6em;
+  }
+  
   .social-nom {
+    display: none;
+  }*/
+
+  .lien-social:not(:nth-child(1)):not(:nth-child(2)) {
     display: none;
   }
 }
