@@ -460,10 +460,18 @@ nav>ul>li {
   display: inline;
 }
 
-.logo {
+nav a[data-section="accueil"] {
   grid-row: 1 / -1;
   grid-column: 1;
-  
+
+  border: none;
+  margin-left: -9%;
+  margin-right: -9%;
+
+  font-size: 0;
+}
+
+.logo {  
   display: block;
   --width: 6.2rem;
   width: var(--width);
@@ -474,8 +482,6 @@ nav>ul>li {
   -webkit-mask-size: 100% 100%;
   --mask: url('/_common/components/remiscan-logo/logo--<?=version(dirname(__DIR__, 2), "_common/components/remiscan-logo/logo.svg")?>.svg');
 
-  margin-left: -9%;
-  margin-right: -9%;
   position: relative;
 }
 
@@ -499,13 +505,6 @@ body[data-section="accueil"] .logo::after {
 body:not([data-section="accueil"]) .logo::after {
   animation-play-state: paused;
   opacity: 1;
-}
-
-body:not([data-section="accueil"]) .logo:focus::after {
-  background-color: white;
-}
-body:not([data-section="accueil"]) .logo:focus:not(:focus-visible)::after {
-  background-color: var(--previous-link-color);
 }
 
 nav>.lien-interne,
