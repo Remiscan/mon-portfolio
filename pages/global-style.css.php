@@ -501,6 +501,13 @@ body:not([data-section="accueil"]) .logo::after {
   opacity: 1;
 }
 
+body:not([data-section="accueil"]) .logo:focus::after {
+  background-color: white;
+}
+body:not([data-section="accueil"]) .logo:focus:not(:focus-visible)::after {
+  background-color: var(--previous-link-color);
+}
+
 nav>.lien-interne,
 footer .lien-interne {
   padding-top: 0;
