@@ -465,8 +465,7 @@ nav a[data-section="accueil"] {
   grid-column: 1;
 
   border: none;
-  margin-left: -9%;
-  margin-right: -9%;
+  margin: .3rem -9%;
 
   font-size: 0;
 }
