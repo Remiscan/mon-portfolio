@@ -196,9 +196,7 @@ if ($css_critique_methode == 'push') {
     <!-- CONTENU DU SITE -->
     <header>
       <nav class="s6">
-        <a href="/" data-section="accueil" class="logo lien-nav">
-          <strong></strong>
-        </a>
+        <a href="/" data-section="accueil" class="rainbow-bg logo lien-nav"></a>
 
         <ul>
           <li>
@@ -229,6 +227,12 @@ if ($css_critique_methode == 'push') {
             </a>
           </li>
         </ul>
+
+        <!--<div class="options s7">
+          <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
+          <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
+          <theme-selector position="bottom"></theme-selector>
+        </div>-->
       </nav>
     </header>
 

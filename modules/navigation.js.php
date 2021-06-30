@@ -33,6 +33,7 @@ const Navigation = {
     const styles = getComputedStyle(document.documentElement);
     const oldSection = document.body.dataset.section;
     const couleur = styles.getPropertyValue(`--${oldSection}-bg-color`);
+    const previousLinkColor = styles.getPropertyValue(`--${oldSection}-link-color`);
     const nextLinkColor = styles.getPropertyValue(`--${section}-link-color`)
                         ||`hsl(${Number(styles.getPropertyValue(`--${section}-primary-hue`)) + 180}, 50%, 80%)`;
 
@@ -41,6 +42,7 @@ const Navigation = {
       if (lien.dataset.section == section) {
         lien.setAttribute('aria-current', 'page');
         lien.tabIndex = -1;
+        lien.style.setProperty('--previous-link-color', previousLinkColor);
         lien.style.setProperty('--next-link-color', nextLinkColor);
 
         if (lien.dataset.section != 'accueil') {

@@ -1,3 +1,5 @@
+/*<?php require_once dirname(__DIR__, 2) . '/_common/php/version.php'; ?>*/
+
 :root {
   /* Animation timing */
   --easing-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
@@ -198,7 +200,7 @@ strong {
 
 .rainbow-bg {
   background-color: var(--text-color);
-  background-image: var(--vivid-gradient);
+  background-image: var(--main-gradient);
   background-size: calc(var(--main-gradient-bands) * 50%) 100%;
   background-position: 0 0;
   background-repeat: repeat;
@@ -438,18 +440,18 @@ nav {
   align-self: center;
   display: grid;
   grid-template-rows: .6rem auto .6rem;
-  grid-template-columns: auto 1fr auto;
+  grid-template-columns: auto 1fr auto 1.65em auto;
+  grid-template-columns: auto 1fr auto 0 auto;
   margin: auto 0;
 }
 
 nav>ul {
   grid-row: 2;
-  grid-column: -2;
+  grid-column: 3;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  gap: .6rem;
-  margin: 0;
+  margin: auto 0;
   padding: 0;
   list-style-type: none;
 }
@@ -461,13 +463,42 @@ nav>ul>li {
 .logo {
   grid-row: 1 / -1;
   grid-column: 1;
-  font-size: 1.5rem;
-  border-bottom: none;
-  margin: 0;
+  
+  display: block;
+  --width: 6.2rem;
+  width: var(--width);
+  height: calc(.5 * var(--width));
+  mask: var(--mask);
+  mask-size: 100% 100%;
+  -webkit-mask: var(--mask);
+  -webkit-mask-size: 100% 100%;
+  --mask: url('/_common/components/remiscan-logo/logo--<?=version(dirname(__DIR__, 2), "_common/components/remiscan-logo/logo.svg")?>.svg');
+
+  margin-left: -9%;
+  margin-right: -9%;
+  position: relative;
 }
 
-.logo>strong::before {
-  content: "remiscan";
+.logo::after {
+  content: '';
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--link-color);
+  opacity: 0;
+  transition: opacity 1s ease;
+}
+
+body[data-section="accueil"] .logo::after {
+  background-color: var(--previous-link-color);
+}
+
+body:not([data-section="accueil"]) .logo::after {
+  animation-play-state: paused;
+  opacity: 1;
 }
 
 nav>.lien-interne,
@@ -476,7 +507,22 @@ footer .lien-interne {
   margin: auto 0;
 }
 
+nav>.options {
+  display: none;
+  grid-row: 2;
+  grid-column: 5;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin: auto 0;
+}
+
+nav>.options>.bouton-langage {
+  display: none;
+}
+
 nav>ul,
+nav>.options,
 .liens-bottom {
   gap: 1.65em;
 }
@@ -502,10 +548,6 @@ nav>ul,
 }*/
 
 @media (max-width: 35rem) {
-  .logo>strong::before {
-    content: "rémi";
-  }
-
   nav>ul,
   .liens-bottom {
     gap: 1em;
@@ -1076,6 +1118,22 @@ theme-selector>.selector>.selector-arrow::after {
   justify-self: center;
   background-color: var(--bg-color);
   z-index: 2;
+}
+
+nav theme-selector>.selector {
+  transform: translateY(-.2rem);
+  margin-bottom: 0;
+  margin-top: .6rem;
+}
+
+nav theme-selector>.selector>.selector-arrow {
+  top: unset;
+  bottom: 100%;
+}
+
+nav theme-selector>.selector>.selector-arrow::after {
+  align-self: start;
+  transform: translateY(2px) rotate(45deg);
 }
 
 @media (max-width: 80rem) {
