@@ -470,6 +470,7 @@ nav a[data-section="accueil"] {
   font-size: 0;
 }
 
+/* <?php $versionLogo = version(dirname(__DIR__, 2), "_common/components/remiscan-logo/logo.svg"); ?> */
 .logo {  
   display: block;
   --width: 6.2rem;
@@ -479,7 +480,7 @@ nav a[data-section="accueil"] {
   mask-size: 100% 100%;
   -webkit-mask: var(--mask);
   -webkit-mask-size: 100% 100%;
-  --mask: url('/_common/components/remiscan-logo/logo--<?=version(dirname(__DIR__, 2), "_common/components/remiscan-logo/logo.svg")?>.svg');
+  --mask: url('/_common/components/remiscan-logo/logo--<?=$versionLogo?>.svg');
 
   position: relative;
 }
