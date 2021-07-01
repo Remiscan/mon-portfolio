@@ -459,6 +459,7 @@ nav>ul {
   list-style-type: none;
   max-width: calc(100vw - 2.4rem - 1.65em - 6.2rem + 1.8rem); /* window - bodyPadding - linkGap - logoWidth + logoNegMargin */
   overflow-x: auto;
+  scrollbar-width: thin;
 }
 
 nav>ul>li {
