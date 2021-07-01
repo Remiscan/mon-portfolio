@@ -198,7 +198,7 @@ if ($css_critique_methode == 'push') {
       <nav class="s6">
         <a href="/" data-section="accueil" class="lien-nav"
            <?=($start_section == 'accueil') ? 'aria-current="page" tabindex="-1"' : ''?>>
-          <span data-string="nav-accueil"></span>
+          <span data-string="nav-accueil"><?=$Textes->getString('nav-accueil')?></span>
           <div class="rainbow-bg logo lien-nav" aria-hidden="true"></div>
         </a>
 
