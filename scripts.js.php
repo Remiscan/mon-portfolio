@@ -38,12 +38,14 @@ const section = document.body.dataset.section;
 history.replaceState({ section }, '', Navigation.getUrl(section));
 
 // Personnalisation du theme-selector
-const themeSelector = document.querySelector('theme-selector');
-themeSelector.querySelector('.selector-title').classList.add('s5');
-themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
-const arrow = document.createElement('div');
-arrow.classList.add('selector-arrow');
-themeSelector.querySelector('.selector').appendChild(arrow);
+const themeSelectors = document.querySelectorAll('theme-selector');
+for (const themeSelector of themeSelectors) {
+  themeSelector.querySelector('.selector-title').classList.add('s5');
+  themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
+  const arrow = document.createElement('div');
+  arrow.classList.add('selector-arrow');
+  themeSelector.querySelector('.selector').appendChild(arrow);
+  Traduction.traduire(themeSelector);
+}
 
 Navigation.init();
-Traduction.traduire(themeSelector);
