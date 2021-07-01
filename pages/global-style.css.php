@@ -1013,13 +1013,16 @@ echo buildThemesStylesheet($body); ?>*/
 .lien-social>svg {
   grid-column: 1;
   fill: var(--text-color);
-  transition: fill .2s var(--easing-standard);
+  stroke: var(--text-color);
+  transition: fill .2s var(--easing-standard),
+              stroke .2s var(--easing-standard);
   margin-top: -2.5ch; /* pour ne pas influencer la position du lien */
 }
 
 .lien-social:hover>svg,
 .lien-social:focus>svg {
   fill: var(--color, var(--link-color));
+  stroke: var(--color, var(--link-color));
 }
 
 .social-nom {
