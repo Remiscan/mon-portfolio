@@ -194,9 +194,6 @@ if ($css_critique_methode == 'push') {
 
     <div id="couleur"></div>
 
-    <!-- DÉFINITION DES SVG -->
-    <?php include __DIR__.'/images/social.svg' ?>
-
     <!-- CONTENU DU SITE -->
     <header>
       <nav class="s6">
@@ -356,6 +353,9 @@ if ($css_critique_methode == 'push') {
     </main>
 
     <footer class="s7">
+      <!-- Définition des SVG -->
+      <?php include __DIR__.'/images/social.svg' ?>
+
       <div class="liens-bottom">
         <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
             class="lien-interne lien-social" style="
