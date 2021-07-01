@@ -215,10 +215,10 @@ if ($css_critique_methode == 'push') {
               <?=$Textes->getString('nav-projets')?>
             </a>
           </li>
-          <?php $conditionBlog = false;
+          <?php $conditionBlog = true;
           if ($conditionBlog) { ?>
           <li>
-            <a href="/articles" data-section="articles" data-string="nav-articles"
+            <a href="/articles" data-section="blog" data-string="nav-articles"
               class="lien-interne lien-nav" <?=($start_section == 'blog') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 20">
               <?=$Textes->getString('nav-articles')?>
             </a>
