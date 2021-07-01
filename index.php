@@ -398,29 +398,5 @@ if ($css_critique_methode == 'push') {
       </div>
     </footer>
 
-    <div class="cookie-consent-container"></div>
-    <!-- FIN : CONTENU DU SITE -->
-
-    <!-- SCRIPTS -->
-    <!-- ▼ Fichiers cache-busted grâce à PHP -->
-    <!--<?php ob_start();?>-->
-
-    <script src="/_common/js/test-support.js" id="test-support-script"></script>
-    <script id="test-support-script-exe">
-      TestSupport.getSupportResults([
-        { name: 'CSS clip-path', priority: 0 },
-        { name: 'CSS custom properties', priority: 1 },
-        { name: 'localStorage', priority: 0 },
-        { name: 'web animations', priority: 0 },
-        { name: 'ES const & let', priority: 1 },
-        { name: 'ES template literals', priority: 1 },
-        { name: 'ES modules', priority: 1 }
-      ]);
-    </script>
-
-    <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
-    echo versionizeFiles($imports, __DIR__); ?>-->
-
   </body>
 </html>
