@@ -1014,6 +1014,7 @@ echo buildThemesStylesheet($body); ?>*/
   grid-column: 1;
   fill: var(--text-color);
   stroke: var(--text-color);
+  stroke-width: 0;
   transition: fill .2s var(--easing-standard),
               stroke .2s var(--easing-standard);
   margin-top: -2.5ch; /* pour ne pas influencer la position du lien */
