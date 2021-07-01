@@ -364,7 +364,7 @@ if ($css_critique_methode == 'push') {
             --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('black', 8, 1)->hsl()?>;
             --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('white', 8, 1)->hsl()?>;
             ">
-          <svg viewBox="20.8 0.8 24.4 24.4"><use href="#codepen" /></svg>
+          <svg viewBox="-0.2 -0.2 24.4 24.4"><use href="#codepen" /></svg>
           <span class="social-nom">CodePen</span>
         </a>
         <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
