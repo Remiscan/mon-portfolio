@@ -519,22 +519,7 @@ footer .lien-interne {
   margin: auto 0;
 }
 
-nav>.options {
-  display: none;
-  grid-row: 2;
-  grid-column: 5;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: auto 0;
-}
-
-nav>.options>.bouton-langage {
-  display: none;
-}
-
 nav>ul,
-nav>.options,
 .liens-bottom {
   gap: 1.65em;
 }
