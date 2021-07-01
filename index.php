@@ -151,7 +151,7 @@ if ($css_critique_methode == 'push') {
     }
     ?>
 
-    <!-- Scripts -->
+    <!-- Scripts principaux -->
     <script defer type="module" src="/mon-portfolio/scripts.js.php"></script>
 
     <!-- Préchargement des modules -->
