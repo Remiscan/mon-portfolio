@@ -120,18 +120,7 @@ if ($css_critique_methode == 'push') {
 
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php ob_start();?>-->
-
-    <!-- Préchargement des textes -->
-    <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
-          id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
-    <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="/_common/js/traduction.js">
-    <link rel="modulepreload" href="/_common/js/cancelable-async.js">
-    <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
-    foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
-    <?php } ?>
-
+    
     <?php if ($css_critique_methode == 'push') { ?>
     
       <!-- CSS critique (pushed) -->
@@ -161,6 +150,21 @@ if ($css_critique_methode == 'push') {
       <?php
     }
     ?>
+
+    <!-- Scripts -->
+    <script defer type="module" src="/mon-portfolio/scripts.js.php"></script>
+
+    <!-- Préchargement des modules -->
+    <link rel="modulepreload" href="/_common/js/traduction.js">
+    <link rel="modulepreload" href="/_common/js/cancelable-async.js">
+    <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
+    foreach($mods as $mod) { ?>
+    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
+    <?php } ?>
+
+    <!-- Préchargement des textes -->
+    <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
+          id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
 
     <!--<?php $imports = ob_get_clean();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
@@ -413,7 +417,6 @@ if ($css_critique_methode == 'push') {
         { name: 'ES modules', priority: 1 }
       ]);
     </script>
-    <script type="module" src="/mon-portfolio/scripts.js.php"></script>
 
     <!--<?php $imports = ob_get_clean();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
