@@ -441,8 +441,9 @@ nav {
   display: grid;
   grid-template-rows: .6rem auto .6rem;
   grid-template-columns: auto 1fr auto 1.65em auto;
-  grid-template-columns: auto 1fr auto 0 auto;
+  grid-template-columns: auto minmax(1.65em, 1fr) auto;
   margin: auto 0;
+  max-width: 100%;
 }
 
 nav>ul {
@@ -450,10 +451,14 @@ nav>ul {
   grid-column: 3;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
-  margin: auto 0;
-  padding: 0;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 0 -.3rem; /* to prevent focus styles clipping */
+  padding: 0 .3rem;
   list-style-type: none;
+  max-width: calc(100vw - 2.4rem - 1.65em - 6.2rem + 1.8rem); /* window - bodyPadding - linkGap - logoWidth + logoNegMargin */
+  overflow-x: auto;
 }
 
 nav>ul>li {
@@ -558,7 +563,6 @@ nav>.options,
   .liens-bottom {
     gap: 1em;
     width: 100%;
-    justify-content: flex-end;
   }
 }
 
