@@ -1,7 +1,6 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php ob_start();?>*/
 
-import { Params } from './modules/Params.js.php';
 import Navigation from './modules/navigation.js.php';
 import { Traduction } from './modules/traduction.js.php';
 import Cookie from './modules/cookies.js.php';
@@ -18,18 +17,8 @@ echo versionizeFiles($imports, __DIR__); ?>*/
 window.addEventListener('themechange', event => {
   // Set meta theme-color here
 
-  //if (event.detail.theme != 'auto') new Cookie('theme', event.detail.theme);
   if (event.detail.theme != 'auto') Cookie.submit('theme', event.detail.theme);
   else                              Cookie.delete('theme');
-});
-
-
-
-/////////////////////////////////
-// Gère les changements de langue
-window.addEventListener('langchange', event => {
-  //new Cookie('lang', event.detail.lang);
-  Cookie.submit('lang', event.detail.lang);
 });
 
 
@@ -45,22 +34,16 @@ window.addEventListener('popstate', event => {
 
 ////////////////////////////////////////////////
 // Gère la mise en place du site à son ouverture
-document.addEventListener('DOMContentLoaded', async event => {
-  const section = document.body.dataset.section;
-  history.replaceState({ section }, '', Navigation.getUrl(section));
+const section = document.body.dataset.section;
+history.replaceState({ section }, '', Navigation.getUrl(section));
 
-  // Personnalisation du theme-selector
-  const themeSelector = document.querySelector('theme-selector');
-  themeSelector.querySelector('.selector-title').classList.add('s5');
-  themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
-  const arrow = document.createElement('div');
-  arrow.classList.add('selector-arrow');
-  themeSelector.querySelector('.selector').appendChild(arrow);
-  //await Traduction.traduire(themeSelector);
+// Personnalisation du theme-selector
+const themeSelector = document.querySelector('theme-selector');
+themeSelector.querySelector('.selector-title').classList.add('s5');
+themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
+const arrow = document.createElement('div');
+arrow.classList.add('selector-arrow');
+themeSelector.querySelector('.selector').appendChild(arrow);
 
-  Navigation.init();
-  //await Traduction.initLanguageButtons();
-  await Traduction.traduire(themeSelector);
-  
-  return;
-});
+Navigation.init();
+Traduction.traduire(themeSelector);
