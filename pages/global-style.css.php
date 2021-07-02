@@ -547,7 +547,7 @@ nav a[data-section="accueil"] {
   height: 100%;
   background-color: var(--link-color);
   opacity: 0;
-  transition: opacity 1s var(--easing-standard), background-color .2s var(--easing-standard);
+  transition: opacity .5s var(--easing-standard), background-color .2s var(--easing-standard);
 }
 
 body[data-section="accueil"] .logo::after {
