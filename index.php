@@ -203,7 +203,7 @@ if ($css_critique_methode == 'push') {
           <div class="rainbow-bg logo lien-nav" aria-hidden="true"></div>
         </a>
 
-        <ul>
+        <ul class="liste-liens">
           <li>
             <a href="/bio" data-section="bio" data-string="nav-bio"
               class="lien-interne lien-nav" <?=($start_section == 'bio') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 350">
@@ -352,48 +352,57 @@ if ($css_critique_methode == 'push') {
     </main>
 
     <footer class="s7">
-      <!-- Définition des SVG -->
       <?php include __DIR__.'/images/social.svg' ?>
 
       <div class="liens-bottom">
-        <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
-            class="lien-interne lien-social" style="
-            --color-dark: <?=(new Couleur('#6e5494'))->improveContrast('black', 8, 1)->hsl()?>;
-            --color-light: <?=(new Couleur('#6e5494'))->improveContrast('white', 8, 1)->hsl()?>;
-            ">
-          <svg viewBox="0 0 16 16"><use href="#github" /></svg>
-          <span class="social-nom">GitHub</span>
-        </a>
-        <a href="https://codepen.io/remiscan" target="_blank" rel="noopener"
-            class="lien-interne lien-social" style="
-            --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('black', 8, 1)->hsl()?>;
-            --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('white', 8, 1)->hsl()?>;
-            ">
-          <svg viewBox="-0.2 -0.2 24.4 24.4"><use href="#codepen" /></svg>
-          <span class="social-nom">CodePen</span>
-        </a>
-        <a href="https://www.linkedin.com/in/remiscan/" target="_blank" rel="noopener"
-            class="lien-interne lien-social" style="
-            --color-dark: <?=(new Couleur('#0077B5'))->improveContrast('black', 8, 1)->hsl()?>;
-            --color-light: <?=(new Couleur('#0077B5'))->improveContrast('white', 8, 1)->hsl()?>;
-            ">
-          <svg viewBox="-2 -2 28 28"><use href="#linkedin" /></svg>
-          <span class="social-nom">LinkedIn</span>
-        </a>
-        <a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
-            class="lien-interne lien-social" style="
-            --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('black', 8, 1)->hsl()?>;
-            --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('white', 8, 1)->hsl()?>;
-            ">
-          <svg viewBox="70 70 260 260"><use href="#twitter" /></svg>
-          <span class="social-nom">Twitter</span>
-        </a>
-        
-        <div class="spacer"></div>
+        <ul class="liste-liens liens-sociaux">
+          <li>
+            <a href="https://github.com/Remiscan"
+                class="lien-interne lien-social" style="
+                --color-dark: <?=(new Couleur('#6e5494'))->improveContrast('black', 8, 1)->hsl()?>;
+                --color-light: <?=(new Couleur('#6e5494'))->improveContrast('white', 8, 1)->hsl()?>;
+                ">
+              <svg viewBox="0 0 16 16"><use href="#github" /></svg>
+              <span class="social-nom">GitHub</span>
+            </a>
+          </li>
+          <li>
+            <a href="https://codepen.io/remiscan"
+                class="lien-interne lien-social" style="
+                --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('black', 8, 1)->hsl()?>;
+                --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('white', 8, 1)->hsl()?>;
+                ">
+              <svg viewBox="-0.2 -0.2 24.4 24.4"><use href="#codepen" /></svg>
+              <span class="social-nom">CodePen</span>
+            </a>
+          </li>
+          <!--<li>
+            <a href="https://www.linkedin.com/in/remiscan/"
+                class="lien-interne lien-social" style="
+                --color-dark: <?=(new Couleur('#0077B5'))->improveContrast('black', 8, 1)->hsl()?>;
+                --color-light: <?=(new Couleur('#0077B5'))->improveContrast('white', 8, 1)->hsl()?>;
+                ">
+              <svg viewBox="-2 -2 28 28"><use href="#linkedin" /></svg>
+              <span class="social-nom">LinkedIn</span>
+            </a>
+          </li>-->
+          <li>
+            <a href="https://twitter.com/Remiscan"
+                class="lien-interne lien-social" style="
+                --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('black', 8, 1)->hsl()?>;
+                --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('white', 8, 1)->hsl()?>;
+                ">
+              <svg viewBox="70 70 260 260"><use href="#twitter" /></svg>
+              <span class="social-nom">Twitter</span>
+            </a>
+          </li>
+        </ul>
 
-        <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
-        <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
-        <theme-selector position="top"></theme-selector>
+        <ul class="liste-liens options">
+          <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
+          <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
+          <theme-selector position="top"></theme-selector>
+        </ul>
       </div>
     </footer>
 
