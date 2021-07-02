@@ -660,7 +660,7 @@ body[data-section="contact"] #contact {
 /* PAGE D'ACCUEIL */
 
 #accueil {
-  grid-template-rows: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);
+  grid-template-rows: minmax(1.2rem, 1fr) [moi] auto 1.2rem minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);
   padding: 0;
 }
 
