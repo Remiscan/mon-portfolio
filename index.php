@@ -248,15 +248,6 @@ if ($css_critique_methode == 'push') {
           <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5 bouton" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
-        <!-- Mini-articles -->
-        <!--<section class="accueil-articles">
-          <div class="section-titre">
-            <h4>Articles récents :</h4>
-            <a href="/articles" data-section="articles" class="lien-fleche h5">Tous mes articles</a>
-            <span class="section-titre-fin"></span>
-          </div>
-        </section>-->
-
         <!-- Mini-projets -->
         <section class="accueil-projets">
           <div class="section-titre">
@@ -343,6 +334,20 @@ if ($css_critique_methode == 'push') {
             }
             ?>
         </section>
+      </article>
+
+      <!-- ---- -->
+      <!-- Blog -->
+      <!-- ---- -->
+      <article id="blog" data-section="blog">
+        <h1 class="article-titre s2">Blog</h1>
+      </article>
+
+      <!-- ------- -->
+      <!-- Contact -->
+      <!-- ------- -->
+      <article id="contact" data-section="contact">
+        <h1 class="article-titre s2">Contact</h1>
       </article>
     </main>
 
