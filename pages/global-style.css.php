@@ -1045,10 +1045,6 @@ echo buildThemesStylesheet($body); ?>*/
   .social-nom {
     display: none;
   }*/
-
-  .lien-social:not(:nth-child(1)):not(:nth-child(2)) {
-    display: none;
-  }
 }
 
 .bouton-langage[disabled] {
