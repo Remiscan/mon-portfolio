@@ -1,3 +1,4 @@
+/*<?php require_once dirname(__DIR__, 2) . '/colori/colori.php'; ?>*/
 /*<?php require_once dirname(__DIR__, 2) . '/_common/php/version.php'; ?>*/
 
 :root {
@@ -31,12 +32,31 @@
   --border-radius: .2rem;
 }
 
+/* <?php function makeGradient($ciel = 90, $ciec = 20) {
+  echo "*"."/\n";
+  $steps = 6;
+  $gradSteps = 5;
+  for ($i = 0; $i < $steps; $i++) {
+    $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * $i) % 360) . ')');
+    $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ')');
+    $gradient = Couleur::gradient($couleur, $nextCouleur, $gradSteps);
+    for ($j = 0; $j < count($gradient); $j++) {
+      if ($i < $steps - 1 && $j == count($gradient) - 1) continue;
+      echo "  " . $gradient[$j]->hsl() . " " . (round(100 * ($i * $steps + $j) * 100 / (($steps + 1) * $gradSteps)) / 100) . "%" . (($i * $j) <= (($steps - 1) * ($gradSteps - 1)) ? ',' : '') . "\n";
+    }
+  }
+  echo '  /'.'*';
+} ?> */
+
 /*<?php ob_start();?>*/
 :root[data-theme="light"] {
   color-scheme: light;
   --text-color: black;
   --link-hover-color: black;
   --inverse-text-color: white;
+  --main-gradient: repeating-linear-gradient(to right,
+    /* <?php makeGradient(75, 30); ?> */
+  );
 }
 
 :root[data-theme="dark"] {
@@ -44,6 +64,9 @@
   --text-color: white;
   --link-hover-color: white;
   --inverse-text-color: black;
+  --main-gradient: repeating-linear-gradient(to right,
+    /* <?php makeGradient(90, 20); ?> */
+  );
 }
 /*<?php $body = ob_get_clean();
 require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
@@ -396,6 +419,7 @@ header {
 main {
   grid-row: 2;
   grid-column: full-bleed-start / full-bleed-end;
+  z-index: 1;
 }
 
 footer {
@@ -551,6 +575,10 @@ footer .lien-interne {
   .liste-liens {
     gap: 1em;
     width: 100%;
+  }
+
+  .logo {  
+    --width: 5rem;
   }
 }
 
