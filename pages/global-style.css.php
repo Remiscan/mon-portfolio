@@ -593,7 +593,7 @@ footer .lien-interne {
   }
 
   .liens-bottom {
-    grid-template-rows: .6rem [first-links] 1.8rem .6rem [last-links] auto .6rem;
+    grid-template-rows: .6rem [first-links] 1.8rem 1.2rem [last-links] auto 1.2rem;
   }
 
   nav a[data-section="accueil"] {
