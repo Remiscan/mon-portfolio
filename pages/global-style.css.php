@@ -32,13 +32,19 @@
   --border-radius: .2rem;
 }
 
-/* <?php function makeGradient($ciel = 90, $ciec = 20) {
+/* <?php function makeGradient($ciel = 90, $ciec = 20, $format = 'hsl') {
   echo "*"."/\n";
   $steps = 6;
   $gradSteps = 5;
   for ($i = 0; $i < $steps; $i++) {
-    $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * $i) % 360) . ')');
-    $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ')');
+    if ($format == 'lch') {
+      $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * $i) % 360) . ')');
+      $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ')');
+    } elseif ($format == 'hsl') {
+      $couleur = (new Couleur('hsl(' . ((20 + (360 / $steps) * $i) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
+      $nextCouleur = (new Couleur('hsl(' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
+    }
+
     $gradient = Couleur::gradient($couleur, $nextCouleur, $gradSteps);
     for ($j = 0; $j < count($gradient); $j++) {
       if ($i < $steps - 1 && $j == count($gradient) - 1) continue;
