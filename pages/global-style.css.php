@@ -32,17 +32,18 @@
   --border-radius: .2rem;
 }
 
-/* <?php function makeGradient($ciel = 90, $ciec = 20, $format = 'hsl') {
+/* <?php function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
   echo "*"."/\n";
   $steps = 6;
   $gradSteps = 5;
+  $startHue = 300;
   for ($i = 0; $i < $steps; $i++) {
     if ($format == 'lch') {
-      $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * $i) % 360) . ')');
-      $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ')');
+      $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . (($startHue + (360 / $steps) * $i) % 360) . ')');
+      $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ')');
     } elseif ($format == 'hsl') {
-      $couleur = (new Couleur('hsl(' . ((20 + (360 / $steps) * $i) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
-      $nextCouleur = (new Couleur('hsl(' . ((20 + (360 / $steps) * ($i + 1)) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
+      $couleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * $i) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
+      $nextCouleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
     }
 
     $gradient = Couleur::gradient($couleur, $nextCouleur, $gradSteps);
@@ -71,7 +72,7 @@
   --link-hover-color: white;
   --inverse-text-color: black;
   --main-gradient: repeating-linear-gradient(to right,
-    /* <?php makeGradient(90, 20); ?> */
+    /* <?php makeGradient(90, 25); ?> */
   );
 }
 /*<?php $body = ob_get_clean();
@@ -544,7 +545,7 @@ nav a[data-section="accueil"] {
   height: 100%;
   background-color: var(--link-color);
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 1s var(--easing-standard), background-color .2s var(--easing-standard);
 }
 
 body[data-section="accueil"] .logo::after {
