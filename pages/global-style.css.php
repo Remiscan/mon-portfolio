@@ -660,7 +660,7 @@ body[data-section="contact"] #contact {
 /* PAGE D'ACCUEIL */
 
 #accueil {
-  grid-template-rows: 1.2rem [moi] auto 1.2rem [projets] auto 1fr;
+  grid-template-rows: minmax(1.2rem, 1fr) [moi] auto minmax(1.2rem, 1fr) [projets] auto minmax(1.2rem, 1fr);
   padding: 0;
 }
 
@@ -921,13 +921,9 @@ echo buildThemesStylesheet($body); ?>*/
 
 /* Mobile */
 
-@media (max-width: 80rem) {
+@media (max-width: 35rem) {
   #accueil {
     grid-template-rows: [moi] auto 1.2rem [articles projets] auto 1fr;
-  }
-
-  .accueil-articles {
-    grid-row: articles;
   }
 }
 
