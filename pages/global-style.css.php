@@ -32,7 +32,8 @@
   --border-radius: .2rem;
 }
 
-/* <?php function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
+/* <?php
+function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
   echo "*"."/\n";
   $steps = 6;
   $gradSteps = 5;
@@ -53,7 +54,8 @@
     }
   }
   echo '  /'.'*';
-} ?> */
+}
+?> */
 
 /*<?php ob_start();?>*/
 :root[data-theme="light"] {
