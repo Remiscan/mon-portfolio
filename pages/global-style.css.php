@@ -220,6 +220,22 @@ h1, h2, h3, h4, h5, h6 {
 .s8 { font-size: calc(1rem / var(--mod-small) / var(--mod-small) / var(--mod-small)) }
 p { font-size: 1rem; line-height: 1.6rem; margin: 0; }
 
+.s6-s2 {
+  font-size: calc(1rem / var(--mod-small));
+}
+.s7-s6 {
+  font-size: calc(1rem / var(--mod-small) / var(--mod-small))
+}
+
+@media (max-width: 35rem) {
+  .s6-s2 {
+    font-size: calc(var(--mod-small) * 1rem)
+  }
+  .s7-s6 {
+    font-size: calc(1rem / var(--mod-small))
+  }
+}
+
 
 
 /* Dégradé arc-en-ciel animé */
@@ -587,7 +603,7 @@ footer .lien-interne {
 
   nav,
   .liens-bottom {
-    grid-template-rows: .6rem [first-links] auto .6rem [last-links] 1.8rem .6rem;
+    grid-template-rows: .6rem [first-links] auto .6rem [last-links] 2rem .6rem;
     grid-template-columns: [first-links last-links] 100%;
     place-items: center;
   }
@@ -1193,6 +1209,11 @@ nav theme-selector>.selector>.selector-arrow::after {
 }
 
 @media (max-width: 35rem) {
+  theme-selector {
+    width: 2rem;
+    height: 2rem;
+  }
+
   theme-selector>.selector {
     right: unset;
   }
