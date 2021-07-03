@@ -220,7 +220,7 @@ h1, h2, h3, h4, h5, h6 {
 .s8 { font-size: calc(1rem / var(--mod-small) / var(--mod-small) / var(--mod-small)) }
 p { font-size: 1rem; line-height: 1.6rem; margin: 0; }
 
-.s6-s2 {
+.s6-s5 {
   font-size: calc(1rem / var(--mod-small));
 }
 .s7-s6 {
@@ -228,8 +228,8 @@ p { font-size: 1rem; line-height: 1.6rem; margin: 0; }
 }
 
 @media (max-width: 35rem) {
-  .s6-s2 {
-    font-size: calc(var(--mod-small) * 1rem)
+  .s6-s5 {
+    font-size: calc(1rem)
   }
   .s7-s6 {
     font-size: calc(1rem / var(--mod-small))
