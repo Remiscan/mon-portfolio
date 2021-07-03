@@ -246,6 +246,7 @@ strong {
   color: var(--text-color);
 }
 
+.lien-nav[data-section]:not([data-section="accueil"])::after,
 .rainbow-bg {
   background-color: var(--text-color);
   background-image: var(--main-gradient);
@@ -585,6 +586,10 @@ footer .lien-interne {
   margin: auto 0;
 }
 
+.lien-nav {
+  position: relative;
+}
+
 .lien-nav[data-section][aria-current],
 .lien-nav[data-section][aria-current]:hover,
 .lien-nav[data-section]:active {
@@ -594,6 +599,29 @@ footer .lien-interne {
 
 .lien-nav[data-section][aria-current] {
   pointer-events: none;
+  color: var(--text-color);
+}
+
+.lien-nav[data-section]:not([data-section="accueil"])::after {
+  content: '';
+  display: block;
+  width: calc(100% + 2px);
+  height: 3px;
+  position: absolute;
+  bottom: -2px;
+  left: -1px;
+  border-radius: 3px;
+
+  animation-play-state: paused;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: opacity .2s var(--easing-standard), transform .2s var(--easing-standard);
+}
+
+.lien-nav[data-section][aria-current]:not([data-section="accueil"])::after { 
+  opacity: 1;
+  transform: scaleX(1);
+  animation-play-state: initial;
 }
 
 @media (max-width: 35rem) {
@@ -603,7 +631,7 @@ footer .lien-interne {
 
   nav,
   .liens-bottom {
-    grid-template-rows: .6rem [first-links] auto .6rem [last-links] 2rem .6rem;
+    grid-template-rows: .6rem [first-links] auto .6rem [last-links] 2.2rem .6rem;
     grid-template-columns: [first-links last-links] 100%;
     place-items: center;
   }
