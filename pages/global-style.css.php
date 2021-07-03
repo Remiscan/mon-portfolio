@@ -652,7 +652,7 @@ footer .lien-interne {
   }
 
   .liste-liens {
-    gap: 1em;
+    gap: 1.2em;
     height: 100%;
   }
 }
