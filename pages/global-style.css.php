@@ -1202,6 +1202,11 @@ theme-selector[open="true"]>.selector {
   transform: translateY(0);
 }
 
+theme-selector>.selector>label {
+  min-height: var(--tap-safe-size);
+  box-sizing: border-box;
+}
+
 theme-selector>.selector>.selector-arrow {
   position: absolute;
   top: 100%;
@@ -1258,8 +1263,8 @@ nav theme-selector>.selector>.selector-arrow::after {
 
 @media (max-width: 35rem) {
   theme-selector {
-    width: 2rem;
-    height: 2rem;
+    width: 1.8rem;
+    height: 1.8rem;
   }
 
   theme-selector>.selector {
