@@ -1189,7 +1189,7 @@ theme-selector>.selector {
   background-color: var(--bg-color);
   box-shadow: 0 0 0 1px var(--link-color),
               0 0 0 2px var(--bg-color),
-              0 1px .2rem 1px var(--bg-color);
+              0 1px .2rem 3px var(--bg-color);
   margin-bottom: .6rem;
   border-radius: var(--border-radius);
   /*overflow: hidden;*/
