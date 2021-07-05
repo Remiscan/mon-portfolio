@@ -409,9 +409,12 @@ body {
   max-width: var(--max-width);
 
   margin: 0 auto;
-  padding: 0;
-  position: relative;
+  padding-top: env(safe-area-inset-top, 0);
+  padding-right: env(safe-area-inset-right, 0);
+  padding-bottom: env(safe-area-inset-bottom, 0);
+  padding-left: env(safe-area-inset-left, 0);
 
+  position: relative;
   overflow-x: hidden;
   overflow-y: hidden;
 
