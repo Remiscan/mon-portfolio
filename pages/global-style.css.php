@@ -315,7 +315,6 @@ button {
 .lien-interne,
 a {
   padding: .25em 1px;
-  margin: auto 0 0;
   font-weight: 500;
   text-decoration: none;
   color: var(--link-color);
@@ -409,6 +408,7 @@ body {
   max-width: var(--max-width);
 
   margin: 0 auto;
+  padding: 0;
   padding-top: env(safe-area-inset-top, 0);
   padding-right: env(safe-area-inset-right, 0);
   padding-bottom: env(safe-area-inset-bottom, 0);
