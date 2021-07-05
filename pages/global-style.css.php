@@ -656,7 +656,7 @@ footer .lien-interne {
   }
 
   .liens-bottom {
-    grid-template-rows: .6rem [first-links] 1.8rem 1.2rem [last-links] auto 1.2rem;
+    grid-template-rows: .6rem [first-links] var(--tap-safe-size) .3rem [last-links] var(--tap-safe-size) .6rem;
   }
 
   nav a[data-section="accueil"] {
@@ -1195,6 +1195,7 @@ theme-selector>.selector {
   transform: translateY(.2rem);
   transition: opacity .2s ease,
               transform .2s ease;
+  z-index: 10;
 }
 
 theme-selector[open="true"]>.selector {
