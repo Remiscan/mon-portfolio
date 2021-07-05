@@ -197,7 +197,7 @@ if ($css_critique_methode == 'push') {
     <!-- CONTENU DU SITE -->
     <header>
       <nav class="s6-s5">
-        <a href="/" data-section="accueil" class="lien-nav"
+        <a href="/" data-section="accueil" class="lien-nav" data-tappable
            <?=($start_section == 'accueil') ? 'aria-current="page" tabindex="-1"' : ''?>>
           <span data-string="nav-accueil"><?=$Textes->getString('nav-accueil')?></span>
           <div class="rainbow-bg logo lien-nav" aria-hidden="true"></div>
@@ -206,13 +206,13 @@ if ($css_critique_methode == 'push') {
         <ul class="liste-liens">
           <li>
             <a href="/bio" data-section="bio" data-string="nav-bio"
-              class="lien-interne lien-nav" <?=($start_section == 'bio') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 350">
+              class="lien-interne lien-nav" data-tappable <?=($start_section == 'bio') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 350">
               <?=$Textes->getString('nav-bio')?>
             </a>
           </li>
           <li>
             <a href="/<?=($lang == 'fr' ? 'projets' : 'projects')?>" data-section="projets" data-string="nav-projets"
-              class="lien-interne lien-nav" <?=($start_section == 'projets') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 230">
+              class="lien-interne lien-nav" data-tappable <?=($start_section == 'projets') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 230">
               <?=$Textes->getString('nav-projets')?>
             </a>
           </li>
@@ -220,14 +220,14 @@ if ($css_critique_methode == 'push') {
           if ($conditionBlog) { ?>
           <li>
             <a href="/blog" data-section="blog" data-string="nav-articles"
-              class="lien-interne lien-nav" <?=($start_section == 'blog') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 20">
+              class="lien-interne lien-nav" data-tappable <?=($start_section == 'blog') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 20">
               <?=$Textes->getString('nav-articles')?>
             </a>
           </li>
           <?php } ?>
           <li>
             <a href="/contact" data-section="contact" data-string="nav-contact"
-              class="lien-interne lien-nav" <?=($start_section == 'contact') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 100">
+              class="lien-interne lien-nav" data-tappable <?=($start_section == 'contact') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 100">
               <?=$Textes->getString('nav-contact')?>
             </a>
           </li>
@@ -245,14 +245,14 @@ if ($css_critique_methode == 'push') {
           <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
           <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
           <span data-string="je-suis-remi-3"><?=$Textes->getString('je-suis-remi-3')?></span>
-          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5 bouton" data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
+          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5 bouton" data-tappable data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
         </section>
 
         <!-- Mini-projets -->
         <section class="accueil-projets">
           <div class="section-titre">
             <h2 data-string="projets-recents" class="s2"><?=$Textes->getString('projets-recents')?></h2>
-            <a href="/projets" data-section="projets" class="lien-interne lien-fleche s5" data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
+            <a href="/projets" data-section="projets" class="lien-interne lien-fleche s5" data-tappable data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
             <span class="section-titre-fin"></span>
           </div>
 
@@ -273,7 +273,7 @@ if ($css_critique_methode == 'push') {
                 }
                 ?>
 
-            <a href="/projet/<?=$projet['id']?>" class="apercu-projet">
+            <a href="/projet/<?=$projet['id']?>" class="apercu-projet" data-tappable>
               <div class="apercu-projet-image" style="<?=$style?>"></div>
               <div class="apercu-projet-infos">
                 <span class="apercu-projet-titre s5"><?=$projet['titre']?></span>
@@ -358,7 +358,7 @@ if ($css_critique_methode == 'push') {
         <ul class="liste-liens liens-sociaux">
           <li>
             <a href="https://github.com/Remiscan"
-                class="lien-interne lien-social" style="
+                class="lien-interne lien-social" data-tappable style="
                 --color-dark: <?=(new Couleur('#6e5494'))->improveContrast('black', 8, 1)->hsl()?>;
                 --color-light: <?=(new Couleur('#6e5494'))->improveContrast('white', 8, 1)->hsl()?>;
                 ">
@@ -368,7 +368,7 @@ if ($css_critique_methode == 'push') {
           </li>
           <li>
             <a href="https://codepen.io/remiscan"
-                class="lien-interne lien-social" style="
+                class="lien-interne lien-social" data-tappable style="
                 --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('black', 8, 1)->hsl()?>;
                 --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('white', 8, 1)->hsl()?>;
                 ">
@@ -378,7 +378,7 @@ if ($css_critique_methode == 'push') {
           </li>
           <!--<li>
             <a href="https://www.linkedin.com/in/remiscan/"
-                class="lien-interne lien-social" style="
+                class="lien-interne lien-social" data-tappable style="
                 --color-dark: <?=(new Couleur('#0077B5'))->improveContrast('black', 8, 1)->hsl()?>;
                 --color-light: <?=(new Couleur('#0077B5'))->improveContrast('white', 8, 1)->hsl()?>;
                 ">
@@ -388,7 +388,7 @@ if ($css_critique_methode == 'push') {
           </li>-->
           <li>
             <a href="https://twitter.com/Remiscan"
-                class="lien-interne lien-social" style="
+                class="lien-interne lien-social" data-tappable style="
                 --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('black', 8, 1)->hsl()?>;
                 --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('white', 8, 1)->hsl()?>;
                 ">
@@ -399,8 +399,8 @@ if ($css_critique_methode == 'push') {
         </ul>
 
         <ul class="liste-liens options">
-          <a href="?lang=fr" class="lien-interne bouton-langage" lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
-          <a href="?lang=en" class="lien-interne bouton-langage" lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
+          <a href="?lang=fr" class="lien-interne bouton-langage" data-tappable lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
+          <a href="?lang=en" class="lien-interne bouton-langage" data-tappable lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
           <theme-selector position="top"></theme-selector>
         </ul>
       </div>

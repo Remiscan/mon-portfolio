@@ -122,6 +122,23 @@ textarea::selection {
   }
 }
 
+:root { --tap-safe-size: 44px; }
+[data-tappable] { position: relative; z-index: 1; }
+[data-tappable]:not([data-tappable="after"])::before,
+[data-tappable="after"]::after {
+  content: '';
+  display: block;
+  width: 100%;
+  min-width: 44px;
+  height: 100%;
+  min-height: 44px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: -1;
+}
+
 
 
 
@@ -509,6 +526,7 @@ nav,
   align-items: center;
   margin: 0 -.3rem; /* to prevent focus styles clipping */
   padding: 0 .3rem;
+  min-height: var(--tap-safe-size);
   list-style-type: none;
   overflow-x: auto;
   scrollbar-width: thin;

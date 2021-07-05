@@ -40,6 +40,7 @@ history.replaceState({ section }, '', Navigation.getUrl(section));
 // Personnalisation du theme-selector
 const themeSelectors = document.querySelectorAll('theme-selector');
 for (const themeSelector of themeSelectors) {
+  themeSelector.querySelector('button').dataset.tappable = '';
   themeSelector.querySelector('.selector-title').classList.add('s5');
   themeSelector.querySelector('.selector-cookie-notice').classList.add('s8');
   const arrow = document.createElement('div');
