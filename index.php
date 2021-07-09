@@ -152,15 +152,7 @@ if ($css_critique_methode == 'push') {
     ?>
 
     <!-- Scripts principaux -->
-    <script defer type="module" src="/mon-portfolio/scripts.js.php"></script>
-
-    <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="/_common/js/traduction.js">
-    <link rel="modulepreload" href="/_common/js/cancelable-async.js">
-    <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
-    foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
-    <?php } ?>
+    <script type="module" src="/mon-portfolio/scripts.js.php"></script>
 
     <!-- Préchargement des textes -->
     <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
