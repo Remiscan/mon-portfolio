@@ -28,11 +28,6 @@ function agepro() {
 
 
 
-$urlLang = substr(htmlspecialchars($_GET['lang']), 0, 2);
-$userLang = $_COOKIE['lang'] ?: httpLanguage() ?: 'en';
-$lang = $urlLang ?: $userLang;
-$Textes = new Textes('mon-portfolio', $lang);
-
 // Gestion de l'URL demandée et adaptation de la page
 
 //// Récupération de la section de départ
@@ -44,6 +39,36 @@ if (isset($_GET['onav'])) {
     $start_section = $onav;
 }
 $isAccueil = ($start_section == 'accueil');
+
+//// Liste des fichiers style-*.css critiques ou non
+$styles_critiques = ['variables', 'global'];
+if ($start_section != 'accueil')
+  $styles_critiques[] = $start_section;
+$styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
+
+// Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
+// (dé/commenter la première ligne pour changer de méthode)
+$css_critique_methode = 'push'; /*
+$css_critique_methode = 'inline'; /**/
+
+if ($css_critique_methode == 'push') {
+  //// On demande au serveur de PUSH le css critique avec HTTP2
+  $linkHeader = 'Link: ';
+  foreach($styles_critiques as $k => $section) {
+    $versionStyle = version(__DIR__.'/pages', $section . '-style.css.php');
+    if ($k > 0) $linkHeader .= ', ';
+    $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css.php>; rel=preload; as=style';
+  }
+  header($linkHeader);
+}
+
+//// Détermination de la langue
+
+$urlLang = isset($_GET['lang']) ? substr(htmlspecialchars($_GET['lang']), 0, 2) : null;
+$cookieLang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : null;
+$userLang = $cookieLang ?: httpLanguage() ?: 'en';
+$lang = $urlLang ?: $userLang;
+$Textes = new Textes('mon-portfolio', $lang);
 
 //// Si l'URL demandée est /
 $titre_page = false;
@@ -68,30 +93,7 @@ if (!$isAccueil) {
 
 //// Donne le titre de la page
 $titre = 'Rémi S., ' . $Textes->getString('job');
-if ($titre_page != false)
-  $titre = $titre_page . ' — ' . $titre;
-
-//// Liste des fichiers style-*.css critiques ou non
-$styles_critiques = ['variables', 'global'];
-if ($start_section != 'accueil')
-  $styles_critiques[] = $start_section;
-$styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
-
-// Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
-// (dé/commenter la première ligne pour changer de méthode)
-$css_critique_methode = 'push'; /*
-$css_critique_methode = 'inline'; /**/
-
-if ($css_critique_methode == 'push') {
-  //// On demande au serveur de PUSH le css critique avec HTTP2
-  $linkHeader = 'Link: ';
-  foreach($styles_critiques as $k => $section) {
-    $versionStyle = version(__DIR__.'/pages', $section . '-style.css');
-    if ($k > 0) $linkHeader .= ', ';
-    $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
-  }
-  header($linkHeader);
-}
+if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
 ?>
 <!doctype html>
 <html lang="<?=$lang?>"
@@ -293,7 +295,7 @@ if ($css_critique_methode == 'push') {
       <!-- Mes projets -->
       <!-- ----------- -->
       <article id="projets" data-section="projets">
-        <section class="liste-projets" style="--nombre-lignes: <?=round(ceil($PROJETS) / 2)?>;">
+        <section class="liste-projets" style="--nombre-lignes: <?=ceil(count($PROJETS) / 2)?>;">
           <?php
             foreach($PROJETS as $projet) {
               $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
