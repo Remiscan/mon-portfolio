@@ -1,13 +1,6 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
-
-import CookieMaker from '/_common/js/cookie-maker.js.php';
-import DefCookieConsentMini from '/_common/components/cookie-consent-mini/cookie-consent-mini.js.php';
-import { Traduction } from './traduction.js.php';
-
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+import CookieMaker from 'cookie-maker';
+import DefCookieConsentMini from 'cookie-consent-mini';
+import { Traduction } from 'traduction';
 
 
 

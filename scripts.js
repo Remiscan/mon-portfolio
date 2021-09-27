@@ -1,14 +1,7 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
-
-import Navigation from './modules/navigation.js.php';
-import { Traduction } from './modules/traduction.js.php';
-import Cookie from './modules/cookies.js.php';
-import '/_common/components/theme-selector/theme-selector.js.php';
-
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+import Navigation from 'navigation';
+import { Traduction } from 'traduction';
+import Cookie from 'cookies';
+import 'theme-selector';
 
 
 
