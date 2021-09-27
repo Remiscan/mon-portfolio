@@ -155,22 +155,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
 
     <!-- Import map -->
     <script defer src="/_common/polyfills/es-module-shims.js"></script>
-    <script type="importmap">
-      {
-        "imports": {
-          "cookies": "./modules/cookies.js",
-          "navigation": "./modules/navigation.js",
-          "Params": "./modules/Params.js",
-          "traduction": "./modules/traduction.js",
-
-          "cookie-maker": "/_common/js/cookie-maker.js.php",
-          "cookie-consent-mini": "/_common/components/cookie-consent-mini/cookie-consent-mini.js.php",
-          "cancelable-async": "/_common/js/cancelable-async.js",
-          "default-traduction": "/_common/js/traduction.js",
-          "theme-selector": "/_common/components/theme-selector/theme-selector.js.php"
-        }
-      }
-    </script>
+    <script type="importmap"><?php include 'importMap.json'; ?></script>
 
     <!-- Scripts principaux -->
     <script type="module" src="/mon-portfolio/scripts.js"></script>
