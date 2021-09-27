@@ -8,7 +8,7 @@ import { naviguer, getNavActuelle, setNavActuelle } from './modules/mod_navigati
 import { initProjets, closeProjet } from './modules/mod_projets.js.php';
 
 /*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
 echo versionizeFiles($imports, __DIR__); ?>*/
 
 

@@ -5,7 +5,7 @@ import { getString } from './mod_traduction.js.php';
 import { simulateClick } from './mod_Params.js.php';
 
 /*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
 echo versionizeFiles($imports, __DIR__); ?>*/
 
 

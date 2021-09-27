@@ -156,7 +156,7 @@
     ?>
 
     <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
     echo versionizeFiles($imports, __DIR__); ?>-->
 
     <script id="preload-polyfill">
@@ -241,7 +241,7 @@
     <script type="module" src="/mon-portfolio/scripts.js.php"></script>
 
     <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
+    require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
     echo versionizeFiles($imports, __DIR__); ?>-->
 
   </body>
