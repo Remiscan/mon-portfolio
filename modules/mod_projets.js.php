@@ -52,7 +52,7 @@ export function* openProjet(event)
   elProjet.removeAttribute('hidden');
 
   const images = [{
-    url: '/' + id + '/icons/icon.svg',
+    url: '/' + (id === 'colori' ? 'colori/demo' : id) + '/icons/icon.svg',
     conteneur: document.getElementById('projet-details-icone')
   }, {
     url: `/mon-portfolio/projets/${id}/preview-phone.png`,
