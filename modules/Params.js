@@ -20,6 +20,7 @@ export function wait(time) {
     return new Promise(resolve => time.addEventListener('finish', resolve));
   else if (typeof time === 'number')
     return new Promise(resolve => setTimeout(resolve, time));
+  else return Promise.resolve();
 }
 
 
