@@ -1,6 +1,7 @@
 <?php
+$source = $_POST['source_mail'];
 $expediteur = filter_var($_POST['adresse_mail'], FILTER_VALIDATE_EMAIL);
-$destinataire = 'contact@remiscan.fr';
+$destinataire = base64_decode('cmVtaS5zY2FuZGVsbGErcG9pbnRmckBnbWFpbC5jb20=');
 $objet = mb_encode_mimeheader('Contact via remiscan.fr', 'UTF-8');
 $message = $_POST['message_mail'];
 $headers = array(
@@ -10,10 +11,8 @@ $headers = array(
   'Content-Type' => 'text/plain; charset=utf-8'
 );
 
-if ($expediteur)
-  $envoi_reussi = mail($destinataire, $objet, $message, $headers);
-else
-  $envoi_reussi = false;
+if ($expediteur && $source === '') $envoi_reussi = mail($destinataire, $objet, $message, $headers);
+else                               $envoi_reussi = false;
 
 ////////////////////////////////////
 // On passe le résultat à javascript

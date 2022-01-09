@@ -1,6 +1,8 @@
 <p class="info-contact" data-string="contact-intro"><?=$Textes->getString('contact-intro')?></p>
 
 <form id="formulaire_contact" data-label="nav-contact" aria-label="<?=$Textes->getString('nav-contact')?>">
+  <input type="text" id="source_mail" name="source_mail">
+
   <p class="input-grid">
     <label for="adresse_mail" class="h4" data-string="contact-champ-email"><?=$Textes->getString('contact-champ-email')?></label>
     <input type="email" id="adresse_mail" name="adresse_mail">
