@@ -33,26 +33,43 @@
 }
 
 /* <?php
-function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
+function makeGradient($light = 90, $chroma = 20, $format = 'oklch') {
   echo "*"."/\n";
   $steps = 6;
-  $gradSteps = 5;
+  $gradSteps = 4;
   $startHue = 300;
+
+  $gradient = [];
   for ($i = 0; $i < $steps; $i++) {
-    if ($format == 'lch') {
-      $couleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . (($startHue + (360 / $steps) * $i) % 360) . ')');
-      $nextCouleur = new Couleur('lch(' . $ciel . '% ' . $ciec . ' ' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ')');
-    } elseif ($format == 'hsl') {
-      $couleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * $i) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
-      $nextCouleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ', 100%, 50%)'))->replace('ciel', $ciel . '%')->replace('ciec', $ciec);
+    switch ($format) {
+      case 'oklch':
+        $couleur = new Couleur('oklch(' . $light . '% ' . $chroma . ' ' . (($startHue + (360 / $steps) * $i) % 360) . ')');
+        $nextCouleur = new Couleur('oklch(' . $light . '% ' . $chroma . ' ' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ')');
+        break;
+
+      case 'lch':
+        $couleur = new Couleur('lch(' . $light . '% ' . $chroma . ' ' . (($startHue + (360 / $steps) * $i) % 360) . ')');
+        $nextCouleur = new Couleur('lch(' . $light . '% ' . $chroma . ' ' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ')');
+        break;
+
+      case 'hsl':
+        $couleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * $i) % 360) . ', 100%, 50%)'))->replace('ciel', $light . '%')->replace('ciec', $chroma);
+        $nextCouleur = (new Couleur('hsl(' . (($startHue + (360 / $steps) * ($i + 1)) % 360) . ', 100%, 50%)'))->replace('ciel', $light . '%')->replace('ciec', $chroma);
+        break;
     }
 
-    $gradient = Couleur::gradient($couleur, $nextCouleur, $gradSteps);
-    for ($j = 0; $j < count($gradient); $j++) {
-      if ($i < $steps - 1 && $j == count($gradient) - 1) continue;
-      echo "  " . $gradient[$j]->hsl() . " " . (round(100 * ($i * $steps + $j) * 100 / (($steps + 1) * $gradSteps)) / 100) . "%" . (($i * $j) <= (($steps - 1) * ($gradSteps - 1)) ? ',' : '') . "\n";
+    $tempGradient = Couleur::interpolate($couleur, $nextCouleur, $gradSteps, $format);
+    foreach ($tempGradient as $color) {
+      $gradient[] = $color;
     }
   }
+
+  $max = count($gradient) - 1;
+  $strings = [];
+  foreach ($gradient as $k => $color) {
+    $strings[] = "" . $color->hsl() . " " . ($k / $max) * 100 . "%";
+  }
+  echo join(",\n", $strings);
   echo '  /'.'*';
 }
 ?> */
@@ -64,7 +81,7 @@ function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
   --link-hover-color: black;
   --inverse-text-color: white;
   --main-gradient: repeating-linear-gradient(to right,
-    /* <?php makeGradient(75, 30); ?> */
+    /* <?php makeGradient(65, .13); ?> */
   );
 }
 
@@ -74,7 +91,7 @@ function makeGradient($ciel = 90, $ciec = 20, $format = 'lch') {
   --link-hover-color: white;
   --inverse-text-color: black;
   --main-gradient: repeating-linear-gradient(to right,
-    /* <?php makeGradient(90, 25); ?> */
+    /* <?php makeGradient(95, .13); ?> */
   );
 }
 /*<?php $body = ob_get_clean();
