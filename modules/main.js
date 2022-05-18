@@ -7,10 +7,18 @@ import 'theme-selector';
 ////////////////////////////////
 // Gère les changements de thème
 window.addEventListener('themechange', event => {
-  // Set meta theme-color here
+  document.documentElement.dataset.resolvedTheme = event.detail.resolvedTheme;
 
-  if (event.detail.theme != 'auto') Cookie.submit('theme', event.detail.theme);
-  else                              Cookie.delete('theme');
+  /*const meta = document.querySelector('meta[name=theme-color]');
+  meta.content = meta.dataset[event.detail.resolvedTheme];*/
+
+  if (event.detail.theme != 'auto') {
+    new Cookie('theme', event.detail.theme);
+    new Cookie('resolvedTheme', event.detail.resolvedTheme);
+  } else {
+    Cookie.delete('theme');
+    Cookie.delete('resolvedTheme');
+  }
 });
 
 

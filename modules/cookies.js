@@ -1,4 +1,20 @@
-import DefCookieConsentMini from 'cookie-consent-mini';
+import DefCookie from 'default-cookies';
+
+
+
+export default class Cookie extends DefCookie {
+  constructor(name, value, maxAge = null) {
+    super(name, value, '/', maxAge);
+  }
+
+  static delete(name) {
+    super.delete('/', name);
+  }
+}
+
+
+
+/*import DefCookieConsentMini from 'cookie-consent-mini';
 import CookieMaker from 'cookie-maker';
 
 
@@ -21,4 +37,4 @@ class CookieConsentMini extends DefCookieConsentMini {
   }
 }
 
-if (!customElements.get('cookie-consent-mini')) customElements.define('cookie-consent-mini', CookieConsentMini);
+if (!customElements.get('cookie-consent-mini')) customElements.define('cookie-consent-mini', CookieConsentMini);*/

@@ -4,7 +4,7 @@
     "navigation": "./modules/navigation.js",
     "Params": "./modules/Params.js",
 
-    "cookie-maker": "/_common/js/cookie-maker.js.php",
+    "default-cookies": "/_common/js/cookies.js",
     "cookie-consent-mini": "/_common/components/cookie-consent-mini/cookie-consent-mini.js.php",
     "cancelable-async": "/_common/js/cancelable-async.js",
     
