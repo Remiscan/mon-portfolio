@@ -3,12 +3,10 @@
     "cookies": "./modules/cookies.js",
     "navigation": "./modules/navigation.js",
     "Params": "./modules/Params.js",
-    "traduction": "./modules/traduction.js",
 
     "cookie-maker": "/_common/js/cookie-maker.js.php",
     "cookie-consent-mini": "/_common/components/cookie-consent-mini/cookie-consent-mini.js.php",
     "cancelable-async": "/_common/js/cancelable-async.js",
-    "default-traduction": "/_common/js/traduction.js",
     
     "theme-selector": "/_common/components/theme-selector/theme-selector.js",
     "trap-focus": "/_common/js/trap-focus.js",

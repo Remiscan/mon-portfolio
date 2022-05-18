@@ -158,11 +158,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
     <script type="importmap"><?php include 'importMap.json'; ?></script>
 
     <!-- Scripts principaux -->
-    <script type="module" src="/mon-portfolio/scripts.js"></script>
-
-    <!-- Préchargement des textes -->
-    <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
-          id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
+    <script type="module" src="/mon-portfolio/modules/main.js"></script>
 
     <!--<?php $imports = ob_get_clean();
     require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';

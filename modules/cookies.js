@@ -1,6 +1,5 @@
-import CookieMaker from 'cookie-maker';
 import DefCookieConsentMini from 'cookie-consent-mini';
-import { Traduction } from 'traduction';
+import CookieMaker from 'cookie-maker';
 
 
 
@@ -19,7 +18,6 @@ class CookieConsentMini extends DefCookieConsentMini {
     this.querySelector('.cookie-consent-mini-button-yes').classList.add('s7');
     this.querySelector('.cookie-consent-mini-button-no').classList.add('s7');
     this.querySelector('.cookie-consent-mini-info').classList.add('s8');
-    Traduction.traduire(this);
   }
 }
 

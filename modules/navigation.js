@@ -1,6 +1,5 @@
 import { cancelableAsync } from 'cancelable-async';
-import { wait, Params } from 'Params';
-import { Traduction, getTitrePage } from 'traduction';
+import { Params, wait } from 'Params';
 
 
 
@@ -80,7 +79,7 @@ const Navigation = {
     yield wait(anim1);
 
     // On applique le style, le titre et l'url de la nouvelle section
-    document.title = getTitrePage(section);
+    //document.title = Navigation.getUrl(section);
     if (history) window.history.pushState({ section }, '', Navigation.getUrl(section));
     document.body.dataset.section = section;
 
@@ -141,7 +140,9 @@ const Navigation = {
       blog: { fr: 'blog', en: 'blog' },
       contact: { fr: 'contact', en: 'contact' }
     };
-    const url = (section == 'accueil') ? '' : sectionUrls[section][Traduction.language];
+
+    const lang = document.documentElement.lang || 'en';
+    const url = (section == 'accueil') ? '' : sectionUrls[section][lang];
     const suffix = new URLSearchParams(window.location.search);
     if (!document.documentElement.dataset.urlLang) suffix.delete('lang');
     return `/${url}${suffix.toString() ? `?${suffix.toString()}` : ''}`;
