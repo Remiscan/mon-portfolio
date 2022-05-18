@@ -1,6 +1,5 @@
-import Navigation from 'navigation';
-import { Traduction } from 'traduction';
 import Cookie from 'cookies';
+import Navigation from 'navigation';
 import 'theme-selector';
 
 
@@ -39,7 +38,6 @@ for (const themeSelector of themeSelectors) {
   const arrow = document.createElement('div');
   arrow.classList.add('selector-arrow');
   themeSelector.querySelector('.selector').appendChild(arrow);
-  Traduction.traduire(themeSelector);
 }
 
 Navigation.init();
