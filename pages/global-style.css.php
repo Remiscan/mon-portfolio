@@ -1,4 +1,4 @@
-/*<?php require_once dirname(__DIR__, 2) . '/colori/dist/colori.php'; ?>*/
+/*<?php require_once dirname(__DIR__, 1) . '/modules/class_Couleur.php'; ?>*/
 /*<?php require_once dirname(__DIR__, 2) . '/_common/php/version.php'; ?>*/
 
 :root {
