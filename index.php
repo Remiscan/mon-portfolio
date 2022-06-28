@@ -120,8 +120,8 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
-    <!-- ▼ Fichiers cache-busted grâce à PHP -->
-    <!--<?php ob_start();?>-->
+    <!-- ▼ Cache-busted files -->
+    <!--<?php versionizeStart(); ?>-->
     
     <?php if ($css_critique_methode == 'push') { ?>
     
@@ -160,9 +160,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
     <!-- Scripts principaux -->
     <script type="module" src="/mon-portfolio/modules/main.js"></script>
 
-    <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/php/versionize-files.php';
-    echo versionizeFiles($imports, __DIR__); ?>-->
+    <!--<?php versionizeEnd(__DIR__); ?>-->
 
     <script id="preload-polyfill">
       {
