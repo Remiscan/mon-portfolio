@@ -1,11 +1,9 @@
 // ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
+/*<?php versionizeStart(); ?>*/
 
 import { simulateClick } from './mod_Params.js.php';
 
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+/*<?php versionizeEnd(__DIR__); ?>*/
 
 
 
