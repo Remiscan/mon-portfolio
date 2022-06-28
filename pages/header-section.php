@@ -44,12 +44,12 @@
       <i class="svg" style="width: 1.7rem; height: 1.7rem;"><svg viewBox="0 0 266.893 266.895"><use href="#facebook" /></svg></i>
     </a>-->
 
-    <a href="https://www.linkedin.com/in/remiscan" target="_blank" rel="noopener"
+    <!--<a href="https://www.linkedin.com/in/remiscan" target="_blank" rel="noopener"
        class="focusable expandable" tabindex="0"
        data-label="contact-linkedin" aria-label="<?=$Textes->getString('contact-linkedin')?>"
        style="--social-color:<?=$c_linkedin->hsl()?>;">
       <i class="svg" style="width: 1.25rem; height: 1.25rem;"><svg viewBox="0 0 24 24"><use href="#linkedin" /></svg></i>
-    </a>
+    </a>-->
 
     <!--<a href="https://twitter.com/Remiscan" target="_blank" rel="noopener"
        class="focusable expandable" tabindex="0"
