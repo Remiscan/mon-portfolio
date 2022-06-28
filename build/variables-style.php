@@ -34,7 +34,7 @@ function generatePagesCSS($sections) {
   }
   $css .= "}\n";
 
-  $css = "/*" . buildThemesStylesheet($css) . "*/\n\n";
+  $css = buildThemesStylesheet($css, closeComment: false)[0] . "\n\n";
   forEach($sections as $s) {
     $css .= "/* Page $s->id */\n";
     $css .= "body[data-section=\"$s->id\"] {\n";

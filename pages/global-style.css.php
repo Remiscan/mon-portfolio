@@ -74,7 +74,7 @@ function makeGradient($light = 90, $chroma = 20, $format = 'oklch') {
 }
 ?> */
 
-/*<?php ob_start();?>*/
+/*<?php themeSheetStart(); ?>*/
 :root[data-theme="light"] {
   color-scheme: light;
   --text-color: black;
@@ -94,9 +94,7 @@ function makeGradient($light = 90, $chroma = 20, $format = 'oklch') {
     /* <?php makeGradient(95, .13); ?> */
   );
 }
-/*<?php $body = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
-echo buildThemesStylesheet($body); ?>*/
+/*<?php themeSheetEnd(closeComment: true); ?>*/
 
 
 
@@ -769,7 +767,7 @@ body[data-section="contact"] #contact {
   transform: translateX(0);
 }
 
-/*<?php ob_start();?>*/
+/*<?php themeSheetStart(); ?>*/
 :root[data-theme="light"] .lien-fleche::after {
   content: var(--arrow-light);
 }
@@ -777,9 +775,7 @@ body[data-section="contact"] #contact {
 :root[data-theme="dark"] .lien-fleche::after {
   content: var(--arrow-dark);
 }
-/*<?php $body = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
-echo buildThemesStylesheet($body); ?>*/
+/*<?php themeSheetEnd(closeComment: true); ?>*/
 
 .grand-apercu-projet-lien:hover .lien-fleche::after,
 .grand-apercu-projet-lien:focus .lien-fleche::after,
@@ -907,7 +903,7 @@ echo buildThemesStylesheet($body); ?>*/
   position: relative;
   z-index: 1;
 }
-/*<?php ob_start();?>*/
+/*<?php themeSheetStart(); ?>*/
 :root[data-theme="light"] .apercu-projet-image {
   background-image: var(--image-light, var(--image));
 }
@@ -915,10 +911,7 @@ echo buildThemesStylesheet($body); ?>*/
 :root[data-theme="dark"] .apercu-projet-image {
   background-image: var(--image-dark, var(--image));
 }
-/*<?php $body = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
-echo buildThemesStylesheet($body); ?>*/
-/*<?php ob_start();?>*/
+
 :root[data-theme="light"] .grand-apercu-projet-image::after {
   background-image: var(--image-light, var(--image));
 }
@@ -926,9 +919,7 @@ echo buildThemesStylesheet($body); ?>*/
 :root[data-theme="dark"] .grand-apercu-projet-image::after {
   background-image: var(--image-dark, var(--image));
 }
-/*<?php $body = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
-echo buildThemesStylesheet($body); ?>*/
+/*<?php themeSheetEnd(closeComment: true); ?>*/
 
 .grand-apercu-projet-lien:hover>.grand-apercu-projet-image::after,
 .grand-apercu-projet-lien:focus>.grand-apercu-projet-image::after,
@@ -1129,7 +1120,7 @@ echo buildThemesStylesheet($body); ?>*/
   position: relative;
 }
 
-/*<?php ob_start();?>*/
+/*<?php themeSheetStart(); ?>*/
 :root[data-theme="light"] .lien-social {
   --color: var(--color-light);
 }
@@ -1137,9 +1128,7 @@ echo buildThemesStylesheet($body); ?>*/
 :root[data-theme="dark"] .lien-social {
   --color: var(--color-dark);
 }
-/*<?php $body = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/_common/components/theme-selector/build-css.php';
-echo buildThemesStylesheet($body); ?>*/
+/*<?php themeSheetEnd(closeComment: true); ?>*/
 
 .lien-social>svg {
   grid-column: 1;
