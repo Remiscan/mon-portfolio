@@ -14,7 +14,7 @@ import { getTitrePage } from './mod_traduction.js.php';
 
 
 
-export const navs = ['nav_accueil', 'nav_bio', 'nav_portfolio', 'nav_contact'];
+export const navs = ['nav_accueil', 'nav_bio', 'nav_portfolio'];
 
 let nav_actuelle = 'nav_accueil';
 let nav_etat = 'accueil';

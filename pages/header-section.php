@@ -19,30 +19,12 @@
   <div id="liens_contact" class="h4">
     <h3 class="h4" data-string="me-contacter" aria-hidden="true" hidden><?=$Textes->getString('me-contacter')?></h3>
 
-    <a id="nav_contact" href="/contact"
-       class="focusable expandable nav" tabindex="0"
-       data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
-       style="--social-color:<?=$c_email->hsl()?>; 
-              --article-color:<?=$c_email->hsl()?>;">
+    <a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener"
+        class="focusable expandable" tabindex="0"
+        data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
+        style="--social-color:<?=$c_email->hsl()?>;">
       <i class="svg"><svg viewBox="0 0 24 24" id="svg-email"><use href="#email-closed" /></svg></i>
-      <div class="underline"></div>
     </a>
-
-    <noscript>
-      <a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener"
-         class="focusable expandable" tabindex="0"
-         data-label="contact-email" aria-label="<?=$Textes->getString('contact-email')?>"
-         style="--social-color:<?=$c_email->hsl()?>;">
-        <i class="svg"><svg viewBox="0 0 24 24" id="svg-email"><use href="#email-closed" /></svg></i>
-      </a>
-    </noscript>
-
-    <!--<a href="https://www.facebook.com/remiscan" target="_blank" rel="noopener"
-         class="focusable expandable" tabindex="0"
-         data-label="contact-facebook" aria-label="<?=$Textes->getString('contact-facebook')?>"
-         style="--social-color:<?=$c_facebook->hsl()?>;">
-      <i class="svg" style="width: 1.7rem; height: 1.7rem;"><svg viewBox="0 0 266.893 266.895"><use href="#facebook" /></svg></i>
-    </a>-->
 
     <!--<a href="https://www.linkedin.com/in/remiscan" target="_blank" rel="noopener"
        class="focusable expandable" tabindex="0"
