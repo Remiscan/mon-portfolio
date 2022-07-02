@@ -186,14 +186,12 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
 
     <div id="couleur"></div>
 
+    <div class="background"></div>
+
     <!-- CONTENU DU SITE -->
     <header>
       <nav class="s6-s5">
-        <a href="/" data-section="accueil" class="lien-nav" data-tappable
-           <?=($start_section == 'accueil') ? 'aria-current="page" tabindex="-1"' : ''?>>
-          <span data-string="nav-accueil"><?=$Textes->getString('nav-accueil')?></span>
-          <div class="rainbow-bg logo lien-nav" aria-hidden="true"></div>
-        </a>
+        <remiscan-logo animate></remiscan-logo>
 
         <ul class="liste-liens">
           <li>
@@ -217,12 +215,6 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
             </a>
           </li>
           <?php } ?>
-          <li>
-            <a href="/contact" data-section="contact" data-string="nav-contact"
-              class="lien-interne lien-nav" data-tappable <?=($start_section == 'contact') ? 'aria-current="page" tabindex="-1"' : ''?> style="--hue: 100">
-              <?=$Textes->getString('nav-contact')?>
-            </a>
-          </li>
         </ul>
       </nav>
     </header>
@@ -232,54 +224,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
       <!-- Page d'accueil -->
       <!-- -------------- -->
       <article id="accueil" data-section="accueil">
-        <!-- Mini-bio -->
-        <section class="accueil-moi s1">
-          <span data-string="je-suis-remi"><?=$Textes->getString('je-suis-remi')?></span>
-          <span data-string="je-suis-remi-2"><?=$Textes->getString('je-suis-remi-2')?></span>
-          <span data-string="je-suis-remi-3"><?=$Textes->getString('je-suis-remi-3')?></span>
-          <a href="/bio" data-section="bio" class="lien-interne lien-fleche s5 bouton" data-tappable data-string="lien-more-bio"><?=$Textes->getString('lien-more-bio')?></a>
-        </section>
-
-        <!-- Mini-projets -->
-        <section class="accueil-projets">
-          <div class="section-titre">
-            <h2 data-string="projets-recents" class="s2"><?=$Textes->getString('projets-recents')?></h2>
-            <a href="/projets" data-section="projets" class="lien-interne lien-fleche s5" data-tappable data-string="lien-more-projets"><?=$Textes->getString('lien-more-projets')?></a>
-            <span class="section-titre-fin"></span>
-          </div>
-
-          <div class="accueil-conteneur-projets">
-            <?php
-            foreach($PROJETS as $projet) {
-              if ($projet['featured']) {
-                $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
-                $imageLight = __DIR__."/projets/{$projet['id']}/preview-light.png";
-                if (file_exists($imageDark)) {
-                  $versionDark = version(__DIR__, $imageDark);
-                  $versionLight = version(__DIR__, $imageLight);
-                  $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark--{$versionDark}.png";
-                  $imageLight = __DIR__."/projets/{$projet['id']}/preview-light--{$versionLight}.png";
-                  $style = "--image-dark: url('/mon-portfolio/projets/{$projet['id']}/preview-dark--{$versionDark}.png'); --image-light: url('/mon-portfolio/projets/{$projet['id']}/preview-light--{$versionLight}.png');";
-                } else {
-                  $style = "--image: url('/mon-portfolio/projets/{$projet['id']}/preview.png');";
-                }
-                ?>
-
-            <a href="/projet/<?=$projet['id']?>" class="apercu-projet" data-tappable>
-              <div class="apercu-projet-image" style="<?=$style?>"></div>
-              <div class="apercu-projet-infos">
-                <span class="apercu-projet-titre s5"><?=$projet['titre']?></span>
-                <span class="apercu-projet-description s7" data-string="projet-<?=$projet['id']?>-description"><?=$Textes->getString('projet-'.$projet['id'].'-description')?></span>
-                <span class="lien-interne lien-fleche apercu-projet-lien s7"><span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span></span>
-              </div>
-            </a>
-
-                <?php
-              }
-            }
-            ?>
-          </div>
-        </section>
+        <h1 class="article-titre s2">Bonjour</h1>
       </article>
 
       <!-- ----------- -->
@@ -293,39 +238,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
       <!-- Mes projets -->
       <!-- ----------- -->
       <article id="projets" data-section="projets">
-        <section class="liste-projets" style="--nombre-lignes: <?=ceil(count($PROJETS) / 2)?>;">
-          <?php
-            foreach($PROJETS as $projet) {
-              $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark.png";
-              $imageLight = __DIR__."/projets/{$projet['id']}/preview-light.png";
-              if (file_exists($imageDark)) {
-                $versionDark = version(__DIR__, $imageDark);
-                $versionLight = version(__DIR__, $imageLight);
-                $imageDark = __DIR__."/projets/{$projet['id']}/preview-dark--{$versionDark}.png";
-                $imageLight = __DIR__."/projets/{$projet['id']}/preview-light--{$versionLight}.png";
-                $style = "--image-dark: url('/mon-portfolio/projets/{$projet['id']}/preview-dark--{$versionDark}.png'); --image-light: url('/mon-portfolio/projets/{$projet['id']}/preview-light--{$versionLight}.png');";
-              } else {
-                $style = "--image: url('/mon-portfolio/projets/{$projet['id']}/preview.png');";
-              }
-              ?>
-
-          <div class="grand-apercu-projet">
-            <a href="/projet/<?=$projet['id']?>" data-projet="<?=$projet['id']?>" class="grand-apercu-projet-lien">
-              <h2 class="apercu-projet-titre s2"><?=$projet['titre']?></h2>
-              <span class="lien-interne lien-fleche apercu-projet-lien s5">
-                <span class="apercu-projet-lien-texte" data-string="lien-details-projet"><?=$Textes->getString('lien-details-projet')?></span>
-              </span>
-
-              <div class="grand-apercu-projet-image" style="<?=$style?>"></div>
-            </a>
-
-            <p class="apercu-projet-description s5" data-string="projet-<?=$projet['id']?>-longue-description"><?=$Textes->getString('projet-'.$projet['id'].'-longue-description')?></p>
-          </div>
-
-              <?php
-            }
-            ?>
-        </section>
+        <h1 class="article-titre s2">Mes projets</h1>
       </article>
 
       <!-- ---- -->
@@ -334,69 +247,7 @@ if ($titre_page != false) $titre = $titre_page . ' — ' . $titre;
       <article id="blog" data-section="blog">
         <h1 class="article-titre s2">Blog</h1>
       </article>
-
-      <!-- ------- -->
-      <!-- Contact -->
-      <!-- ------- -->
-      <article id="contact" data-section="contact">
-        <h1 class="article-titre s2">Contact</h1>
-      </article>
     </main>
-
-    <footer class="s7-s6">
-      <?php include __DIR__.'/images/social.svg' ?>
-
-      <div class="liens-bottom">
-        <ul class="liste-liens liens-sociaux">
-          <li>
-            <a href="https://github.com/Remiscan"
-                class="lien-interne lien-social" data-tappable style="
-                --color-dark: <?=(new Couleur('#6e5494'))->improveContrast('black', 8, 1)->hsl()?>;
-                --color-light: <?=(new Couleur('#6e5494'))->improveContrast('white', 8, 1)->hsl()?>;
-                ">
-              <svg viewBox="0 0 16 16"><use href="#github" /></svg>
-              <span class="social-nom">GitHub</span>
-            </a>
-          </li>
-          <li>
-            <a href="https://codepen.io/remiscan"
-                class="lien-interne lien-social" data-tappable style="
-                --color-dark: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('black', 8, 1)->hsl()?>;
-                --color-light: <?=(new Couleur('hsl(275, 70%, 40%)'))->improveContrast('white', 8, 1)->hsl()?>;
-                ">
-              <svg viewBox="-0.2 -0.2 24.4 24.4"><use href="#codepen" /></svg>
-              <span class="social-nom">CodePen</span>
-            </a>
-          </li>
-          <!--<li>
-            <a href="https://www.linkedin.com/in/remiscan/"
-                class="lien-interne lien-social" data-tappable style="
-                --color-dark: <?=(new Couleur('#0077B5'))->improveContrast('black', 8, 1)->hsl()?>;
-                --color-light: <?=(new Couleur('#0077B5'))->improveContrast('white', 8, 1)->hsl()?>;
-                ">
-              <svg viewBox="-2 -2 28 28"><use href="#linkedin" /></svg>
-              <span class="social-nom">LinkedIn</span>
-            </a>
-          </li>-->
-          <li>
-            <a href="https://twitter.com/Remiscan"
-                class="lien-interne lien-social" data-tappable style="
-                --color-dark: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('black', 8, 1)->hsl()?>;
-                --color-light: <?=(new Couleur('hsl(205, 99%, 55%)'))->improveContrast('white', 8, 1)->hsl()?>;
-                ">
-              <svg viewBox="70 70 260 260"><use href="#twitter" /></svg>
-              <span class="social-nom">Twitter</span>
-            </a>
-          </li>
-        </ul>
-
-        <ul class="liste-liens options">
-          <a href="?lang=fr" class="lien-interne bouton-langage" data-tappable lang="fr" <?php if ($lang == 'fr') { ?>disabled tabindex="-1"<?php } ?>>Français</a>
-          <a href="?lang=en" class="lien-interne bouton-langage" data-tappable lang="en" <?php if ($lang == 'en') { ?>disabled tabindex="-1"<?php } ?>>English</a>
-          <theme-selector position="top"></theme-selector>
-        </ul>
-      </div>
-    </footer>
 
   </body>
 </html>

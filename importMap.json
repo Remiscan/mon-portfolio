@@ -7,6 +7,10 @@
     "default-cookies": "/_common/js/cookies.js",
     "cookie-consent-mini": "/_common/components/cookie-consent-mini/cookie-consent-mini.js.php",
     "cancelable-async": "/_common/js/cancelable-async.js",
+
+    "remiscan-logo": "/_common/components/remiscan-logo/remiscan-logo.js",
+    "remiscan-logo-styles": "/_common/components/remiscan-logo/styles.css.php",
+    "remiscan-logo-template": "/_common/components/remiscan-logo/template.js",
     
     "theme-selector": "/_common/components/theme-selector/theme-selector.js",
     "trap-focus": "/_common/js/trap-focus.js",

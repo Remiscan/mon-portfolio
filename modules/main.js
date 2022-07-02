@@ -1,5 +1,6 @@
 import Cookie from 'cookies';
 import Navigation from 'navigation';
+import 'remiscan-logo';
 import 'theme-selector';
 
 
