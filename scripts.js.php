@@ -43,6 +43,8 @@ window.addEventListener('popstate', event => {
 document.addEventListener('DOMContentLoaded', async event => {
   if (Params.startSection == 'accueil')
     history.replaceState({onav: 'nav_accueil'}, '', '/');
+  else
+    history.replaceState({ onav: `nav_${Params.startSection}` }, '', `/${Params.startSection}`);
 
   await Traduction.traduire();
   await Traduction.initLanguageButtons();
