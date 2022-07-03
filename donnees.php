@@ -29,7 +29,7 @@ $c_projet_colori = new Couleur('aquamarine');
 
 // PROJETS
 $projets = [
-  new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),
+  /*new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),*/
   new Projet('', 'Rémidex', $c_projet_remidex, 'https://remiscan.fr/remidex/'),
   new Projet('', 'Solaire', $c_projet_solaire, 'https://remiscan.fr/solaire/', true),
   new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/'),
