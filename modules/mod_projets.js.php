@@ -1,17 +1,15 @@
 // ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
+/*<?php versionizeStart(); ?>*/
 
 import { cancelableAsync } from '../../_common/js/cancelable-async.js';
-import { Traduction, getString, getTitrePage } from './mod_traduction.js.php';
-import { Params, isVisible, wait } from './mod_Params.js.php';
-import { naviguer, getNavActuelle } from './mod_navigation.js.php';
-import { changeThemeColor } from './mod_changeCouleur.js.php';
-import { Loader, dePlaceholder, placeholderNoMore } from './mod_loadImages.js.php';
 import { focusable } from './mod_a11y.js.php';
+import { changeThemeColor } from './mod_changeCouleur.js.php';
+import { dePlaceholder, Loader, placeholderNoMore } from './mod_loadImages.js.php';
+import { getNavActuelle, naviguer } from './mod_navigation.js.php';
+import { isVisible, Params, wait } from './mod_Params.js.php';
+import { getString, getTitrePage, Traduction } from './mod_traduction.js.php';
 
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+/*<?php versionizeEnd(__DIR__); ?>*/
 
 
 

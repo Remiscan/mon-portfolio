@@ -46,7 +46,7 @@
 
 .liste-projets {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(22rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(24rem, 1fr));
   grid-gap: 2.4rem;
   width: 100%;
   position: relative;

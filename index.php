@@ -112,7 +112,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" media="print" onload="this.media='all'">
 
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
-    <!--<?php ob_start();?>-->
+    <!--<?php versionizeStart(); ?>-->
 
     <!-- Préchargement des textes -->
     <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
@@ -155,9 +155,7 @@
     }
     ?>
 
-    <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-    echo versionizeFiles($imports, __DIR__); ?>-->
+    <!--<?php versionizeEnd(__DIR__); ?>-->
 
     <script id="preload-polyfill">
       {
@@ -224,7 +222,7 @@
 
     <!-- SCRIPTS -->
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
-    <!--<?php ob_start();?>-->
+    <!--<?php versionizeStart(); ?>-->
 
     <script src="/_common/js/test-support.js" id="test-support-script"></script>
     <script id="test-support-script-exe">
@@ -240,9 +238,7 @@
     </script>
     <script type="module" src="/mon-portfolio/scripts.js.php"></script>
 
-    <!--<?php $imports = ob_get_clean();
-    require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-    echo versionizeFiles($imports, __DIR__); ?>-->
+    <!--<?php versionizeEnd(__DIR__); ?>-->
 
   </body>
 </html>

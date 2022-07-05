@@ -19,6 +19,7 @@ $c_competence_css = new Couleur('rgb(0, 112, 186)');
 $c_competence_php = new Couleur('rgb(137, 147, 190)');
 $c_competence_sql = new Couleur('rgb(208, 136, 56)');
 $c_competence_javascript = new Couleur('rgb(99, 168, 20)');
+$c_competence_typescript = new Couleur('#3178C6');
 //$c_projet_cesite = new Couleur('hsl(261, 52%, 47%)');
 $c_projet_cesite = new Couleur('hsl(300, 30%, 15%)');
 $c_projet_remidex = new Couleur('rgb(63, 81, 181)');
@@ -28,7 +29,7 @@ $c_projet_colori = new Couleur('aquamarine');
 
 // PROJETS
 $projets = [
-  new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),
+  /*new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),*/
   new Projet('', 'Rémidex', $c_projet_remidex, 'https://remiscan.fr/remidex/'),
   new Projet('', 'Solaire', $c_projet_solaire, 'https://remiscan.fr/solaire/', true),
   new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/'),
@@ -41,5 +42,6 @@ $competences = [
   new Competence('CSS', '2006', $c_competence_css, 1, 'variables,grid,animations'),
   new Competence('PHP', '2008', $c_competence_php, 2, 'poo'),
   new Competence('SQL', '2009', $c_competence_sql, 2, 'mysql'),
-  new Competence('JavaScript', '2010', $c_competence_javascript, 3, 'webanimations,serviceworkers,webapps')
+  new Competence('JavaScript', '2010', $c_competence_javascript, 3, 'webanimations,serviceworkers,webapps'),
+  new Competence('TypeScript', '2021', $c_competence_typescript, 4)
 ];

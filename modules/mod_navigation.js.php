@@ -1,22 +1,20 @@
 // ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
+/*<?php versionizeStart(); ?>*/
 
 import { cancelableAsync } from '../../_common/js/cancelable-async.js';
-import { Params } from './mod_Params.js.php';
-import { getTitrePage } from './mod_traduction.js.php';
+import { focusable } from './mod_a11y.js.php';
+import { anim_competences } from './mod_animations.js.php';
 import { changeCouleur } from './mod_changeCouleur.js.php';
 import { champsContact, verifyForm } from './mod_contact.js.php';
-import { anim_competences } from './mod_animations.js.php';
-import { placeholderNoMore, loadMaPhoto, loadProjetImages } from './mod_loadImages.js.php';
-import { focusable } from './mod_a11y.js.php';
+import { loadMaPhoto, loadProjetImages, placeholderNoMore } from './mod_loadImages.js.php';
+import { Params } from './mod_Params.js.php';
+import { getTitrePage } from './mod_traduction.js.php';
 
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+/*<?php versionizeEnd(__DIR__); ?>*/
 
 
 
-export const navs = ['nav_accueil', 'nav_bio', 'nav_portfolio', 'nav_contact'];
+export const navs = ['nav_accueil', 'nav_bio', 'nav_portfolio'];
 
 let nav_actuelle = 'nav_accueil';
 let nav_etat = 'accueil';

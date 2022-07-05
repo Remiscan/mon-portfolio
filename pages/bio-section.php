@@ -68,5 +68,6 @@
     <span class="competences-frise-separateur" style="--colonne: 1">2006</span>
     <span class="competences-frise-separateur" style="--colonne: 2">2008</span>
     <span class="competences-frise-separateur" style="--colonne: 3">2010</span>
+    <span class="competences-frise-separateur" style="--colonne: 4">2021</span>
   </div>
 </article>

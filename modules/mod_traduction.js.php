@@ -1,12 +1,10 @@
 // ▼ ES modules cache-busted grâce à PHP
-/*<?php ob_start();?>*/
+/*<?php versionizeStart(); ?>*/
 
-import DefTraduction from '/_common/js/traduction.js';
 import { recalcOnResize } from './mod_Params.js.php';
+import DefTraduction from '/_common/js/traduction.js';
 
-/*<?php $imports = ob_get_clean();
-require_once $_SERVER['DOCUMENT_ROOT'] . '/mon-portfolio/modules/versionize-files.php';
-echo versionizeFiles($imports, __DIR__); ?>*/
+/*<?php versionizeEnd(__DIR__); ?>*/
 
 
 

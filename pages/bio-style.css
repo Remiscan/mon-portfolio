@@ -186,13 +186,13 @@
   position: relative;
   width: 100%;
   display: grid;
-  grid-template-columns: repeat(3, calc(2.8rem + 5%)) 1fr;
+  grid-template-columns: repeat(5, calc(2.8rem + 5%)) 1fr;
   grid-template-rows: 1.2rem;
   --competence-anim-bg-duree: .5s;
 }
 
 .competences-frise-separateur {
-  grid-row: 1 / 7;
+  grid-row: 1 / 8;
   grid-column-start: var(--colonne);
   display: flex;
   flex-direction: column;
@@ -340,5 +340,10 @@
 
   .competence-conteneur.mini {
     height: calc(4rem + 2rem);
+  }
+
+  .competence-conteneur.mini:last-of-type {
+    padding-bottom: 0.7rem;
+    height: calc(4rem + 2rem - 1.4rem);
   }
 }
