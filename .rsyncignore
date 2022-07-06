@@ -2,4 +2,5 @@
 .gitattributes
 .gitignore
 .rsyncignore
-.deploy.sh
+.deploy
+projets/mon-portfolio/originales
