@@ -169,7 +169,6 @@
 
         if (support) script.remove();
       }
-      <?php include $commonDir.'/polyfills/link-preload-stylesheet.min.js'; ?>
     </script>
 
     <noscript>
