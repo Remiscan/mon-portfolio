@@ -1,7 +1,6 @@
 <?php
 $commonDir = dirname(__DIR__, 1).'/_common';
 require_once $commonDir.'/php/Translation.php';
-require_once $commonDir.'/php/version.php';
 require_once __DIR__.'/modules/class_Competence.php';
 require_once __DIR__.'/modules/class_Couleur.php';
 require_once __DIR__.'/modules/class_Projet.php';
