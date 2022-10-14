@@ -1,6 +1,13 @@
 <?php
   include __DIR__ . '/fonctions.php';
-  $Textes = new Textes('mon-portfolio');
+
+  $translation = new Translation(__DIR__.'/strings.json');
+  $httpLanguage = $translation->getLanguage();
+  
+  $urlLang = isset($_GET['lang']) ? htmlspecialchars($_GET['lang']) : null;
+  $cookieLang = isset($_COOKIE['lang']) ? $_COOKIE['lang'] : null;
+  $lang = $urlLang ?: $cookieLang ?: $httpLanguage ?: 'en';
+  $translation->setLanguage($lang);
 
   // Gestion de l'URL demandée et adaptation de la page
 
@@ -40,16 +47,16 @@
     {
       case 'bio':
         $start_color = $c_section_parcours;
-        $titre_page = $Textes->getString('nav-bio');
+        $titre_page = $translation->get('nav-bio');
         break;
       case 'projet':
       case 'portfolio':
         $start_color = $c_section_portfolio;
-        $titre_page = $Textes->getString('nav-portfolio');
+        $titre_page = $translation->get('nav-portfolio');
         break;
       case 'contact':
         $start_color = $c_email;
-        $titre_page = $Textes->getString('nav-contact');
+        $titre_page = $translation->get('nav-contact');
         break;
     }
     $start_meta_color = $start_color->change('l', '25%', true);
@@ -57,7 +64,7 @@
   $load_color = Couleur::blend($c_topcolor, $start_color);
 
   //// Donne le titre de la page
-  $titre = 'Rémi S., ' . $Textes->getString('job');
+  $titre = 'Rémi S., ' . $translation->get('job');
   if ($titre_page != false)
     $titre .= ' — ' . $titre_page;
 
@@ -87,15 +94,15 @@
   }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=httpLanguage()?>" <?=$isAccueil?'':'class="actif"'?>>
+<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=$httpLanguage?>" <?=$isAccueil?'':'class="actif"'?>>
 
   <head>
     <meta charset="utf-8">
     <title><?=$titre?></title>
 
-    <meta name="description" content="<?=$Textes->getString('description-site')?>">
-    <meta property="og:title" content="Rémi S., <?=$Textes->getString('job')?>">
-    <meta property="og:description" content="<?=$Textes->getString('description-site')?>">
+    <meta name="description" content="<?=$translation->get('description-site')?>">
+    <meta property="og:title" content="Rémi S., <?=$translation->get('job')?>">
+    <meta property="og:description" content="<?=$translation->get('description-site')?>">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://remiscan.fr">
     <meta property="og:image" content="https://remiscan.fr/mon-portfolio/images/mosaique-preview.png">
@@ -195,7 +202,7 @@
     </header>
 
     <main id="bottom">
-      <section id="accueil" data-label="nav-accueil" aria-label="<?=$Textes->getString('nav-accueil')?>"></section>
+      <section id="accueil" data-label="nav-accueil" aria-label="<?=$translation->get('nav-accueil')?>"></section>
 
       <section id="bio" aria-labelledby="nav_bio">
         <?php include './pages/bio-section.php'; ?>
@@ -210,7 +217,7 @@
       </section>
     </main>
 
-    <section id="projet" data-label="nav-projet" aria-label="<?=$Textes->getString('nav-projet')?>" aria-hidden="true" hidden>
+    <section id="projet" data-label="nav-projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden>
       <?php include './pages/projet-section.php'; ?>
     </section>
 

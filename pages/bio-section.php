@@ -1,25 +1,25 @@
 <article id="presentation_texte" class="h5" aria-labelledby="titre-bio">
-  <h4 class="sous-section" id="titre-bio" data-string="titre-bio"><?=$Textes->getString('titre-bio')?></h4>
+  <h4 class="sous-section" id="titre-bio" data-string="titre-bio"><?=$translation->get('titre-bio')?></h4>
 
   <div class="biographie">
     <div id="photo" class="cadre-photo">
       <div id="photosecret" class="nope"></div>
     </div>
 
-    <p><span data-string="bio-intro-avant-age"><?=$Textes->getString('bio-intro-avant-age')?></span><?=age()?><span data-string="bio-intro-apres-age"><?=$Textes->getString('bio-intro-apres-age')?></span></p>
+    <p><span data-string="bio-intro-avant-age"><?=$translation->get('bio-intro-avant-age')?></span><?=age()?><span data-string="bio-intro-apres-age"><?=$translation->get('bio-intro-apres-age')?></span></p>
 
-    <p data-string="bio-paragraphe-geek"><?=$Textes->getString('bio-paragraphe-geek')?></p>
+    <p data-string="bio-paragraphe-geek"><?=$translation->get('bio-paragraphe-geek')?></p>
 
-    <p data-string="bio-paragraphe-science"><?=$Textes->getString('bio-paragraphe-science')?></p>
+    <p data-string="bio-paragraphe-science"><?=$translation->get('bio-paragraphe-science')?></p>
       
-    <p><span data-string="bio-conclusion-avant-age"><?=$Textes->getString('bio-conclusion-avant-age')?></span><?=agepro()?><span data-string="bio-conclusion-apres-age"><?=$Textes->getString('bio-conclusion-apres-age')?></span></p>
+    <p><span data-string="bio-conclusion-avant-age"><?=$translation->get('bio-conclusion-avant-age')?></span><?=agepro()?><span data-string="bio-conclusion-apres-age"><?=$translation->get('bio-conclusion-apres-age')?></span></p>
 
-    <p><span data-string="bio-contact-avant-lien"><?=$Textes->getString('bio-contact-avant-lien')?></span><a href="/contact" class="mecontacter focusable" tabIndex="0" data-string="bio-contact-lien"><?=$Textes->getString('bio-contact-lien')?></a><span data-string="bio-contact-apres-lien"><?=$Textes->getString('bio-contact-apres-lien')?></span></p>
+    <p><span data-string="bio-contact-avant-lien"><?=$translation->get('bio-contact-avant-lien')?></span><a href="/contact" class="mecontacter focusable" tabIndex="0" data-string="bio-contact-lien"><?=$translation->get('bio-contact-lien')?></a><span data-string="bio-contact-apres-lien"><?=$translation->get('bio-contact-apres-lien')?></span></p>
   </div>
 </article>
 
 <article id="exp" aria-labelledby="titre-exp">
-  <h4 class="sous-section" id="titre-exp" data-string="titre-exp"><?=$Textes->getString('titre-exp')?></h4>
+  <h4 class="sous-section" id="titre-exp" data-string="titre-exp"><?=$translation->get('titre-exp')?></h4>
 
   <div class="liste-competences">
     <?php
@@ -52,7 +52,7 @@
             foreach($competence->exemples as $k => $exemple)
             {
               ?>
-              <span data-string="competence-<?=strtolower($competence->nom)?>-ex-<?=$exemple?>"><?=$Textes->getString('competence-'.strtolower($competence->nom).'-ex-'.$exemple)?></span><?=($k < $nombre_exemples - 1)?'&nbsp;· ':' …'?>
+              <span data-string="competence-<?=strtolower($competence->nom)?>-ex-<?=$exemple?>"><?=$translation->get('competence-'.strtolower($competence->nom).'-ex-'.$exemple)?></span><?=($k < $nombre_exemples - 1)?'&nbsp;· ':' …'?>
               <?php
             }
             ?>

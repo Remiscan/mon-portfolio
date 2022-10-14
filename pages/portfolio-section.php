@@ -1,5 +1,5 @@
 <article id="projets-personnels" aria-labelledby="titre-projets-perso">
-  <h4 class="sous-section" id="titre-projets-perso" data-string="titre-projets-perso"><?=$Textes->getString('titre-projets-perso')?></h4>
+  <h4 class="sous-section" id="titre-projets-perso" data-string="titre-projets-perso"><?=$translation->get('titre-projets-perso')?></h4>
 
   <div class="liste-projets" style="--nmax: <?=count($projets)?>">
     <?php
@@ -47,7 +47,7 @@
 
           <div class="projet-titre">
             <h5 class="h4" id="projet-titre-<?=$projet->id?>"><?=$projet->titre?></h5>
-            <span data-string="projet-<?=$projet->id?>-description"><?=$Textes->getString('projet-'.$projet->id.'-description')?></span>
+            <span data-string="projet-<?=$projet->id?>-description"><?=$translation->get('projet-'.$projet->id.'-description')?></span>
           </div>
         </div>
 
@@ -60,7 +60,7 @@
 </article>
 
 <?php /*<article id="projets-professionnels" aria-labelledby="titre-projets-perso">
-  <h4 class="sous-section" id="titre-projets-perso" data-string="titre-projets-pro"><?=$Textes->getString('titre-projets-pro')?></h4>
+  <h4 class="sous-section" id="titre-projets-perso" data-string="titre-projets-pro"><?=$translation->get('titre-projets-pro')?></h4>
   
   <p>J'attends de pouvoir remplir cette section avec impatience !</p>
 </article>*/ ?>
