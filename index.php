@@ -86,7 +86,7 @@
     //// On demande au serveur de PUSH le css critique avec HTTP2
     $linkHeader = 'Link: ';
     foreach($styles_critiques as $k => $section) {
-      $versionStyle = version(__DIR__.'/pages', $section . '-style.css');
+      $versionStyle = version([__DIR__.'/pages/'.$section.'-style.css']);
       if ($k > 0) $linkHeader .= ', ';
       $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
     }
@@ -94,7 +94,7 @@
   }
 ?>
 <!doctype html>
-<html data-version="<?=version(__DIR__)?>" data-http-lang="<?=$httpLanguage?>" <?=$isAccueil?'':'class="actif"'?>>
+<html data-version="<?=version([__DIR__])?>" data-http-lang="<?=$httpLanguage?>" <?=$isAccueil?'':'class="actif"'?>>
 
   <head>
     <meta charset="utf-8">
@@ -123,7 +123,7 @@
 
     <!-- Préchargement des textes -->
     <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
-          id="strings" data-version="<?=version(__DIR__, 'strings.json')?>">
+          id="strings" data-version="<?=version([__DIR__.'/strings.json'])?>">
     <!-- Préchargement des modules -->
     <link rel="modulepreload" href="/_common/js/traduction.js">
     <link rel="modulepreload" href="/_common/js/cancelable-async.js">
