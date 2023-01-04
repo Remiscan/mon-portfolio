@@ -78,6 +78,6 @@
 </nav>
 
 <div class="groupe-langages">
-  <button class="bouton-langage focusable h6" data-lang="fr">Français</button>
-  <button class="bouton-langage focusable h6" data-lang="en" disabled>English</button>
+  <a href="?lang=fr" class="bouton-langage focusable h6" data-lang="fr">Français</a>
+  <a href="?lang=en" class="bouton-langage focusable h6" data-lang="en">English</a>
 </div>

@@ -2,10 +2,9 @@
 /*<?php versionizeStart(); ?>*/
 
 import './modules/comp_mediaProjet.js.php';
+import { Params, recalcOnResize, simulateClick } from './modules/mod_Params.js.php';
 import { getNavActuelle, naviguer, setNavActuelle } from './modules/mod_navigation.js.php';
-import { Params, simulateClick } from './modules/mod_Params.js.php';
 import { closeProjet, initProjets } from './modules/mod_projets.js.php';
-import { Traduction } from './modules/mod_traduction.js.php';
 
 /*<?php versionizeEnd(__DIR__); ?>*/
 
@@ -46,8 +45,7 @@ document.addEventListener('DOMContentLoaded', async event => {
   else
     history.replaceState({ onav: `nav_${Params.startSection}` }, '', `/${Params.startSection}`);
 
-  await Traduction.traduire();
-  await Traduction.initLanguageButtons();
+  recalcOnResize();
 
   // Adapte les liens du portfolio (par défaut, ils mènent directement aux projets si JavaScript est désactivé)
   Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => { e.href = '/projet/' + e.dataset.id; e.removeAttribute('target'); });

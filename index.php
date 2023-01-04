@@ -1,6 +1,13 @@
 <?php
+  $commonDir = dirname(__DIR__, 1).'/_common';
+  require_once __DIR__.'/modules/class_Competence.php';
+  require_once __DIR__.'/modules/class_Couleur.php';
+  require_once __DIR__.'/modules/class_Projet.php';
+  
+  include __DIR__ . '/donnees.php'; // Définition des variables de données, comme les couleurs
   include __DIR__ . '/fonctions.php';
 
+  require_once $commonDir.'/php/Translation.php';
   $translation = new Translation(__DIR__.'/strings.json');
   $httpLanguage = $translation->getLanguage();
   
@@ -94,7 +101,7 @@
   }
 ?>
 <!doctype html>
-<html data-version="<?=version([__DIR__])?>" data-http-lang="<?=$httpLanguage?>" <?=$isAccueil?'':'class="actif"'?>>
+<html data-version="<?=version([__DIR__])?>" lang="<?=$lang?>" <?=$isAccueil?'':'class="actif"'?>>
 
   <head>
     <meta charset="utf-8">
@@ -109,6 +116,7 @@
 
     <meta name="viewport" content="initial-scale=1">
     <meta name="theme-color" content="<?=$start_meta_color->hsl()?>">
+    <meta name="color-scheme" content="light dark">
     
     <link rel="icon" type="image/png" href="/mon-portfolio/icons/icon-192.png">
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
@@ -121,11 +129,19 @@
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php versionizeStart(); ?>-->
 
-    <!-- Préchargement des textes -->
-    <link rel="preload" as="fetch" href="/mon-portfolio/strings.json" crossorigin
-          id="strings" data-version="<?=version([__DIR__.'/strings.json'])?>">
+    <!-- Import map et polyfills -->
+    <script defer src="../_common/polyfills/adoptedStyleSheets.min.js"></script>
+    <script>window.esmsInitOptions = { polyfillEnable: ['css-modules', 'json-modules'] }</script>
+    <script defer src="../_common/polyfills/es-module-shims.js"></script>
+    <script type="importmap">
+    {
+      "imports": {
+        
+      }
+    }
+    </script>
+
     <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="/_common/js/traduction.js">
     <link rel="modulepreload" href="/_common/js/cancelable-async.js">
     <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>

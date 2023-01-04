@@ -2,12 +2,12 @@
 /*<?php versionizeStart(); ?>*/
 
 import { cancelableAsync } from '../../_common/js/cancelable-async.js';
+import { isVisible, Params, wait } from './mod_Params.js.php';
 import { focusable } from './mod_a11y.js.php';
 import { changeThemeColor } from './mod_changeCouleur.js.php';
 import { dePlaceholder, Loader, placeholderNoMore } from './mod_loadImages.js.php';
 import { getNavActuelle, naviguer } from './mod_navigation.js.php';
-import { isVisible, Params, wait } from './mod_Params.js.php';
-import { getString, getTitrePage, Traduction } from './mod_traduction.js.php';
+import { getString, getTitrePage } from './mod_traduction.js.php';
 
 /*<?php versionizeEnd(__DIR__); ?>*/
 
@@ -194,7 +194,7 @@ export function* openProjet(event)
       }
 
       // On récupère le "pourquoi du comment" sur le serveur ou dans le cache
-      return fetchEtude(Traduction.language)
+      return fetchEtude(document.documentElement.getAttribute('lang'))
       .catch(() => fetchEtude('fr'))
       .then(response => response.text())
       .catch(error => {

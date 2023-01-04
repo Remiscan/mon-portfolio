@@ -455,11 +455,18 @@ header>.background {
   position: relative;
 }
 
+html[lang="fr"] .bouton-langage[data-lang="fr"],
+html[lang="en"] .bouton-langage[data-lang="en"],
 .bouton-langage:disabled {
   background-color: transparent;
   text-decoration: none;
   opacity: .3;
   cursor: auto;
+}
+
+.bouton-langage:is(:link, :hover, :focus, :active, :visited) {
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .groupe-langages.off {

@@ -1,30 +1,14 @@
 // ▼ ES modules cache-busted grâce à PHP
 /*<?php versionizeStart(); ?>*/
 
-import { recalcOnResize } from './mod_Params.js.php';
-import DefTraduction from '/_common/js/traduction.js';
+import strings from '../strings.json' assert { type: 'json' };
 
 /*<?php versionizeEnd(__DIR__); ?>*/
 
 
 
-class ExtTraduction extends DefTraduction {
-  constructor() {
-    const version = document.querySelector('link#strings').dataset.version || document.documentElement.dataset.version || 0;
-    const path = `/mon-portfolio/strings--${version}.json`;
-    super('mon-portfolio', path, 'fr');
-  }
-
-  async traduire(element = document) {
-    await super.traduire(element);
-    recalcOnResize();
-    document.title = getTitrePage(history.state.onav.replace('nav_', ''));
-    return;
-  }
-}
-
-export const Traduction = new ExtTraduction();
-export const getString = Traduction.getString.bind(Traduction);
+const currentLang = document.documentElement.getAttribute('lang') ?? 'en';
+export const getString = id => strings[currentLang]?.[id] ?? strings['en']?.[id] ?? 'undefined string';
 
 
 

@@ -1,12 +1,4 @@
 <?php
-$commonDir = dirname(__DIR__, 1).'/_common';
-require_once $commonDir.'/php/Translation.php';
-require_once __DIR__.'/modules/class_Competence.php';
-require_once __DIR__.'/modules/class_Couleur.php';
-require_once __DIR__.'/modules/class_Projet.php';
-
-// Définition des variables de données, comme les couleurs
-include __DIR__ . '/donnees.php';
 
 // Calcule l'âge d'une date par rapport à aujourd'hui
 function age($date = '1993-10-31') {
