@@ -33,7 +33,7 @@
       }
       ?>
 
-      <div class="competence-conteneur <?=$competence->mini?'mini':''?>"
+      <div class="competence-conteneur <?='mini'//$competence->mini?'mini':''?>"
           style="--competence-color:<?=$couleurComp->hsl()?>;
                   --colonne: <?=$competence->colonne?>;
                   --ligne: <?=$n + 2?>;

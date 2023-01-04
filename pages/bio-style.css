@@ -279,6 +279,10 @@
   margin: 0;
 }
 
+.competence-conteneur.mini .competence-exemples {
+  display: none;
+}
+
 
 
 /*
