@@ -1,0 +1,19 @@
+{
+  "imports": {
+    "cancelable-async": "/_common/js/cancelable-async.js",
+
+    "mediaProjet": "./modules/components/mediaProjet.js",
+
+    "a11y": "./modules/a11y.js",
+    "animations": "./modules/animations.js",
+    "changeCouleur": "./modules/changeCouleur.js",
+    "contact": "./modules/contact.js",
+    "loadImages": "./modules/loadImages.js",
+    "navigation": "./modules/navigation.js",
+    "Params": "./modules/Params.js",
+    "projets": "./modules/projets.js",
+    "traduction": "./modules/traduction.js",
+
+    "strings": "./strings.json"
+  }
+}

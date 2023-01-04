@@ -1,16 +1,11 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import { cancelableAsync } from '../../_common/js/cancelable-async.js';
-import { focusable } from './mod_a11y.js.php';
-import { anim_competences } from './mod_animations.js.php';
-import { changeCouleur } from './mod_changeCouleur.js.php';
-import { champsContact, verifyForm } from './mod_contact.js.php';
-import { loadMaPhoto, loadProjetImages, placeholderNoMore } from './mod_loadImages.js.php';
-import { Params } from './mod_Params.js.php';
-import { getTitrePage } from './mod_traduction.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { Params } from 'Params';
+import { focusable } from 'a11y';
+import { anim_competences } from 'animations';
+import { cancelableAsync } from 'cancelable-async';
+import { changeCouleur } from 'changeCouleur';
+import { champsContact, verifyForm } from 'contact';
+import { loadMaPhoto, loadProjetImages, placeholderNoMore } from 'loadImages';
+import { getTitrePage } from 'traduction';
 
 
 

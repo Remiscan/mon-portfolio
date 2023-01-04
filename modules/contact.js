@@ -1,10 +1,5 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import { simulateClick } from './mod_Params.js.php';
-import { getString } from './mod_traduction.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { simulateClick } from 'Params';
+import { getString } from 'traduction';
 
 
 
@@ -53,7 +48,7 @@ function sendData()
   }
 
   // Étape parallèle 1 : envoi des données
-  const promiseEnvoi = fetch('/mon-portfolio/modules/mod_sendMail.php', {
+  const promiseEnvoi = fetch('/mon-portfolio/modules/sendMail.php', {
     method: 'POST',
     body: donnees
   })

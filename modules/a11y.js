@@ -1,19 +1,12 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import { simulateClick } from './mod_Params.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { simulateClick } from 'Params';
 
 
 
 ///////////////////////////////////
 // Spécifie quel objet est en focus
 let focused = false;
-function iFocus(element)
-{
-  if (focused != element)
-    focused = element;
+function iFocus(element) {
+  if (focused != element) focused = element;
 }
 
 

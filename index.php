@@ -5,7 +5,6 @@
   require_once __DIR__.'/modules/class_Projet.php';
   
   include __DIR__ . '/donnees.php'; // Définition des variables de données, comme les couleurs
-  include __DIR__ . '/fonctions.php';
 
   require_once $commonDir.'/php/Translation.php';
   $translation = new Translation(__DIR__.'/strings.json');
@@ -133,19 +132,13 @@
     <script defer src="../_common/polyfills/adoptedStyleSheets.min.js"></script>
     <script>window.esmsInitOptions = { polyfillEnable: ['css-modules', 'json-modules'] }</script>
     <script defer src="../_common/polyfills/es-module-shims.js"></script>
-    <script type="importmap">
-    {
-      "imports": {
-        
-      }
-    }
-    </script>
+    <script type="importmap"><?php include __DIR__.'/import-map.json'; ?></script>
 
     <!-- Préchargement des modules -->
     <link rel="modulepreload" href="/_common/js/cancelable-async.js">
-    <?php $mods = preg_filter('/(.+)\.js\.php/', '$1', scandir(__DIR__.'/modules'));
+    <?php $mods = preg_filter('/(.+)\.js$/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js.php">
+    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js">
     <?php } ?>
 
     <?php if ($css_critique_methode == 'push') { ?>
@@ -177,6 +170,9 @@
       <?php
     }
     ?>
+
+    <!-- Scripts -->
+    <script type="module" src="/mon-portfolio/modules/main.js"></script>
 
     <!--<?php versionizeEnd(__DIR__); ?>-->
 
@@ -241,26 +237,5 @@
     <div id="defontsize" style="width: 1000rem; height: 0; position: absolute;" aria-hidden="true"></div>
     <div id="largeurpage" style="width: 100vw; height: 0; position: absolute;" aria-hidden="true"></div>
     <div id="hauteurpage" style="width: 0; height: 100vh; position: absolute;" aria-hidden="true"></div>
-
-    <!-- SCRIPTS -->
-    <!-- ▼ Fichiers cache-busted grâce à PHP -->
-    <!--<?php versionizeStart(); ?>-->
-
-    <script src="/_common/js/test-support.js" id="test-support-script"></script>
-    <script id="test-support-script-exe">
-      TestSupport.getSupportResults([
-        { name: 'CSS clip-path', priority: 0 },
-        { name: 'CSS custom properties', priority: 1 },
-        { name: 'localStorage', priority: 0 },
-        { name: 'web animations', priority: 0 },
-        { name: 'ES const & let', priority: 1 },
-        { name: 'ES template literals', priority: 1 },
-        { name: 'ES modules', priority: 1 }
-      ]);
-    </script>
-    <script type="module" src="/mon-portfolio/scripts.js.php"></script>
-
-    <!--<?php versionizeEnd(__DIR__); ?>-->
-
   </body>
 </html>

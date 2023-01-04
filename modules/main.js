@@ -1,12 +1,7 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import './modules/comp_mediaProjet.js.php';
-import { Params, recalcOnResize, simulateClick } from './modules/mod_Params.js.php';
-import { getNavActuelle, naviguer, setNavActuelle } from './modules/mod_navigation.js.php';
-import { closeProjet, initProjets } from './modules/mod_projets.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { Params, recalcOnResize, simulateClick } from 'Params';
+import 'mediaProjet';
+import { getNavActuelle, naviguer, setNavActuelle } from 'navigation';
+import { closeProjet, initProjets } from 'projets';
 
 
 

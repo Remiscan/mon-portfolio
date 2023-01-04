@@ -1,9 +1,4 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import strings from '../strings.json' assert { type: 'json' };
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import strings from 'strings' assert { type: 'json' };
 
 
 

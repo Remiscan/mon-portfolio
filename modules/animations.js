@@ -1,9 +1,4 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import { wait } from './mod_Params.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { wait } from 'Params';
 
 
 

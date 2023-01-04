@@ -1,15 +1,10 @@
-// ▼ ES modules cache-busted grâce à PHP
-/*<?php versionizeStart(); ?>*/
-
-import { cancelableAsync } from '../../_common/js/cancelable-async.js';
-import { isVisible, Params, wait } from './mod_Params.js.php';
-import { focusable } from './mod_a11y.js.php';
-import { changeThemeColor } from './mod_changeCouleur.js.php';
-import { dePlaceholder, Loader, placeholderNoMore } from './mod_loadImages.js.php';
-import { getNavActuelle, naviguer } from './mod_navigation.js.php';
-import { getString, getTitrePage } from './mod_traduction.js.php';
-
-/*<?php versionizeEnd(__DIR__); ?>*/
+import { Params, isVisible, wait } from 'Params';
+import { focusable } from 'a11y';
+import { cancelableAsync } from 'cancelable-async';
+import { changeThemeColor } from 'changeCouleur';
+import { Loader, dePlaceholder, placeholderNoMore } from 'loadImages';
+import { getNavActuelle, naviguer } from 'navigation';
+import { getString, getTitrePage } from 'traduction';
 
 
 
