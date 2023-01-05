@@ -18,33 +18,45 @@ function agepro() {
 ?>
 
 <article id="presentation_texte" class="h5" aria-labelledby="titre-bio">
-  <h4 class="sous-section" id="titre-bio" data-string="titre-bio"><?=$translation->get('titre-bio')?></h4>
+  <h4 class="sous-section" id="titre-bio"><?=$translation->get('titre-bio')?></h4>
 
   <div class="biographie">
     <div id="photo" class="cadre-photo">
       <div id="photosecret" class="nope"></div>
     </div>
 
-    <p><span data-string="bio-intro-avant-age"><?=$translation->get('bio-intro-avant-age')?></span><?=age()?><span data-string="bio-intro-apres-age"><?=$translation->get('bio-intro-apres-age')?></span></p>
+    <p>
+      <span><?=$translation->get('bio-intro-avant-age')?></span>
+      <span><?=age()?></span>
+      <span><?=$translation->get('bio-intro-apres-age')?></span>
+    </p>
 
-    <p data-string="bio-paragraphe-geek"><?=$translation->get('bio-paragraphe-geek')?></p>
+    <p><?=$translation->get('bio-paragraphe-geek')?></p>
 
-    <p data-string="bio-paragraphe-science"><?=$translation->get('bio-paragraphe-science')?></p>
+    <p><?=$translation->get('bio-paragraphe-science')?></p>
       
-    <p><span data-string="bio-conclusion-avant-age"><?=$translation->get('bio-conclusion-avant-age')?></span><?=agepro()?><span data-string="bio-conclusion-apres-age"><?=$translation->get('bio-conclusion-apres-age')?></span></p>
+    <p>
+      <span><?=$translation->get('bio-conclusion-avant-age')?></span>
+      <span><?=agepro()?></span>
+      <span><?=$translation->get('bio-conclusion-apres-age')?></span>
+    </p>
 
-    <p><span data-string="bio-contact-avant-lien"><?=$translation->get('bio-contact-avant-lien')?></span><a href="/contact" class="mecontacter" tabIndex="0" data-string="bio-contact-lien"><?=$translation->get('bio-contact-lien')?></a><span data-string="bio-contact-apres-lien"><?=$translation->get('bio-contact-apres-lien')?></span></p>
+    <p>
+      <span><?=$translation->get('bio-contact-avant-lien')?></span>
+      <a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener" class="mecontacter"><?=$translation->get('bio-contact-lien')?></a>
+      <span><?=$translation->get('bio-contact-apres-lien')?></span>
+    </p>
   </div>
 </article>
 
 <article id="exp" aria-labelledby="titre-exp">
-  <h4 class="sous-section" id="titre-exp" data-string="titre-exp"><?=$translation->get('titre-exp')?></h4>
+  <h4 class="sous-section" id="titre-exp"><?=$translation->get('titre-exp')?></h4>
 
   <div class="liste-competences">
     <?php
-    foreach($competences as $n => $competence)
-    {
+    foreach($competences as $n => $competence) {
       $couleurComp = $competence->couleur;
+
       // Amélioration du contraste entre la couleur de la compétence et le texte blanc transparent
       while(Couleur::contrast($couleurComp, new Couleur('white')) < 4.5) {
         $couleurComp = $couleurComp->change('bk', '+5%')->change('w', '-5%');
@@ -54,9 +66,9 @@ function agepro() {
 
       <div class="competence-conteneur <?='mini'//$competence->mini?'mini':''?>"
           style="--competence-color:<?=$couleurComp->hsl()?>;
-                  --colonne: <?=$competence->colonne?>;
-                  --ligne: <?=$n + 2?>;
-                  --delai: <?=$n * .1?>s">
+                 --colonne: <?=$competence->colonne?>;
+                 --ligne: <?=$n + 2?>;
+                 --delai: <?=$n * .1?>s">
 
         <div class="competence-background"></div>
 
@@ -66,15 +78,11 @@ function agepro() {
           </div>
 
           <div class="competence-exemples">
-            <?php
-            $nombre_exemples = count($competence->exemples);
-            foreach($competence->exemples as $k => $exemple)
-            {
-              ?>
-              <span data-string="competence-<?=strtolower($competence->nom)?>-ex-<?=$exemple?>"><?=$translation->get('competence-'.strtolower($competence->nom).'-ex-'.$exemple)?></span><?=($k < $nombre_exemples - 1)?'&nbsp;· ':' …'?>
-              <?php
-            }
-            ?>
+            <?php $nombre_exemples = count($competence->exemples);
+            foreach($competence->exemples as $k => $exemple) { ?>
+              <span><?=$translation->get('competence-'.strtolower($competence->nom).'-ex-'.$exemple)?></span>
+              <?=($k < $nombre_exemples - 1)?'&nbsp;· ':' …'?>
+            <?php } ?>
           </div>
         </div>
 

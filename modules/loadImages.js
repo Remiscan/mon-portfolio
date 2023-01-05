@@ -88,10 +88,8 @@ export async function dePlaceholder(conteneur, url) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Charge des images pendant que leurs conteneurs affichent une animation d'attente, puis affiche ces images avec animation
-export function placeholderNoMore(listeImages = false, listeConteneurs, sequence = false, grid = false)
-{
-  if (listeImages !== false)
-  {
+export function placeholderNoMore(listeImages = false, listeConteneurs, sequence = false, grid = false) {
+  if (listeImages !== false) {
     function endOnePlaceholder(e, n, nmax, k = 0) {
       return new Promise(resolve => {
         e.style.setProperty('--n', (nmax == 0) ? 0 : n);
@@ -123,8 +121,7 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
     listeConteneurs.forEach(e => e.classList.add('loading'));
     const promesses = [];
 
-    if (sequence)
-    {
+    if (sequence) {
       return loadAllImages(listeImages)
       .then(() => {
         const nmax = (grid !== false) ? getComputedStyle(grid).gridTemplateColumns.split(' ').length
@@ -141,9 +138,7 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
         return Promise.all(promesses);
       })
       .catch(raison => console.error('[:(] L\'image ' + raison + ' n\'a pas pu être chargée...'));
-    }
-    else
-    {
+    } else {
       listeConteneurs.forEach((e, n) => {
         const unePromesse = loadAllImages([listeImages[n]])
         .then(() => endOnePlaceholder(e, n, 0))
@@ -154,9 +149,7 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
       return Promise.all(promesses)
       .catch(raison => console.error(raison));
     }
-  }
-  else
-  {
+  } else {
     return Promise.resolve().then(() => {
       listeConteneurs.forEach(e => {
         e.classList.remove('loaded', 'loading');
@@ -171,8 +164,7 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
 
 ///////////////////////////////////////////////////////////////
 // Chargement des images de preview des projet sur le portfolio
-export function loadProjetImages()
-{
+export function loadProjetImages() {
   const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));
   let listeImages = [];
   listeProjets.forEach(e => listeImages.push(e.dataset.image));
@@ -183,8 +175,7 @@ export function loadProjetImages()
 
 /////////////////////////
 // Chargement de ma photo
-export function loadMaPhoto()
-{
+export function loadMaPhoto() {
   const maPhoto = document.getElementById('photo');
   placeholderNoMore(['/mon-portfolio/images/moi.jpg'], [maPhoto]);
 }

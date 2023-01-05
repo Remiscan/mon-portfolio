@@ -9,17 +9,14 @@ export const getString = id => strings[currentLang]?.[id] ?? strings['en']?.[id]
 
 /////////////////////////////////////
 // Donne le titre de la page en cours
-export function getTitrePage(o = false, titre = false)
-{
+export function getTitrePage(o = false, titre = false) {
   const titrePrefix = 'Rémi S., ' + getString('job');
   const titreSeparator = ' — ';
 
-  if (titre)
-    return titre + titreSeparator + titrePrefix;
+  if (titre)     return titre + titreSeparator + titrePrefix;
   
   let titreCore;
-  switch (o)
-  {
+  switch (o) {
     case 'competences':
     case 'quijesuis':
     case 'biographie':
@@ -39,8 +36,6 @@ export function getTitrePage(o = false, titre = false)
       titreCore = false;
   }
 
-  if (titreCore)
-    return titreCore + titreSeparator + titrePrefix;
-  else
-    return titrePrefix;
+  if (titreCore) return titreCore + titreSeparator + titrePrefix;
+  else           return titrePrefix;
 }

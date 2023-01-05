@@ -19,26 +19,23 @@
 
   //// Récupération de la section de départ
   $start_section = 'accueil';
-  if (isset($_GET['onav']))
-  {
+  if (isset($_GET['onav'])) {
     $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
-
-    if (in_array($onav, array('competences', 'bio', 'portfolio', 'projet', 'contact')))
+    if (in_array($onav, ['competences', 'bio', 'portfolio', 'projet', 'contact'])) {
       $start_section = $onav;
+    }
   }
-  $isAccueil = ($start_section == 'accueil');
+  $isAccueil = ($start_section === 'accueil');
 
   //// Récupération du projet de départ
   $start_projet = '';
-  if (isset($_GET['projet']))
-  {
+  if (isset($_GET['projet'])) {
     $oprojet = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['projet']);
 
     $idsProjets = array();
     foreach($projets as $projet) { $idsProjets[] = $projet->id; }
     
-    if (in_array($oprojet, $idsProjets))
-      $start_projet = $oprojet;
+    if (in_array($oprojet, $idsProjets)) $start_projet = $oprojet;
   }
 
   //// Si l'URL demandée est /
@@ -47,10 +44,8 @@
   $titre_page = false;
 
   //// Si une URL différente de / est demandée
-  if (!$isAccueil)
-  {
-    switch($start_section)
-    {
+  if (!$isAccueil) {
+    switch($start_section) {
       case 'bio':
         $start_color = $c_section_parcours;
         $titre_page = $translation->get('nav-bio');
@@ -71,15 +66,12 @@
 
   //// Donne le titre de la page
   $titre = 'Rémi S., ' . $translation->get('job');
-  if ($titre_page != false)
-    $titre .= ' — ' . $titre_page;
+  if ($titre_page) $titre .= ' — ' . $titre_page;
 
   //// Liste des fichiers style-*.css critiques ou non
   $styles_critiques = ['global'];
-  if ($start_section != 'accueil')
-    $styles_critiques[] = $start_section;
-  if ($start_section == 'projet')
-    $styles_critiques[] = 'portfolio';
+  if ($start_section != 'accueil') $styles_critiques[] = $start_section;
+  if ($start_section == 'projet')  $styles_critiques[] = 'portfolio';
   $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
 
   // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
@@ -87,8 +79,7 @@
   $css_critique_methode = 'push'; /*
   $css_critique_methode = 'inline'; /**/
 
-  if ($css_critique_methode == 'push')
-  {
+  if ($css_critique_methode == 'push') {
     //// On demande au serveur de PUSH le css critique avec HTTP2
     $linkHeader = 'Link: ';
     foreach($styles_critiques as $k => $section) {
@@ -137,13 +128,16 @@
 
     <!-- Préchargement des modules -->
     <link rel="modulepreload" href="/_common/js/cancelable-async.js">
-    <?php $mods = preg_filter('/(.+)\.js$/', '$1', scandir(__DIR__.'/modules'));
-    foreach($mods as $mod) { ?>
-    <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js">
-    <?php } ?>
+    <?php
+    $mods = preg_filter('/(.+)\.js$/', '$1', scandir(__DIR__.'/modules'));
+    foreach($mods as $mod) {
+      ?>
+      <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js">
+      <?php
+    } ?>
 
     <?php if ($css_critique_methode == 'push') { ?>
-    
+
       <!-- CSS critique (pushed) -->
       <?php foreach($styles_critiques as $section) { ?>
         <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css">
@@ -152,44 +146,24 @@
     <?php } else { ?>
 
       <!-- CSS critique (inline) -->
-      <?php
-      echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
+      <?php echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
       foreach($styles_critiques as $section) {
         include __DIR__ . '/pages/' . $section . '-style.css';
       }
-      echo '</style>';
-      ?>
+      echo '</style>'; ?>
 
     <?php } ?>
 
     <!-- CSS non-critique (préchargé) -->
-    <?php
-    foreach($styles_non_critiques as $section) {
-      ?>
+    <?php foreach($styles_non_critiques as $section) { ?>
       <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style.css"
             onload="this.onload=null; this.rel='stylesheet'">
-      <?php
-    }
-    ?>
+    <?php } ?>
 
     <!-- Scripts -->
     <script type="module" src="/mon-portfolio/modules/main.js"></script>
 
     <!--<?php versionizeEnd(__DIR__); ?>-->
-
-    <script id="preload-polyfill">
-      {
-        let support = false;
-        let script = document.getElementById('preload-polyfill');
-        try {
-          support = document.createElement('link').relList.supports('preload');
-        } catch(e) {
-          support = false;
-        }
-
-        if (support) script.remove();
-      }
-    </script>
 
     <noscript>
       <link rel="stylesheet" href="/mon-portfolio/style-noscript.css">
@@ -215,7 +189,7 @@
     </header>
 
     <main id="bottom">
-      <section id="accueil" data-label="nav-accueil" aria-label="<?=$translation->get('nav-accueil')?>"></section>
+      <section id="accueil" aria-label="<?=$translation->get('nav-accueil')?>"></section>
 
       <section id="bio" aria-labelledby="nav_bio">
         <?php include './pages/bio-section.php'; ?>
@@ -230,7 +204,7 @@
       </section>
     </main>
 
-    <section id="projet" data-label="nav-projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden inert>
+    <section id="projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden inert>
       <?php include './pages/projet-section.php'; ?>
     </section>
 

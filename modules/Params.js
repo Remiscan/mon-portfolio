@@ -184,25 +184,9 @@ export function wait(time) { return new Promise(resolve => setTimeout(resolve, t
 
 
 
-/////////////////////////////////
-// Simule un click sur un élément
-export function simulateClick(elem, x = -1, y = -1) {
-	const event = new MouseEvent('click', {
-		bubbles: true,
-		cancelable: true,
-    view: window,
-    clientX: x,
-    clientY: y
-  });
-  elem.dispatchEvent(event);
-};
-
-
-
 ///////////////////////////////////////////////////////////////////////
 // Vérifie si un élément est complètement visible avec le scroll actuel
-export function isVisible(e, fully = true)
-{
+export function isVisible(e, fully = true) {
   const eCoord = e.getBoundingClientRect();
   const daddyScroll = {top: 0, bottom: window.innerHeight}; // on reste safe au cas où l'omnibar du navigateur est affichée sur mobile
   const eScroll = {top: eCoord.top, bottom: eCoord.bottom};
@@ -210,26 +194,4 @@ export function isVisible(e, fully = true)
     return ((daddyScroll.top < eScroll.top) && (daddyScroll.bottom > eScroll.bottom));
   else
     return ((daddyScroll.top <= eScroll.bottom) && (daddyScroll.bottom >= eScroll.top));
-}
-
-
-
-/////////////////////////////////////////////////////
-// Vérifie si localstorage est utilisable (merci MDN)
-export function storageAvailable(type) {
-  try {
-      const storage = window[type],
-            x = '__storage_test__';
-      storage.setItem(x, x);
-      storage.removeItem(x);
-      return true;
-  }
-  catch(e) {
-      return e instanceof DOMException && (
-          e.code === 22 ||
-          e.code === 1014 ||
-          e.name === 'QuotaExceededError' ||
-          e.name === 'NS_ERROR_DOM_QUOTA_REACHED') &&
-          storage.length !== 0;
-  }
 }

@@ -107,7 +107,7 @@ export function* openProjet(event)
       window.addEventListener('keydown', window.cp = event => {
         const key = event.which || event.keyCode;
         const button = document.getElementById('projet-close');
-        if (key == 27) simulateClick(button, 1, 1);
+        if (key == 27) button.click();
       });
 
       if (thisProjetNav != lastProjetNav) throw 'expired';

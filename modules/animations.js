@@ -4,20 +4,17 @@ import { wait } from 'Params';
 
 ///////////////////////////////////
 // Clip quand on passe sur la photo
-function photoclip(event, bool = true)
-{
+export function photoclip(event, bool = true) {
   const photo = document.getElementById('photosecret');
   const photorect = photo.getBoundingClientRect();
   const tx = event.clientX - photorect.left;
   const ty = event.clientY - photorect.top;
-  if (bool)
-  {
+
+  if (bool) {
     photo.style.opacity = 1;
     photo.style.setProperty('-webkit-clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
     photo.style.setProperty('clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
-  }
-  else
-  {
+  } else {
     photo.animate([
       { clipPath: 'circle(25% at ' + tx + 'px '+ ty + 'px)', opacity: 1 },
       { clipPath: 'circle(0% at ' + tx + 'px '+ ty + 'px)', opacity: 1 }
@@ -31,30 +28,40 @@ function photoclip(event, bool = true)
   }
 }
 
-document.getElementById('photosecret').addEventListener('mousemove', event => {
-  photoclip(event);
-});
-document.getElementById('photosecret').addEventListener('mouseleave', event => {
-  photoclip(event, false);
+const photoSecret = document.getElementById('photosecret');
+photoSecret.addEventListener('pointerenter', event => {
+  const moveHandler = event => { photoclip(event) };
+
+  const cancelHandler = event => {
+    photoclip(event, false);
+    photoSecret.removeEventListener('pointermove', moveHandler);
+    photoSecret.removeEventListener('pointerup', cancelHandler);
+    photoSecret.removeEventListener('pointercancel', cancelHandler);
+    photoSecret.removeEventListener('pointerout', cancelHandler);
+    photoSecret.removeEventListener('pointerleave', cancelHandler);
+  }
+
+  photoSecret.addEventListener('pointermove', moveHandler);
+  photoSecret.addEventListener('pointerup', cancelHandler);
+  photoSecret.addEventListener('pointercancel', cancelHandler);
+  photoSecret.addEventListener('pointerout', cancelHandler);
+  photoSecret.addEventListener('pointerleave', cancelHandler);
 });
 
 
 
 ////////////////////////////////////
 // Anime la timeline des compétences
-export function anim_competences(t = true)
-{
-  if (t && !document.querySelector('.competence-conteneur').classList.contains('colored'))
-  {
-    Array.from(document.getElementsByClassName('competence-conteneur')).forEach(e => {
+export function anim_competences(t = true) {
+  const firstConteneur = document.querySelector('.competence-conteneur');
+  const allConteneurs = [...document.getElementsByClassName('competence-conteneur')];
+
+  if (t && !firstConteneur.classList.contains('colored')) {
+    allConteneurs.forEach(e => {
       const delai = parseFloat(e.style.getPropertyValue('--delai'));
       wait(1000 * delai).then(() => e.classList.add('colored'));
     });
-  }
-  else if (!t && document.querySelector('.competence-conteneur').classList.contains('colored'))
-  {
-    Array.from(document.getElementsByClassName('competence-conteneur')).forEach(e => {
-      e.classList.remove('colored');
-    });
+  } else if (!t && firstConteneur.classList.contains('colored')) {
+    allConteneurs.forEach(e => e.classList.remove('colored'));
   }
 }

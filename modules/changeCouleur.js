@@ -2,28 +2,26 @@ import { Params } from 'Params';
 
 
 
-/////////////////////////////////////////////////////
-// Gère le changement de couleur de la section du bas
 let couleurEnCours = false;
 
+
+
+/////////////////////////////////////////////////////
+// Gère le changement de couleur de la section du bas
 //   event : permet de récupérer les coordonnées du clic
 //   element : l'élément sur lequel je considère avoir cliqué - utilisé par défaut comme source du Fond, sauf si elementExpand est spécifié
 //   call : fonction(event, element) à appeler après changement de couleur
 //   color : couleur du Fond, récupérée automatiquement sur les éléments de nav - sinon, teinte aléatoire si non spécifiée
 //   elementExpand : l'élément utilisé comme source du Fond, si il est différent de element
-export function changeCouleur(event, element = false, color = false, elementExpand = false)
-{
+export function changeCouleur(event, element = false, color = false, elementExpand = false) {
   const Fond = document.getElementById('couleur');
   return new Promise((resolve, reject) => {
     let couleur;
-    if (element !== false)
+    if (element !== false) {
       couleur = element.style.getPropertyValue('--article-color') || getComputedStyle(element).getPropertyValue('--article-color');
-    else
-    {
-      if (color)
-        couleur = color;
-      else
-      {
+    } else {
+      if (color) couleur = color;
+      else {
         const r = Math.floor((Math.random() * 360));
         couleur = 'hsl(' + r + ', 40%, 30%)';
       }
@@ -38,11 +36,9 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     let elPos = { left: posX, top: posY, right: posX + 1, bottom: posY + 1 };
     let keyframesColoration;
 
-    if (element !== false)
-    {
+    if (element) {
       let el = element;
-      if (elementExpand)
-        el = elementExpand;
+      if (elementExpand) el = elementExpand;
 
       // J'essaye de placer le Fond avec la même taille et position que l'élément sur lequel on a cliqué
       elPos = el.getBoundingClientRect();
@@ -79,7 +75,6 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     const coloration = Fond.animate(
       keyframesColoration, {
         easing: 'cubic-bezier(0.2, 0.45, 0.3, 1)',
-        //duration: 350,
         duration: 400,
         fill: 'forwards'
     });
@@ -97,8 +92,7 @@ export function changeCouleur(event, element = false, color = false, elementExpa
 
 /////////////////////////////////////////////////////////////////////////////////////////////////
 // Change la couleur du thème via la balise meta theme-color, à partir de 'couleur' au format hsl
-export function changeThemeColor(couleur)
-{
+export function changeThemeColor(couleur) {
   const metaThemeColor = document.querySelector("meta[name=theme-color]");
   const metaCouleur = couleur.split(',');
   metaCouleur[2] = Math.round(Number(metaCouleur[2].replace('%)', '')) * 0.72) + '%)';

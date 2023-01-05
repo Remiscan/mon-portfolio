@@ -1,4 +1,3 @@
-import { simulateClick } from 'Params';
 import { getString } from 'traduction';
 
 
@@ -238,8 +237,8 @@ document.getElementById('formulaire_contact').addEventListener('submit', event =
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 // Scrolle vers le haut de page puis envoie vers la page contact au clic sur "me contacter" dans la bio
-document.querySelector('.mecontacter').addEventListener('click', event => {
+/*document.querySelector('.mecontacter').addEventListener('click', event => {
   event.preventDefault();
   window.scrollTo(0, 0);
-  setTimeout(() => simulateClick(document.getElementById('nav_contact'), 1, 1), 100);
-});
+  setTimeout(() => document.getElementById('nav_contact').click(), 100);
+});*/
