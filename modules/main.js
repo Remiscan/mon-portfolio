@@ -7,12 +7,12 @@ import { closeProjet, initProjets } from 'projets';
 
 ////////////////////////////////////////////////////////////////////
 // Gère les appuis sur les boutons précédent / suivant du navigateur
-window.addEventListener('popstate', event => {
+window.addEventListener('popstate', async event => {
   const elProjet = document.getElementById('projet');
   const onav = event.state.onav;
   if (onav == 'projet') {
     if (elProjet.style.display != 'none' && elProjet.style.display) {
-      closeProjet();
+      await closeProjet();
     }
 
     const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
@@ -23,7 +23,7 @@ window.addEventListener('popstate', event => {
     });
   } else {
     if (document.getElementById('projet').classList.contains('on')) {
-      closeProjet();
+      await closeProjet();
     }
     
     document.getElementById(onav)?.click();

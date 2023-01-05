@@ -277,8 +277,7 @@ export function initProjets() {
 
 //////////////////
 // Ferme un projet
-export function closeProjet()
-{
+export async function closeProjet() {
   document.body.style.removeProperty('--projet-color');
   
   elProjet.setAttribute('aria-hidden', 'true');
@@ -289,7 +288,6 @@ export function closeProjet()
   document.querySelector('main').removeAttribute('inert');
   document.querySelector('header').removeAttribute('inert');
 
-  const boutonFermer = document.getElementById('projet-close');
   window.removeEventListener('keydown', window.cp);
   changeThemeColor(document.body.style.getPropertyValue('--article-color'));
   projetTransition.style.display = 'block';
@@ -301,73 +299,56 @@ export function closeProjet()
   const listeConteneurs = [document.getElementById('projet-details-image-phone'), document.getElementById('projet-details-image-pc')];
   placeholderNoMore(false, listeConteneurs);
   placeholderNoMore(false, [document.getElementById('projet-details-icone')]);
-  if (apparitionProjetConteneur)
-  {
-    animProjet(false, true);
-    apparitionProjetConteneur.addEventListener('finish', hideProjet);
-  }
+
+  await animProjet(false, true);
+  if (transiSource) transiSource.style.opacity = 'unset';
+  const transiProjOpa = elProjet.animate([
+    { opacity: 1 },
+    { opacity: 0 }
+  ], {
+    duration: 100,
+    fill: 'forwards'
+  });
+  await new Promise(resolve => transiProjOpa.addEventListener('finish', resolve));
+  isProjetClosing = 0;
+  elProjet.classList.remove('on');
+  transiProjOpa.cancel();
+  document.documentElement.style.overflowY = 'auto';
+  if (typeof obfuscatorProjet !== 'undefined') obfuscatorProjet.cancel();
+
   const lastOpened = document.querySelector(`.projet-conteneur[data-id=${currentProjet}]`);
   lastOpened.focus();
-  lastOpened.blur();
-
-  function hideProjet()
-  {
-    if (transiSource)
-      transiSource.style.opacity = 'unset';
-    const transiProjOpa = elProjet.animate([
-      { opacity: 1 },
-      { opacity: 0 }
-    ], {
-      duration: 100,
-      fill: 'forwards'
-    });
-    transiProjOpa.addEventListener('finish', () => {
-      isProjetClosing = 0;
-      elProjet.classList.remove('on');
-      transiProjOpa.cancel();
-      document.documentElement.style.overflowY = 'auto';
-      if (typeof obfuscatorProjet !== 'undefined')
-        obfuscatorProjet.cancel();
-    });
-    apparitionProjetConteneur.removeEventListener('finish', hideProjet);
-  }
 }
 
 
 
 /////////////////////////////////
 // Anime l'apparition d'un projet
-function animProjet(id = false, reverse = false)
-{
-  let trueid;
-  if (id)
-    trueid = id;
-  else
-    trueid = currentProjet;
+function animProjet(id = false, reverse = false) {
+  const trueid = id ? id : currentProjet;
   
   // On prépare l'animation de transition
   transiSource = document.getElementById('projet-preview-' + trueid);
   const transiSourceClip = window.getComputedStyle(transiSource).getPropertyValue('clip-path');
   const transiSourcePos = transiSource.getBoundingClientRect();
   const transiPosDebut = {
-                            top: transiSourcePos.top,
-                            left: transiSourcePos.left,
-                            width: transiSource.offsetWidth / Params.owidth,
-                            height: transiSource.offsetHeight / Params.oheight
-                         };
+    top: transiSourcePos.top,
+    left: transiSourcePos.left,
+    width: transiSource.offsetWidth / Params.owidth,
+    height: transiSource.offsetHeight / Params.oheight
+  };
   const projetContenuPos = projetContenu.getBoundingClientRect();
   const transiPosFin = {
-                         top: 0,
-                         left: projetContenuPos.left,
-                         width: projetContenu.offsetWidth / Params.owidth,
-                         height: 1
-                       };
+    top: 0,
+    left: projetContenuPos.left,
+    width: projetContenu.offsetWidth / Params.owidth,
+    height: 1
+  };
   
   // Si on est sur mobile, modifier l'animation pour qu'elle tienne compte du clip-path
   const transiTop = document.getElementById('projet-transition-top');
   const transiBottom = document.getElementById('projet-transition-bottom');
-  if (transiSourceClip != 'none')
-  {
+  if (transiSourceClip != 'none') {
     const transiSourceClipValue = transiSourceClip.split('px,')[0].replace('polygon(0px ', '');
     projetTransition.style.setProperty('--clip-height', String(transiSourceClipValue + 2) + 'px');
     transiPosDebut.top = transiPosDebut.top + Number(transiSourceClipValue);
@@ -375,20 +356,13 @@ function animProjet(id = false, reverse = false)
   }
 
   let transiDuration, transiTiming, istart, iend;
-  if (reverse)
-  {
-    //transiDuration = 100;
+  if (reverse) {
     transiDuration = 150;
-    //transiTiming = Params.easingAccelerate;
     transiTiming = Params.easingDecelerate;
     istart = 1;
     iend = 0;
-  }
-  else
-  {
-    //transiDuration = 200;
+  } else {
     transiDuration = 250;
-    //transiTiming = Params.easingDecelerate;
     transiTiming = 'cubic-bezier(0.4, 0.15, 0.3, 0.8)';
     istart = 0;
     iend = 1;
@@ -414,20 +388,16 @@ function animProjet(id = false, reverse = false)
   
   // On lance l'animation de transition
   transiSource.style.opacity = 0;
-  window['apparitionProjetConteneur'] = projetTransition.animate([transiKeyframes[istart], transiKeyframes[iend]], transiOptions);
-  if (transiSourceClip != 'none')
-  {
+  const apparitionProjetConteneur = projetTransition.animate([transiKeyframes[istart], transiKeyframes[iend]], transiOptions);
+  if (transiSourceClip != 'none') {
     window['animTransiTop'] = transiTop.animate([transiTopKeyframes[istart], transiTopKeyframes[iend]], transiOptions);
     window['animTransiBottom'] = transiBottom.animate([transiTopKeyframes[istart], transiTopKeyframes[iend]], transiOptions);
   }
 
   // On anime le fond transparent noir en même temps
-  if (reverse)
-    projetObfuscator.classList.remove('on');
-  else
-    projetObfuscator.classList.add('on');
-  if (!window.matchMedia('(max-width: ' + Params.breakpointMobile + 'px)').matches)
-  {
+  if (reverse) projetObfuscator.classList.remove('on');
+  else         projetObfuscator.classList.add('on');
+  if (!window.matchMedia('(max-width: ' + Params.breakpointMobile + 'px)').matches) {
     window['obfuscatorProjet'] = projetObfuscator.animate([obfuscatorKeyframes[istart], obfuscatorKeyframes[iend]], {
       easing: 'linear',
       duration: transiDuration,
