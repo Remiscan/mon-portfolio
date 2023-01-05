@@ -16,7 +16,7 @@
   </p>
 
   <p class="button">
-    <button type="submit" class="expandable focusable"
+    <button type="submit" class="expandable "
             data-label="contact-bouton-envoyer" aria-label="<?=$translation->get('contact-bouton-envoyer')?>">
       <span data-string="contact-bouton-envoyer"><?=$translation->get('contact-bouton-envoyer')?></span>
     </button>

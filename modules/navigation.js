@@ -1,5 +1,4 @@
 import { Params } from 'Params';
-import { focusable } from 'a11y';
 import { anim_competences } from 'animations';
 import { cancelableAsync } from 'cancelable-async';
 import { changeCouleur } from 'changeCouleur';
@@ -193,12 +192,11 @@ export function* naviguer(event, nav, start = false, historique = true)
       navs.forEach(e => {
         // 2.2 : On masque toutes les autres sections que celle demandée
         if (e != nav.id) {
-          const article_id = e.replace('nav_', '');
-          const article = document.getElementById(article_id);
+          const sectionID = e.replace('nav_', '');
+          const section = document.getElementById(sectionID);
           const navlink = document.getElementById(e);
-          article.style.display = 'none';
+          section.style.display = 'none';
           navlink.classList.remove('selected');
-          navlink.tabIndex = 0;
 
           // Recrée le href des liens des sections fermées
           if (navlink.dataset.href) {
@@ -207,7 +205,7 @@ export function* naviguer(event, nav, start = false, historique = true)
           }
           
           // On réinitialise le formulaire de contact
-          if (article_id == 'contact') {
+          if (sectionID == 'contact') {
             champsContact.forEach(e => verifyForm(document.getElementById(e + '_mail')));
             const enveloppeSvg = document.getElementById('svg-email');
             enveloppeSvg.innerHTML = enveloppeSvg.innerHTML.replace('#email-open', '#email-closed');
@@ -215,9 +213,7 @@ export function* naviguer(event, nav, start = false, historique = true)
         }
       });
 
-      nav.blur();
       nav.classList.add('selected');
-      nav.tabIndex = -1;
 
       // Supprime le href du lien de la section ouverte
       nav.dataset.href = nav.getAttribute('href');
@@ -231,23 +227,6 @@ export function* naviguer(event, nav, start = false, historique = true)
 
       if (nav.id == 'nav_bio')
         anim_competences(false);
-
-      // On rend les éléments focusables ou non selon la section
-      const portfolio = document.getElementById('portfolio');
-      if (nav.id == 'nav_portfolio')
-      {
-        focusable.forEach(e => {
-          if (portfolio.contains(e))
-            e.tabIndex = 0;
-        });
-      }
-      else
-      {
-        focusable.forEach(e => {
-          if (portfolio.contains(e) && e.tabIndex != -1)
-            e.tabIndex = -1;
-        });
-      }
       
       // Animation de la propagation de la couleur de section choisie
       yield changeCouleur(event, nav);

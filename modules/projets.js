@@ -1,5 +1,4 @@
 import { Params, isVisible, wait } from 'Params';
-import { focusable } from 'a11y';
 import { cancelableAsync } from 'cancelable-async';
 import { changeThemeColor } from 'changeCouleur';
 import { Loader, dePlaceholder, placeholderNoMore } from 'loadImages';
@@ -118,22 +117,9 @@ export function* openProjet(event)
       projetContenu.style.opacity = 1;
       projetTransition.style.display = 'none';
   
-      focusable.forEach(e => {
-        if (elProjet.contains(e))
-          e.tabIndex = 0;
-        else {
-          e.dataset.savedTabIndex = e.tabIndex;
-          e.tabIndex = -1;
-        }
-      });
-      
-      // On insère les infos basiques du projet
-      const boutonFermer = document.getElementById('projet-close');
-      boutonFermer.addEventListener('click', boutonFermer.clickhandler = () => {
-        closeProjet();
-        history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
-        document.title = getTitrePage('portfolio');
-      });
+      document.querySelector('main').setAttribute('inert', '');
+      document.querySelector('header').setAttribute('inert', '');
+      elProjet.removeAttribute('inert');
       
       const boutonVisiter = document.getElementById('projet-details-lien');
       document.getElementById('projet-details-titre').innerHTML = titre;
@@ -216,7 +202,6 @@ export function* openProjet(event)
       projetDetailsLoading.classList.remove('needstoload');
       projetDetailsLoading.classList.remove('loadingnow');
       projetDetailsPourquoi.innerHTML = data;
-      Array.from(projetDetailsPourquoi.querySelectorAll('a')).forEach(e => e.classList.add('focusable'));
 
       const anim_projetDetails = projetDetailsPourquoi.animate([
         { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
@@ -270,6 +255,15 @@ export function initProjets() {
     e.addEventListener('click', event => openProjet(event));
   });
 
+  // On insère les infos basiques du projet
+  const boutonFermer = document.getElementById('projet-close');
+  boutonFermer.addEventListener('click', boutonFermer.clickhandler = (event) => {
+    event.preventDefault();
+    closeProjet();
+    history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
+    document.title = getTitrePage('portfolio');
+  });
+
   projetObfuscator.addEventListener('click', () => {
     if (isProjetClosing == 1) return;
     isProjetClosing = 1;
@@ -290,17 +284,12 @@ export function closeProjet()
   elProjet.setAttribute('aria-hidden', 'true');
   elProjet.setAttribute('hidden', true);
   lastProjetNav = Date.now();
-  focusable.forEach(function(e) {
-    if (elProjet.contains(e))
-      e.tabIndex = -1;
-    else
-    {
-      e.tabIndex = e.dataset.savedTabIndex || 0;
-      e.removeAttribute('data-saved-tab-index');
-    }
-  });
+
+  elProjet.setAttribute('inert', '');
+  document.querySelector('main').removeAttribute('inert');
+  document.querySelector('header').removeAttribute('inert');
+
   const boutonFermer = document.getElementById('projet-close');
-  boutonFermer.removeEventListener('click', boutonFermer.clickhandler);
   window.removeEventListener('keydown', window.cp);
   changeThemeColor(document.body.style.getPropertyValue('--article-color'));
   projetTransition.style.display = 'block';

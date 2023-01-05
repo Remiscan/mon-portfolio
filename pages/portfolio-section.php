@@ -28,7 +28,7 @@
       ?>
 
       <a href="<?=$projet->lien?>" target="_blank"
-          class="projet-conteneur focusable expandable <?=$featured?>" tabindex="0"
+          class="projet-conteneur expandable <?=$featured?>" tabindex="0"
           aria-labelledby="titre-projets-perso projet-titre-<?=$projet->id?>"
           id="projet-preview-<?=$projet->id?>"
           style="--projet-color:<?=$couleurProjet->hsl()?>;"

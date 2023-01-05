@@ -652,13 +652,10 @@ nav>a:hover, nav>a:active {
   justify-self: start;
   cursor: pointer;
   transition: opacity .1s var(--easing-standard);
-  opacity: 0;
-  pointer-events: none;
 }
 
-.actif #nav_accueil {
-  opacity: 1;
-  pointer-events: auto;
+html:not(.actif) #nav_accueil {
+  display: none;
 }
 
 #nav_accueil>i {
@@ -773,7 +770,7 @@ textarea::selection {
   background: black;
 }
 
-.focusable:active {
+/*.focusable:active {
   outline: none;
 }
 .focusable::moz-focus-inner {
@@ -796,7 +793,7 @@ textarea::selection {
 .mecontacter:focus {
   outline-offset: 1px;
   text-decoration: none;
-}
+}*/
 
 
 

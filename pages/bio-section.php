@@ -33,7 +33,7 @@ function agepro() {
       
     <p><span data-string="bio-conclusion-avant-age"><?=$translation->get('bio-conclusion-avant-age')?></span><?=agepro()?><span data-string="bio-conclusion-apres-age"><?=$translation->get('bio-conclusion-apres-age')?></span></p>
 
-    <p><span data-string="bio-contact-avant-lien"><?=$translation->get('bio-contact-avant-lien')?></span><a href="/contact" class="mecontacter focusable" tabIndex="0" data-string="bio-contact-lien"><?=$translation->get('bio-contact-lien')?></a><span data-string="bio-contact-apres-lien"><?=$translation->get('bio-contact-apres-lien')?></span></p>
+    <p><span data-string="bio-contact-avant-lien"><?=$translation->get('bio-contact-avant-lien')?></span><a href="/contact" class="mecontacter" tabIndex="0" data-string="bio-contact-lien"><?=$translation->get('bio-contact-lien')?></a><span data-string="bio-contact-apres-lien"><?=$translation->get('bio-contact-apres-lien')?></span></p>
   </div>
 </article>
 
