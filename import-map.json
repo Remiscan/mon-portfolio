@@ -4,7 +4,6 @@
 
     "mediaProjet": "./modules/components/mediaProjet.js",
 
-    "a11y": "./modules/a11y.js",
     "animations": "./modules/animations.js",
     "changeCouleur": "./modules/changeCouleur.js",
     "contact": "./modules/contact.js",
