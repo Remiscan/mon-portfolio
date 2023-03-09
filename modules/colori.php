@@ -700,9 +700,9 @@ class Couleur
     $cieb = round($this->cieb);
     $a = round($this->a * 100) / 100;
     if ($this->a < 1)
-      return "lab(${ciel}% ${ciea} ${cieb} / ${a})";
+      return "lab({$ciel}% {$ciea} {$cieb} / {$a})";
     else
-      return "lab(${ciel}% ${ciea} ${cieb})";
+      return "lab({$ciel}% {$ciea} {$cieb})";
   }
 
   public function laba() {
@@ -710,7 +710,7 @@ class Couleur
     $ciea = round($this->ciea);
     $cieb = round($this->cieb);
     $a = round($this->a * 100) / 100;
-    return "lab(${ciel}% ${ciea} ${cieb} / ${a})";
+    return "lab({$ciel}% {$ciea} {$cieb} / {$a})";
   }
 
   public function lch() {
@@ -719,9 +719,9 @@ class Couleur
     $cieh = round($this->cieh * 360);
     $a = round($this->a * 100) / 100;
     if ($this->a < 1)
-      return "lch(${ciel}% ${ciec} ${cieh} / ${a})";
+      return "lch({$ciel}% {$ciec} {$cieh} / {$a})";
     else
-      return "lch(${ciel}% ${ciec} ${cieh})";
+      return "lch({$ciel}% {$ciec} {$cieh})";
   }
 
   public function lcha() {
@@ -730,9 +730,9 @@ class Couleur
     $cieh = round($this->cieh * 360);
     $a = round($this->a * 100) / 100;
     if ($this->a < 1)
-      return "lch(${ciel}% ${ciec} ${cieh} / ${a})";
+      return "lch({$ciel}% {$ciec} {$cieh} / {$a})";
     else
-      return "lch(${ciel}% ${ciec} ${cieh})";
+      return "lch({$ciel}% {$ciec} {$cieh})";
   }
 
   private function rgb2hsl() {
