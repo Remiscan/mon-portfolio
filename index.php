@@ -127,7 +127,7 @@
     <script type="importmap"><?php include __DIR__.'/import-map.json'; ?></script>
 
     <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="/_common/js/cancelable-async.js">
+    <link rel="modulepreload" href="/_common/js/cancelable-async/mod.js">
     <?php
     $mods = preg_filter('/(.+)\.js$/', '$1', scandir(__DIR__.'/modules'));
     foreach($mods as $mod) {
