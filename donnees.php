@@ -22,7 +22,7 @@ $c_competence_javascript = new Couleur('rgb(99, 168, 20)');
 $c_competence_typescript = new Couleur('#3178C6');
 //$c_projet_cesite = new Couleur('hsl(261, 52%, 47%)');
 $c_projet_cesite = new Couleur('hsl(300, 30%, 15%)');
-$c_projet_remidex = new Couleur('rgb(63, 81, 181)');
+$c_projet_shinydex = new Couleur('rgb(63, 81, 181)');
 $c_projet_solaire = new Couleur('#211216');
 $c_projet_csswitch = new Couleur('hsl(200, 0%, 40%)');
 $c_projet_colori = new Couleur('aquamarine');
@@ -30,7 +30,7 @@ $c_projet_colori = new Couleur('aquamarine');
 // PROJETS
 $projets = [
   /*new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),*/
-  new Projet('', 'Rémidex', $c_projet_remidex, 'https://remiscan.fr/remidex/'),
+  new Projet('', 'Shinydex', $c_projet_shinydex, 'https://remiscan.fr/shinydex/'),
   new Projet('', 'Solaire', $c_projet_solaire, 'https://remiscan.fr/solaire/', true),
   new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/'),
   new Projet('', 'Colori', $c_projet_colori, 'https://remiscan.fr/colori/')
