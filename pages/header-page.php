@@ -1,6 +1,6 @@
 <div class="background" aria-hidden="true"></div>
 
-<article id="intro">
+<section id="intro">
 
   <div class="moi">
     <div class="vraiment-moi">
@@ -60,17 +60,17 @@
     </a>
   </div>
   
-</article>
+</section>
 
 <nav>
   <a id="nav_bio" href="/bio" aria-label="<?=$translation->get('nav-bio')?>"
-     class="expandable nav" style="--article-color:<?=$c_section_parcours->hsl()?>;">
+     class="expandable nav" style="--article-color:<?=$c_article_parcours->hsl()?>;">
     <h3><?=$translation->get('nav-bio')?></h3>
     <div class="underline"></div>
   </a>
 
   <a id="nav_portfolio" href="/portfolio" aria-label="<?=$translation->get('nav-portfolio')?>"
-     class="expandable nav" style="--article-color:<?=$c_section_portfolio->hsl()?>;">
+     class="expandable nav" style="--article-color:<?=$c_article_portfolio->hsl()?>;">
     <h3><?=$translation->get('nav-portfolio')?></h3>
     <div class="underline"></div>
   </a>

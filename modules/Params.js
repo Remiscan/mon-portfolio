@@ -21,25 +21,25 @@ export const Params = {
   decalageNav2: null,
   diffScaleNavs: null,
 
-  startSection: null,
+  startArticle: null,
   startProjet: null,
-  sectionOuverte: null
+  articleOuvert: null
 }
 
 
 
 ///////////////////////////////////////////////////////
 // On détecte quelle page doit être affichée en premier
-Params.startSection = document.body.dataset.start;
+Params.startArticle = document.body.dataset.start;
 Params.startProjet = document.body.dataset.startProjet;
 document.body.removeAttribute('data-start-projet');
-if (Params.startSection == 'projet')
-  Params.startSection = 'portfolio';
+if (Params.startArticle == 'projet')
+  Params.startArticle = 'portfolio';
 
-if (Params.startSection == 'accueil')
-  Params.sectionOuverte = false;
+if (Params.startArticle == 'accueil')
+  Params.articleOuvert = false;
 else
-  Params.sectionOuverte = true;
+  Params.articleOuvert = true;
 
 
 
@@ -105,7 +105,7 @@ function calcul_pos_nav()
   else
   {
     let preDecalage1 = nav1.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage1) || Params.sectionOuverte)
+    if (isNaN(preDecalage1) || Params.articleOuvert)
       preDecalage1 = 0;
     const nav1Pos = nav1.getBoundingClientRect();
     Params.decalageNav1 = [
@@ -114,7 +114,7 @@ function calcul_pos_nav()
     ];
 
     let preDecalage2 = nav2.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage2) || Params.sectionOuverte)
+    if (isNaN(preDecalage2) || Params.articleOuvert)
       preDecalage2 = 0;
     const nav2Pos = nav2.getBoundingClientRect();
     Params.decalageNav2 = [

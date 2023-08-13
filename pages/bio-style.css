@@ -7,7 +7,7 @@
   grid-template-columns: 1.2rem 1fr 3.6rem 1fr 1.2rem;
 }
 
-#bio article + article h4.sous-section {
+#bio section + section h4.sous-section {
   align-self: flex-end;
   box-shadow: 5rem 0 0 0 var(--teinte);
   padding-left: 0.7em;
@@ -21,7 +21,7 @@
  */
 
  @media screen and (max-width: 1200px) {
-  #bio article + article h4.sous-section {
+  #bio section + section h4.sous-section {
     align-self: flex-start;
     box-shadow: -5rem 0 0 0 var(--teinte);
     padding-left: 0;

@@ -35,10 +35,10 @@ window.addEventListener('popstate', async event => {
 ////////////////////////////////////////////////
 // Gère la mise en place du site à son ouverture
 document.addEventListener('DOMContentLoaded', async event => {
-  if (Params.startSection == 'accueil') {
+  if (Params.startArticle == 'accueil') {
     history.replaceState({onav: 'nav_accueil'}, '', '/');
   } else {
-    history.replaceState({ onav: `nav_${Params.startSection}` }, '', `/${Params.startSection}`);
+    history.replaceState({ onav: `nav_${Params.startArticle}` }, '', `/${Params.startArticle}`);
   }
 
   recalcOnResize();
@@ -57,9 +57,9 @@ document.addEventListener('DOMContentLoaded', async event => {
     }
   }, 100);
 
-  setNavActuelle('nav_' + Params.startSection);
+  setNavActuelle('nav_' + Params.startArticle);
   
-  if (Params.startSection == 'accueil') {
+  if (Params.startArticle == 'accueil') {
     document.documentElement.style.overflowY = 'auto';
     return;
   }

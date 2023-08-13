@@ -21,7 +21,7 @@ if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
 
 
 ////////////////////////////
-// Navigation entre sections
+// Navigation entre articles
 export function* naviguer(event, nav, start = false, historique = true)
 {
   let needAnimations = false;
@@ -34,16 +34,16 @@ export function* naviguer(event, nav, start = false, historique = true)
 
     // ÉTAPE 1 : Navigation autorisée ?
     // Ne rien faire si :
-      // - on demande à aller sur la section déjà ouverte alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
-      // - on demande à aller sur la section vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
+      // - on demande à aller sur l'article déjà ouvert alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
+      // - on demande à aller sur l'article vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
     if (!navEnCours && nav_actuelle == nav.id && !start)
-      throw 'Navigation rejetée : la section demandée (' + nav.id + ') est déjà ouverte';
+      throw 'Navigation rejetée : l\'article demandé (' + nav.id + ') est déjà ouverte';
     else if (navEnCours && lastNav == nav)
-      throw 'Navigation rejetée : navigation déjà en cours vers la section demandée (' + nav.id + ')';
+      throw 'Navigation rejetée : navigation déjà en cours vers l\'article demandé (' + nav.id + ')';
 
 
-    // ÉTAPE 2.1 : Animations accueil <==> section + couleur
-    // et ÉTAPE 2.2 en parallèle : Masquer les éléments de la vielle section
+    // ÉTAPE 2.1 : Animations accueil <==> article + couleur
+    // et ÉTAPE 2.2 en parallèle : Masquer les éléments du viel article
     lastNav = nav;
 
     // Si aucune condition de rejet n'est remplie, on continue :
@@ -68,7 +68,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     }
     document.title = getTitrePage(nav.id.replace('nav_', ''));
 
-    // 2.1 : Préparation des animations de passage accueil <==> section
+    // 2.1 : Préparation des animations de passage accueil <==> article
     let headerBgMove = 0;
     if (Params.owidth > Params.breakpointMobile)
       headerBgMove = Params.tailleHeader;
@@ -76,13 +76,13 @@ export function* naviguer(event, nav, start = false, historique = true)
     let dureeTransition = 300;
     let e0, e1;
 
-    if (!Params.sectionOuverte && nav.id != 'nav_accueil') {
+    if (!Params.articleOuvert && nav.id != 'nav_accueil') {
       needAnimations = true;
       e0 = 0;
       e1 = 1;
       document.getElementById('nav_portfolio').style.setProperty('--diff-scale-navs', 0);
     }
-    else if (Params.sectionOuverte && nav.id == 'nav_accueil') {
+    else if (Params.articleOuvert && nav.id == 'nav_accueil') {
       needAnimations = true;
       e0 = 1;
       e1 = 0;
@@ -159,7 +159,7 @@ export function* naviguer(event, nav, start = false, historique = true)
       ], options);
 
       // Avant la fin des animations pour bien gérer les popstate events
-      Params.sectionOuverte = (e0 == 0); // true si on quitte l'accueil et ouvre une section, false si on ferme une section pour aller sur l'accueil
+      Params.articleOuvert = (e0 == 0); // true si on quitte l'accueil et ouvre un article, false si on ferme un article pour aller sur l'accueil
 
       // Une fois les animations finies
       headerSize.addEventListener('finish', () => {
@@ -168,7 +168,7 @@ export function* naviguer(event, nav, start = false, historique = true)
         }
         else {
           document.documentElement.classList.add('actif');
-          nav_etat = 'section';
+          nav_etat = 'article';
         }
         headerMove.cancel();
         headerSize.cancel();
@@ -183,29 +183,29 @@ export function* naviguer(event, nav, start = false, historique = true)
       if (nav.id == 'nav_accueil')
         nav_etat = 'accueil';
       else
-        nav_etat = 'section';
-      Params.sectionOuverte = true;
+        nav_etat = 'article';
+      Params.articleOuvert = true;
     }
 
-    // Si on navigue vers une section qui existe
+    // Si on navigue vers un article qui existe
     if (navs.indexOf(nav.id) != -1) {
       navs.forEach(e => {
-        // 2.2 : On masque toutes les autres sections que celle demandée
+        // 2.2 : On masque toutes les autres articles que celui demandé
         if (e != nav.id) {
-          const sectionID = e.replace('nav_', '');
-          const section = document.getElementById(sectionID);
+          const articleID = e.replace('nav_', '');
+          const article = document.getElementById(articleID);
           const navlink = document.getElementById(e);
-          section.style.display = 'none';
+          article.style.display = 'none';
           navlink.classList.remove('selected');
 
-          // Recrée le href des liens des sections fermées
+          // Recrée le href des liens des articles fermés
           if (navlink.dataset.href) {
             navlink.href = navlink.dataset.href;
             navlink.removeAttribute('data-href');
           }
           
           // On réinitialise le formulaire de contact
-          if (sectionID == 'contact') {
+          if (articleID == 'contact') {
             champsContact.forEach(e => verifyForm(document.getElementById(e + '_mail')));
             const enveloppeSvg = document.getElementById('svg-email');
             enveloppeSvg.innerHTML = enveloppeSvg.innerHTML.replace('#email-open', '#email-closed');
@@ -215,7 +215,7 @@ export function* naviguer(event, nav, start = false, historique = true)
 
       nav.classList.add('selected');
 
-      // Supprime le href du lien de la section ouverte
+      // Supprime le href du lien de l'article ouvert
       nav.dataset.href = nav.getAttribute('href');
       nav.removeAttribute('href');
       
@@ -228,14 +228,14 @@ export function* naviguer(event, nav, start = false, historique = true)
       if (nav.id == 'nav_bio')
         anim_competences(false);
       
-      // Animation de la propagation de la couleur de section choisie
+      // Animation de la propagation de la couleur de article choisi
       yield changeCouleur(event, nav);
     }
 
-    else throw 'Navigation demandée vers une section inexistante: ' + nav.id;
+    else throw 'Navigation demandée vers un article inexistant: ' + nav.id;
 
 
-    // ÉTAPE 3 : Affichage de la nouvelle section
+    // ÉTAPE 3 : Affichage du nouvel article
     // Si une autre navigation a été déclenchée après celle encore en cours
     //if (lastNav != nav) throw 'expired';
     
@@ -243,7 +243,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     const article = document.getElementById(article_id);
     article.style.display = 'grid';
 
-    // Apparition de la section demandée
+    // Apparition de l'article demandé
     let article_animation = main.animate([
       { opacity: '0', transform: 'translate3D(0, 1rem, 0)' },
       { opacity: '1', transform: 'translate3D(0, 0, 0)' }
@@ -263,7 +263,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     navEnCours = false;
     if (start) document.body.removeAttribute('data-start');
 
-    // Animations et derniers ajustements du contenu de la nouvelle section
+    // Animations et derniers ajustements du contenu du nouvel article
     if (article_id == 'bio') {
       anim_competences();
       loadMaPhoto();
@@ -291,7 +291,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     {
       console.log('Navigation expirée : navigation plus récente en cours');
       // Quand on voulait aller sur l'accueil mais qu'une navigation plus récente va ailleurs
-      if (nav.id == 'nav_accueil' && nav_etat == 'section' && !document.documentElement.classList.contains('actif'))
+      if (nav.id == 'nav_accueil' && nav_etat == 'article' && !document.documentElement.classList.contains('actif'))
         document.documentElement.classList.add('actif');
       // Quand on voulait aller ailleurs mais qu'une navigation plus récente va sur l'accueil (nav_actuelle n'est pas màj quand on throw vers ici)
       else if (nav.id != 'nav_accueil' && nav_etat == 'accueil' && document.documentElement.classList.contains('actif'))

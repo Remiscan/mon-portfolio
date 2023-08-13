@@ -1,4 +1,4 @@
-<article id="projets-personnels" aria-labelledby="titre-projets-perso">
+<section id="projets-personnels" aria-labelledby="titre-projets-perso">
   <h4 class="sous-section" id="titre-projets-perso"><?=$translation->get('titre-projets-perso')?></h4>
 
   <div class="liste-projets" style="--nmax: <?=count($projets)?>">
@@ -57,10 +57,10 @@
     }
     ?>
   </div>
-</article>
+</section>
 
-<?php /*<article id="projets-professionnels" aria-labelledby="titre-projets-perso">
+<?php /*<section id="projets-professionnels" aria-labelledby="titre-projets-perso">
   <h4 class="sous-section" id="titre-projets-perso"><?=$translation->get('titre-projets-pro')?></h4>
   
   <p>J'attends de pouvoir remplir cette section avec impatience !</p>
-</article>*/ ?>
+</section>*/ ?>

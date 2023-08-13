@@ -75,7 +75,7 @@ export function* openProjet(event)
     }
     document.title = getTitrePage(false, getString('titre-projet') + titre);
 
-    // On anime l'apparition de la section Projet
+    // On anime l'apparition de l'article Projet
     currentProjet = id;
 
     //document.body.style.overflowY = 'hidden';
@@ -191,7 +191,7 @@ export function* openProjet(event)
     let delay = (projetDetailsLoading.classList.contains('needstoload')) ? 250 : 0;
     let animDelay = 100;
     
-    // On affiche les données, mais seulement quand la section projet est encore ouverte
+    // On affiche les données, mais seulement quand l'article projet est encore ouvert
     if (thisProjetNav != lastProjetNav) throw 'expired';
 
     if (elProjet.classList.contains('on') && currentProjet == id) {
@@ -224,7 +224,7 @@ export function* openProjet(event)
       });
       return;
     }
-    else throw 'La section projet est fermée, les détails ne peuvent pas être affichés.';
+    else throw 'L\'article projet est fermé, les détails ne peuvent pas être affichés.';
   }
   
   catch(error) {

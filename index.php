@@ -17,15 +17,15 @@
 
   // Gestion de l'URL demandée et adaptation de la page
 
-  //// Récupération de la section de départ
-  $start_section = 'accueil';
+  //// Récupération de l'article de départ
+  $start_article = 'accueil';
   if (isset($_GET['onav'])) {
     $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
     if (in_array($onav, ['competences', 'bio', 'portfolio', 'projet', 'contact'])) {
-      $start_section = $onav;
+      $start_article = $onav;
     }
   }
-  $isAccueil = ($start_section === 'accueil');
+  $isAccueil = ($start_article === 'accueil');
 
   //// Récupération du projet de départ
   $start_projet = '';
@@ -45,14 +45,14 @@
 
   //// Si une URL différente de / est demandée
   if (!$isAccueil) {
-    switch($start_section) {
+    switch($start_article) {
       case 'bio':
-        $start_color = $c_section_parcours;
+        $start_color = $c_article_parcours;
         $titre_page = $translation->get('nav-bio');
         break;
       case 'projet':
       case 'portfolio':
-        $start_color = $c_section_portfolio;
+        $start_color = $c_article_portfolio;
         $titre_page = $translation->get('nav-portfolio');
         break;
       case 'contact':
@@ -70,8 +70,8 @@
 
   //// Liste des fichiers style-*.css critiques ou non
   $styles_critiques = ['global'];
-  if ($start_section != 'accueil') $styles_critiques[] = $start_section;
-  if ($start_section == 'projet')  $styles_critiques[] = 'portfolio';
+  if ($start_article != 'accueil') $styles_critiques[] = $start_article;
+  if ($start_article == 'projet')  $styles_critiques[] = 'portfolio';
   $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
 
   // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
@@ -82,10 +82,10 @@
   if ($css_critique_methode == 'push') {
     //// On demande au serveur de PUSH le css critique avec HTTP2
     $linkHeader = 'Link: ';
-    foreach($styles_critiques as $k => $section) {
-      $versionStyle = version([__DIR__.'/pages/'.$section.'-style.css']);
+    foreach($styles_critiques as $k => $article) {
+      $versionStyle = version([__DIR__.'/pages/'.$article.'-style.css']);
       if ($k > 0) $linkHeader .= ', ';
-      $linkHeader .= '</mon-portfolio/pages/' . $section . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
+      $linkHeader .= '</mon-portfolio/pages/' . $article . '-style--' . $versionStyle . '.css>; rel=preload; as=style';
     }
     header($linkHeader);
   }
@@ -139,24 +139,24 @@
     <?php if ($css_critique_methode == 'push') { ?>
 
       <!-- CSS critique (pushed) -->
-      <?php foreach($styles_critiques as $section) { ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$section?>-style.css">
+      <?php foreach($styles_critiques as $article) { ?>
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$article?>-style.css">
       <?php } ?>
 
     <?php } else { ?>
 
       <!-- CSS critique (inline) -->
       <?php echo '<style id="css-critique" data-sections-critiques="' . implode(',', $styles_critiques) . '">';
-      foreach($styles_critiques as $section) {
-        include __DIR__ . '/pages/' . $section . '-style.css';
+      foreach($styles_critiques as $article) {
+        include __DIR__ . '/pages/' . $article . '-style.css';
       }
       echo '</style>'; ?>
 
     <?php } ?>
 
     <!-- CSS non-critique (préchargé) -->
-    <?php foreach($styles_non_critiques as $section) { ?>
-      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$section?>-style.css"
+    <?php foreach($styles_non_critiques as $article) { ?>
+      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$article?>-style.css"
             onload="this.onload=null; this.rel='stylesheet'">
     <?php } ?>
 
@@ -173,7 +173,7 @@
   <body style="--default-color:<?=$c_default_bgcolor->hsl()?>;
                --load-color:<?=$load_color->hsl()?>;
                --article-color:<?=$start_color->hsl()?>;"
-        data-start="<?=$start_section?>"
+        data-start="<?=$start_article?>"
         data-start-projet="<?=$start_projet?>">
 
     <!-- DÉFINITION DES SVG -->
@@ -185,28 +185,28 @@
 
     <!-- CONTENU DU SITE -->
     <header>
-      <?php include './pages/header-section.php'; ?>
+      <?php include './pages/header-page.php'; ?>
     </header>
 
     <main id="bottom">
-      <section id="accueil" aria-label="<?=$translation->get('nav-accueil')?>"></section>
+      <article id="accueil" aria-label="<?=$translation->get('nav-accueil')?>"></article>
 
-      <section id="bio" aria-labelledby="nav_bio">
-        <?php include './pages/bio-section.php'; ?>
-      </section>
+      <article id="bio" aria-labelledby="nav_bio">
+        <?php include './pages/bio-page.php'; ?>
+      </article>
 
-      <section id="portfolio" aria-labelledby="nav_portfolio">
-        <?php include './pages/portfolio-section.php'; ?>
-      </section>
+      <article id="portfolio" aria-labelledby="nav_portfolio">
+        <?php include './pages/portfolio-page.php'; ?>
+      </article>
 
-      <section id="contact" aria-labelledby="nav_contact">
-        <?php include './pages/contact-section.php'; ?>
-      </section>
+      <article id="contact" aria-labelledby="nav_contact">
+        <?php include './pages/contact-page.php'; ?>
+      </article>
     </main>
 
-    <section id="projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden inert>
-      <?php include './pages/projet-section.php'; ?>
-    </section>
+    <article id="projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden inert>
+      <?php include './pages/projet-page.php'; ?>
+    </article>
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
     <div id="defontsize" style="width: 1000rem; height: 0; position: absolute;" aria-hidden="true"></div>

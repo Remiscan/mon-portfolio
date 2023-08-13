@@ -139,7 +139,7 @@ body {
   transition: opacity .1s var(--easing-decelerate);
 }
 
-/* Transition colorée animée entre sections */
+/* Transition colorée animée entre articles */
 
 #couleur {
   width: 100vw;
@@ -185,7 +185,7 @@ main {
 
 
 /*
- * Sections
+ * Articles & leurs sections
  */
 
 #bio,
@@ -201,7 +201,7 @@ body[data-start=contact] #contact {
   display: grid;
 }
 
-article {
+section {
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
@@ -209,7 +209,7 @@ article {
   align-items: center;
 }
 
-main article {
+main section {
   padding: 0;
 }
 

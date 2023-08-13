@@ -17,7 +17,7 @@ function agepro() {
 }
 ?>
 
-<article id="presentation_texte" class="h5" aria-labelledby="titre-bio">
+<section id="presentation_texte" class="h5" aria-labelledby="titre-bio">
   <h4 class="sous-section" id="titre-bio"><?=$translation->get('titre-bio')?></h4>
 
   <div class="biographie">
@@ -47,9 +47,9 @@ function agepro() {
       <span><?=$translation->get('bio-contact-apres-lien')?></span>
     </p>
   </div>
-</article>
+</section>
 
-<article id="exp" aria-labelledby="titre-exp">
+<section id="exp" aria-labelledby="titre-exp">
   <h4 class="sous-section" id="titre-exp"><?=$translation->get('titre-exp')?></h4>
 
   <div class="liste-competences">
@@ -97,4 +97,4 @@ function agepro() {
     <span class="competences-frise-separateur" style="--colonne: 3">2010</span>
     <span class="competences-frise-separateur" style="--colonne: 4">2021</span>
   </div>
-</article>
+</section>
