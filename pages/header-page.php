@@ -2,18 +2,18 @@
 
 <section id="intro">
 
+  <a id="nav_accueil" href="/" aria-label="<?=$translation->get('nav-accueil')?>"
+     style="--article-color:<?=$c_default_bgcolor->hsl()?>;">
+    <i class="svg">
+      <svg viewBox="0 0 24 24"><use href="#arrow-back" /></svg>
+    </i>
+  </a>
+
   <div class="moi">
     <div class="vraiment-moi">
       <h1 class="nom">Rémi Scandella</h1>
       <h2 class="h3 job"><?=$translation->get('job')?></h2>
     </div>
-
-    <a id="nav_accueil" href="/" aria-label="<?=$translation->get('nav-accueil')?>"
-       style="--article-color:<?=$c_default_bgcolor->hsl()?>;">
-      <i class="svg">
-        <svg viewBox="0 0 24 24"><use href="#arrow-back" /></svg>
-      </i>
-    </a>
   </div>
 
   <div id="liens_contact" class="h4">

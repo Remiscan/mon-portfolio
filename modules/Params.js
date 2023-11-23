@@ -145,7 +145,9 @@ function calcul_taille_header()
   {
     let oheight = Params.oheight;
     const mod = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--mod'));
-    const hauteurHeader = 3 * 1.2 * mod * mod * (mod * mod * fontsize + fontsize);
+    const hauteurHeaderText = 1.2 * mod * mod * (mod * mod * fontsize + fontsize);
+    const hauteurHeaderSocials = 1.7 * fontsize + 2 * .25 * fontsize + .5 * fontsize;
+    const hauteurHeader = hauteurHeaderText + hauteurHeaderSocials + (2 * 2.4 + 1.2) * fontsize;
     Params.tailleHeader = Math.ceil(0.5 * oheight - 0.5 * hauteurHeader);
     Params.decalageIntro = 0;
     Params.decalageNav = 0;
