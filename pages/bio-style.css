@@ -322,32 +322,29 @@
   }
 
   .competence-conteneur {
-    height: calc(6rem + 2rem);
     --r: calc(0.028 * var(--rem) / var(--vw)); 
     --angle-competence-conteneur: calc(2rem - 2rem * (var(--colonne) - 1) * (var(--r) + 0.05)); /* calcul dans backups/calculs-css-sans-js.txt */
     -webkit-clip-path: polygon(0 var(--angle-competence-conteneur), 100% 0, 100% calc(100% - var(--angle-competence-conteneur)), 0 100%);
     clip-path: polygon(0 var(--angle-competence-conteneur), 100% 0, 100% calc(100% - var(--angle-competence-conteneur)), 0 100%);
-    margin: 0 0 calc(-1 * var(--angle-competence-conteneur) - 1px) 0;
-    box-sizing: border-box;
-    padding-bottom: 1.4rem;
+    box-sizing: content-box;
+    padding-bottom: var(--angle-competence-conteneur);
+    margin-bottom: calc(-1 * var(--angle-competence-conteneur) - 1px);
+
+    --decalage-titre: ; /* (largeur titre / largeur conteneur) * padding-bottom */
+  }
+
+  .competence-conteneur.mini {
+    height: 3rem;
   }
 
   .competence-intro {
     padding-right: 2ch;
+    transform: translateY(calc(var(--angle-competence-titre)) * .5);
   }
 
   .competence-exemples {
     max-width: calc(100vw - 12ch - 10%);
     box-sizing: border-box;
     font-size: calc(1rem / var(--mod));
-  }
-
-  .competence-conteneur.mini {
-    height: calc(4rem + 2rem);
-  }
-
-  .competence-conteneur.mini:last-of-type {
-    padding-bottom: 0.7rem;
-    height: calc(4rem + 2rem - 1.4rem);
   }
 }
