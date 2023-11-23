@@ -36,8 +36,11 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     let elPos = { left: posX, top: posY, right: posX + 1, bottom: posY + 1 };
     let keyframesColoration;
 
+    let isAccueil = false;
+
     if (element) {
       let el = element;
+      if (element.id === 'nav_accueil') isAccueil = true;
       if (elementExpand) el = elementExpand;
 
       // J'essaye de placer le Fond avec la même taille et position que l'élément sur lequel on a cliqué
@@ -45,14 +48,14 @@ export function changeCouleur(event, element = false, color = false, elementExpa
       const rotation = el.style.transform.match(/rotate\((.+)\)/);
       angle = (rotation != null) ? rotation[1] : 0;
 
-      if (elRect.left > 0 || elRect.top > 0 || element.id === 'nav_accueil') {
+      if (elRect.left > 0 || elRect.top > 0 || isAccueil) {
         elPos = elRect;
       }
 
       const elWidth = elPos.right - elPos.left;
       const elHeight = elPos.bottom - elPos.top;
-      scaleX = (element.id === 'nav_accueil') ? 1 : elWidth / Params.owidth;
-      scaleY = elHeight / Params.oheight;
+      scaleX = isAccueil ? 1 : elWidth / Params.owidth;
+      scaleY = isAccueil ? 0 : elHeight / Params.oheight;
     }
 
     Fond.style.backgroundColor = couleur;
@@ -83,8 +86,10 @@ export function changeCouleur(event, element = false, color = false, elementExpa
         fill: 'forwards'
     });
 
+    if (isAccueil) changeThemeColor(couleur);
+
     coloration.addEventListener('finish', () => {
-      changeThemeColor(couleur);
+      if (!isAccueil) changeThemeColor(couleur);
       document.body.style.setProperty('--article-color', couleur);
       couleurEnCours = false;
       return resolve();
