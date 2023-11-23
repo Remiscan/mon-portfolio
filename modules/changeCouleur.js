@@ -41,13 +41,17 @@ export function changeCouleur(event, element = false, color = false, elementExpa
       if (elementExpand) el = elementExpand;
 
       // J'essaye de placer le Fond avec la même taille et position que l'élément sur lequel on a cliqué
-      elPos = el.getBoundingClientRect();
+      const elRect = el.getBoundingClientRect();
       const rotation = el.style.transform.match(/rotate\((.+)\)/);
       angle = (rotation != null) ? rotation[1] : 0;
 
+      if (elRect.left > 0 || elRect.top > 0 || element.id === 'nav_accueil') {
+        elPos = elRect;
+      }
+
       const elWidth = elPos.right - elPos.left;
       const elHeight = elPos.bottom - elPos.top;
-      scaleX = elWidth / Params.owidth;
+      scaleX = (element.id === 'nav_accueil') ? 1 : elWidth / Params.owidth;
       scaleY = elHeight / Params.oheight;
     }
 
