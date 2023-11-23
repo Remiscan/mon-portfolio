@@ -36,9 +36,7 @@ function agepro() {
     <p><?=$translation->get('bio-paragraphe-science')?></p>
       
     <p>
-      <span><?=$translation->get('bio-conclusion-avant-age')?></span>
-      <span><?=agepro()?></span>
-      <span><?=$translation->get('bio-conclusion-apres-age')?></span>
+      <span><?=$translation->get('bio-conclusion')?></span>
     </p>
 
     <p>
