@@ -14,21 +14,13 @@
       $imageProjet = 'projets/' . $projet->id . '/preview' . $projet->image_preview;
       $versionImageProjet = version([__DIR__.'/../'.$imageProjet.'.png']);
       $imageProjet = $imageProjet . '--' . $versionImageProjet . '.png';
-
-      $couleurProjet = $projet->couleur->change('l', '50%', true);
-
-      // Amélioration du contraste entre la couleur du projet et le texte blanc
-      while(Couleur::contrast($couleurProjet, new Couleur('white')) < 4.5) {
-        $couleurProjet = $couleurProjet->change('bk', '+5%')->change('w', '-5%');
-        if ($couleurProjet->w < 0.05 && $couleurProjet->bk > 0.95) break;
-      }
       ?>
 
       <a href="<?=$projet->lien?>" target="_blank"
          aria-labelledby="titre-projets-perso projet-titre-<?=$projet->id?>"
          id="projet-preview-<?=$projet->id?>"
          class="projet-conteneur expandable"
-         style="--projet-color:<?=$couleurProjet->hsl()?>;"
+         style="--projet-color:<?=$projet->couleur->hsl()?>;"
          data-id="<?=$projet->id?>"
          data-lien="<?=$projet->lien?>"
          data-en-exists="<?=$en_exists?>"

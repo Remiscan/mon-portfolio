@@ -62,7 +62,7 @@
     }
     $start_meta_color = $start_color->change('l', '25%', true);
   }
-  $load_color = Couleur::blend($c_topcolor, $start_color);
+  $load_color = Couleur::blend($start_color, $c_topcolor);
 
   //// Donne le titre de la page
   $titre = 'Rémi S., ' . $translation->get('job');

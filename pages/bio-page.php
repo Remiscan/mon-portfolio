@@ -53,17 +53,10 @@ function agepro() {
   <div class="liste-competences">
     <?php
     foreach($competences as $n => $competence) {
-      $couleurComp = $competence->couleur;
-
-      // Amélioration du contraste entre la couleur de la compétence et le texte blanc transparent
-      while(Couleur::contrast($couleurComp, new Couleur('white')) < 4.5) {
-        $couleurComp = $couleurComp->change('bk', '+5%')->change('w', '-5%');
-        if ($couleurComp->w < 0.05 && $couleurComp->bk > 0.95) break;
-      }
       ?>
 
       <div class="competence-conteneur <?='mini'//$competence->mini?'mini':''?>"
-          style="--competence-color:<?=$couleurComp->hsl()?>;
+          style="--competence-color:<?=$competence->couleur->improveContrast('white', 80, as: 'background')->hsl()?>;
                  --colonne: <?=$competence->colonne?>;
                  --ligne: <?=$n + 2?>;
                  --delai: <?=$n * .1?>s">
