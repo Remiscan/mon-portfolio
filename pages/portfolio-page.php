@@ -3,10 +3,7 @@
 
   <div class="liste-projets" style="--nmax: <?=count($projets)?>">
     <?php
-    usort($projets, array('Projet', 'sortByFeatured'));
-    foreach(array_reverse($projets) as $n => $projet) {
-      $featured = $projet->featured ? 'featured' : '';
-
+    foreach($projets as $n => $projet) {
       $etudes = array(
         dirname(__DIR__, 1) . '/projets/' . $projet->id . '/etude-fr.htm',
         dirname(__DIR__, 1) . '/projets/' . $projet->id . '/etude-en.htm'
@@ -30,7 +27,7 @@
       <a href="<?=$projet->lien?>" target="_blank"
          aria-labelledby="titre-projets-perso projet-titre-<?=$projet->id?>"
          id="projet-preview-<?=$projet->id?>"
-         class="projet-conteneur expandable <?=$featured?>"
+         class="projet-conteneur expandable"
          style="--projet-color:<?=$couleurProjet->hsl()?>;"
          data-id="<?=$projet->id?>"
          data-lien="<?=$projet->lien?>"

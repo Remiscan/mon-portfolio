@@ -8,9 +8,8 @@ class Projet {
   public $image_phone;
   public $image_preview;
   public $version;
-  public $featured;
 
-  function __construct($id, $titre, $couleur, $lien = '', $featured = false) {
+  function __construct($id, $titre, $couleur, $lien = '') {
     $this->titre = $titre;
     $this->couleur = $couleur;
 
@@ -29,13 +28,5 @@ class Projet {
     else                             $this->image_preview = '-phone';
 
     $this->lien = $lien;
-    $this->featured = $featured;
-  }
-
-  // Classe les projets en plaçant ceux ayant featured=true en dernier
-  public static function sortByFeatured($a, $b) {
-    if ($a->featured && !$b->featured)      return 1;
-    else if (!$a->featured && $b->featured) return -1;
-    else                                    return 0;
   }
 }
