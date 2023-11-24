@@ -37,6 +37,7 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     let keyframesColoration;
 
     let isAccueil = false;
+    const startScaleYAccueil = (Params.owidth > Params.breakpointMobile) ? (Params.oheight - 2 * Params.tailleHeader) / Params.oheight : 0;
 
     if (element) {
       let el = element;
@@ -55,7 +56,7 @@ export function changeCouleur(event, element = false, color = false, elementExpa
       const elWidth = elPos.right - elPos.left;
       const elHeight = elPos.bottom - elPos.top;
       scaleX = isAccueil ? 1 : elWidth / Params.owidth;
-      scaleY = isAccueil ? 0 : elHeight / Params.oheight;
+      scaleY = isAccueil ? startScaleYAccueil : elHeight / Params.oheight;
     }
 
     Fond.style.backgroundColor = couleur;
@@ -80,11 +81,12 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     ];
 
     const isMotionReduced = Params.isMotionReduced();
+    const isAccueilPCAnimation = isAccueil && startScaleYAccueil > 0;
     const coloration = Fond.animate(
       keyframesColoration, {
-        easing: 'cubic-bezier(0.2, 0.45, 0.3, 1)',
-        duration: isMotionReduced ? 0 : 400,
-        fill: 'forwards'
+        easing: isAccueilPCAnimation ? Params.easingStandard : 'cubic-bezier(0.2, 0.45, 0.3, 1)',
+        duration: isMotionReduced ? 0 : isAccueilPCAnimation ? 300 : 400,
+        fill: 'both'
     });
 
     if (isAccueil) changeThemeColor(couleur);
