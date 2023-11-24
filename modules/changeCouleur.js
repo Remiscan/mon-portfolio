@@ -79,10 +79,11 @@ export function changeCouleur(event, element = false, color = false, elementExpa
       { transform: 'translate3D(0, 0, 0) scale(1, 1) rotate(0)'}
     ];
 
+    const isMotionReduced = Params.isMotionReduced();
     const coloration = Fond.animate(
       keyframesColoration, {
         easing: 'cubic-bezier(0.2, 0.45, 0.3, 1)',
-        duration: 400,
+        duration: isMotionReduced ? 0 : 400,
         fill: 'forwards'
     });
 

@@ -140,10 +140,11 @@ export function* openProjet(event)
         { opacity: '1', transform: 'translate3D(0, 0, 0) '}
       ];
       const projetOptions = k => {
+        const isMotionReduced = Params.isMotionReduced();
         return {
           easing: Params.easingDecelerate,
-          duration: 100,
-          delay: k * 20,
+          duration: isMotionReduced ? 0 : 100,
+          delay: isMotionReduced ? 0 : k * 20,
           fill: 'backwards'
         };
       };
@@ -203,13 +204,14 @@ export function* openProjet(event)
       projetDetailsLoading.classList.remove('loadingnow');
       projetDetailsPourquoi.innerHTML = data;
 
+      const isMotionReduced = Params.isMotionReduced();
       const anim_projetDetails = projetDetailsPourquoi.animate([
         { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
         { opacity: '1', transform: 'translate3D(0, 0, 0) '}
       ], {
           easing: Params.easingDecelerate,
-          duration: 150,
-          delay: animDelay,
+          duration: isMotionReduced ? 0 : 150,
+          delay: isMotionReduced ? 0 : animDelay,
           fill: 'both'
       });
 
@@ -302,11 +304,12 @@ export async function closeProjet() {
 
   await animProjet(false, true);
   if (transiSource) transiSource.style.opacity = 'unset';
+  const isMotionReduced = Params.isMotionReduced();
   const transiProjOpa = elProjet.animate([
     { opacity: 1 },
     { opacity: 0 }
   ], {
-    duration: 100,
+    duration: isMotionReduced ? 0 : 100,
     fill: 'forwards'
   });
   await new Promise(resolve => transiProjOpa.addEventListener('finish', resolve));
@@ -368,9 +371,10 @@ function animProjet(id = false, reverse = false) {
     iend = 1;
   }
 
+  const isMotionReduced = Params.isMotionReduced();
   const transiOptions = {
     easing: transiTiming,
-    duration: transiDuration,
+    duration: isMotionReduced ? 0 : transiDuration,
     fill: 'both'
   };
   const transiKeyframes = [

@@ -1,4 +1,4 @@
-import { wait } from 'Params';
+import { Params, wait } from 'Params';
 
 
 
@@ -15,12 +15,13 @@ export function photoclip(event, bool = true) {
     photo.style.setProperty('-webkit-clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
     photo.style.setProperty('clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
   } else {
+    const isMotionReduced = Params.isMotionReduced();
     photo.animate([
       { clipPath: 'circle(25% at ' + tx + 'px '+ ty + 'px)', opacity: 1 },
       { clipPath: 'circle(0% at ' + tx + 'px '+ ty + 'px)', opacity: 1 }
     ], {
         easing: 'cubic-bezier(1, 0.6, 1, 0.6)',
-        duration: 60
+        duration: isMotionReduced ? 0 : 60
     });
     photo.style.setProperty('-webkit-clip-path', 'unset');
     photo.style.setProperty('clip-path', 'unset');
@@ -57,8 +58,9 @@ export function anim_competences(t = true) {
   const allConteneurs = [...document.getElementsByClassName('competence-conteneur')];
 
   if (t && !firstConteneur.classList.contains('colored')) {
+    const isMotionReduced = Params.isMotionReduced();
     allConteneurs.forEach(e => {
-      const delai = parseFloat(e.style.getPropertyValue('--delai'));
+      const delai = isMotionReduced ? 0 : parseFloat(e.style.getPropertyValue('--delai'));
       wait(1000 * delai).then(() => e.classList.add('colored'));
     });
   } else if (!t && firstConteneur.classList.contains('colored')) {

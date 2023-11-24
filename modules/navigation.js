@@ -94,9 +94,10 @@ export function* naviguer(event, nav, start = false, historique = true)
 
     if (needAnimations) {
       // Paramètres des animations
+      const isMotionReduced = Params.isMotionReduced();
       const options = {
         easing: Params.easingStandard,
-        duration: dureeTransition,
+        duration: isMotionReduced ? 0 : dureeTransition,
         fill: 'forwards'
       };
 
@@ -244,12 +245,13 @@ export function* naviguer(event, nav, start = false, historique = true)
     article.style.display = 'grid';
 
     // Apparition de l'article demandé
+    const isMotionReduced = Params.isMotionReduced();
     let article_animation = main.animate([
       { opacity: '0', transform: 'translate3D(0, 1rem, 0)' },
       { opacity: '1', transform: 'translate3D(0, 0, 0)' }
     ], {
         easing: Params.easingDecelerate,
-        duration: start ? 0 : 150,
+        duration: start ? 0 : isMotionReduced ? 0 : 150,
         fill: 'forwards'
     });
     if (start) article_animation.play(); // Empêche Edge d'ignorer l'animation de durée 0

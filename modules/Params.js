@@ -23,7 +23,9 @@ export const Params = {
 
   startArticle: null,
   startProjet: null,
-  articleOuvert: null
+  articleOuvert: null,
+
+  isMotionReduced: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
 
 

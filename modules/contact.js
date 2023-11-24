@@ -1,3 +1,4 @@
+import { Params } from 'Params';
 import { getString } from 'traduction';
 
 
@@ -84,6 +85,7 @@ function sendData()
 
   function bouton2dots() {
     return new Promise((resolve, reject) => {
+      const isMotionReduced = Params.isMotionReduced();
       dots.forEach(function(e, i)
       {
         window['dotShortening' + i] = e.animate([
@@ -91,8 +93,8 @@ function sendData()
           { transform: 'scale(1)' }
         ], {
             easing: 'ease-out',
-            duration: 200,
-            delay: i * 50,
+            duration: isMotionReduced ? 0 : 200,
+            delay: isMotionReduced ? 0 : i * 50,
             fill: 'forwards'
         });
         animationsToCancel.push(window['dotShortening' + i]);
@@ -106,6 +108,7 @@ function sendData()
   function dotsWave() {
     return new Promise((resolve, reject) => {
       const anims = {};
+      const isMotionReduced = Params.isMotionReduced();
       dots.forEach((el, j) => {
         anims['dotanim' + j] = el.animate([
           { transform: 'translateY(0)' },
@@ -113,8 +116,8 @@ function sendData()
           { transform: 'translateY(0)' }
         ], {
             easing: 'ease-in-out',
-            duration: 500,
-            delay: 500 + j * 75,
+            duration: isMotionReduced ? 0 : 500,
+            delay: isMotionReduced ? 0 : 500 + j * 75,
         });
       });
 
@@ -152,14 +155,15 @@ function sendData()
       document.getElementById('adresse_mail').parentElement.classList.add('error');
     }
 
+    const isMotionReduced = Params.isMotionReduced();
     dots.forEach((e, i) => {
       e.animate([
         { transform: 'scale(1)' },
         { transform: 'scale(5)' }
       ], {
           easing: 'ease-in',
-          duration: 200,
-          delay: i * 50,
+          duration: isMotionReduced ? 0 : 200,
+          delay: isMotionReduced ? 0 : i * 50,
           fill: 'forwards'
       });
 
@@ -168,8 +172,8 @@ function sendData()
         { backgroundColor: couleurReponse }
       ], {
           easing: 'ease-in',
-          duration: 200,
-          delay: i * 50,
+          duration: isMotionReduced ? 0 : 200,
+          delay: isMotionReduced ? 0 : i * 50,
           fill: 'forwards'
       });
       animationsToCancel.push(window['dotWidening' + i]);
@@ -179,12 +183,13 @@ function sendData()
       const boutonTexte = document.getElementById('button-animation-text');
       boutonTexte.innerHTML = texteReponse;
       boutonTexte.style.zIndex = 1;
+      const isMotionReduced = Params.isMotionReduced();
       window['textApparition'] = boutonTexte.animate([
         { opacity: 0 },
         { opacity: 1 }
       ], {
           easing: 'ease-in',
-          duration: 200,
+          duration: isMotionReduced ? 0 : 200,
           fill: 'forwards'
       });
       animationsToCancel.push(window['textApparition']);
@@ -195,14 +200,15 @@ function sendData()
         if (!statutReponse)
           transformation = 'translateY(5rem) rotate(10deg)';
 
+        const isMotionReduced = Params.isMotionReduced();
         window['boutonRevient'] = boutonAnimation.animate([
           { transform: 'translateY(0)', opacity: 1 },
           { transform: transformation, opacity: 0 }
         ], {
             easing: 'ease-in',
-            duration: 200,
+            duration: isMotionReduced ? 0 : 200,
             fill: 'forwards',
-            delay: 2000
+            delay: isMotionReduced ? 0 : 2000
         });
         animationsToCancel.push(window['boutonRevient']);
 
