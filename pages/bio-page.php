@@ -50,7 +50,7 @@ function agepro() {
 <section id="exp" aria-labelledby="titre-exp">
   <h4 class="sous-section" id="titre-exp"><?=$translation->get('titre-exp')?></h4>
 
-  <div class="liste-competences">
+  <div class="liste-competences" style="--max-competences: <?=count($competences)?>;">
     <?php
     foreach($competences as $n => $competence) {
       ?>

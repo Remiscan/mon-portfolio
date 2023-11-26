@@ -240,6 +240,7 @@
   align-items: flex-end;
   box-sizing: border-box;
   position: relative;
+  z-index: calc(2 + var(--max-competences) - var(--ligne));
 }
 
 .competence-conteneur.mini {
