@@ -36,9 +36,9 @@ window.addEventListener('popstate', async event => {
 // Gère la mise en place du site à son ouverture
 document.addEventListener('DOMContentLoaded', async event => {
   if (Params.startArticle == 'accueil') {
-    history.replaceState({onav: 'nav_accueil'}, '', '/');
+    history.replaceState({onav: 'nav_accueil'}, '', `/${location.search}`);
   } else {
-    history.replaceState({ onav: `nav_${Params.startArticle}` }, '', `/${Params.startArticle}`);
+    history.replaceState({ onav: `nav_${Params.startArticle}` }, '', `/${Params.startArticle}${location.search}`);
   }
 
   recalcOnResize();

@@ -68,10 +68,11 @@ export function* openProjet(event)
     // Si l'event est un vrai clic (vs simulation par popstate event), on ajoute à l'historique
     if (history.state.onav != 'projet' || history.state.oprojet_id != id)
     {
+      const newUrl = `/projet/${id}${location.search}`;
       if (event.clientX != -1 && event.clientY != -1)
-        history.pushState({onav: 'projet', oprojet_id: id, oprojet_titre: titre, oprojet_couleur: couleur}, '', '/projet/' + id);
+        history.pushState({onav: 'projet', oprojet_id: id, oprojet_titre: titre, oprojet_couleur: couleur}, '', newUrl);
       else
-        history.replaceState({onav: 'projet', oprojet_id: id, oprojet_titre: titre, oprojet_couleur: couleur}, '', '/projet/' + id);
+        history.replaceState({onav: 'projet', oprojet_id: id, oprojet_titre: titre, oprojet_couleur: couleur}, '', newUrl);
     }
     document.title = getTitrePage(false, getString('titre-projet') + titre);
 
@@ -262,7 +263,7 @@ export function initProjets() {
   boutonFermer.addEventListener('click', boutonFermer.clickhandler = (event) => {
     event.preventDefault();
     closeProjet();
-    history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
+    history.pushState({onav: 'nav_portfolio'}, '', `/portfolio${location.search}`);
     document.title = getTitrePage('portfolio');
   });
 
@@ -270,7 +271,7 @@ export function initProjets() {
     if (isProjetClosing == 1) return;
     isProjetClosing = 1;
     closeProjet();
-    history.pushState({onav: 'nav_portfolio'}, '', '/portfolio');
+    history.pushState({onav: 'nav_portfolio'}, '', `/portfolio${location.search}`);
     document.title = getTitrePage('portfolio');
   }, {passive: true});
 }

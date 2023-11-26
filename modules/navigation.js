@@ -55,9 +55,9 @@ export function* naviguer(event, nav, start = false, historique = true)
     // Création de l'entrée de l'historique + URL et titre de la page
     let newurl;
     if (nav.id.replace('nav_', '') == 'accueil')
-      newurl = '/';
+      newurl = `/${location.search}`;
     else
-      newurl = '/' + nav.id.replace('nav_', '')
+      newurl = `/${nav.id.replace('nav_', '')}${location.search}`;
 
     if (historique && event.clientX != -1 && event.clientY != -1)
     {
