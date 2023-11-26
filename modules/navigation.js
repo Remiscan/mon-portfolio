@@ -260,6 +260,7 @@ export function* naviguer(event, nav, start = false, historique = true)
 
     main.style.height = 'auto';
     document.documentElement.style.overflowY = 'auto';
+    boutonLangage.classList.remove('off');
     window.scrollTo(0, currentScroll);
     nav_actuelle = 'nav_' + article_id;
     navEnCours = false;
@@ -273,8 +274,6 @@ export function* naviguer(event, nav, start = false, historique = true)
     }
     else if (article_id == 'portfolio')
       loadProjetImages();
-    else if (article_id == 'accueil')
-      boutonLangage.classList.remove('off');
     
     if (article_id != 'portfolio' && document.getElementById('portfolio').querySelector('.actual-image') != null) {
       const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));

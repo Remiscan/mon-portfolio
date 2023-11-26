@@ -208,6 +208,13 @@
       <?php include './pages/projet-page.php'; ?>
     </article>
 
+    <footer>
+      <div class="groupe-langages">
+        <a href="?lang=fr" class="bouton-langage h6" data-lang="fr">Français</a>
+        <a href="?lang=en" class="bouton-langage h6" data-lang="en">English</a>
+      </div>
+    </footer>
+
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
     <div id="defontsize" style="width: 1000rem; height: 0; position: absolute;" aria-hidden="true"></div>
     <div id="largeurpage" style="width: 100vw; height: 0; position: absolute;" aria-hidden="true"></div>
