@@ -3,7 +3,7 @@
 
 // - Pages
 $c_default_bgcolor = new Couleur('oklch(25% 0.0525 327)');
-$c_article_parcours = new Couleur('oklch(40% 0.11 20)');
+$c_article_parcours = new Couleur('oklch(38% 0.11 20)');
 $c_article_portfolio = new Couleur('oklch(35% 0.13 275)');
 
 // - Projets
