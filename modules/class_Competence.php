@@ -4,7 +4,7 @@ class Competence {
   public $annee;
   public $couleur;
   public $colonne;
-  public $exemples = array();
+  public $exemples = array(); // utiliser pour afficher les frameworks ?
   public $mini = false;
 
   function __construct($nom, $annee, $couleur = 'rgb(255, 255, 255)', $colonne = 1, $exemples = '') {
