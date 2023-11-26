@@ -67,7 +67,7 @@
 }
 
 .projet-conteneur.expandable:hover::before {
-  transform: scale(1.06);
+  transform: scale(1.025, 1.05);
 }
 
 .projet-conteneur-enfant {
