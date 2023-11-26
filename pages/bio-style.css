@@ -67,6 +67,10 @@
   display: block;
 }
 
+.biographie p {
+  text-wrap: pretty;
+}
+
 
 
 /*

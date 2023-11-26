@@ -40,9 +40,7 @@ function agepro() {
     </p>
 
     <p>
-      <span><?=$translation->get('bio-contact-avant-lien')?></span>
-      <a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener" class="mecontacter"><?=$translation->get('bio-contact-lien')?></a>
-      <span><?=$translation->get('bio-contact-apres-lien')?></span>
+      <span><?=$translation->get('bio-contact-avant-lien')?></span><a href="mailto:contact@remiscan.fr" target="_blank" rel="noopener" class="mecontacter"><?=$translation->get('bio-contact-lien')?></a><span><?=$translation->get('bio-contact-apres-lien')?></span>
     </p>
   </div>
 </section>
