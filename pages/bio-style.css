@@ -245,6 +245,7 @@
   align-items: flex-end;
   box-sizing: border-box;
   position: relative;
+  margin-bottom: -1px;
   z-index: calc(2 + var(--max-competences) - var(--ligne));
 }
 
