@@ -352,8 +352,6 @@
     box-sizing: content-box;
     padding-bottom: var(--angle-competence-conteneur);
     margin-bottom: calc(-1 * var(--angle-competence-conteneur) - 1px);
-
-    --decalage-titre: ; /* (largeur titre / largeur conteneur) * padding-bottom */
   }
 
   .competence-conteneur.mini {
@@ -362,7 +360,11 @@
 
   .competence-intro {
     padding-right: 2ch;
-    transform: translateY(calc(var(--angle-competence-titre)) * .5);
+    --angle-competence-titre: calc(2rem * var(--rem-ratio) * var(--rem) / (100 * var(--vw)));
+    /* On décale le texte pour qu'il soit visuellement centré, et non pas centré sur la droite du conteneur.
+    /* On veut décaler le texte vers le bas de la moitié du ratio entre sa largeur et la largeur de la page, fois l'oblique de 2rem.
+    /* On utilise padding-top pour que 100% soit égal à la largeur du texte (+2ch de padding à droite). */
+    padding-top: calc(.5 * (100% + 2ch) * 2 * var(--rem) / (100 * var(--vw)));
   }
 
   .competence-exemples {
