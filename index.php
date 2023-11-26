@@ -108,7 +108,7 @@
     <meta name="theme-color" content="<?=$start_meta_color->hsl()?>">
     <meta name="color-scheme" content="light dark">
     
-    <link rel="icon" type="image/png" href="/mon-portfolio/icons/icon-192.png">
+    <link rel="icon" type="image/png" href="/mon-portfolio/icons/apple-touch-icon.png">
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
