@@ -85,7 +85,7 @@ export function changeCouleur(event, element = false, color = false, elementExpa
     const coloration = Fond.animate(
       keyframesColoration, {
         easing: isAccueilPCAnimation ? Params.easingStandard : 'cubic-bezier(0.2, 0.45, 0.3, 1)',
-        duration: isMotionReduced ? 0 : isAccueilPCAnimation ? 300 : 400,
+        duration: isMotionReduced ? 0 : isAccueil ? 300 : 400,
         fill: 'both'
     });
 
