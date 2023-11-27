@@ -112,11 +112,12 @@ body {
   font-weight: 400;
   color: white;
   transition: transform .1s ease-out;
-  --hauteur-header: calc(3 * 1.2 * var(--mod) * var(--mod) * (var(--mod) * var(--mod) * 1rem + 1rem));
 
   --hauteur-header-text: calc(1.2 * var(--mod) * var(--mod) * (var(--mod) * var(--mod) * 1rem + 1rem));
   --hauteur-header-socials: calc(1.7rem + 2 * .25rem + .5rem);
   --hauteur-header: calc(var(--hauteur-header-text) + var(--hauteur-header-socials) + 2 * 2.4rem + 1.2rem); /* + #intro padding-block + #intro gap */
+
+  --hauteur-footer: 2.4rem;
 }
 
 @media screen and (max-width: 620px) {
@@ -164,7 +165,7 @@ main {
   background-color: transparent;
   position: relative;
   z-index: 3;
-  padding: 2.4rem 1.2rem 2.4rem 1.2rem;
+  padding: 2.4rem 1.2rem var(--hauteur-footer) 1.2rem;
   box-sizing: border-box;
   display: none;
   --hauteur: var(--hauteur-header);
@@ -179,7 +180,7 @@ main {
     --hauteur: calc(2.4rem + 3.4rem + 5rem + 3rem + 3rem);
     margin-top: var(--hauteur);
     padding: 1.2rem;
-    padding-bottom: 3.6rem;
+    padding-bottom: calc(1.2rem + var(--hauteur-footer));
   }
 }
 
@@ -419,18 +420,23 @@ header>.background {
  * Boutons de changement de langue
  */
 
+@keyframes appear {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
 footer {
-  display: grid;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: absolute;
   z-index: 4;
   bottom: 0;
   width: 100%;
-  height: 2.4rem;
-}
-
-@keyframes appear {
-  0% { opacity: 0; }
-  100% { opacity: 1; }
+  height: var(--hauteur-footer);
+  box-sizing: border-box;
+  padding-inline: 2.4rem;
+  animation: appear .2s var(--easing-decelerate);
 }
 
 .groupe-langages {
@@ -438,7 +444,11 @@ footer {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  animation: appear .2s var(--easing-decelerate);
+  gap: 1.2rem;
+}
+
+html:not(.actif) .groupe-langages {
+  gap: 2.4rem;
 }
 
 .bouton-langage {
@@ -448,9 +458,8 @@ footer {
   appearance: none;
   color: white;
   font-family: inherit;
-  width: 8ch;
   cursor: pointer;
-  padding: .4rem 1rem;
+  padding: .4rem 0;
   opacity: .5;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
@@ -462,6 +471,10 @@ footer {
 }
 .bouton-langage:last-child {
   text-align: start;
+}
+
+html:not(.actif) .bouton-langage {
+  width: 8ch;
 }
 
 html[lang="fr"] .bouton-langage[data-lang="fr"],
@@ -478,8 +491,28 @@ html[lang="en"] .bouton-langage[data-lang="en"],
   cursor: pointer;
 }
 
-.groupe-langages.off {
+footer.off {
   display: none;
+}
+
+remiscan-logo {
+  --width: 4.8rem;
+}
+
+html:not(.actif) footer {
+  justify-content: center;
+}
+
+html:not(.actif) remiscan-logo {
+  display: none;
+}
+
+html.actif body {
+  --hauteur-footer: 3.6rem;
+}
+
+html.actif footer {
+  padding-top: 1.2rem;
 }
 
 
@@ -503,6 +536,27 @@ html[lang="en"] .bouton-langage[data-lang="en"],
 
   .actif .background {
     bottom: 0;
+  }
+
+  footer {
+    padding-inline: 1.2rem;
+    flex-direction: row-reverse;
+  }
+
+  html.actif body {
+    --hauteur-footer: 2.4rem;
+  }
+
+  html.actif footer {
+    padding-top: 0;
+  }
+
+  html:not(.actif) .groupe-langages {
+    gap: 1.2rem;
+  }
+
+  html:not(.actif) .bouton-langage {
+    width: auto;
   }
 
   /* Informations personnelles */

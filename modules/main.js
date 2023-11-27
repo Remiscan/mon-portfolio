@@ -2,6 +2,7 @@ import { Params, recalcOnResize } from 'Params';
 import 'mediaProjet';
 import { getNavActuelle, naviguer, setNavActuelle } from 'navigation';
 import { closeProjet, initProjets } from 'projets';
+import 'remiscan-logo';
 
 
 

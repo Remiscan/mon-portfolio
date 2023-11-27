@@ -28,7 +28,7 @@ export function* naviguer(event, nav, start = false, historique = true)
   let currentScroll = window.scrollY;
   const header = document.querySelector('header');
   const main = document.querySelector('main');
-  const boutonLangage = document.querySelector('.groupe-langages');
+  const footer = document.querySelector('footer');
 
   try {
 
@@ -50,7 +50,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     navEnCours = true;
     main.style.height = getComputedStyle(main).height;
     document.documentElement.style.overflowY = 'hidden';
-    boutonLangage.classList.add('off');
+    footer.classList.add('off');
 
     // Création de l'entrée de l'historique + URL et titre de la page
     let newurl;
@@ -260,7 +260,7 @@ export function* naviguer(event, nav, start = false, historique = true)
 
     main.style.height = 'auto';
     document.documentElement.style.overflowY = 'auto';
-    boutonLangage.classList.remove('off');
+    footer.classList.remove('off');
     window.scrollTo(0, currentScroll);
     nav_actuelle = 'nav_' + article_id;
     navEnCours = false;

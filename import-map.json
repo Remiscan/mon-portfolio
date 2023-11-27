@@ -1,6 +1,10 @@
 {
   "imports": {
     "cancelable-async": "/_common/js/cancelable-async/mod.js",
+    "remiscan-logo": "/_common/components/remiscan-logo/remiscan-logo.js",
+    "remiscan-logo-svg": "/_common/components/remiscan-logo/logo.svg",
+    "remiscan-logo-svg-horizontal": "/_common/components/remiscan-logo/logo-horizontal.svg",
+    "remiscan-logo-svg-square": "/_common/components/remiscan-logo/logo-square.svg",
 
     "mediaProjet": "./modules/components/mediaProjet.js",
 
