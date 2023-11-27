@@ -115,7 +115,7 @@ export function* openProjet(event)
       if (thisProjetNav != lastProjetNav) throw 'expired';
       
       // On anime l'apparition des infos de base du projet choisi
-      changeThemeColor(themeCouleur);
+      changeThemeColor(couleur);
       projetContenu.style.opacity = 1;
       projetTransition.style.display = 'none';
   
