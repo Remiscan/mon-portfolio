@@ -45,6 +45,8 @@
       <?php
     }
     ?>
+
+    <a href="https://github.com/remiscan" target="_blank" rel="noopener" id="projet-preview-more"><?=$translation->get('projet-more-description')?></a>
   </div>
 </section>
 

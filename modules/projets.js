@@ -255,6 +255,7 @@ openProjet = cancelableAsync(openProjet);
 let isProjetClosing = 0;
 export function initProjets() {
   Array.from(document.querySelectorAll('.projet-conteneur')).forEach(e => {
+    if (e.id === 'projet-preview-more') return;
     e.addEventListener('click', event => openProjet(event));
   });
 

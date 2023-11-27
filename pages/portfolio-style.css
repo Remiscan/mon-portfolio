@@ -133,6 +133,13 @@
   max-width: 90%;
 }
 
+#projet-preview-more {
+  text-decoration: underline;
+  text-align: center;
+  margin: auto;
+  display: none;
+}
+
 
 
 /*
@@ -204,5 +211,10 @@
     --angle-projet-image: .9rem; /* calcul dans backups/calculs-css-sans-js.txt */
     -webkit-clip-path: polygon(0 var(--angle-projet-image), 100% 0, 100% calc(100% - var(--angle-projet-image)), 0 100%);
     clip-path: polygon(0 var(--angle-projet-image), 100% 0, 100% calc(100% - var(--angle-projet-image)), 0 100%);
+  }
+
+  #projet-preview-more {
+    margin-top: calc(2rem + 0.6rem);
+    margin-bottom: -1.2rem;
   }
 }

@@ -167,7 +167,10 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
 export function loadProjetImages() {
   const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));
   let listeImages = [];
-  listeProjets.forEach(e => listeImages.push(e.dataset.image));
+  listeProjets.forEach(e => {
+    if (!e.dataset.image) return;
+    listeImages.push(e.dataset.image);
+  });
   placeholderNoMore(listeImages, listeProjets, true, document.querySelector('.liste-projets'));
 }
 

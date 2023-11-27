@@ -45,7 +45,11 @@ document.addEventListener('DOMContentLoaded', async event => {
   recalcOnResize();
 
   // Adapte les liens du portfolio (par défaut, ils mènent directement aux projets si JavaScript est désactivé)
-  Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => { e.href = '/projet/' + e.dataset.id; e.removeAttribute('target'); });
+  Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => {
+    if (e.id === 'projet-preview-more') return;
+    e.href = '/projet/' + e.dataset.id;
+    e.removeAttribute('target');
+  });
   // -- fin --
 
   initProjets();
