@@ -497,6 +497,7 @@ footer.off {
 
 remiscan-logo {
   --width: 4.8rem;
+  margin-inline: calc(-0.033 * var(--width));
 }
 
 html:not(.actif) footer {

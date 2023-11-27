@@ -19,7 +19,7 @@
   <div id="liens_contact" class="h4">
     <h3 class="h4"aria-hidden="true" hidden><?=$translation->get('me-contacter')?></h3>
 
-    <a href="https://github.com/Remiscan" target="_blank" rel="noopener"
+    <a href="https://github.com/remiscan" target="_blank" rel="noopener"
        aria-label="<?=$translation->get('contact-github')?>"
        class="expandable" style="--social-color:<?=$c_github->hsl()?>;">
       <i class="svg" style="width: 1.4rem; height: 1.4rem;">
@@ -44,8 +44,8 @@
     </a>-->
 
     <a href="https://www.linkedin.com/in/remiscan" target="_blank" rel="noopener"
-           aria-label="<?=$translation->get('contact-linkedin')?>"
-           class="expandable" style="--social-color:<?=$c_linkedin->hsl()?>;">
+       aria-label="<?=$translation->get('contact-linkedin')?>"
+       class="expandable" style="--social-color:<?=$c_linkedin->hsl()?>;">
       <i class="svg" style="width: 1.25rem; height: 1.25rem;">
         <svg viewBox="0 0 24 24"><use href="#linkedin" /></svg>
       </i>
