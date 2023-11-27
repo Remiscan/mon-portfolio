@@ -16,14 +16,18 @@ let couleurEnCours = false;
 export function changeCouleur(event, element = false, color = false, elementExpand = false) {
   const Fond = document.getElementById('couleur');
   return new Promise((resolve, reject) => {
-    let couleur;
+    let couleur, themeCouleur;
     if (element !== false) {
       couleur = element.style.getPropertyValue('--article-color') || getComputedStyle(element).getPropertyValue('--article-color');
+      themeCouleur = element.style.getPropertyValue('--theme-color') || getComputedStyle(element).getPropertyValue('--theme-color');
     } else {
-      if (color) couleur = color;
-      else {
+      if (color) {
+        couleur = color;
+        themeCouleur = color;
+      } else {
         const r = Math.floor((Math.random() * 360));
         couleur = 'hsl(' + r + ', 40%, 30%)';
+        themeCouleur = couleur;
       }
     }
 
@@ -89,11 +93,12 @@ export function changeCouleur(event, element = false, color = false, elementExpa
         fill: 'both'
     });
 
-    if (isAccueil) changeThemeColor(couleur);
+    if (isAccueil) changeThemeColor(themeCouleur);
 
     coloration.addEventListener('finish', () => {
-      if (!isAccueil) changeThemeColor(couleur);
+      if (!isAccueil) changeThemeColor(themeCouleur);
       document.body.style.setProperty('--article-color', couleur);
+      document.body.style.setProperty('--theme-color', themeCouleur);
       couleurEnCours = false;
       return resolve();
     });
@@ -106,7 +111,5 @@ export function changeCouleur(event, element = false, color = false, elementExpa
 // Change la couleur du thème via la balise meta theme-color, à partir de 'couleur' au format hsl
 export function changeThemeColor(couleur) {
   const metaThemeColor = document.querySelector("meta[name=theme-color]");
-  const metaCouleur = couleur.split(',');
-  metaCouleur[2] = Math.round(Number(metaCouleur[2].replace('%)', '')) * 0.72) + '%)';
-  metaThemeColor.setAttribute("content", metaCouleur[0] + ',' + metaCouleur[1] + ',' + metaCouleur[2]);
+  metaThemeColor.setAttribute("content", couleur);
 }

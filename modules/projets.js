@@ -32,6 +32,7 @@ export function* openProjet(event)
   const source = event.currentTarget;
   const id = source.dataset.id;
   const couleur = source.style.getPropertyValue('--projet-color');
+  const themeCouleur = source.style.getPropertyValue('--theme-color');
   const titre = getString('projet-' + id + '-titre');
   const lien = source.dataset.lien;
   const description = getString('projet-' + id + '-description');
@@ -114,7 +115,7 @@ export function* openProjet(event)
       if (thisProjetNav != lastProjetNav) throw 'expired';
       
       // On anime l'apparition des infos de base du projet choisi
-      changeThemeColor(couleur);
+      changeThemeColor(themeCouleur);
       projetContenu.style.opacity = 1;
       projetTransition.style.display = 'none';
   
@@ -293,7 +294,7 @@ export async function closeProjet() {
   document.querySelector('header').removeAttribute('inert');
 
   window.removeEventListener('keydown', window.cp);
-  changeThemeColor(document.body.style.getPropertyValue('--article-color'));
+  changeThemeColor(document.body.style.getPropertyValue('--theme-color'));
   projetTransition.style.display = 'block';
   projetContenu.style.opacity = 0;
   projetDetailsPourquoi.style.opacity = 0;

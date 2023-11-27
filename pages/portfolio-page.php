@@ -20,7 +20,10 @@
          aria-labelledby="titre-projets-perso projet-titre-<?=$projet->id?>"
          id="projet-preview-<?=$projet->id?>"
          class="projet-conteneur expandable"
-         style="--projet-color:<?=$projet->couleur->hsl()?>;"
+         style="
+          --projet-color: <?=$projet->couleur->hsl()?>;
+          --theme-color: <?=Couleur::blend($projet->couleur, $c_topcolor)->rgb()?>;
+         "
          data-id="<?=$projet->id?>"
          data-lien="<?=$projet->lien?>"
          data-en-exists="<?=$en_exists?>"

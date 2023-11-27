@@ -3,7 +3,10 @@
 <section id="intro">
 
   <a id="nav_accueil" href="/" aria-label="<?=$translation->get('nav-accueil')?>"
-     style="--article-color:<?=$c_default_bgcolor->hsl()?>;">
+     style="
+      --article-color: <?=$c_default_bgcolor->hsl()?>;
+      --theme-color: <?=Couleur::blend($c_default_bgcolor, $c_topcolor)->rgb()?>;
+     ">
     <i class="svg">
       <svg viewBox="0 0 24 24"><use href="#arrow-back" /></svg>
     </i>
@@ -64,13 +67,21 @@
 
 <nav>
   <a id="nav_bio" href="/bio" aria-label="<?=$translation->get('nav-bio')?>"
-     class="expandable nav" style="--article-color:<?=$c_article_parcours->hsl()?>;">
+     class="expandable nav"
+     style="
+      --article-color: <?=$c_article_parcours->hsl()?>;
+      --theme-color: <?=Couleur::blend($c_article_parcours, $c_topcolor)->rgb()?>;
+     ">
     <h3><?=$translation->get('nav-bio')?></h3>
     <div class="underline"></div>
   </a>
 
   <a id="nav_portfolio" href="/portfolio" aria-label="<?=$translation->get('nav-portfolio')?>"
-     class="expandable nav" style="--article-color:<?=$c_article_portfolio->hsl()?>;">
+     class="expandable nav"
+     style="
+      --article-color: <?=$c_article_portfolio->hsl()?>;
+      --theme-color: <?=Couleur::blend($c_article_portfolio, $c_topcolor)->rgb()?>;
+     ">
     <h3><?=$translation->get('nav-portfolio')?></h3>
     <div class="underline"></div>
   </a>

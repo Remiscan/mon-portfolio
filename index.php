@@ -40,7 +40,6 @@
 
   //// Si l'URL demandée est /
   $start_color = $c_default_bgcolor;
-  $start_meta_color = $c_default_bgcolor->change('l', '11%', true);
   $titre_page = false;
 
   //// Si une URL différente de / est demandée
@@ -60,9 +59,9 @@
         $titre_page = $translation->get('nav-contact');
         break;
     }
-    $start_meta_color = $start_color->change('l', '25%', true);
   }
   $load_color = Couleur::blend($start_color, $c_topcolor);
+  $start_meta_color = $load_color;
 
   //// Donne le titre de la page
   $titre = 'Rémi S., ' . $translation->get('job');
@@ -105,7 +104,7 @@
     <meta property="og:image" content="https://remiscan.fr/mon-portfolio/images/mosaique-preview.png">
 
     <meta name="viewport" content="initial-scale=1">
-    <meta name="theme-color" content="<?=$start_meta_color->hsl()?>">
+    <meta name="theme-color" content="<?=$start_meta_color->rgb()?>">
     <meta name="color-scheme" content="light dark">
     
     <link rel="icon" type="image/svg" href="/mon-portfolio/icons/icon.svg">
