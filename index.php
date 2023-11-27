@@ -208,11 +208,11 @@
     </article>
 
     <footer>
-      <remiscan-logo text-color="rgb(0, 0, 0, .5)" disabled></remiscan-logo>
       <div class="groupe-langages">
         <a href="?lang=fr" class="bouton-langage h6" data-lang="fr">Français</a>
         <a href="?lang=en" class="bouton-langage h6" data-lang="en">English</a>
       </div>
+      <remiscan-logo text-color="rgb(255, 255, 255, .3)" disabled></remiscan-logo>
     </footer>
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->

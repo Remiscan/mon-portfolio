@@ -426,9 +426,9 @@ header>.background {
 }
 
 footer {
-  display: flex;
+  display: grid;
   align-items: center;
-  justify-content: space-between;
+  grid-template-columns: 1fr 3fr 1fr;
   position: absolute;
   z-index: 4;
   bottom: 0;
@@ -440,15 +440,17 @@ footer {
 }
 
 .groupe-langages {
+  grid-column: 2;
+  grid-row: 1;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 1.2rem;
+  gap: 2.4rem;
 }
 
-html:not(.actif) .groupe-langages {
-  gap: 2.4rem;
+html.actif .groupe-langages {
+  gap: 1.2rem;
 }
 
 .bouton-langage {
@@ -459,6 +461,7 @@ html:not(.actif) .groupe-langages {
   color: white;
   font-family: inherit;
   cursor: pointer;
+  width: 8ch;
   padding: .4rem 0;
   opacity: .5;
   text-decoration: underline;
@@ -471,10 +474,6 @@ html:not(.actif) .groupe-langages {
 }
 .bouton-langage:last-child {
   text-align: start;
-}
-
-html:not(.actif) .bouton-langage {
-  width: 8ch;
 }
 
 html[lang="fr"] .bouton-langage[data-lang="fr"],
@@ -496,12 +495,11 @@ footer.off {
 }
 
 remiscan-logo {
+  grid-column: 3;
+  grid-row: 1;
+  justify-self: end;
   --width: 4.8rem;
   margin-inline: calc(-0.033 * var(--width));
-}
-
-html:not(.actif) footer {
-  justify-content: center;
 }
 
 html:not(.actif) remiscan-logo {
@@ -540,8 +538,9 @@ html.actif footer {
   }
 
   footer {
+    display: flex;
     padding-inline: 1.2rem;
-    flex-direction: row-reverse;
+    justify-content: space-between;
   }
 
   html.actif body {
@@ -552,11 +551,16 @@ html.actif footer {
     padding-top: 0;
   }
 
+  html:not(.actif) footer {
+    justify-content: center;
+  }
+
+  html.actif .groupe-langages,
   html:not(.actif) .groupe-langages {
     gap: 1.2rem;
   }
 
-  html:not(.actif) .bouton-langage {
+  .bouton-langage {
     width: auto;
   }
 
@@ -907,12 +911,6 @@ textarea::selection {
 
   .expandable:not(.nav):active::before {
     transform: scale(1);
-  }
-
-  /* Boutons de changement de langue */
-
-  .groupe-langages {
-    left: 50%;
   }
 
   /* Boutons de navigation */
