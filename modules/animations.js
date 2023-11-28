@@ -2,52 +2,38 @@ import { Params, wait } from 'Params';
 
 
 
-///////////////////////////////////
-// Clip quand on passe sur la photo
-export function photoclip(event, bool = true) {
-  const photo = document.getElementById('photosecret');
-  const photorect = photo.getBoundingClientRect();
-  const tx = event.clientX - photorect.left;
-  const ty = event.clientY - photorect.top;
+///////////////////////////////////////////////////
+// Surveille le survol d'un élément par le pointeur
+// et lui passe les coordonnées locales du pointeur
+function monitorHoveredElement(element) {
+  const callback = (event) => {
+    const rect = element.getBoundingClientRect();
+    const tx = event.clientX - rect.left;
+    const ty = event.clientY - rect.top;
 
-  if (bool) {
-    photo.style.opacity = 1;
-    photo.style.setProperty('-webkit-clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
-    photo.style.setProperty('clip-path', 'circle(25% at ' + tx + 'px '+ ty + 'px)');
-  } else {
-    const isMotionReduced = Params.isMotionReduced();
-    photo.animate([
-      { clipPath: 'circle(25% at ' + tx + 'px '+ ty + 'px)', opacity: 1 },
-      { clipPath: 'circle(0% at ' + tx + 'px '+ ty + 'px)', opacity: 1 }
-    ], {
-        easing: 'cubic-bezier(1, 0.6, 1, 0.6)',
-        duration: isMotionReduced ? 0 : 60
-    });
-    photo.style.setProperty('-webkit-clip-path', 'unset');
-    photo.style.setProperty('clip-path', 'unset');
-    photo.style.opacity = 0;
+    element.style.setProperty('--tx', Math.round(tx));
+    element.style.setProperty('--ty', Math.round(ty));
   }
+
+  const cancelEventTypes = ['pointercancel', 'pointerout', 'pointerleave']
+  element.addEventListener('pointerenter', event => {
+    const cancelHandler = () => {
+      element.removeEventListener('pointermove', callback);
+      cancelEventTypes.forEach(type => {
+        element.removeEventListener(type, cancelHandler);
+      });
+    };
+
+    element.addEventListener('pointermove', callback);
+    cancelEventTypes.forEach(type => {
+      element.addEventListener(type, cancelHandler);
+    });
+  })
 }
 
+// Effet au survol de ma photo
 const photoSecret = document.getElementById('photosecret');
-photoSecret.addEventListener('pointerenter', event => {
-  const moveHandler = event => { photoclip(event) };
-
-  const cancelHandler = event => {
-    photoclip(event, false);
-    photoSecret.removeEventListener('pointermove', moveHandler);
-    photoSecret.removeEventListener('pointerup', cancelHandler);
-    photoSecret.removeEventListener('pointercancel', cancelHandler);
-    photoSecret.removeEventListener('pointerout', cancelHandler);
-    photoSecret.removeEventListener('pointerleave', cancelHandler);
-  }
-
-  photoSecret.addEventListener('pointermove', moveHandler);
-  photoSecret.addEventListener('pointerup', cancelHandler);
-  photoSecret.addEventListener('pointercancel', cancelHandler);
-  photoSecret.addEventListener('pointerout', cancelHandler);
-  photoSecret.addEventListener('pointerleave', cancelHandler);
-});
+monitorHoveredElement(photoSecret);
 
 
 
