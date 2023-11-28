@@ -212,7 +212,7 @@
         <a href="?lang=fr" class="bouton-langage h6" data-lang="fr">Français</a>
         <a href="?lang=en" class="bouton-langage h6" data-lang="en">English</a>
       </div>
-      <remiscan-logo text-color="rgb(255, 255, 255, .15)" disabled></remiscan-logo>
+      <remiscan-logo text-color="rgb(255, 255, 255, .3)" disabled></remiscan-logo>
     </footer>
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->
