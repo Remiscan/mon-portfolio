@@ -135,6 +135,7 @@
   mask-size: calc(var(--tcoeff, 1) * var(--mask-width) )calc(var(--tcoeff, 1) * var(--mask-height));
   mask-repeat: no-repeat;
   clip-path: inset(4px);
+  cursor: none;
 }
 
 #photosecret:not(.nope) {
