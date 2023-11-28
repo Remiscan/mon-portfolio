@@ -50,6 +50,7 @@ export function* naviguer(event, nav, start = false, historique = true)
     navEnCours = true;
     main.style.height = getComputedStyle(main).height;
     document.documentElement.style.overflowY = 'hidden';
+    document.body.setAttribute('data-section-actuelle', nav.id.replace('nav_', ''));
     footer.classList.add('off');
 
     // Création de l'entrée de l'historique + URL et titre de la page

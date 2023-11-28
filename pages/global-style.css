@@ -504,6 +504,11 @@ remiscan-logo {
   margin-inline: calc(-0.033 * var(--width));
 }
 
+body[data-section-actuelle="bio"] remiscan-logo {
+  grid-column: 1;
+  justify-self: start;
+}
+
 html:not(.actif) remiscan-logo {
   display: none;
 }
