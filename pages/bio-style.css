@@ -124,8 +124,8 @@
   --mask: url('/_common/components/remiscan-logo/logo.svg');
   --mask-width: 4.5rem;
   --mask-height: calc(.5 * var(--mask-width));
-  --mask-x: calc(var(--tx) * 1px - .5 * var(--tcoeff) * var(--mask-width));
-  --mask-y: calc(var(--ty) * 1px - .5 * var(--tcoeff) * var(--mask-height));
+  --mask-x: calc(var(--tx) * 1px - .5 * var(--tcoeff, 1) * var(--mask-width));
+  --mask-y: calc(var(--ty) * 1px - .5 * var(--tcoeff, 1) * var(--mask-height));
   -webkit-mask: var(--mask);
   -webkit-mask-position: var(--mask-x, 0px) var(--mask-y, 0px);
   -webkit-mask-size: calc(var(--tcoeff, 1) * var(--mask-width) )calc(var(--tcoeff, 1) * var(--mask-height));
