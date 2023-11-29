@@ -119,13 +119,15 @@
   opacity: 0;
   z-index: 5;
   transition:
-    opacity .5s var(--easing-standard),
+    opacity var(--opacity-transition-duration, .2s) var(--easing-standard),
     --tcoeff var(--mask-transition-duration, .5s) var(--easing-standard);
   --mask: url('/_common/components/remiscan-logo/logo.svg');
   --mask-width: 4.5rem;
   --mask-height: calc(.5 * var(--mask-width));
-  --mask-x: calc(var(--tx) * 1px - .5 * var(--tcoeff, 1) * var(--mask-width));
-  --mask-y: calc(var(--ty) * 1px - .5 * var(--tcoeff, 1) * var(--mask-height));
+  /* Coefficients chosen for the dot of the "i" to be the center of the cursor */
+  /*                              🔽🔽🔽                                      */
+  --mask-x: calc(var(--tx) * 1px - .695 * var(--tcoeff, 1) * var(--mask-width));
+  --mask-y: calc(var(--ty) * 1px - .077 * var(--tcoeff, 1) * var(--mask-height));
   -webkit-mask: var(--mask);
   -webkit-mask-position: var(--mask-x, 0px) var(--mask-y, 0px);
   -webkit-mask-size: calc(var(--tcoeff, 1) * var(--mask-width) )calc(var(--tcoeff, 1) * var(--mask-height));
@@ -140,13 +142,13 @@
 
 #photosecret:not(.nope) {
   background-image:
-    url('/mon-portfolio/images/cake.png'),
+    url('/mon-portfolio/images/secret.jpg'),
     linear-gradient(to right, var(--article-color) 0% 100%);
   background-position:
-    center 20%,
+    center center,
     center center;
   background-size:
-    40% 40%,
+    cover,
     cover;
   background-repeat:
     no-repeat,
@@ -155,11 +157,12 @@
 
 #photo:hover #photosecret {
   opacity: 1;
+  --opacity-transition-duration: .5s;
 }
 
 #photo:active #photosecret {
-  --tcoeff: 10;
-  --mask-transition-duration: 3s;
+  --tcoeff: 30;
+  --mask-transition-duration: 2s;
 }
 
 @supports not (clip-path: circle(40%)) {
