@@ -2,6 +2,25 @@ import { Params, wait } from 'Params';
 
 
 
+////////////////////////////////////
+// Anime la timeline des compétences
+export function anim_competences(t = true) {
+  const firstConteneur = document.querySelector('.competence-conteneur');
+  const allConteneurs = [...document.getElementsByClassName('competence-conteneur')];
+
+  if (t && !firstConteneur.classList.contains('colored')) {
+    const isMotionReduced = Params.isMotionReduced();
+    allConteneurs.forEach(e => {
+      const delai = isMotionReduced ? 0 : parseFloat(e.style.getPropertyValue('--delai'));
+      wait(1000 * delai).then(() => e.classList.add('colored'));
+    });
+  } else if (!t && firstConteneur.classList.contains('colored')) {
+    allConteneurs.forEach(e => e.classList.remove('colored'));
+  }
+}
+
+
+
 ///////////////////////////////////////////////////
 // Surveille le survol d'un élément par le pointeur
 // et lui passe les coordonnées locales du pointeur
@@ -31,25 +50,42 @@ function monitorHoveredElement(element) {
   })
 }
 
+// EASTER EGG
 // Effet au survol de ma photo
 const photoSecret = document.getElementById('photosecret');
 monitorHoveredElement(photoSecret);
 
 
 
-////////////////////////////////////
-// Anime la timeline des compétences
-export function anim_competences(t = true) {
-  const firstConteneur = document.querySelector('.competence-conteneur');
-  const allConteneurs = [...document.getElementsByClassName('competence-conteneur')];
+/////////////
+// EASTER EGG
+// Animation du logo remiscan du footer
+let footerAnimationTimeout;
+const footerObserver = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) {
+      // Animate logo here
 
-  if (t && !firstConteneur.classList.contains('colored')) {
-    const isMotionReduced = Params.isMotionReduced();
-    allConteneurs.forEach(e => {
-      const delai = isMotionReduced ? 0 : parseFloat(e.style.getPropertyValue('--delai'));
-      wait(1000 * delai).then(() => e.classList.add('colored'));
-    });
-  } else if (!t && firstConteneur.classList.contains('colored')) {
-    allConteneurs.forEach(e => e.classList.remove('colored'));
+      // 1. Slide logo in
+      wait(1000)
+      .then(() => entry.target.classList.add('visible'))
+
+      // 2. Make it blink
+      // in css
+
+      // 3. Slide logo out
+      .then(() => {
+        footerAnimationTimeout = setTimeout(() => {
+          entry.target.classList.remove('visible');
+        }, 3500);
+      });
+    } else {
+      entry.target.classList.remove('visible');
+      clearTimeout(footerAnimationTimeout);
+    }
   }
-}
+}, {
+  threshold: [0, 1]
+});
+
+footerObserver.observe(document.querySelector('footer'));

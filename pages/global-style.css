@@ -496,22 +496,84 @@ footer.off {
   display: none;
 }
 
-remiscan-logo {
+@keyframes blinking-twice {
+  0% { scale: 1 1; }
+  20% { scale: 1 0; }
+  40% { scale: 1 1; }
+  60% { scale: 1 1; }
+  80% { scale: 1 0; }
+  100% { scale: 1 1; }
+}
+
+@keyframes blinking-once {
+  0% { scale: 1 1; }
+  2% { scale: 1 0; }
+  4% { scale: 1 1; }
+  100% { scale: 1 1; }
+}
+
+footer svg {
   grid-column: -2;
   grid-row: 1;
   justify-self: end;
   --width: 4.8rem;
   margin-inline: calc(-0.033 * var(--width));
-  display: none;
+  transform: translateY(calc(var(--hauteur-footer) + 2px));
+  transition: transform .2s var(--easing-standard);
 }
 
-body[data-section-actuelle="bio"] remiscan-logo {
+footer svg .text {
+  fill: rgb(255, 255, 255, .3);
+}
+
+body[data-section-actuelle="bio"] footer svg {
   grid-column: 1;
   justify-self: start;
 }
 
-html:not(.actif) remiscan-logo {
+html:not(.actif) footer svg {
   display: none;
+}
+
+footer.visible svg {
+  transform: translateY(0);
+}
+
+footer.visible svg #eye {
+  animation: blinking-twice 700ms linear;
+  animation-delay: 900ms;
+}
+
+@media (hover: none) {
+  footer:active svg {
+    transform: translateY(0);
+    transition-delay: 300ms;
+  }
+
+  footer:active svg #eye {
+    animation: blinking-once 7000ms linear;
+    animation-delay: 900ms;
+    animation-iteration-count: infinite;
+  }
+}
+
+@media (hover: hover) {
+  footer:hover svg {
+    transition-delay: 100ms;
+    transform: translateY(0);
+  }
+
+  footer:hover svg #eye {
+    animation: blinking-once 7000ms linear;
+    animation-delay: 1000ms;
+    animation-iteration-count: infinite;
+  }
+
+  footer:active svg #eye {
+    animation: blinking-twice 700ms linear;
+    animation-delay: 0ms;
+    animation-iteration-count: initial;
+  }
 }
 
 

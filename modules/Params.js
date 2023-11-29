@@ -184,7 +184,16 @@ window.addEventListener('orientationchange', callResize);
 
 //////////////////////
 // Promesse setTimeout
-export function wait(time) { return new Promise(resolve => setTimeout(resolve, time)); }
+export function wait(time) { 
+  if (time instanceof Animation) {
+    if (time.playState === 'finished') return Promise.resolve();
+    return new Promise(resolve => time.addEventListener('finish', resolve));
+  } else if (typeof time === 'number') {
+    return new Promise(resolve => setTimeout(resolve, time));
+  } else {
+    return Promise.resolve();
+  }
+}
 
 
 
