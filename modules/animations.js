@@ -63,7 +63,7 @@ monitorHoveredElement(photoSecret);
 let footerAnimationTimeout;
 const footerObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
-    if (entry.isIntersecting) {
+    if (entry.isIntersecting && document.documentElement.classList.contains('actif')) {
       // Animate logo here
 
       // 1. Slide logo in
