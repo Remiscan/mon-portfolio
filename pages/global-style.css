@@ -519,7 +519,8 @@ footer svg {
   --width: 4.8rem;
   margin-inline: calc(-0.033 * var(--width));
   transform: translateY(calc(var(--hauteur-footer) + 2px));
-  transition: transform .2s var(--easing-standard);
+  transition: transform .2s var(--easing-accelerate);
+  --easing-enthusiastic: cubic-bezier(.4, 0, .1, 1.6);
 }
 
 footer svg .text {
@@ -537,6 +538,8 @@ html:not(.actif) footer svg {
 
 footer.visible svg {
   transform: translateY(0);
+  transition-timing-function: var(--easing-enthusiastic);
+  transition-duration: 300ms;
 }
 
 footer.visible svg #eye {
@@ -548,6 +551,8 @@ footer.visible svg #eye {
   footer:active svg {
     transform: translateY(0);
     transition-delay: 300ms;
+    transition-timing-function: var(--easing-enthusiastic);
+    transition-duration: 300ms;
   }
 
   footer:active svg #eye {
@@ -561,6 +566,8 @@ footer.visible svg #eye {
   footer:hover svg {
     transition-delay: 100ms;
     transform: translateY(0);
+    transition-timing-function: var(--easing-enthusiastic);
+    transition-duration: 300ms;
   }
 
   footer:hover svg #eye {
