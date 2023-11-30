@@ -491,7 +491,9 @@ html[lang="fr"] .bouton-langage[data-lang="fr"]::before,
 html[lang="en"] .bouton-langage[data-lang="en"]::before,
 .bouton-langage:disabled::before {
   content: '✓';
+  display: inline-block;
   margin-right: .5ch;
+  margin-block: -.5ch;
 }
 
 .bouton-langage:is(:link, :hover, :focus, :active, :visited) {
