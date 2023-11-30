@@ -463,7 +463,7 @@ html.actif .groupe-langages {
   color: white;
   font-family: inherit;
   cursor: pointer;
-  width: 8ch;
+  width: 9ch;
   padding: .4rem 0;
   opacity: .5;
   text-decoration: underline;
@@ -483,8 +483,13 @@ html[lang="en"] .bouton-langage[data-lang="en"],
 .bouton-langage:disabled {
   background-color: transparent;
   text-decoration: none;
-  opacity: .3;
-  cursor: auto;
+}
+
+html[lang="fr"] .bouton-langage[data-lang="fr"]::before,
+html[lang="en"] .bouton-langage[data-lang="en"]::before,
+.bouton-langage:disabled::before {
+  content: '✓';
+  margin-right: .5ch;
 }
 
 .bouton-langage:is(:link, :hover, :focus, :active, :visited) {
