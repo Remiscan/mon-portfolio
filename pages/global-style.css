@@ -806,7 +806,7 @@ html:not(.actif) #nav_accueil {
 }
 
 #nav_accueil>i {
-  opacity: .1;
+  opacity: .3;
 }
 
 
@@ -991,7 +991,6 @@ textarea::selection {
   #nav_accueil {
     align-self: end;
     justify-self: center;
-    transform: rotate(90deg);
     grid-row: 1;
     grid-column: 1 / -1;
     margin: 0;
