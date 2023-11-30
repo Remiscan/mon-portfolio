@@ -428,8 +428,9 @@ header>.background {
 footer {
   display: grid;
   align-items: center;
-  grid-template-columns: 4.8rem 1fr auto 1fr 4.8rem;
-  gap: 1.2rem;
+  --logo-width: 4.8rem;
+  grid-template-columns: var(--logo-width) 1fr auto 1fr var(--logo-width);
+  gap: .6rem;
   justify-content: end;
   position: absolute;
   z-index: 4;
@@ -439,6 +440,7 @@ footer {
   box-sizing: border-box;
   padding-inline: 2.4rem;
   animation: appear .2s var(--easing-decelerate);
+  --easing-enthusiastic: cubic-bezier(.4, 0, .1, 1.6);
 }
 
 .groupe-langages {
@@ -517,24 +519,38 @@ footer.off {
   100% { scale: 1 1; }
 }
 
+.logo-container {
+  grid-row: 1 / -1;
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: var(--left-col, 1fr) [logo] var(--logo-width) var(--right-col, 0fr);
+  transition: grid-template-columns .1s var(--easing-standard);
+}
+
 footer svg {
-  grid-column: -2;
-  grid-row: 1;
+  grid-column: logo;
   justify-self: end;
-  --width: 4.8rem;
-  margin-inline: calc(-0.033 * var(--width));
+  width: var(--logo-width);
+  margin-inline: calc(-0.033 * var(--logo-width));
   transform: translateY(calc(var(--hauteur-footer) + 2px));
   transition: transform .2s var(--easing-accelerate);
-  --easing-enthusiastic: cubic-bezier(.4, 0, .1, 1.6);
 }
 
 footer svg .text {
   fill: rgb(255, 255, 255, .3);
 }
 
+body[data-section-actuelle="bio"] .logo-container {
+  --left-col: 0fr;
+  --right-col: 1fr;
+}
+
 body[data-section-actuelle="bio"] footer svg {
-  grid-column: 1;
   justify-self: start;
+}
+
+body[data-section-actuelle="bio"] footer {
+  justify-content: start;
 }
 
 html:not(.actif) footer svg {
@@ -564,6 +580,32 @@ footer.visible svg #eye {
     animation: blinking-once 7000ms linear;
     animation-delay: 900ms;
     animation-iteration-count: infinite;
+  }
+
+  footer.touched-left {
+    justify-content: end !important;
+  }
+
+  footer.touched-right {
+    justify-content: start !important;
+  }
+
+  footer.touched-left .logo-container {
+    --left-col: 1fr !important;
+    --right-col: 0fr !important;
+  }
+
+  footer.touched-left svg {
+    justify-self: end !important;
+  }
+
+  footer.touched-right .logo-container {
+    --left-col: 0fr !important;
+    --right-col: 1fr !important;
+  }
+
+  footer.touched-right svg {
+    justify-self: start !important;
   }
 }
 

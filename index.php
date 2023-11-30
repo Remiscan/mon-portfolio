@@ -208,11 +208,13 @@
     </article>
 
     <footer>
+      <div class="logo-container">
+        <?php include dirname(__DIR__, 1) . '/_common/components/remiscan-logo/logo.svg'; ?>
+      </div>
       <div class="groupe-langages">
         <a href="?lang=fr" class="bouton-langage h6" data-lang="fr">Français</a>
         <a href="?lang=en" class="bouton-langage h6" data-lang="en">English</a>
       </div>
-      <?php include dirname(__DIR__, 1) . '/_common/components/remiscan-logo/logo.svg'; ?>
     </footer>
 
     <!-- RÉCUPÉRATION DES PARAMÈTRES DE LA FENÊTRE -->

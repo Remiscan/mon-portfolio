@@ -63,6 +63,7 @@ monitorHoveredElement(photoSecret);
 let footerAnimationTimeout;
 const footerObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
+    entry.target.classList.remove('touched-left', 'touched-right');
     if (entry.isIntersecting && document.documentElement.classList.contains('actif')) {
       // Animate logo here
 
@@ -88,4 +89,16 @@ const footerObserver = new IntersectionObserver((entries) => {
   threshold: [0, 1]
 });
 
-footerObserver.observe(document.querySelector('footer'));
+const footer = document.querySelector('footer');
+footerObserver.observe(footer);
+
+footer.addEventListener('pointerdown', event => {
+  const rect = footer.getBoundingClientRect();
+  const tx = event.clientX - rect.left;
+
+  let touchedSide = 'left';
+  if (tx > rect.width / 2) touchedSide = 'right';
+
+  footer.classList.remove('touched-left', 'touched-right');
+  footer.classList.add(`touched-${touchedSide}`);
+});
