@@ -69,6 +69,11 @@ export async function dePlaceholder(conteneur, url) {
     conteneur.src = url;
     conteneur.classList.add('loaded');
     return Promise.resolve();
+  } else if (conteneur.getAttribute('data-type') === 'img') {
+    const img = conteneur.querySelector('img');
+    img.src = url;
+    conteneur.classList.add('loaded');
+    return Promise.resolve();
   } else {
     conteneur.style.setProperty('--image', `url('${url}')`);
 
@@ -162,6 +167,8 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
         e.classList.remove('loaded', 'loading');
         if (e.tagName === 'IMG') {
           e.removeAttribute('src');
+        } else if (e.getAttribute('data-type') === 'img') {
+          e.querySelector('img')?.removeAttribute('src');
         } else {
           Array.from(e.getElementsByClassName('actual-image')).forEach(c => c.remove());
         }

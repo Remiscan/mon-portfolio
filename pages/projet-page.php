@@ -30,12 +30,16 @@
       then clipped to 1075 * 2214 by removing status and nav bar,
       then resized to 400 * 824 and converted to WebP (90% quality) with Squoosh
     */ ?>
-    <img id="projet-details-image-phone" width="400" height="824">
+    <div id="projet-details-image-phone" data-type="img">
+      <img alt="" width="400" height="824">
+    </div>
     <?php /*
       Image captured on my PC dev tools at 1658 * 965,
       then resized to 1416 * 824 and converted to WebP (90% quality) with Squoosh
     */ ?>
-    <img id="projet-details-image-pc" width="1416" height="824">
+    <div id="projet-details-image-pc" data-type="img">
+      <img alt="" width="1416" height="824">
+    </div>
   </div>
 
   <p id="projet-details-longue_description" class="ignore-scrollbar h5"></p>
