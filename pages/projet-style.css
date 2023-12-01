@@ -180,6 +180,7 @@
 }
 
 #projet-details-images img {
+  display: block;
   height: 100%;
   width: auto;
 }
