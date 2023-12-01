@@ -446,11 +446,10 @@ footer {
 .groupe-langages {
   grid-column: 3;
   grid-row: 1;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
   gap: 2.4rem;
+  align-items: center;
 }
 
 html.actif .groupe-langages {
@@ -464,20 +463,21 @@ html.actif .groupe-langages {
   appearance: none;
   color: white;
   font-family: inherit;
+  text-wrap: nowrap;
   cursor: pointer;
-  width: 9ch;
   padding: .4rem 0;
   opacity: .5;
   text-decoration: underline;
   text-decoration-skip-ink: auto;
   position: relative;
+  justify-self: start;
 }
 
 .bouton-langage:first-child {
-  text-align: end;
+  justify-self: end;
 }
 .bouton-langage:last-child {
-  text-align: start;
+  justify-self: start;
 }
 
 html[lang="fr"] .bouton-langage[data-lang="fr"],
@@ -670,6 +670,10 @@ footer.visible svg #eye {
 
   html:not(.actif) footer {
     justify-content: center;
+  }
+
+  .groupe-langages {
+    grid-template-columns: repeat(2, auto);
   }
 
   html.actif .groupe-langages,
