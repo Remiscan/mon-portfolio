@@ -1,76 +1,84 @@
-<p>Dans plusieurs projets présentés sur ce portfolio, j'ai fait en sorte sur l'interface s'adapte à la couleur de certains éléments. C'est le cas du portfolio lui-même, où chaque projet est associé à une couleur, et cliquer sur un projet ouvre une fenêtre de cette couleur-là. C'est aussi le cas de Solaire, où l'application s'adapte à la couleur de l'étoile.</p>
+<p>Dans plusieurs projets présentés sur ce portfolio, j'ai fait en sorte que l'interface s'adapte à la couleur de certains éléments. C'est le cas du portfolio lui-même, où chaque projet est associé à une couleur, et cliquer sur un projet ouvre une fenêtre de cette couleur-là. C'est aussi le cas de Solaire, où l'application s'adapte à la couleur de l'étoile.</p>
 
 <p>En développant ces projets et en jouant avec les couleurs, j'ai eu envie d'utiliser un outil qui me permettrait de convertir une couleur, à la volée, d'un format à un autre (par format, j'entends un format supporté par CSS, comme RGB - pour rouge / vert / bleu - ou HSL - pour teinte / saturation / luminosité). Je me suis dit qu'il serait intéressant de développer cet outil moi-même ; c'est ainsi qu'est né Colori.</p>
 
-<p>Colori est disponible en tant que module JavaScript ou PHP, sans dépendance, que j'espère avoir rendu suffisamment simple pour pouvoir être utilisé même par un développeur débutant. Pour en démontrer les capacités, j'ai développé une interface qui utilise Colori pour faire fonctionner un convertisseur de couleurs.</p>
+<p>Colori est disponible en tant que module JavaScript ou PHP, sans dépendance, et j'espère l'avoir rendu suffisamment simple pour pouvoir être utilisé même par un développeur débutant. Pour en démontrer les capacités, j'ai développé une interface qui utilise Colori pour faire fonctionner un convertisseur de couleurs.</p>
 
 <figure>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-red.png"></media-projet>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-green.png"></media-projet>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-blue.png"></media-projet>
+  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-red.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-green.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-blue.webp"></media-projet>
   <figcaption>L'interface s'adapte à la couleur entrée dans le convertisseur</figcaption>
 </figure>
 
-<p>J'ai aussi rédigé la documentation de Colori, en français et en anglais, pour lister et expliquer les fonctions du module.</p>
-
-<figure>
-  <media-projet type="image" width="800" height="517" src="/mon-portfolio/projets/colori/images/documentation-pc.png"></media-projet>
-  <figcaption>La documentation, accompagnée par son menu flottant de navigation rapide sur les écrans larges</figcaption>
-</figure>
-
-<p>Cette documentation renseigne sur toutes les fonctions intégrées à Colori. Par exemple, la fonction darken permet d'assombrir une couleur ; son opposé lighten permet de l'éclaircir. Par ailleurs, la fonction invert permet d'obtenir le négatif d'une couleur ; la fonction blend permet de fusionner deux couleurs, c'est-à-dire de déterminer quelle couleur on observerait si on superposait une couleur semi-transparente par-dessus une autre couleur. Plusieurs autres fonctions sont disponibles, je vous invite à consulter la documentation pour les voir toutes.</p>
+<p>J'ai aussi rédigé une <a href="https://github.com/Remiscan/colori/wiki" target="blank" rel="noopener">documentation</a> qui renseigne sur toutes les fonctions intégrées à Colori. Par exemple, la fonction invert permet d'obtenir le négatif d'une couleur ; la fonction blend permet de fusionner deux couleurs, c'est-à-dire de déterminer quelle couleur on observerait si on superposait une couleur semi-transparente par-dessus une autre couleur. Plusieurs autres fonctions sont disponibles, je vous invite à consulter la documentation pour les voir toutes.</p>
 
 <div class="separator"></div>
 
-<p>Pour adapter l'interface à la couleur entrée, changer simplement la couleur des différents éléments ne suffit pas. En effet, quand la couleur de deux éléments change, le contraste entre eux change aussi, même si l'écart de luminosité reste le même.</p>
+<p>Pour adapter l'interface à la couleur entrée, j'ai d'abord tenté de concevoir l'interface avec des couleurs au format HSL. Ainsi, je pouvais changer la valeur de teinte des couleurs tout en conservant la même saturation et luminosité. Mon but était, par exemple, de pouvoir passer l'interface entière du rouge au jaune. Malheureusement, j'ai découvert que ce ne serait pas aussi simple.</p>
+
+<p>En effet, dans l'espace de couleurs HSL, deux couleurs avec la même valeur de luminosité n'ont pas réellement la même luminosité <em>perçue</em>. Voici deux images de l'interface en rouge et en jaune, mettant en avant ce problème.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-1.png"></media-projet>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-2.png"></media-projet>
-  <figcaption>Le contraste ne permet pas de dinstinguer confortablement le fond de la page et la section sur la deuxième image, alors que les saturations et luminosités sont identiques dans les deux images</figcaption>
+  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-1.webp"></media-projet>
+  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-2.webp"></media-projet>
+  <figcaption>L'ancienne interface, utilisant des couleurs HSL, montre clairement que les couleurs jaunes paraissent plus claires que les couleurs rouges, même lorsqu'elles ont la même valeur de luminosité</figcaption>
 </figure>
 
-<p>J'ai ajouté à Colori une fonction qui calcule le contraste entre deux couleurs. Je peux ainsi adapter en temps réel l'interface afin que le contraste entre les éléments soit toujours suffisant.</p>
+<p>Pour régler ce problème, il m'a fallu concevoir l'interface avec des couleurs dans un autre espace de couleurs, qui conserve la luminosité perçue lorsqu'on change la teinte. J'ai d'abord choisi l'espace <a href="https://lea.verou.me/blog/2020/04/lch-colors-in-css-what-why-and-how/" target="_blank" rel="noopener">LCH</a>. Il conserve bien les luminosités perçues en changeant la teinte, mais il présente un léger problème pour les teintes bleues. En effet, en conservant la même teinte bleue mais en variant la luminosité, la teinte dérive vers le violet.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/good-contraste-1.png"></media-projet>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/good-contraste-2.png"></media-projet>
-  <figcaption>La distinction est plus facile, et les textes sont plus lisibles</figcaption>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/lch-problem.webp"></media-projet>
+  <figcaption>Avec des couleurs LCH, l'interface "bleue" prend une teinte violette</figcaption>
 </figure>
 
-<p>Voici un autre exemple de l'adaptation automatique des couleurs de l'interface pour éviter des problèmes de contraste : lorsque la couleur affichée en aperçu devient trop proche de la couleur de fond, le fond s'éclaircit pour maintenir un contraste suffisant.</p>
+<p>Finalement, j'ai choisi l'espace de couleurs <a href="https://bottosson.github.io/posts/oklab/" target="_blank" rel="noopener">OKHSL</a>. Tout comme LCH, il conserve ls luminosités perçues, mais il résout aussi le décalage vers le violet observé avec LCH.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="291" src="/mon-portfolio/projets/colori/images/fond-normal.png"></media-projet>
-  <media-projet type="image" width="400" height="291" src="/mon-portfolio/projets/colori/images/fond-adapte.png"></media-projet>
-  <figcaption>Le bleu de la deuxième image est plus foncé et se fondrait légèrement dans la couleur de fond, si celle-ci ne s'était pas éclaircie</figcaption>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-red.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-yellow.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-blue.webp"></media-projet>
+  <figcaption>La nouvelle interface, utilisant des couleurs OKLCH, conserve mieux les luminosités perçues et la teinte du bleu</figcaption>
 </figure>
 
-<p>De même, la couleur de fond de la documentation s'adapte automatiquement pour que le contraste avec le texte soit suffisant. Le texte reste ainsi lisible quelle que soit la couleur de l'interface.</p>
+<p>L'interface s'adapte aussi au thème choisi par l'utilisateur : clair ou sombre, selon le réglage de l'appareil ou le choix fait via le sélecteur de thème.</p>
 
-<p>Ce genre d'adaptation automatique en fonction du contraste se retrouve aussi sur mon portfolio : la section que vous lisez en ce moment-même change de couleur selon le projet choisi ; Colori calcule le contraste entre la couleur de fond et le texte et adapte la première en conséquence.</p>
+<figure>
+  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-light.webp"></media-projet>
+  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-dark.webp"></media-projet>
+  <figcaption>Le thème clair et le thème sombre</figcaption>
+</figure>
+
+<p>J'utilise des techniques similaires pour changer la couleur des sections sur ce portfolio sur lequel vous lisez ces mots, ainsi que dans mes autres projets.</p>
 
 <div class="separator"></div>
 
-<p>Regardons plus en détail la partie "Démo" de l'interface de présentation de Colori. Il s'agit d'un convertisseur de couleurs : l'utilisateur entre une couleur dans un format supporté par CSS (par exemple "red" ou "#FF0000"), et le convertisseur affiche cette couleur dans tous les autres formats.</p>
+<p>Regardons plus en détail la partie "Démonstration" de l'interface de présentation de Colori. Il s'agit d'un convertisseur de couleurs : l'utilisateur entre une couleur dans un format supporté par CSS (par exemple "red" ou "#FF0000"), et le convertisseur affiche cette couleur dans tous les autres formats.</p>
 
 <figure>
-  <media-projet type="image" width="500" height="310" src="/mon-portfolio/projets/colori/images/resultats-rouge.png"></media-projet>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/convertisseur.webp"></media-projet>
   <figcaption>Toutes ces valeurs représentent la couleur rouge dans différents formats</figcaption>
 </figure>
 
-<p>Les fonctions de modification de couleur (comme darken, lighten, invert et blend mentionnées plus tôt) peuvent aussi être testées via ce convertisseur. Il suffit de les saisir, dans une syntaxe proche de celle de JavaScript, pour observer le résultat.</p>
+<p>Les fonctions de modification de couleur (comme invert et blend mentionnées plus tôt) peuvent aussi être testées via ce convertisseur. Il suffit de les saisir, dans une syntaxe proche de celle de JavaScript, pour observer le résultat.</p>
 
 <figure>
-  <media-projet type="image" width="500" height="310" src="/mon-portfolio/projets/colori/images/resultats-darken.png"></media-projet>
-  <figcaption>La couleur rouge assombrie de 50% est affichée</figcaption>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonction.webp"></media-projet>
+  <figcaption>L'inverse du rouge, c'est le cyan, aussi appelé "aqua" en CSS</figcaption>
 </figure>
 
 <p>J'ai fait en sorte que les fonctions puissent être enchaînées, permettant de calculer des couleurs complexes via ce convertisseur.</p>
 
 <figure>
-  <media-projet type="image" width="500" height="514" src="/mon-portfolio/projets/colori/images/blend-en-chaine.png"></media-projet>
-  <figcaption>Voici le résultat de la superposition de blanc, assombri de 80% et transparent à 80%, par-dessus du rouge transparent à 50%, lui-même par-dessus du bleu</figcaption>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonctions-en-chaine.webp"></media-projet>
+  <figcaption>L'inverse de l'inverse du rouge... c'est le rouge</figcaption>
+</figure>
+
+<p>Le champ de démonstration ne propose pas seulement de saisir une couleur et des fonctions sous forme de texte. Il permet aussi de choisir une couleur via un sélecteur de couleur, qui propose de manipuler individuellement chaque valeur des couleurs, dans plusieurs formats.</p>
+
+<figure>
+  <media-projet type="image" width="400" height="700" src="/mon-portfolio/projets/colori/images/selector.webp"></media-projet>
+  <figcaption>Le sélecteur de couleur, ici dans le format OKLCH, affichant donc les valeurs de luminosité (L), chroma (C), teinte (H) et opacité</figcaption>
 </figure>
 
 <div class="separator"></div>
@@ -78,14 +86,14 @@
 <p>Remarquez l'alignement des titres avec leur section, et l'ombre allongée qu'ils projettent.</p>
 
 <figure>
-  <media-projet type="image" width="759" height="247" src="/mon-portfolio/projets/colori/images/alignement-titre.png"></media-projet>
+  <media-projet type="image" width="776" height="205" src="/mon-portfolio/projets/colori/images/alignement-titre.webp"></media-projet>
   <figcaption>Le titre "Documentation" est précisément aligné avec le haut de sa section</figcaption>
 </figure>
 
 <p>Cet effet visuel particulier, qui est obtenu suite à une mesure précise de la police utilisée, est une idée que je souhaite implémenter depuis longtemps. Un effet semblable se trouvait déjà sur un prototype de portfolio développé il y a quelques années.</p>
 
 <figure>
-  <media-projet type="image" width="493" height="609" src="/mon-portfolio/projets/colori/images/prototype-portfolio.png"></media-projet>
+  <media-projet type="image" width="493" height="609" src="/mon-portfolio/projets/colori/images/prototype-portfolio.webp"></media-projet>
   <figcaption>Une première idée de design pour mon portfolio utilisait un effet similaire</figcaption>
 </figure>
 
