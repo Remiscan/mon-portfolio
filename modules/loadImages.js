@@ -123,6 +123,7 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
 
     if (sequence) {
       return loadAllImages(listeImages)
+      .catch(raison => console.error('[:(] L\'image ' + raison + ' n\'a pas pu être chargée...'))
       .then(() => {
         const nmax = (grid !== false) ? getComputedStyle(grid).gridTemplateColumns.split(' ').length
                                       : listeConteneurs.length;
@@ -137,12 +138,12 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
         });
         return Promise.all(promesses);
       })
-      .catch(raison => console.error('[:(] L\'image ' + raison + ' n\'a pas pu être chargée...'));
+      .catch(raison => console.error(raison));
     } else {
       listeConteneurs.forEach((e, n) => {
         const unePromesse = loadAllImages([listeImages[n]])
-        .then(() => endOnePlaceholder(e, n, 0))
-        .catch(() => { throw '[:(] L\'image ' + n + ' n\'a pas pu être chargée...'; });
+        .catch(() => { throw '[:(] L\'image ' + n + ' n\'a pas pu être chargée...'; })
+        .then(() => endOnePlaceholder(e, n, 0));
 
         promesses.push(unePromesse);
       });
