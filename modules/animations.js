@@ -60,7 +60,8 @@ monitorHoveredElement(photoSecret);
 /////////////
 // EASTER EGG
 // Animation du logo remiscan du footer
-let footerAnimationTimeout;
+let footerlogoSlideInTimeout;
+let footerLogoChangeSideTimeout;
 const footerObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     entry.target.classList.remove('touched-left', 'touched-right');
@@ -76,13 +77,14 @@ const footerObserver = new IntersectionObserver((entries) => {
 
       // 3. Slide logo out
       .then(() => {
-        footerAnimationTimeout = setTimeout(() => {
+        footerlogoSlideInTimeout = setTimeout(() => {
           entry.target.classList.remove('visible');
         }, 3500);
       });
     } else {
       entry.target.classList.remove('visible');
-      clearTimeout(footerAnimationTimeout);
+      clearTimeout(footerlogoSlideInTimeout);
+      clearTimeout(footerLogoChangeSideTimeout);
     }
   }
 }, {
@@ -93,12 +95,16 @@ const footer = document.querySelector('footer');
 footerObserver.observe(footer);
 
 footer.addEventListener('pointerdown', event => {
+  clearTimeout(footerLogoChangeSideTimeout);
+
   const rect = footer.getBoundingClientRect();
   const tx = event.clientX - rect.left;
 
   let touchedSide = 'left';
   if (tx > rect.width / 2) touchedSide = 'right';
 
-  footer.classList.remove('touched-left', 'touched-right');
-  footer.classList.add(`touched-${touchedSide}`);
+  footerLogoChangeSideTimeout = setTimeout(() => {
+    footer.classList.remove('touched-left', 'touched-right');
+    footer.classList.add(`touched-${touchedSide}`);
+  }, 100);
 });
