@@ -31,14 +31,14 @@
       then resized to 400 * 824 and converted to WebP (90% quality) with Squoosh
     */ ?>
     <div id="projet-details-image-phone" data-type="img">
-      <img alt="" width="400" height="824">
+      <img alt="" width="400" height="824" data-alt="<?=$translation->get('projet-preview-phone-alt')?>">
     </div>
     <?php /*
       Image captured on my PC dev tools at 1658 * 965,
       then resized to 1416 * 824 and converted to WebP (90% quality) with Squoosh
     */ ?>
     <div id="projet-details-image-pc" data-type="img">
-      <img alt="" width="1416" height="824">
+      <img alt="" width="1416" height="824" data-alt="<?=$translation->get('projet-preview-pc-alt')?>">
     </div>
   </div>
 

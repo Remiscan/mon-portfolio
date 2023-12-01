@@ -92,6 +92,12 @@ export function* openProjet(event)
     // et quand les deux seront finis, on placera le "pourquoi du comment" dans l'interface
     //// Promesse 1 : chargement des images
     const loadImages = async () => {
+      const imagePhone = projetDetailsImages.querySelector('#projet-details-image-phone > img');
+      imagePhone.setAttribute('alt', imagePhone.getAttribute('data-alt').replace('{p}', titre));
+
+      const imagePC = projetDetailsImages.querySelector('#projet-details-image-pc > img');
+      imagePC.setAttribute('alt', imagePC.getAttribute('data-alt').replace('{p}', titre));
+
       return await Promise.all(images.map(async img => {
         img.conteneur.classList.add('loading');
         const loader = new Loader(img.url);
