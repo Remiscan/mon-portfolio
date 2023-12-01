@@ -24,10 +24,18 @@
   </div>
 
   <div id="projet-details-images">
-    <div id="projet-details-images_conteneur">
-      <div id="projet-details-image-phone"></div>
-      <div id="projet-details-image-pc"></div>
-    </div>
+    <?php /*
+      Image captured on my phone at 1075 * 2393,
+      then converted to oxiPNG with Squoosh to preserve colors,
+      then clipped to 1075 * 2214 by removing status and nav bar,
+      then resized to 400 * 824 and converted to WebP (90% quality) with Squoosh
+    */ ?>
+    <img id="projet-details-image-phone" width="400" height="824">
+    <?php /*
+      Image captured on my PC dev tools at 1658 * 965,
+      then resized to 1416 * 824 and converted to WebP (90% quality) with Squoosh
+    */ ?>
+    <img id="projet-details-image-pc" width="1416" height="824">
   </div>
 
   <p id="projet-details-longue_description" class="ignore-scrollbar h5"></p>

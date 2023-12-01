@@ -63,6 +63,9 @@
     "projet-colori-titre": "Colori",
     "projet-colori-description": "Manipulation et conversion de couleurs",
     "projet-colori-longue-description": "Ce module JavaScript (aussi disponible en PHP) permet de manipuler des couleurs, en extrayant plusieurs de leurs propriétés (teinte, saturation, luminosité, etc.) afin de pouvoir les utiliser et les modifier à la volée.",
+    "projet-lib-remi-titre": "Lib-Rémi",
+    "projet-lib-remi-description": "Librairie perso de composants web et fonctions",
+    "projet-lib-remi-longue-description": "Un ensemble de composants web, ainsi que de fonctions JavaScript ou PHP, que j'utilise dans mes projets ou expérimentations.",
     "projet-etude-details": "Le pourquoi du comment",
     "projet-etude-erreur-fetch": "Erreur : récupération des données impossible...",
     "js-warning": "Ce portfolio, ainsi que les projets qu'il présente, utilisent JavaScript. L'utilisation de JavaScript sur ce site est actuellement désactivée par votre navigateur. Le portfolio ne fonctionnera donc pas correctement."
@@ -131,6 +134,9 @@
     "projet-colori-titre": "Colori",
     "projet-colori-description": "Colour manipulation and conversion",
     "projet-colori-longue-description": "This JavaScript module (also available in PHP) enables you to manipulate colours, by extracting many of their properties (hue, saturation, luminosity, etc.) in order to use and edit them on the fly.",
+    "projet-lib-remi-titre": "Lib-Rémi",
+    "projet-lib-remi-description": "Personal library of web components and functions",
+    "projet-lib-remi-longue-description": "A bunch of web components, and JavaScript or PHP functions, that I use in my projects or experiments.",
     "projet-etude-details": "The why and the how (in French)",
     "projet-etude-erreur-fetch": "Error: couldn't fetch the data...",
     "js-warning": "This portfolio and the various projects it showcases use JavaScript. Your browser is currently preventing JavaScript code from running on this website, so this portfolio will not work properly."

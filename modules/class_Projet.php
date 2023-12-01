@@ -23,7 +23,7 @@ class Projet {
     }
     $this->id = $id;
 
-    $image_preview = 'projets/' . $this->id.'/preview.png';
+    $image_preview = 'projets/' . $this->id.'/preview.webp';
     if (file_exists($image_preview)) $this->image_preview = '';
     else                             $this->image_preview = '-phone';
 

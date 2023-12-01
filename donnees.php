@@ -10,8 +10,9 @@ $c_article_portfolio = new Couleur('oklch(35% 0.13 275)');
 $c_projet_cesite = new Couleur('oklch(50% 0.1 327)');
 $c_projet_shinydex = new Couleur('oklch(50% 0.13 254)');
 $c_projet_solaire = new Couleur('oklch(50% 0.1 2)');
-$c_projet_csswitch = new Couleur('oklch(50% 0 0)');
+$c_projet_csswitch = new Couleur('oklch(50% 0.09 27.86)');
 $c_projet_colori = new Couleur('oklch(50% 0.13 169)');
+$c_projet_libremi = new Couleur('oklch(50% 0 327)');
 
 // - Skills
 $c_competence_html = new Couleur('oklch(60% 0.19 34)');
@@ -35,11 +36,12 @@ $c_topcolor = new Couleur('hsla(0, 0%, 0%, .5)');
 
 // PROJETS
 $projets = [
-  /*new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),*/
   new Projet('', 'Solaire', $c_projet_solaire, 'https://remiscan.fr/solaire/'),
   new Projet('', 'Colori', $c_projet_colori, 'https://remiscan.fr/colori/'),
   new Projet('', 'Shinydex', $c_projet_shinydex, 'https://remiscan.fr/shinydex/'),
-  new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/')
+  new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/'),
+  //new Projet('', 'Lib-Rémi', $c_projet_libremi, 'https://remiscan.fr/components/'),
+  //new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),
 ];
 
 // COMPÉTENCES

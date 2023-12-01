@@ -12,8 +12,8 @@
       $en_exists = file_exists($etudes[1]);
 
       $imageProjet = 'projets/' . $projet->id . '/preview' . $projet->image_preview;
-      $versionImageProjet = version([__DIR__.'/../'.$imageProjet.'.png']);
-      $imageProjet = $imageProjet . '--' . $versionImageProjet . '.png';
+      $versionImageProjet = version([__DIR__.'/../'.$imageProjet.'.webp']);
+      $imageProjet = $imageProjet . '--' . $versionImageProjet . '.webp';
       ?>
 
       <a href="<?=$projet->lien?>" target="_blank"
@@ -27,7 +27,10 @@
          data-id="<?=$projet->id?>"
          data-lien="<?=$projet->lien?>"
          data-en-exists="<?=$en_exists?>"
-         data-version="<?=version($etudes)?>">
+         data-version="<?=version($etudes)?>"
+         data-version-image-phone="<?=version([__DIR__.'/../projets/'.$projet->id.'/preview-phone.webp'])?>"
+         data-version-image-pc="<?=version([__DIR__.'/../projets/'.$projet->id.'/preview-pc.webp'])?>"
+      >
 
         <div class="projet-conteneur-enfant">
           <div class="projet-image">

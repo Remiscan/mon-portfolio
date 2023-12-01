@@ -65,23 +65,29 @@ export async function loadAllImages(liste) {
 //////////////////////////////////////////////
 // Remplace un placeholder par l'image chargée
 export async function dePlaceholder(conteneur, url) {
-  conteneur.style.setProperty('--image', `url('${url}')`);
+  if (conteneur.tagName === 'IMG') {
+    conteneur.src = url;
+    conteneur.classList.add('loaded');
+    return Promise.resolve();
+  } else {
+    conteneur.style.setProperty('--image', `url('${url}')`);
 
-  const actualImage = document.createElement('div');
-  actualImage.classList.add('actual-image');
-  conteneur.appendChild(actualImage);
+    const actualImage = document.createElement('div');
+    actualImage.classList.add('actual-image');
+    conteneur.appendChild(actualImage);
 
-  conteneur.classList.add('loaded');
-  const loadImg = conteneur.querySelector('.actual-image').animate([
-    { opacity: 0 },
-    { opacity: 1 }
-  ], {
-      easing: 'ease-out',
-      duration: 300,
-      fill: 'forwards'
-  });
+    conteneur.classList.add('loaded');
+    const loadImg = conteneur.querySelector('.actual-image').animate([
+      { opacity: 0 },
+      { opacity: 1 }
+    ], {
+        easing: 'ease-out',
+        duration: 300,
+        fill: 'forwards'
+    });
 
-  return await new Promise(resolve => loadImg.onfinish = resolve);
+    return await new Promise(resolve => loadImg.onfinish = resolve);
+  }
 }
 
 
@@ -154,7 +160,11 @@ export function placeholderNoMore(listeImages = false, listeConteneurs, sequence
     return Promise.resolve().then(() => {
       listeConteneurs.forEach(e => {
         e.classList.remove('loaded', 'loading');
-        Array.from(e.getElementsByClassName('actual-image')).forEach(c => c.remove());
+        if (e.tagName === 'IMG') {
+          e.removeAttribute('src');
+        } else {
+          Array.from(e.getElementsByClassName('actual-image')).forEach(c => c.remove());
+        }
       });
       return;
     });

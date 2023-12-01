@@ -9,6 +9,7 @@ import { getString, getTitrePage } from 'traduction';
 
 const elProjet = document.getElementById('projet');
 const projetContenu = document.getElementById('projet-contenu');
+const projetDetailsImages = document.getElementById('projet-details-images');
 const projetDetailsPourquoi = document.getElementById('projet-details-pourquoi');
 const projetDetailsLoading = document.getElementById('projet-details-loading');
 const projetTransition = document.getElementById('projet-transition');
@@ -48,10 +49,10 @@ export function* openProjet(event)
     url: '/' + (id === 'colori' ? 'colori/demo' : id) + '/icons/icon.svg',
     conteneur: document.getElementById('projet-details-icone')
   }, {
-    url: `/mon-portfolio/projets/${id}/preview-phone.png`,
+    url: `/mon-portfolio/projets/${id}/preview-phone--${source.getAttribute('data-version-image-phone') ?? '0'}.webp`,
     conteneur: document.getElementById('projet-details-image-phone')
   }, {
-    url: `/mon-portfolio/projets/${id}/preview-pc.png`,
+    url: `/mon-portfolio/projets/${id}/preview-pc--${source.getAttribute('data-version-image-pc') ?? '0'}.webp`,
     conteneur: document.getElementById('projet-details-image-pc')
   }];
 
@@ -136,6 +137,7 @@ export function* openProjet(event)
   
       projetContenu.style.display = 'block';
       projetContenu.scrollTop = 0;
+      projetDetailsImages.scrollTo(0, 0);
   
       const projetKeyframes = [
         { opacity: '0', transform: 'translate3D(' + directionPreview[0] + 'rem, ' + directionPreview[1] + 'rem, 0) '},
@@ -299,7 +301,7 @@ export async function closeProjet() {
   projetContenu.style.opacity = 0;
   projetDetailsPourquoi.style.opacity = 0;
   projetDetailsPourquoi.innerHTML = '';
-  document.getElementById('projet-details-images').scrollLeft = 0;
+  projetDetailsImages.scrollTo(0, 0);
   projetDetailsLoading.classList.remove('loaded', 'needstoload', 'loadingnow', 'failed');
   const listeConteneurs = [document.getElementById('projet-details-image-phone'), document.getElementById('projet-details-image-pc')];
   placeholderNoMore(false, listeConteneurs);
