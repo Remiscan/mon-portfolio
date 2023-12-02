@@ -2,40 +2,58 @@
 
 <p>Le design du portfolio a évolué, ne laissant plus de place à cette illustration. J'ai donc décidé de récupérer cette idée pour en faire un petit projet à part : une page web qui permettrait de visualiser une Nintendo Switch avec toutes les combinaisons de couleurs possibles pour les manettes. C'est ainsi qu'est né CSSwitch.</p>
 
-<p>Grâce à HTML et CSS, j'ai dessiné une Nintendo Switch dans un style minimaliste, en me basant sur des images promotionnelles de la vraie console pour que les proportions soient proches de la réalité. Ensuite, grâce à CSS et Javascript, j'ai programmé l'animation de détachement et d'attachement des manettes. J'y ai même joint le bruit caractéristique de l'attachement des manettes de la Switch.</p>
+<p>Grâce à HTML et CSS, j'ai dessiné une Nintendo Switch dans un style minimaliste, en me basant sur des images promotionnelles de la vraie console pour que les proportions soient proches de la réalité. J'ai aussi reproduit l'écran principal de la console, qui peut s'allumer en appuyant sur le bouton "Home".</p>
+
+<figure>
+  <media-projet type="video" width="1200" height="600" src="/mon-portfolio/projets/csswitch/images/allumage.mp4"></media-projet>
+  <figcaption>L'allumage de la console</figcaption>
+</figure>
+  
+<p>Ensuite, grâce à CSS et Javascript, j'ai programmé l'animation de détachement et d'attachement des manettes. J'y ai même joint le bruit caractéristique de l'attachement des manettes de la Switch. Cette animation est déclenchée au choix de la couleur des manettes, qui se fait en cliquant sur l'icône de manette sur le menu principal.</p>
+
+<figure>
+  <media-projet type="video" width="1200" height="592" src="/mon-portfolio/projets/csswitch/images/animation-manette.mp4"></media-projet>
+  <figcaption>L'animation au choix de couleur des manettes</figcaption>
+</figure>
+
+<p>Avant que je décide de reproduire le menu de la console, le choix de couleur des manettes se faisait via un bouton situé sous la console sur la page web. Voici cette animation, parce que je l'aimais bien aussi.</p>
 
 <figure>
   <media-projet type="video" width="720" height="454" src="/mon-portfolio/projets/csswitch/images/animation-complete.mp4"></media-projet>
-  <figcaption>L'animation complète, avec le son !</figcaption>
+  <figcaption>L'ancienne animation, avant que je reproduise le menu de la console</figcaption>
 </figure>
 
-<p>Ainsi, cliquer sur le bouton sous une manette la détache, puis fait apparaître le menu de choix des couleurs. Choisir une option change la couleur de la manette, puis celle-ci se rattache à la console et le bruit est joué.</p>
+<p>Finalement, j'ai préféré pousser le concept jusqu'au bout et rassembler toutes les interactions dans le menu de la console.</p>
 
 <div class="separator"></div>
 
-<p>J'ai aussi programmé un mini-jeu, auquel on peut jouer en allumant la console (en appuyant sur son bouton Home). Une fois allumée, un menu semblable à celui de la véritable Nintendo Switch apparaît, sur lequel on peut choisir quel jeu lancer (il n'y en a qu'un seul pour l'instant, mais j'en ajouterai peut-être d'autres à l'avenir).</p>
+<p>J'ai aussi ajouté des mini-jeux, accessibles via le menu de la console. Ils sont représentés par les grosses icônes carrées alignées au centre du menu.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="361" src="/mon-portfolio/projets/csswitch/images/menu.jpg"></media-projet>
-  <figcaption>Le bouton Home, illuminé sur la manette de droite, affiche le menu</figcaption>
+  <media-projet type="image" width="1200" height="600" src="/mon-portfolio/projets/csswitch/images/liste-jeux.webp"></media-projet>
+  <figcaption>3 jeux sont disponibles pour le moment</figcaption>
 </figure>
 
-<p>Le jeu est simple : il faut appuyer sur le bouton au centre de l'écran le plus tôt possible après avoir entendu un bruit ou après avoir vu le bouton changer de couleur (les deux événements ont lieu en même temps). Le meilleur score est enregistré, et persiste lors de prochaines visites de la page.</p>
+<p>Le premier de ces jeux est <a href="https://github.com/Remiscan/gamejam1" target="_blank" rel="noopener"><em>Boole and the Boulders</em></a>, un jeu créé par <a href="https://skando.itch.io/" target="_blank" rel="noopener">skando</a> et moi pour une <a href="https://fr.wikipedia.org/wiki/Game_jam" target="_blank" rel="noopener">game jam</a>. On y contrôle une grenouille qui doit survivre le plus longtemps possible en esquivant des rochers qui tombent du ciel.</p>
+
+<p>Le deuxième jeu (qui n'en est pas vraiment un) est <em>Solaire</em>, un autre projet présenté sur ce portfolio. Je n'ai pas conçu Solaire avec l'idée d'en faire un jeu, mais après y avoir ajouté un carnet de découvertes inspiré des "succès" dans les jeux vidéo, j'ai pensé qu'il aurait sa place sur CSSwitch aussi.</p>
+
+<p>Le dernier jeu est très simple : il faut appuyer sur un bouton au moment précis où on entend un son. Le jeu mesure le temps écoulé, en millisecondes, entre le son et le moment où le joueur appuie sur le bouton. Le but est d'être le plus rapide possible.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="360" src="/mon-portfolio/projets/csswitch/images/mini-jeu.jpg"></media-projet>
-  <figcaption>Le mini-jeu</figcaption>
+  <media-projet type="image" width="1200" height="600" src="/mon-portfolio/projets/csswitch/images/appuie-au-son.webp"></media-projet>
+  <figcaption>Il faut appuyer sur le gros bouton rouge lorsqu'un son retentit</figcaption>
 </figure>
 
-<p>Et impossible de tricher en appuyant sur le bouton en boucle : si on appuie dessus alors que le bruit n'a pas été joué, il devient intouchable pendant 3 secondes et le prochain bruit est reporté.</p>
+<p>Le bouton se désactive quelques secondes, pendant lesquelles aucun son ne peut retentir, si le joueur appuie trop tôt sur le bouton. Il est ainsi impossible d'appuyer sur le bouton en boucle en espérant tomber par hasard sur le bon moment.</p>
 
 <div class="separator"></div>
 
-<p>Afin de s'adapter à vos préférences, CSSwitch détecte automatiquement si vous avez activé le mode sombre des applications (par exemple via les paramètres Windows).</p>
+<p>CSSwitch choisit automatiquement de s'afficher en mode clair ou sombre selon les réglages de l'appareil de l'utilisateur. La langue la plus appropriée est aussi choisie entre le français et l'anglais.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="343" src="/mon-portfolio/projets/csswitch/images/mode-sombre.png"></media-projet>
-  <figcaption>Le mode sombre</figcaption>
+  <media-projet type="image" width="1200" height="600" src="/mon-portfolio/projets/csswitch/images/dark-theme.webp"></media-projet>
+  <figcaption>CSSwitch en mode sombre et en anglais</figcaption>
 </figure>
 
-<p>La page détecte aussi, selon les réglages de votre navigateur, si elle doit s'afficher en français ou en anglais.</p>
+<p>D'autres mini-jeux seront peut-être ajoutés à l'avenir.</p>
