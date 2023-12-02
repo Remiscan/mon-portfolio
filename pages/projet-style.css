@@ -531,7 +531,8 @@ a.mecontacter:hover {
 
   /* Images et vidéos */
 
-  #projet-details-pourquoi > p {
+  #projet-details-pourquoi > p,
+  #projet-details-pourquoi > ul {
     max-width: 100%;
     padding-inline: var(--paragraph-padding);
     box-sizing: border-box;
