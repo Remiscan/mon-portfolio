@@ -256,6 +256,10 @@
  */
 
 @media screen and (max-width: 620px) {
+  #projet-contenu {
+    --paragraph-padding: 2.4rem;
+  }
+
   #projet-details-top {
     flex-direction: column;
     justify-content: center;
@@ -289,6 +293,12 @@
 
   #projet-details-ligne {
     grid-template-columns: 1fr auto 1fr;
+  }
+
+  #projet-details-longue_description {
+    max-width: 100%;
+    padding-inline: var(--paragraph-padding);
+    box-sizing: border-box;
   }
 }
 
@@ -522,7 +532,7 @@ a.mecontacter:hover {
 
   #projet-details-pourquoi > p {
     max-width: 100%;
-    padding-inline: 1.2rem;
+    padding-inline: var(--paragraph-padding);
     box-sizing: border-box;
   }
 
