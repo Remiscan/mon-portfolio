@@ -16,7 +16,7 @@ class mediaProjet extends HTMLElement {
   }
 
   static get observedAttributes() {
-    return ['src', 'width', 'height', 'phone'];
+    return ['src', 'width', 'height', 'phone', 'alt-text'];
   }
 
   update(attributes = mediaProjet.observedAttributes) {
@@ -28,6 +28,15 @@ class mediaProjet extends HTMLElement {
       if (!attributes.includes('src')) break src;
       const src = this.getAttribute('src');
       source.setAttribute('src', src);
+    }
+
+    alt: {
+      if (!attributes.includes('type') && !attributes.includes('alt-text')) break alt;
+      const type = this.getAttribute('type');
+      const altText = this.getAttribute('alt-text');
+      if (type === 'image' && altText != null) {
+        img.setAttribute('alt', altText);
+      }
     }
 
     width: {

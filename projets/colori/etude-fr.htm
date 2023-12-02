@@ -5,9 +5,9 @@
 <p>Colori est disponible en tant que module JavaScript ou PHP, sans dépendance, et j'espère l'avoir rendu suffisamment simple pour pouvoir être utilisé même par un développeur débutant. Pour en démontrer les capacités, j'ai développé une interface qui utilise Colori pour faire fonctionner un convertisseur de couleurs.</p>
 
 <figure>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-red.webp"></media-projet>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-green.webp"></media-projet>
-  <media-projet type="image" width="250" height="400" phone="true" src="/mon-portfolio/projets/colori/images/teinte-blue.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-red.webp" alt-text="Interface de Colori en rouge"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-green.webp" alt-text="Interface de Colori en vert"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-blue.webp" alt-text="Interface de Colori en bleu"></media-projet>
   <figcaption>L'interface s'adapte à la couleur entrée dans le convertisseur</figcaption>
 </figure>
 
@@ -20,32 +20,34 @@
 <p>En effet, dans l'espace de couleurs HSL, deux couleurs avec la même valeur de luminosité n'ont pas réellement la même luminosité <em>perçue</em>. Voici deux images de l'interface en rouge et en jaune, mettant en avant ce problème.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-1.webp"></media-projet>
-  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-2.webp"></media-projet>
+  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-1.webp" alt-text="Ancienne interface de Colori en rouge, avec couleurs au format HSL"></media-projet>
+  <media-projet type="image" width="400" height="370" src="/mon-portfolio/projets/colori/images/bad-contraste-2.webp" alt-text="Ancienne interface de Colori en jaune, avec couleurs au format HSL"></media-projet>
   <figcaption>L'ancienne interface, utilisant des couleurs HSL, montre clairement que les couleurs jaunes paraissent plus claires que les couleurs rouges, même lorsqu'elles ont la même valeur de luminosité</figcaption>
 </figure>
 
 <p>Pour régler ce problème, il m'a fallu concevoir l'interface avec des couleurs dans un autre espace de couleurs, qui conserve la luminosité perçue lorsqu'on change la teinte. J'ai d'abord choisi l'espace <a href="https://lea.verou.me/blog/2020/04/lch-colors-in-css-what-why-and-how/" target="_blank" rel="noopener">LCH</a>. Il conserve bien les luminosités perçues en changeant la teinte, mais il présente un léger problème pour les teintes bleues. En effet, en conservant la même teinte bleue mais en variant la luminosité, la teinte dérive vers le violet.</p>
 
 <figure>
-  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/lch-problem.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/lch-problem.webp" alt-text="Ancienne interface de Colori en bleu, avec couleurs au format LCH"></media-projet>
   <figcaption>Avec des couleurs LCH, l'interface "bleue" prend une teinte violette</figcaption>
 </figure>
 
 <p>Finalement, j'ai choisi l'espace de couleurs <a href="https://bottosson.github.io/posts/oklab/" target="_blank" rel="noopener">OKHSL</a>. Tout comme LCH, il conserve ls luminosités perçues, mais il résout aussi le décalage vers le violet observé avec LCH.</p>
 
 <figure>
-  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-red.webp"></media-projet>
-  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-yellow.webp"></media-projet>
-  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-blue.webp"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-red.webp" alt-text="Interface de Colori en rouge, avec couleurs au format OKLCH"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-yellow.webp" alt-text="Interface de Colori en jaune, avec couleurs au format OKLCH"></media-projet>
+  <media-projet type="image" width="250" height="400" src="/mon-portfolio/projets/colori/images/teinte-blue.webp" alt-text="Interface de Colori en bleu, avec couleurs au format OKLCH"></media-projet>
   <figcaption>La nouvelle interface, utilisant des couleurs OKLCH, conserve mieux les luminosités perçues et la teinte du bleu</figcaption>
 </figure>
+
+<p>OKLCH commence à être supporté par les navigateurs web, mais ce n'était pas le cas il y a quelques années quand je l'ai ajouté à Colori.</p>
 
 <p>L'interface s'adapte aussi au thème choisi par l'utilisateur : clair ou sombre, selon le réglage de l'appareil ou le choix fait via le sélecteur de thème.</p>
 
 <figure>
-  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-light.webp"></media-projet>
-  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-dark.webp"></media-projet>
+  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-light.webp" alt-text="Thème clair de l'interface"></media-projet>
+  <media-projet type="image" width="350" height="500" src="/mon-portfolio/projets/colori/images/theme-dark.webp" alt-text="Thème sombre de l'interface"></media-projet>
   <figcaption>Le thème clair et le thème sombre</figcaption>
 </figure>
 
@@ -56,29 +58,29 @@
 <p>Regardons plus en détail la partie "Démonstration" de l'interface de présentation de Colori. Il s'agit d'un convertisseur de couleurs : l'utilisateur entre une couleur dans un format supporté par CSS (par exemple "red" ou "#FF0000"), et le convertisseur affiche cette couleur dans tous les autres formats.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/convertisseur.webp"></media-projet>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/convertisseur.webp" alt-text="Convertisseur de couleurs"></media-projet>
   <figcaption>Toutes ces valeurs représentent la couleur rouge dans différents formats</figcaption>
+</figure>
+
+<p>L'utilisateur peut aussi choisir une couleur via un sélecteur de couleur, qui propose de manipuler individuellement chaque valeur des couleurs, dans plusieurs formats.</p>
+
+<figure>
+  <media-projet type="image" width="400" height="700" src="/mon-portfolio/projets/colori/images/selector.webp" alt-text="Sélecteur de couleur"></media-projet>
+  <figcaption>Le sélecteur de couleur, ici dans le format OKLCH, affichant donc les valeurs de luminosité (L), chroma (C), teinte (H) et opacité</figcaption>
 </figure>
 
 <p>Les fonctions de modification de couleur (comme invert et blend mentionnées plus tôt) peuvent aussi être testées via ce convertisseur. Il suffit de les saisir, dans une syntaxe proche de celle de JavaScript, pour observer le résultat.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonction.webp"></media-projet>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonction.webp" alt-text="Exemple de fonction"></media-projet>
   <figcaption>L'inverse du rouge, c'est le cyan, aussi appelé "aqua" en CSS</figcaption>
 </figure>
 
 <p>J'ai fait en sorte que les fonctions puissent être enchaînées, permettant de calculer des couleurs complexes via ce convertisseur.</p>
 
 <figure>
-  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonctions-en-chaine.webp"></media-projet>
+  <media-projet type="image" width="400" height="617" src="/mon-portfolio/projets/colori/images/fonctions-en-chaine.webp" alt-text="Exemple de fonctions en chaîne"></media-projet>
   <figcaption>L'inverse de l'inverse du rouge... c'est le rouge</figcaption>
-</figure>
-
-<p>Le champ de démonstration ne propose pas seulement de saisir une couleur et des fonctions sous forme de texte. Il permet aussi de choisir une couleur via un sélecteur de couleur, qui propose de manipuler individuellement chaque valeur des couleurs, dans plusieurs formats.</p>
-
-<figure>
-  <media-projet type="image" width="400" height="700" src="/mon-portfolio/projets/colori/images/selector.webp"></media-projet>
-  <figcaption>Le sélecteur de couleur, ici dans le format OKLCH, affichant donc les valeurs de luminosité (L), chroma (C), teinte (H) et opacité</figcaption>
 </figure>
 
 <div class="separator"></div>
@@ -86,14 +88,14 @@
 <p>Remarquez l'alignement des titres avec leur section, et l'ombre allongée qu'ils projettent.</p>
 
 <figure>
-  <media-projet type="image" width="776" height="205" src="/mon-portfolio/projets/colori/images/alignement-titre.webp"></media-projet>
+  <media-projet type="image" width="776" height="205" src="/mon-portfolio/projets/colori/images/alignement-titre.webp" alt-text="Alignement précis du titre"></media-projet>
   <figcaption>Le titre "Documentation" est précisément aligné avec le haut de sa section</figcaption>
 </figure>
 
 <p>Cet effet visuel particulier, qui est obtenu suite à une mesure précise de la police utilisée, est une idée que je souhaite implémenter depuis longtemps. Un effet semblable se trouvait déjà sur un prototype de portfolio développé il y a quelques années.</p>
 
 <figure>
-  <media-projet type="image" width="493" height="609" src="/mon-portfolio/projets/colori/images/prototype-portfolio.webp"></media-projet>
+  <media-projet type="image" width="493" height="609" src="/mon-portfolio/projets/colori/images/prototype-portfolio.webp" alt-text="Prototype de mon site personnel"></media-projet>
   <figcaption>Une première idée de design pour mon portfolio utilisait un effet similaire</figcaption>
 </figure>
 
