@@ -17,7 +17,7 @@
   <figcaption>Quelques planètes générées aléatoirement</figcaption>
 </figure>
 
-<div class="separator"></div>
+<hr>
 
 <p>En développant Solaire, j'ai déterminé qu'elle devait avoir deux utilités principales :</p>
 
@@ -63,7 +63,7 @@
 
 <p>Après avoir programmé en CSS une animation correspondant au résultat mathématique attendu, les ombres des lunes sont maintenant correctement alignées selon la direction de leur éclairage (deuxième image ci-dessus).</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Quant à la découverte de nouvelles choses à chaque visite, j'ai décidé d'incorporer un "carnet de découvertes" qui listerait les astres particuliers découverts lors de l'exploration de différents systèmes. Cette fonctionnalité est inspirée des "succès" que l'on débloque dans certains jeux vidéo en découvrant ou accomplissant certaines choses.</p>
 
@@ -88,6 +88,6 @@
 
 <p>L'adresse du système de l'image ci-dessus est "85398025394613800" : c'est simplement un nombre. Chaque système est généré ainsi, à partir d'un simple nombre. Pour garantir qu'une adresse génère toujours le même système, ce nombre est utilisé comme "graine" dans un <a href="https://github.com/pigulla/mersennetwister" target="_blank" rel="noopener">générateur de nombres pseudo-aléatoires Mersenne-Twister</a>, qui génère chaque donnée du système planétaire.</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Toutes ces fontionnalités étant accessibles via des boutons sur l'interface, j'ai aussi placé un bouton (en forme d'œil) qui permet de cacher cette interface, afin que si le visiteur le désire, il puisse observer le système planétaire sans distraction. De plus, afin que le visiteur puisse zoomer sur le système sans que l'interface elle-même ne grossisse, j'ai dû développer ma propre fonctionnalité de zoom (utilisable avec la molette de la souris, ou en pinçant / écartant deux doigts sur écran tactile) plutôt que de me reposer sur celle incluse par défaut dans le navigateur du visiteur.</p>

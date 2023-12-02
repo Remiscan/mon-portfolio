@@ -1,3 +1,7 @@
+<p>(Ces informations concernent une très ancienne version de ce projet, alors appelé "Rémidex" et uniquement conçu pour une utilisation personnelle. Le Shinydex peut désormais être utilisé par n'importe qui. Les détails sur cette nouvelle version sont en cours de rédaction.)</p>
+
+<hr>
+
 <p>Le but de ce projet était de présenter certaines informations, enregistrées dans une base de données, dans un site web répliquant le plus possible l’apparence et le fonctionnement d’une application Android native. À partir de ce souhait, j’ai formulé les contraintes suivantes :</p>
 
 <ul>
@@ -9,7 +13,7 @@
 
 <p>Je n’avais alors jamais réalisé de projet vérifiant toutes ces contraintes. Mais voici les solutions que j’ai appliquées pour construire le Rémidex en tant qu’application web les vérifiant.</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Pour que l’apparence de l’application corresponde à mes envies, j’ai décidé dès le début du projet d’utiliser <a href="https://getmdl.io/" target="_blank" rel="noopener">Material Design Lite (MDL)</a>. Ainsi, les différents éléments du Rémidex ont facilement eu l’apparence souhaitée (barre de titre, menu déroulant, cartes, etc).</p>
 
@@ -53,7 +57,7 @@
 
 <p>J’ai implémenté de nombreuses autres modifications, et plus le temps passe, moins l’application repose sur MDL. Elle ne s’est est cependant pas encore totalement affranchie.</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Pour que le Rémidex ressemble le plus possible à une application Android, il ne fallait pas qu’il soit constitué de différentes pages telles que je naviguerais de l’une à l’autre en cliquant des liens. Il fallait plutôt qu’il soit constitué d’une seule page, donc le contenu serait modifié via Javascript selon l’interaction de l’utilisateur avec l’appli.</p>
 
@@ -95,7 +99,7 @@
 
 <p>C’est une animation avec plusieurs composantes : la fenêtre s’ouvre en provenant de l’icône, mais cette animation est raccourcie pour ne pas retarder son apparition tout en conservant l’impression de provenance. La barre de titre, en bas, se colore aussi en accord avec la fenêtre qui s’ouvre, en suivant précisément son animation. Enfin, le bouton de menu se transforme en bouton “fermer” avec l’animation vue précédemment.</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>A début du développement du Rémidex, les requêtes pour charger les images des centaines de Pokémon différents prenaient un temps reativement long (plus d'une dizaine de secondes), rallongeant le chargement de l'application.</p>
 
@@ -106,7 +110,7 @@
 
 <p>Pour corriger ce problème, j'utilise désormais PHP pour rassembler dynamiquement toutes les images qui devront être affichées dans chaque section sur une seule grande image. Après ça, il n'y a plus qu'une seule requête à faire, et les secondes d'attente s'évaporent.</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Puisque l’application est constituée d’une seule page, naviguer entre les sections ne créait pas naturellement de nouvelle entrée dans l’historique du navigateur. Ainsi, il n’était pas possible de retourner dans la section précédente en cliquant sur le bouton Précédent. J’ai donc programmé ce comportement moi-même en utilisant l’interface History en Javascript.</p>
 
@@ -119,7 +123,7 @@
 
 <p>Naviguer entre les sections est donc possible grâce aux boutons Précédent ou Suivant du navigateur, ainsi qu’avec le bouton Précédent du système Android. Ce comportement a ensuite dû être adapté à certains comportements de l’application (par exemple : si le menu est ouvert, appuyer sur Précédent le ferme sans naviguer vers la section précédemment visitée).</p>
 
-<div class="separator"></div>
+<hr>
 
 <p>Afin de pouvoir utiliser l’application hors-ligne, et de pouvoir l’installer sur mon téléphone et l’utiliser comme une application native, il m’a fallu utiliser un service worker. N’étant pas familier avec ce concept au départ, je m’étais tourné vers <a href="https://www.talater.com/upup/" target="_blank" rel="noopener">UpUp</a>. Cependant, n’étant pas satisfait de son fonctionnement, j’ai fini par programmer mon propre service worker. Cela m’a permis de mieux en comprendre le fonctionnement, et d’avoir un contrôle précis sur le comportement de l’application et le stockage de ses données, selon la présence d’une connexion internet ou non.</p>
 

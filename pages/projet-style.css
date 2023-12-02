@@ -410,16 +410,17 @@
   margin-top: .5em;
 }
 
-.separator {
+hr {
   width: 25%;
   height: 2px;
   margin: 1.5rem 0;
   background-color: white;
   align-self: center;
   opacity: .2;
+  border: none;
 }
 
-figure + .separator {
+figure + hr {
   margin-top: .9rem;
 }
 
