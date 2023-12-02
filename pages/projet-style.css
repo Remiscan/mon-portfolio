@@ -520,8 +520,24 @@ a.mecontacter:hover {
 
   /* Images et vidéos */
 
+  #projet-details-pourquoi > p {
+    max-width: 100%;
+    padding-inline: 1.2rem;
+    box-sizing: border-box;
+  }
+
   #projet-details-pourquoi>figure {
     box-shadow: -10rem 0 0 0 var(--bgcolor), 10rem 0 0 0 var(--bgcolor);
+    box-sizing: border-box;
+    max-width: 100%;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+  }
+
+  media-projet, #projet-details-pourquoi > figure > div {
+    margin-inline: 0;
+    max-width: 100%;
   }
 
   #projet-details-pourquoi>figure>div {
