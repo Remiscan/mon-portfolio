@@ -1,134 +1,116 @@
-<p>(Ces informations concernent une très ancienne version de ce projet, alors appelé "Rémidex" et uniquement conçu pour une utilisation personnelle. Le Shinydex peut désormais être utilisé par n'importe qui. Les détails sur cette nouvelle version sont en cours de rédaction.)</p>
+<p>À l'origine, j'ai créé le Shinydex pour partager ma collection de Pokémon chromatiques avec un ami. À l'époque, ce projet s'appelait le <em>Rémidex</em> puisqu'il n'était pas utilisable par d'autres personnes. Le Rémidex, puis le Shinydex, est un peu mon projet "fil rouge" qui m'a suivi pendant de nombreuses années ; je l'ai recréé et amélioré plusieurs fois à mesure que mon ambition grandissait.</p>
 
-<hr>
+<figure>
+  <media-projet type="image" width="600" height="575" src="/mon-portfolio/projets/shinydex/images/version-1.webp" alt-text="Première version du Rémidex"></media-projet>
+  <figcaption>La première version du Rémidex, simple page web</figcaption>
+</figure>
 
-<p>Le but de ce projet était de présenter certaines informations, enregistrées dans une base de données, dans un site web répliquant le plus possible l’apparence et le fonctionnement d’une application Android native. À partir de ce souhait, j’ai formulé les contraintes suivantes :</p>
+<p>C'était d'abord une simple page web qui présentait ma collection. Puis j'ai voulu transformer cette page web pour qu'elle se rapproche le plus possible d'une application mobile. J'ai commencé par lui donner un design suivant Material Design de Google. J'en ai ensuite fait une <a href="https://fr.wikipedia.org/wiki/Progressive_web_app" target="_blank" rel="noopener">PWA</a> qui pouvait être installée et fonctionner hors-ligne. Les données de ma collection étaient sauvegardées dans une base de données MySQL, et l'application en gardait une copie locale pour fonctionner hors-ligne.</p>
+
+<figure>
+  <media-projet type="image" width="720" height="1354" src="/mon-portfolio/projets/shinydex/images/version-2.webp" alt-text="Deuxième version du Rémidex"></media-projet>
+  <media-projet type="image" width="720" height="1354" src="/mon-portfolio/projets/shinydex/images/version-3.webp" alt-text="Troisième version du Rémidex"></media-projet>
+  <figcaption>L'évolution des anciennes versions du Rémidex</figcaption>
+</figure>
+
+<p>J'ai voulu rendre l'application utilisable par d'autres personnes, d'abord en leur permettant de l'utiliser sur leur mobile, sans se synchroniser à la base de données (qui n'était pas encore conçue pour gérer de multiples utilisateurs). Puis j'ai finalement décidé de recréer l'application à nouveau, en ouvrant l'intégralité des fonctionnalités à tout le monde, et en en ajoutant de nouvelles. C'est à ce moment-là que j'ai renommé le projet <em>Shinydex</em>, puisqu'il n'avait plus de raison de porter mon nom.</p>
+
+<figure>
+  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-home.webp" alt-text="Version actuelle du Shinydex"></media-projet>
+  <figcaption>La version actuelle du Shinydex, ouverte à tous</figcaption>
+</figure>
+
+<p>Le Shinydex est une recréation totale du Rémidex en repartant de zéro, aussi bien pour la partie front-end que back-end. Son design actuel est basé sur la dernière version de Material Design. L'application est divisée en 4 sections principales :</p>
 
 <ul>
-  <li>le design devait se rapprocher le plus possible de Material Design, alors utilisé par Google et bien d’autres applications Android</li>
-  <li>les transitions entre les différentes pages ou sections devaient être animées et fluides</li>
-  <li>la navigation devait être possible via le bouton Précédent du système Android</li>
-  <li>le site web devait fonctionner, d’une manière la plus complète possible, en l’absence de connexion internet</li>
+  <li>La liste des Pokémon chromatiques de l'utilisateur,</li>
+  <li>le Pokédex, liste de tous les Pokémon qui existent,</li>
+  <li>la liste des chasses en cours, c'est-à-dire des Pokémon que l'utilisateur est en train de rechercher,</li>
+  <li>la liste d'amis.</li>
 </ul>
 
-<p>Je n’avais alors jamais réalisé de projet vérifiant toutes ces contraintes. Mais voici les solutions que j’ai appliquées pour construire le Rémidex en tant qu’application web les vérifiant.</p>
+<hr>
+
+<p>La liste des Pokémon chromatiques de l'utilisateur s'ouvre au lancement de l'application, avec une petite animation qui fait glisser les cartes vers le haut l'une après l'autre. Si l'utilisateur est connecté, un cercle apparaît autour du bouton paramètres en haut à droite de l'écran pendant la sauvegarde de ses données.</p>
+
+<figure>
+  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-home.mp4"></media-projet>
+  <figcaption>L'animation d'ouverture de l'application</figcaption>
+</figure>
+
+<p>Lorsqu'un nouvel utilisateur ouvre l'application, il n'y a aucun Pokémon à afficher. L'utilisateur est cependant accueilli par un message l'invitant à se connecter avec son compte Google. C'est totalement optionnel, mais cela permet de sauvegarder ses données dans une base de données (MariaDB) en ligne, et ainsi d'utiliser l'application sur plusieurs appareils ou de partager sa liste de Pokémon avec ses amis.</p>
+
+<figure>
+  <media-projet type="image" width="720" height="1316" src="/mon-portfolio/projets/shinydex/images/new-user-home.webp" alt-text="Page d'accueil de l'application pour un nouvel utilisateur"></media-projet>
+  <figcaption>La page d'accueil de l'application pour un nouvel utilisateur</figcaption>
+</figure>
+
+<p>Le bouton flottant "+" en bas à droite de l'écran permet d'ajouter un Pokémon. La barre de recherche en bas de l'écran permet de rechercher des Pokémon en saisissant le nom de leur espèce (par exemple "Pikachu") ou le surnom que leur a donné l'utilisateur.</p>
 
 <hr>
 
-<p>Pour que l’apparence de l’application corresponde à mes envies, j’ai décidé dès le début du projet d’utiliser <a href="https://getmdl.io/" target="_blank" rel="noopener">Material Design Lite (MDL)</a>. Ainsi, les différents éléments du Rémidex ont facilement eu l’apparence souhaitée (barre de titre, menu déroulant, cartes, etc).</p>
+<p>Le Pokédex montre chaque Pokémon sous la forme d'une petit icône. L'intérêt d'un Pokémon chromatique est le fait qu'il ait une couleur différente de son apparence normale. Puisque certaines personnes préfèrent ne pas connaître les couleurs d'un Pokémon chromatique avant de l'avoir trouvé, les icônes des Pokémon que l'utilisateur ne possède pas sont grisées. Lorsque le Pokémon a été ajoué au Shinydex par l'utilisateur, l'icône prend les couleurs du Pokémon chromatique.</p>
 
-<p>Le travail ne s’est pas arrêté là, et j’ai apporté beaucoup de modifications à cette base.</p>
-
-<p>Material Design a évolué au fil du temps, mais Material Design Lite n’a pas suivi ces évolutions. J’ai programmé moi-même les changements qui me plaisaient, soit pour correspondre aux avancées de MD, soit pour correspondre à mes besoins sur l’application.</p>
+<p>Certains Pokémon possèdent plusieurs formes différentes, chacune ayant sa propre version chromatique. Pour ces Pokémon, de petits indicateurs circulaires sont placés au-dessus de leur icône, pour indiquer le nombre de formes et si elles sont possédées ou non par l'utilisateur.</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1354;"><img src="/mon-portfolio/projets/shinydex/images/appli-actuelle.jpg" width="780" height="1354" alt="" loading="lazy"></div>
-  <figcaption>Le design actuel de l'application</figcaption>
+  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-pokedex.webp" alt-text="Section Pokédex du Shinydex"></media-projet>
+  <figcaption>Le Pokédex, liste de tous les Pokémon qui existent</figcaption>
 </figure>
 
-<p>Les deux exemples les plus frappants sont la barre de titre de l’application, et le menu déroulant.</p>
-
-<p>À l’origine, la barre de titre était fixée tout en haut de l’application et contenait le bouton de menu, le titre de la section en cours, et les divers boutons correspondants. Aujourd’hui, cette barre de titre et les contrôles qu’elle contenait ont été déplacés tout en bas de l’application, pour être facilement atteignable sur un grand smartphone. Google eux-mêmes ont réalisé un changement similaire sur certaines applications (comme <a href="https://play.google.com/store/apps/details?id=com.google.android.apps.tasks" target="_blank">Google Tasks</a>).</p>
-
-<p>Cependant, avoir le titre de la section en cours en bas de l’écran me paraissait peu naturel. J’ai donc laissé le titre en haut, et je l’ai programmé pour qu’il se cache ou réapparaisse dynamiquement quand je fais défiler le contenu d’une section.</p>
+<p>Cliquer sur l'icône d'un Pokémon ouvre une page montrant chacune de ses formes et permettant de comparer ses apparences chromatique et normale. Un bouton permet aussi d'ajouter directement le Pokémon à la liste des chasses en cours.</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 720;"><video loop muted controls width="720" height="720">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-titre.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Le titre apparaît et disparaît en défilant</figcaption>
+  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-pokedex.mp4"></media-projet>
+  <figcaption>La page montrant les images du Pokémon apparaît avec une animation qui l'agrandit depuis de l'icône du Pokémon sur laquelle l'utilisateur a cliqué</figcaption>
 </figure>
 
-<p>Quant au menu déroulant, dans la même idée, il apparaît maintenant en sortant du bas de l’application, et non plus de la gauche. De plus, son apparence a été modifiée pour donner l’impression que c’est la barre de titre qui s’étend et devient ce menu.</p>
+<p>La barre de recherche en bas de l'écran permet de rechercher des Pokémon en saisissant le nom de leur espèce (par exemple "Pikachu") ou le numéro qu'ils portent dans le Pokédex (par exemple "25" pour Pikachu).</p>
 
-<figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1354;"><img src="/mon-portfolio/projets/shinydex/images/menu.jpg" width="720" height="1354" alt="" loading="lazy"></div>
-  <figcaption>Le menu de navigation</figcaption>
-</figure>
-
-<p>Enfin, j’ai programmé ce menu pour qu’il puisse être ouvert soit en tapant sur le bouton menu (comportement prévu par MDL), soit en glissant son doigt du bas vers le haut (non implémenté par MDL). Dans le deuxième cas, le menu suit la position du doigt jusqu’à relâcher le contact avec l’écran.</p>
-
-<figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 850;"><video loop muted controls width="720" height="850">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-menu.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Le menu suit le glissement du doigt</figcaption>
-</figure>
-
-<p>J’ai implémenté de nombreuses autres modifications, et plus le temps passe, moins l’application repose sur MDL. Elle ne s’est est cependant pas encore totalement affranchie.</p>
+<p>Puisqu'il existe plus de 1000 Pokémon à l'heure actuelle, le Pokédex doit afficher plus de 1000 icônes. Charger 1000 images différentes prend beaucoup trop de temps, donc j'ai écrit un script en PHP qui rassemble toutes les icônes sur une même image. Ainsi, il n'y a qu'une seule grande image à charger, ce qui est beaucoup plus rapide. Additionnellement, la liste des icônes est virtualisée, afin que seules les icônes actuellement affichées à l'écran soient chargées. Un système similaire est utilisé pour chaque section de l'application.</p>
 
 <hr>
 
-<p>Pour que le Rémidex ressemble le plus possible à une application Android, il ne fallait pas qu’il soit constitué de différentes pages telles que je naviguerais de l’une à l’autre en cliquant des liens. Il fallait plutôt qu’il soit constitué d’une seule page, donc le contenu serait modifié via Javascript selon l’interaction de l’utilisateur avec l’appli.</p>
-
-<p>C’est donc ainsi que j’ai conçu l’application. Toutes les sections sont techniquement “là” dès le départ, elles sont juste masquées, puis affichées quand la section correspondante est appelée via le menu de navigation. J’ai animé l’apparition de chaque section, pour que la navigation de l’application paraisse fluide. Cette animation reste rapide et discrète pour ne pas trop retarder l’apparition des informations demandées à l’écran.</p>
+<p>La liste des chasses en cours montre les Pokémon que l'utilisateur est en train de rechercher dans les jeux vidéo Pokémon. Il peut y indiquer l'espèce du Pokémon, sa forme (s'il en a plusieurs), le jeu dans lequel il le chasse, la méthode qu'il utilise pour le trouver, et le nombre de rencontres effectuées jusqu'à présent (en effet, un Pokémon ayant très peu de chances d'être chromatique, il faut en rencontrer un grand nombre pour que le hasard nous offre cette chance).</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1354;"><video loop muted controls width="720" height="1354">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-section.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Animation d'apparition d'une section</figcaption>
+  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-hunts.webp" alt-text="Section Chasses du Shinydex"></media-projet>
+  <figcaption>Les liste des Pokémon que l'utilisateur est en train de chasser</figcaption>
 </figure>
 
-<p>Cependant, pour apporter un peu plus de fantaisie et de plaisir à l’ouverture de l’application, et souhaiter la bienvenue sur le Rémidex, c’est une animation différente qui se joue lors de son ouverture, plus longue et plus complexe.</p>
+<p>Lorsqu'il a enfin trouvé le Pokémon chromatique recherché, l'utilisateur peut cocher la case "Capturé". L'application va automatiquement entrer la date actuelle comme date de capture du Pokémon, et d'autres champs apparaissent pour entrer des informations supplémentaires sur la capture.</p>
+
+<p>Avant que la case "Capturé" soit cochée, l'image du Pokémon est affichée avec ses couleurs normales. Au moment où la case "Capturé" est cochée, l'image prend les couleurs de l'apparence chromatique du Pokémon, et une petite animation se joue par-dessus cette image. Cette animation est inspirée des jeux vidéo Pokémon dans lesquels, quand un Pokémon chromatique apparaît, il est entouré de petites étoiles brillantes qui tournent autour de lui.</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1354;"><video loop muted controls width="720" height="1354">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-ouverture.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Animation d'apparition de la section à l'ouverture de l'appli</figcaption>
+  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-hunts.mp4"></media-projet>
+  <figcaption>L'animation étoilée de l'image du Pokémon</figcaption>
 </figure>
-
-<p>En-dehors des changements de section, l’application est remplie de petites animations vouées à fluidifier la navigation et la rendre plus plaisante. Par exemple, lors de l’ouverture d’une sous-section, le bouton de menu se transforme en bouton précédent.</p>
-
-<figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 156;"><video loop muted controls width="720" height="156">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-bouton-menu.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Transformation du bouton de menu</figcaption>
-</figure>
-
-<p>Autre exemple : dans la section “Pokédex”, cliquer sur l’icône d’une créature déclenche l’ouverture de ce que j’appelle la “visionneuse d’images”, une fenêtre contenant les images correspondant à ladite créature. Cette fenêtre s’anime comme si elle s’ouvrait en provenance de l’icône cliquée.</p>
-
-<figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1354;"><video loop muted controls width="720" height="1354">
-    <source src="/mon-portfolio/projets/shinydex/images/animation-visionneuse.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>L'animation dépend de l'endroit où l'utilisateur clique</figcaption>
-</figure>
-
-<p>C’est une animation avec plusieurs composantes : la fenêtre s’ouvre en provenant de l’icône, mais cette animation est raccourcie pour ne pas retarder son apparition tout en conservant l’impression de provenance. La barre de titre, en bas, se colore aussi en accord avec la fenêtre qui s’ouvre, en suivant précisément son animation. Enfin, le bouton de menu se transforme en bouton “fermer” avec l’animation vue précédemment.</p>
 
 <hr>
 
-<p>A début du développement du Rémidex, les requêtes pour charger les images des centaines de Pokémon différents prenaient un temps reativement long (plus d'une dizaine de secondes), rallongeant le chargement de l'application.</p>
+<p>La liste d'amis est, comme son nom l'indique, une liste des personnes que l'utilisateur a ajoutées comme ami. Pour ajouter une personne en ami, celle-ci doit s'être connectée au Shinydex, avoir choisi un pseudo public et avoir autorisé le partage de son profil dans les paramètres de l'application.</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1242;"><img src="/mon-portfolio/projets/shinydex/images/tiles-needed.jpg" width="720" height="1242" alt="" loading="lazy"></div>
-  <figcaption>Charger toutes ces images une par une prenait beaucoup trop longtemps</figcaption>
+  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-friends.webp" alt-text="Section Amis du Shinydex"></media-projet>
+  <figcaption>La liste d'amis (oui, je me suis ajouté moi-même en ami pour tester l'application)</figcaption>
 </figure>
 
-<p>Pour corriger ce problème, j'utilise désormais PHP pour rassembler dynamiquement toutes les images qui devront être affichées dans chaque section sur une seule grande image. Après ça, il n'y a plus qu'une seule requête à faire, et les secondes d'attente s'évaporent.</p>
+<p>Chaque carte montre le pseudo d'un ami, et en-dessous sont listées ses dernières trouvailles de Pokémon chromatiques. En cliquant sur la carte, la liste complète des Pokémon chromatiques de cet ami s'ouvre.</p>
 
 <hr>
 
-<p>Puisque l’application est constituée d’une seule page, naviguer entre les sections ne créait pas naturellement de nouvelle entrée dans l’historique du navigateur. Ainsi, il n’était pas possible de retourner dans la section précédente en cliquant sur le bouton Précédent. J’ai donc programmé ce comportement moi-même en utilisant l’interface History en Javascript.</p>
+<p>La page des paramètres de l'application permet de gérer les paramètres de sauvegarde des données et de partage du profil, mais aussi choisir le thème (clair ou sombre) et la langue de l'application.</p>
+
+<p>La dernière version de Material Design colore l'interface des applications avec la couleur du fond d'écran de l'utilisateur. Le Shinydex essaie de suivre Material Design, mais c'est une application web, pas une application Android. Par conséquent, il est impossible pour le Shinydex de récupérer cette couleur. J'ai donc ajouté aux paramètres le choix de la teinte de l'interface, afin que l'utilisateur puisse choisir lui-même quelle couleur donner au Shinydex.</p>
 
 <figure>
-  <div style="--largeur-max: 20rem; --w: 720; --h: 1434;"><video loop muted controls width="720" height="1434">
-    <source src="/mon-portfolio/projets/shinydex/images/back-button.mp4" type="video/mp4">
-  </video></div>
-  <figcaption>Le bouton Précédent fonctionne</figcaption>
+  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/hue-demo.mp4"></media-projet>
+  <figcaption>Démonstration de différentes teintes de l'interface du Shinydex</figcaption>
 </figure>
 
-<p>Naviguer entre les sections est donc possible grâce aux boutons Précédent ou Suivant du navigateur, ainsi qu’avec le bouton Précédent du système Android. Ce comportement a ensuite dû être adapté à certains comportements de l’application (par exemple : si le menu est ouvert, appuyer sur Précédent le ferme sans naviguer vers la section précédemment visitée).</p>
+<p>Le Shinydex utilise <em>Colori</em>, un autre de mes projets, pour générer la palette de couleurs de l'interface.</p>
 
 <hr>
 
-<p>Afin de pouvoir utiliser l’application hors-ligne, et de pouvoir l’installer sur mon téléphone et l’utiliser comme une application native, il m’a fallu utiliser un service worker. N’étant pas familier avec ce concept au départ, je m’étais tourné vers <a href="https://www.talater.com/upup/" target="_blank" rel="noopener">UpUp</a>. Cependant, n’étant pas satisfait de son fonctionnement, j’ai fini par programmer mon propre service worker. Cela m’a permis de mieux en comprendre le fonctionnement, et d’avoir un contrôle précis sur le comportement de l’application et le stockage de ses données, selon la présence d’une connexion internet ou non.</p>
-
-<p>Ainsi, l’application peut être installée sur smartphone à partir d’un navigateur internet, et se comporte à peu près comme une application Android native, que ma connexion soit activée ou non.</p>
-
-<p>De plus, l’application est conçue pour fonctionner par défaut sans connexion internet. C’est-à-dire que, une fois installée, même si internet est disponible, l’application ne consomme pas de données pour se charger : tout est déjà installé et disponible localement.</p>
-
-<p>Cela a cependant présenté un inconvénient : si l’application était mise à jour en ligne, la version installée localement ne pouvait pas le savoir et télécharger les nouvelles données. J’ai donc mis en place une fonction de mise à jour, qui peut être appelée manuellement ou à chaque démarrage de l’application. Ainsi, les données mobiles ne sont que brièvement utilisées pour vérifier si une mise à jour est disponible à l’appui sur un bouton (ou au démarrage de l’appli, si l’option est cochée).</p>
+<p>Je considère désormais que le Shinydex est complet et que toutes mes ambitions à son sujet ont été réalisées. Cependant, de nouveaux jeux vidéo Pokémon vont sortir, et je continuerai de maintenir l'application à jour avec les nouveaux Pokémon et méthodes de chasse contenus dans ces jeux. De plus, je suis sûr que j'aurai de nouvelles idées pour continuer de travailler sur ce projet, et qu'il continuera d'évoluer avec le temps.</p>
