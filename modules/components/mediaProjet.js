@@ -76,15 +76,16 @@ class mediaProjet extends HTMLElement {
 
 
   connectedCallback() {
-    const type = this.getAttribute('type');
-    if (type === 'video' && this.getAttribute('data-lazy') === 'true') {
-      videoObserver.observe(this.shadow.querySelector('video'));
+    const video = this.shadow.querySelector('video');
+    if (video && video.getAttribute('data-lazy') === 'true') {
+      videoObserver.observe(video);
     }
   }
 
 
   disconnectedCallback() {
-    videoObserver.unobserve(this.shadow.querySelector('video'));
+    const video = this.shadow.querySelector('video');
+    if (video) videoObserver.unobserve(video);
   }
 
 
