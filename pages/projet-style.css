@@ -169,7 +169,8 @@
   flex-wrap: nowrap;
   gap: 1.2rem;
   padding-inline: 1.2rem;
-  height: 450px;
+  --img-height: 450px;
+  height: var(--img-height);
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
@@ -181,7 +182,7 @@
 
 #projet-details-images img {
   display: block;
-  height: 100%;
+  height:var(--img-height);
   width: auto;
 }
 
@@ -288,7 +289,7 @@
   }
 
   #projet-details-images {
-    height: min(400px, 33vh);
+    --img-height: min(400px, 33vh);
   }
 
   #projet-details-ligne {
