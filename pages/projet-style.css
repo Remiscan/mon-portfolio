@@ -174,7 +174,7 @@
   width: fit-content;
   max-width: 100%;
   box-sizing: border-box;
-  scroll-snap-type: x mandatory;
+  scroll-snap-type: x proximity;
   scroll-padding: 1.5rem;
   scrollbar-width: none;
   overflow-x: auto;
@@ -192,14 +192,7 @@
 
 #projet-details-images > * {
   background-color: rgba(0, 0, 0, .3);
-}
-
-#projet-details-image-phone {
   scroll-snap-align: start;
-}
-
-#projet-details-image-pc {
-  scroll-snap-align: end;
 }
 
 
