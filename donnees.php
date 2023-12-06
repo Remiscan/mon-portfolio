@@ -41,7 +41,7 @@ $projets = [
   new Projet('', 'Shinydex', $c_projet_shinydex, 'https://remiscan.fr/shinydex/'),
   new Projet('', 'CSSwitch', $c_projet_csswitch, 'https://remiscan.fr/csswitch/'),
   //new Projet('', 'Lib-Rémi', $c_projet_libremi, 'https://remiscan.fr/components/'),
-  //new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),
+  new Projet('mon-portfolio', 'Ce site', $c_projet_cesite, ''),
 ];
 
 // COMPÉTENCES
