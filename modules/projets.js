@@ -195,8 +195,8 @@ export function* openProjet(event)
       });
     };
   
-    const result = yield Promise.all([loadImages(), loadInterface(), loadEtude()]);
-    const data = result[2];
+    const result = yield Promise.allSettled([loadImages(), loadInterface(), loadEtude()]);
+    const data = result[2].value;
     clearTimeout(waitForEtude);
     
     let delay = (projetDetailsLoading.classList.contains('needstoload')) ? 250 : 0;
