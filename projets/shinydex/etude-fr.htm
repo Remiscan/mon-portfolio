@@ -1,22 +1,22 @@
 <p>À l'origine, j'ai créé le Shinydex pour partager ma collection de Pokémon chromatiques avec un ami. À l'époque, ce projet s'appelait le <em>Rémidex</em> puisqu'il n'était pas utilisable par d'autres personnes. Le Rémidex, puis le Shinydex, est un peu mon projet "fil rouge" qui m'a suivi pendant de nombreuses années ; je l'ai recréé et amélioré plusieurs fois à mesure que mon ambition grandissait.</p>
 
 <figure>
-  <media-projet type="image" width="600" height="575" src="/mon-portfolio/projets/shinydex/images/version-1.webp" alt-text="Première version du Rémidex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/version-1.webp" alt="Première version du Rémidex" width="600" height="575" loading="lazy">
   <figcaption>La première version du Rémidex, simple page web</figcaption>
 </figure>
 
 <p>C'était d'abord une simple page web qui présentait ma collection. Puis j'ai voulu transformer cette page web pour qu'elle se rapproche le plus possible d'une application mobile. J'ai commencé par lui donner un design suivant Material Design de Google. J'en ai ensuite fait une <a href="https://fr.wikipedia.org/wiki/Progressive_web_app" target="_blank" rel="noopener">PWA</a> qui pouvait être installée et fonctionner hors-ligne. Les données de ma collection étaient sauvegardées dans une base de données MySQL, et l'application en gardait une copie locale pour fonctionner hors-ligne.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1354" src="/mon-portfolio/projets/shinydex/images/version-2.webp" alt-text="Deuxième version du Rémidex"></media-projet>
-  <media-projet type="image" width="720" height="1354" src="/mon-portfolio/projets/shinydex/images/version-3.webp" alt-text="Troisième version du Rémidex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/version-2.webp" alt="Deuxième version du Rémidex" width="720" height="1354" loading="lazy" data-phone>
+  <img src="/mon-portfolio/projets/shinydex/images/version-3.webp" alt="Troisième version du Rémidex" width="720" height="1354" loading="lazy" data-phone>
   <figcaption>L'évolution des anciennes versions du Rémidex</figcaption>
 </figure>
 
 <p>J'ai voulu rendre l'application utilisable par d'autres personnes, d'abord en leur permettant de l'utiliser sur leur mobile, sans se synchroniser à la base de données (qui n'était pas encore conçue pour gérer de multiples utilisateurs). Puis j'ai finalement décidé de recréer l'application à nouveau, en ouvrant l'intégralité des fonctionnalités à tout le monde, et en en ajoutant de nouvelles. C'est à ce moment-là que j'ai renommé le projet <em>Shinydex</em>, puisqu'il n'avait plus de raison de porter mon nom.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-home.webp" alt-text="Version actuelle du Shinydex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/page-home.webp" alt="Version actuelle du Shinydex" width="720" height="1483" loading="lazy" data-phone>
   <figcaption>La version actuelle du Shinydex, ouverte à tous</figcaption>
 </figure>
 
@@ -34,14 +34,16 @@
 <p>La liste des Pokémon chromatiques de l'utilisateur s'ouvre au lancement de l'application, avec une petite animation qui fait glisser les cartes vers le haut l'une après l'autre. Si l'utilisateur est connecté, un cercle apparaît autour du bouton paramètres en haut à droite de l'écran pendant la sauvegarde de ses données.</p>
 
 <figure>
-  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-home.mp4"></media-projet>
+  <video preload="none" controls width="450" height="800" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/shinydex/images/animation-home.mp4">
+  </video>
   <figcaption>L'animation d'ouverture de l'application</figcaption>
 </figure>
 
 <p>Lorsqu'un nouvel utilisateur ouvre l'application, il n'y a aucun Pokémon à afficher. L'utilisateur est cependant accueilli par un message l'invitant à se connecter avec son compte Google. C'est totalement optionnel, mais cela permet de sauvegarder ses données dans une base de données (MariaDB) en ligne, et ainsi d'utiliser l'application sur plusieurs appareils ou de partager sa liste de Pokémon avec ses amis.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1316" src="/mon-portfolio/projets/shinydex/images/new-user-home.webp" alt-text="Page d'accueil de l'application pour un nouvel utilisateur"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/new-user-home.webp" alt="Page d'accueil de l'application pour un nouvel utilisateur" width="720" height="1316" loading="lazy" data-phone>
   <figcaption>La page d'accueil de l'application pour un nouvel utilisateur</figcaption>
 </figure>
 
@@ -54,14 +56,16 @@
 <p>Certains Pokémon possèdent plusieurs formes différentes, chacune ayant sa propre version chromatique. Pour ces Pokémon, de petits indicateurs circulaires sont placés au-dessus de leur icône, pour indiquer le nombre de formes et si elles sont possédées ou non par l'utilisateur.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-pokedex.webp" alt-text="Section Pokédex du Shinydex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/page-pokedex.webp" alt="Section Pokédex du Shinydex" width="720" height="1483" loading="lazy" data-phone>
   <figcaption>Le Pokédex, liste de tous les Pokémon qui existent</figcaption>
 </figure>
 
 <p>Cliquer sur l'icône d'un Pokémon ouvre une page montrant chacune de ses formes et permettant de comparer ses apparences chromatique et normale. Un bouton permet aussi d'ajouter directement le Pokémon à la liste des chasses en cours.</p>
 
 <figure>
-  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-pokedex.mp4"></media-projet>
+  <video preload="none" controls width="450" height="800" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/shinydex/images/animation-pokedex.mp4">
+  </video>
   <figcaption>La page montrant les images du Pokémon apparaît avec une animation qui l'agrandit depuis de l'icône du Pokémon sur laquelle l'utilisateur a cliqué</figcaption>
 </figure>
 
@@ -74,7 +78,7 @@
 <p>La liste des chasses en cours montre les Pokémon que l'utilisateur est en train de rechercher dans les jeux vidéo Pokémon. Il peut y indiquer l'espèce du Pokémon, sa forme (s'il en a plusieurs), le jeu dans lequel il le chasse, la méthode qu'il utilise pour le trouver, et le nombre de rencontres effectuées jusqu'à présent (en effet, un Pokémon ayant très peu de chances d'être chromatique, il faut en rencontrer un grand nombre pour que le hasard nous offre cette chance).</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-hunts.webp" alt-text="Section Chasses du Shinydex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/page-hunts.webp" alt="Section Chasses du Shinydex" width="720" height="1483" loading="lazy" data-phone>
   <figcaption>Les liste des Pokémon que l'utilisateur est en train de chasser</figcaption>
 </figure>
 
@@ -83,7 +87,9 @@
 <p>Avant que la case "Capturé" soit cochée, l'image du Pokémon est affichée avec ses couleurs normales. Au moment où la case "Capturé" est cochée, l'image prend les couleurs de l'apparence chromatique du Pokémon, et une petite animation se joue par-dessus cette image. Cette animation est inspirée des jeux vidéo Pokémon dans lesquels, quand un Pokémon chromatique apparaît, il est entouré de petites étoiles brillantes qui tournent autour de lui.</p>
 
 <figure>
-  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/animation-hunts.mp4"></media-projet>
+  <video preload="none" controls width="450" height="800" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/shinydex/images/animation-hunts.mp4">
+  </video>
   <figcaption>L'animation étoilée de l'image du Pokémon</figcaption>
 </figure>
 
@@ -92,7 +98,7 @@
 <p>La liste d'amis est, comme son nom l'indique, une liste des personnes que l'utilisateur a ajoutées comme ami. Pour ajouter une personne en ami, celle-ci doit s'être connectée au Shinydex, avoir choisi un pseudo public et avoir autorisé le partage de son profil dans les paramètres de l'application.</p>
 
 <figure>
-  <media-projet type="image" width="720" height="1483" src="/mon-portfolio/projets/shinydex/images/page-friends.webp" alt-text="Section Amis du Shinydex"></media-projet>
+  <img src="/mon-portfolio/projets/shinydex/images/page-friends.webp" alt="Section Amis du Shinydex" width="720" height="1483" loading="lazy" data-phone>
   <figcaption>La liste d'amis (oui, je me suis ajouté moi-même en ami pour tester l'application)</figcaption>
 </figure>
 
@@ -105,7 +111,9 @@
 <p>La dernière version de Material Design colore l'interface des applications avec la couleur du fond d'écran de l'utilisateur. Le Shinydex essaie de suivre Material Design, mais c'est une application web, pas une application Android. Par conséquent, il est impossible pour le Shinydex de récupérer cette couleur. J'ai donc ajouté aux paramètres le choix de la teinte de l'interface, afin que l'utilisateur puisse choisir lui-même quelle couleur donner au Shinydex.</p>
 
 <figure>
-  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/shinydex/images/hue-demo.mp4"></media-projet>
+  <video preload="none" controls width="450" height="800" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/shinydex/images/hue-demo.mp4">
+  </video>
   <figcaption>Démonstration de différentes teintes de l'interface du Shinydex</figcaption>
 </figure>
 

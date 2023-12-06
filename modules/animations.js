@@ -65,7 +65,7 @@ let footerLogoChangeSideTimeout;
 const footerObserver = new IntersectionObserver((entries) => {
   for (const entry of entries) {
     entry.target.classList.remove('touched-left', 'touched-right');
-    if (entry.isIntersecting && document.documentElement.classList.contains('actif')) {
+    if (entry.isIntersecting && document.body.getAttribute('data-section-actuelle') !== '') {
       // Animate logo here
 
       // 1. Slide logo in

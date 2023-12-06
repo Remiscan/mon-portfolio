@@ -6,8 +6,6 @@
     "remiscan-logo-svg-horizontal": "/_common/components/remiscan-logo/logo-horizontal.svg",
     "remiscan-logo-svg-square": "/_common/components/remiscan-logo/logo-square.svg",
 
-    "mediaProjet": "./modules/components/mediaProjet.js",
-
     "animations": "./modules/animations.js",
     "changeCouleur": "./modules/changeCouleur.js",
     "contact": "./modules/contact.js",

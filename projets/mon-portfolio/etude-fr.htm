@@ -8,16 +8,16 @@
 <p>Il me restait donc à jouer avec des surfaces rectangulaires colorées, des lignes droites, sans bordures et sans ombres, dans un style plutôt brutaliste. Sur mobile, une ligne oblique coupe la page en deux, plus ou moins penchée selon la taille de l'écran (pour ne pas prendre trop de place verticalement).</p>
 
 <!--<figure>
-  <media-projet type="image" width="800" height="450" src="/mon-portfolio/projets/mon-portfolio/images/page-bio-pc.webp" alt-text='La page "Qui je suis" sur PC'></media-projet>
-  <media-projet type="image" width="450" height="800" src="/mon-portfolio/projets/mon-portfolio/images/page-bio.webp" alt-text='La page "Qui je suis" sur mobile'></media-projet>
+  <img src="/mon-portfolio/projets/mon-portfolio/images/page-bio-pc.webp" alt='La page "Qui je suis" sur PC' width="800" height="450" loading="lazy">
+  <img src="/mon-portfolio/projets/mon-portfolio/images/page-bio.webp" alt='La page "Qui je suis" sur mobile' width="450" height="800" loading="lazy">
   <figcaption>Le design est très simple : des rectangles colorés, rendus obliques sur mobile</figcaption>
 </figure>-->
 
 <p>L'angle de cette ligne se retrouve dans différents éléments du site, comme ma photo ou la liste de mes projets.</p>
 
 <figure>
-  <media-projet type="image" width="420" height="420" src="/mon-portfolio/projets/mon-portfolio/images/angle-photo.webp" alt-text="Photo de moi"></media-projet>
-  <media-projet type="image" width="450" height="620" src="/mon-portfolio/projets/mon-portfolio/images/angle-projets.webp" alt-text="Liste de mes projets"></media-projet>
+  <img src="/mon-portfolio/projets/mon-portfolio/images/angle-photo.webp" alt="Photo de moi" width="420" height="420" loading="lazy">
+  <img src="/mon-portfolio/projets/mon-portfolio/images/angle-projets.webp" alt="Liste de mes projets" width="450" height="620" loading="lazy" data-phone>
   <figcaption>L'effet oblique sur divers éléments du site, sur mobile</figcaption>
 </figure>
   
@@ -30,7 +30,9 @@
 <p>Dans cette optique, la couleur de fond des liens de navigation s'étend légèrement au survol de la souris ; en cliquant dessus, cette couleur se répand sur tout l'écran, comme si le bouton lui-même contenait la section qu'il appelle et s'étendait jusqu'à remplir toute la fenêtre avant que la section apparaisse.</p>
 
 <figure>
-  <media-projet type="video" width="1300" height="800" src="/mon-portfolio/projets/mon-portfolio/images/animation-nav.mp4"></media-projet>
+  <video preload="none" controls width="1300" height="800">
+    <source type="video/mp4" src="/mon-portfolio/projets/mon-portfolio/images/animation-nav.mp4">
+  </video>
   <figcaption>L'animation de changement de page (au ralenti)</figcaption>
 </figure>
 
@@ -46,8 +48,12 @@
 <p>De même, la section exposant les détails d'un projet du portfolio s'agrandit à partir du lien qui permet de l'ouvrir. Cette animation respecte la forme originale du bouton : rectangle sur PC, parallélogramme sur mobile.</p>
 
 <figure>
-  <media-projet type="video" width="1300" height="850" src="/mon-portfolio/projets/mon-portfolio/images/animation-projet-pc.mp4"></media-projet>
-  <media-projet type="video" width="450" height="800" src="/mon-portfolio/projets/mon-portfolio/images/animation-projet-mobile.mp4"></media-projet>
+  <video preload="none" controls width="1300" height="850">
+    <source type="video/mp4" src="/mon-portfolio/projets/mon-portfolio/images/animation-projet-pc.mp4">
+  </video>
+  <video preload="none" controls width="450" height="800" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/mon-portfolio/images/animation-projet-mobile.mp4">
+  </video>
   <figcaption>L'animation d'ouverture d'un projet (au ralenti)</figcaption>
 </figure>
 
@@ -62,7 +68,9 @@
 <p>Le bouton pour m'envoyer un e-mail ouvre directement votre client e-mail. Initialement, j'avais créé une page avec un formulaire pour cela. L'envoi d'e-mail n'étant pas instantané et pouvant échouer, j'avais développé une animation qui indiquait le chargement puis le succès ou l'échec de l'envoi.</p>
 
 <figure>
-  <media-projet type="video" width="544" height="754" src="/mon-portfolio/projets/mon-portfolio/images/envoyer-mail.mp4"></media-projet>
+  <video preload="none" controls width="544" height="754" data-phone>
+    <source type="video/mp4" src="/mon-portfolio/projets/mon-portfolio/images/envoyer-mail.mp4">
+  </video>
   <figcaption>L'animation du bouton d'envoi d'e-mail</figcaption>
 </figure>
 
@@ -70,16 +78,16 @@
 
 <hr>
 
-<p>Une grande partie des effets que j'ai mentionnés fonctionne grâce à JavaScript. Je me suis donc lancé le défi d'adapter le site, en faisant le moins de changements possibles, pour qu'il fonctionne même pour un visiteur qui aurait désactivé JavaScript. Et c'est chose faite !</p>
-
-<p>Seule la page de détails d'un projet (comme celle que vous lisez en ce moment-même) reste inaccessible quand JavaScript est désactivé. À la place, cliquer sur une miniature de projet dans le portfolio mène directement vers le projet en question.</p>
+<p>Une grande partie des effets que j'ai mentionnés fonctionne grâce à JavaScript. Je me suis donc lancé le défi d'adapter le site, en faisant le moins de changements possibles, pour qu'il fonctionne même pour un visiteur qui aurait désactivé JavaScript (sans lesdits effets). Et c'est chose faite !</p>
 
 <hr>
 
 <p>J'aimerais terminer en mentionnant la <a href="https://remiscan.fr/oups" target="_blank" rel="noopener">page d'erreur en cas de page introuvable</a> que j'ai conçue. Je voulais quelque chose de visuellement très simple, et j'ai eu l'idée de représenter de la pluie (parce qu'une page introuvable, c'est triste ?).</p>
 
 <figure>
-  <media-projet type="video" width="1200" height="800" src="/mon-portfolio/projets/mon-portfolio/images/animation-pluie.mp4"></media-projet>
+  <video preload="none" controls width="1200" height="800">
+    <source type="video/mp4" src="/mon-portfolio/projets/mon-portfolio/images/animation-pluie.mp4">
+  </video>
   <figcaption>L'animation de pluie en cas d'erreur "page introuvable"</figcaption>
 </figure>
 

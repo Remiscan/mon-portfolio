@@ -18,24 +18,29 @@
   // Gestion de l'URL demandée et adaptation de la page
 
   //// Récupération de l'article de départ
-  $start_article = 'accueil';
+  $start_article = '';
   if (isset($_GET['onav'])) {
     $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
     if (in_array($onav, ['competences', 'bio', 'portfolio', 'projet', 'contact'])) {
       $start_article = $onav;
     }
   }
-  $isAccueil = ($start_article === 'accueil');
+  $isAccueil = ($start_article === '');
 
   //// Récupération du projet de départ
   $start_projet = '';
+  $projet_couleur = '';
   if (isset($_GET['projet'])) {
     $oprojet = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['projet']);
 
     $idsProjets = array();
-    foreach($projets as $projet) { $idsProjets[] = $projet->id; }
-    
-    if (in_array($oprojet, $idsProjets)) $start_projet = $oprojet;
+    foreach($projets as $projet) { 
+      $idsProjets[] = $projet->id;
+      if ($projet->id === $oprojet) {
+        $start_projet = $oprojet;
+        $projet_couleur = $projet->couleur->hsl();
+      }
+    }
   }
 
   //// Si l'URL demandée est /
@@ -49,10 +54,14 @@
         $start_color = $c_article_parcours;
         $titre_page = $translation->get('nav-bio');
         break;
-      case 'projet':
       case 'portfolio':
         $start_color = $c_article_portfolio;
         $titre_page = $translation->get('nav-portfolio');
+        break;
+      case 'projet':
+        $start_color = $c_article_portfolio;
+        $titre_page = $translation->get('titre-projet') . $translation->get("projet-$start_projet-titre");
+        $start_article = 'portfolio';
         break;
       case 'contact':
         $start_color = $c_email;
@@ -65,12 +74,12 @@
 
   //// Donne le titre de la page
   $titre = 'Rémi S., ' . $translation->get('job');
-  if ($titre_page) $titre .= ' — ' . $titre_page;
+  if ($titre_page) $titre = $titre_page . ' — ' . $titre;
 
   //// Liste des fichiers style-*.css critiques ou non
   $styles_critiques = ['global'];
-  if ($start_article != 'accueil') $styles_critiques[] = $start_article;
-  if ($start_article == 'projet')  $styles_critiques[] = 'portfolio';
+  if ($start_article !== '') $styles_critiques[] = $start_article;
+  if ($start_article === 'projet')  $styles_critiques[] = 'portfolio';
   $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
 
   // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
@@ -90,7 +99,7 @@
   }
 ?>
 <!doctype html>
-<html data-version="<?=version([__DIR__])?>" lang="<?=$lang?>" <?=$isAccueil?'':'class="actif"'?>>
+<html data-version="<?=version([__DIR__])?>" lang="<?=$lang?>">
 
   <head>
     <meta charset="utf-8">
@@ -162,18 +171,25 @@
     <!-- Scripts -->
     <script type="module" src="/mon-portfolio/modules/main.js"></script>
 
-    <!--<?php versionizeEnd(__DIR__); ?>-->
-
     <noscript>
+      <?php foreach($styles_non_critiques as $article) { ?>
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$article?>-style.css">
+      <?php } ?>
       <link rel="stylesheet" href="/mon-portfolio/style-noscript.css">
     </noscript>
+
+    <!--<?php versionizeEnd(__DIR__); ?>-->
   </head>
   
-  <body style="--default-color:<?=$c_default_bgcolor->hsl()?>;
-               --load-color:<?=$load_color->hsl()?>;
-               --article-color:<?=$start_color->hsl()?>;"
-        data-start="<?=$start_article?>"
-        data-start-projet="<?=$start_projet?>">
+  <body style="
+    --default-color: <?=$c_default_bgcolor->hsl()?>;
+    --load-color: <?=$load_color->hsl()?>;
+    --article-color: <?=$start_color->hsl()?>;
+    <?= $projet_couleur ? '--projet-color: '.$projet_couleur.';' : '' ?>
+        "
+        data-section-actuelle="<?=$start_article?>"
+        data-projet-actuel="<?=$start_projet?>"
+        class="start">
 
     <!-- DÉFINITION DES SVG -->
     <?php include __DIR__.'/images/social.svg' ?>
@@ -183,11 +199,11 @@
     <div id="couleur" aria-hidden="true"></div>
 
     <!-- CONTENU DU SITE -->
-    <header>
+    <header <?=$start_projet ? 'inert' : ''?>>
       <?php include './pages/header-page.php'; ?>
     </header>
 
-    <main id="bottom">
+    <main id="bottom" <?=$start_projet ? 'inert' : ''?>>
       <article id="accueil" aria-label="<?=$translation->get('nav-accueil')?>"></article>
 
       <article id="bio" aria-labelledby="nav_bio">
@@ -203,9 +219,11 @@
       </article>
     </main>
 
-    <article id="projet" aria-label="<?=$translation->get('nav-projet')?>" aria-hidden="true" hidden inert>
+    <div id="projet" aria-label="<?=$translation->get('nav-projet')?>" <?=$start_projet ? 'data-current-projet="'.$start_projet.'"' : 'aria-hidden="true" hidden inert'?> style="
+      <?= $projet_couleur ? '--projet-color: '.$projet_couleur.';' : '' ?>
+    ">
       <?php include './pages/projet-page.php'; ?>
-    </article>
+    </div>
 
     <footer>
       <div class="logo-container">

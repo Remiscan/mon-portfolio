@@ -2,6 +2,10 @@ html {
   overflow-y: auto;
 }
 
+html:has(body:not([data-projet-actuel=""])) {
+  overflow-y: hidden;
+}
+
 #loading,
 #liens_contact>#nav_contact {
   display: none;
@@ -31,7 +35,7 @@ html {
 }
 
 @media screen and (max-width: 620px) {
-  html:not(.actif) nav {
+  body[data-section-actuelle=""] nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -41,7 +45,7 @@ html {
     gap: 2.4rem;
   }
 
-  html:not(.actif) :is(#nav_bio, #nav_portfolio) {
+  body[data-section-actuelle=""] :is(#nav_bio, #nav_portfolio) {
     transform: none;
   }
 

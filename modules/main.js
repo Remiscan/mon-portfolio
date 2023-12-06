@@ -1,82 +1,60 @@
-import { Params, recalcOnResize } from 'Params';
-import 'mediaProjet';
-import { getNavActuelle, naviguer, setNavActuelle } from 'navigation';
-import { closeProjet, initProjets } from 'projets';
+import { recalcOnResize } from 'Params';
+import { navigationSideEffects, naviguer, updateLastNavCheck } from 'navigation';
 import 'remiscan-logo';
 
 
 
-////////////////////////////////////////////////////////////////////
-// Gère les appuis sur les boutons précédent / suivant du navigateur
-window.addEventListener('popstate', async event => {
-  const elProjet = document.getElementById('projet');
-  const onav = event.state.onav;
-  if (onav == 'projet') {
-    if (elProjet.style.display != 'none' && elProjet.style.display) {
-      await closeProjet();
-    }
+///////////////////////////////////////////////
+// Déclenche une navigation au changement d'URL
+const pushState = history.pushState;
+const replaceState = history.replaceState;
 
-    const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
-    entrees.forEach(e => {
-      if (e.dataset.id == event.state.oprojet_id) {
-        return e.click();
-      }
-    });
-  } else {
-    if (document.getElementById('projet').classList.contains('on')) {
-      await closeProjet();
-    }
-    
-    document.getElementById(onav)?.click();
+history.pushState = function() {
+  const val = pushState.apply(this, arguments);
+  window.dispatchEvent(new Event('pushstate'));
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'pushstate' } }));
+  return val;
+};
+
+history.replaceState = function() {
+  const val = replaceState.apply(this, arguments);
+  window.dispatchEvent(new Event('replacestate'));
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'replacestate' } }));
+  return val;
+};
+
+window.addEventListener('popstate', () => {
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'popstate' } }));
+});
+
+window.addEventListener('locationchange', event => {
+  if (!['pushstate', 'popstate'].includes(event.detail?.cause)) return;
+  updateLastNavCheck();
+  naviguer(location.pathname);
+});
+
+document.querySelectorAll('a[href^="/"]').forEach(a => a.addEventListener('click', event => {
+  if (a.href && event.button === 0 && a.origin === document.location.origin) {
+    event.preventDefault();
+    history.pushState({}, '', `${a.pathname}${location.search}`);
   }
-}, false);
+}));
 
 
 
 ////////////////////////////////////////////////
 // Gère la mise en place du site à son ouverture
-document.addEventListener('DOMContentLoaded', async event => {
-  if (Params.startArticle == 'accueil') {
-    history.replaceState({onav: 'nav_accueil'}, '', `/${location.search}`);
-  } else {
-    history.replaceState({ onav: `nav_${Params.startArticle}` }, '', `/${Params.startArticle}${location.search}`);
-  }
+const sectionActuelle = document.body.getAttribute('data-section-actuelle');
+const projetActuel = document.body.getAttribute('data-projet-actuel');
 
-  recalcOnResize();
+if (projetActuel !== '') {
+  history.replaceState({ onav: 'projet', oprojet_id: projetActuel }, '', `/projet/${projetActuel}${location.search}`);
+} else if (sectionActuelle === '') {
+  history.replaceState({ onav: 'nav_accueil' }, '', `/${location.search}`);
+} else {
+  history.replaceState({ onav: `nav_${sectionActuelle}` }, '', `/${sectionActuelle}${location.search}`);
+}
 
-  // Adapte les liens du portfolio (par défaut, ils mènent directement aux projets si JavaScript est désactivé)
-  Array.from(document.querySelectorAll('a.projet-conteneur')).forEach(e => {
-    if (e.id === 'projet-preview-more') return;
-    e.href = '/projet/' + e.dataset.id;
-    e.removeAttribute('target');
-  });
-  // -- fin --
-
-  initProjets();
-
-  // Supprime l'écran de chargement
-  setTimeout(() => {
-    if (document.getElementById('loading')) {
-      document.getElementById('loading').remove();
-      document.body.style.setProperty('--load-color', null);
-    }
-  }, 100);
-
-  setNavActuelle('nav_' + Params.startArticle);
-  
-  if (Params.startArticle == 'accueil') {
-    document.documentElement.style.overflowY = 'auto';
-    return;
-  }
-
-  await naviguer(event, document.getElementById(getNavActuelle()), true);
-
-  const elProjet = document.getElementById('projet');
-  if (Params.startProjet && !elProjet.classList.contains('on')) {
-    const entrees = Array.from(document.getElementsByClassName('projet-conteneur'));
-    entrees.forEach(e => {
-      if (e.dataset.id == Params.startProjet) e.click();
-    });
-  }
-  return;
-});
+recalcOnResize();
+setTimeout(() => document.getElementById('loading')?.remove(), 100); // Supprime l'écran de chargement du DOM
+navigationSideEffects(sectionActuelle);

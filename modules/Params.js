@@ -30,21 +30,6 @@ export const Params = {
 
 
 
-///////////////////////////////////////////////////////
-// On détecte quelle page doit être affichée en premier
-Params.startArticle = document.body.dataset.start;
-Params.startProjet = document.body.dataset.startProjet;
-document.body.removeAttribute('data-start-projet');
-if (Params.startArticle == 'projet')
-  Params.startArticle = 'portfolio';
-
-if (Params.startArticle == 'accueil')
-  Params.articleOuvert = false;
-else
-  Params.articleOuvert = true;
-
-
-
 ///////////////////////////////////////////////////////////
 // Calcul des paramètres de la fenêtre au redimensionnement
 let resizing = false;
@@ -94,20 +79,18 @@ export function recalcOnResize() {
 
 ////////////////////////////////////////////////////////////////////////////////////
 // On calcule le décalage entre les deux positions possibles des liens de navigation
-function calcul_pos_nav()
-{
+function calcul_pos_nav() {
   const nav1 = document.getElementById('nav_bio');
   const nav2 = document.getElementById('nav_portfolio');
 
-  if (Params.owidth > Params.breakpointMobile)
-  {
+  const articleOuvert = document.body.getAttribute('data-section-actuelle') !== '';
+
+  if (Params.owidth > Params.breakpointMobile) {
     Params.decalageNav1 = [0, 0];
     Params.decalageNav2 = [0, 0];
-  }
-  else
-  {
+  } else {
     let preDecalage1 = nav1.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage1) || Params.articleOuvert)
+    if (isNaN(preDecalage1) || articleOuvert)
       preDecalage1 = 0;
     const nav1Pos = nav1.getBoundingClientRect();
     Params.decalageNav1 = [
@@ -116,7 +99,7 @@ function calcul_pos_nav()
     ];
 
     let preDecalage2 = nav2.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage2) || Params.articleOuvert)
+    if (isNaN(preDecalage2) || articleOuvert)
       preDecalage2 = 0;
     const nav2Pos = nav2.getBoundingClientRect();
     Params.decalageNav2 = [
@@ -167,6 +150,10 @@ function calcul_taille_header()
     Params.decalageNav = Math.ceil(oheight / 4 - 2.75 * fontsize);
     document.querySelector('nav').style.setProperty('--decalage', Params.decalageNav + 'px');
   }
+
+  document.body.style.setProperty('--decalage-header', Params.tailleHeader);
+  document.body.style.setProperty('--decalage-intro', Params.decalageIntro);
+  document.body.style.setProperty('--decalage-nav', Params.decalageNav);
 }
 
 

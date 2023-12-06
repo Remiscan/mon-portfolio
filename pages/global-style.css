@@ -7,9 +7,8 @@
  */
 
 html {
-  --h-diff: -1;
   width: 100%;
-  height: calc(100vh - var(--h-diff) * 1px);
+  height: calc(100vh - var(--h-diff, 0) * 1px);
   overflow-x: hidden;
   overflow-y: hidden;
   font-family: 'Roboto', Helvetica, Arial, sans-serif;
@@ -140,7 +139,7 @@ body {
   background: var(--load-color);
   grid-template-columns: 1fr 12vmin 1fr;
   pointer-events: none;
-  opacity: calc(0 - var(--h-diff));
+  opacity: calc(0 - var(--h-diff, -1));
   transition: opacity .1s var(--easing-decelerate);
 }
 
@@ -184,7 +183,7 @@ main {
   }
 }
 
-.actif main {
+body:not([data-section-actuelle=""]) main {
   display: block;
   pointer-events: all;
 }
@@ -195,17 +194,27 @@ main {
  * Articles & leurs sections
  */
 
-#bio,
-#portfolio,
-#projet,
-#contact {
+main > article {
   display: none;
 }
 
-body[data-start=bio] #bio,
-body[data-start=portfolio] #portfolio,
-body[data-start=contact] #contact {
+@keyframes article-appears {
+  from { transform: translateY(1rem); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+body[data-section-actuelle=""] #accueil,
+body[data-section-actuelle="bio"] #bio,
+body[data-section-actuelle="portfolio"] #portfolio,
+body[data-section-actuelle="contact"] #contact {
   display: grid;
+  animation: article-appears 150ms var(--easing-decelerate);
+  animation-fill-mode: backwards;
+  animation-delay: 400ms;
+}
+
+body.start main > article {
+  animation: none !important;
 }
 
 section {
@@ -292,7 +301,18 @@ header {
   backface-visibility: hidden;
 }
 
-header>.background {
+body:not([data-section-actuelle=""]) header {
+  --hauteur: calc(50vh - 0.5 * var(--hauteur-header));
+  top: calc(-1 * var(--hauteur));
+}
+
+@media screen and (max-width: 620px) {
+  body:not([data-section-actuelle=""]) header {
+    --hauteur: calc((100% - 3rem) / 2 - 3.4rem - 5rem - 2.4rem);
+  }
+}
+
+header > .background {
   grid-column: 1 / 2;
   grid-row: 1 / 4;
   background: rgba(0, 0, 0, .5);
@@ -301,19 +321,8 @@ header>.background {
   position: relative;
 }
 
-.actif header {
-  --hauteur: calc(50vh - 0.5 * var(--hauteur-header));
-  top: calc(-1 * var(--hauteur));
-}
-
-.actif .background {
+body:not([data-section-actuelle=""]) .background {
   bottom: var(--hauteur);
-}
-
-@media screen and (max-width: 620px) {
-  .actif header {
-    --hauteur: calc((100% - 3rem) / 2 - 3.4rem - 5rem - 2.4rem);
-  }
 }
 
 
@@ -452,7 +461,7 @@ footer {
   align-items: center;
 }
 
-html.actif .groupe-langages {
+body:not([data-section-actuelle=""]) .groupe-langages {
   gap: 1.2rem;
 }
 
@@ -555,7 +564,7 @@ body[data-section-actuelle="bio"] footer {
   justify-content: start;
 }
 
-html:not(.actif) footer svg {
+body[data-section-actuelle=""] footer svg {
   display: none;
 }
 
@@ -651,7 +660,7 @@ footer.visible svg #eye {
     clip-path: polygon(0 0, 100% 0, 100% calc(100% - 2.5rem), 0 calc(100% - .5rem));
   }
 
-  .actif .background {
+  body:not([data-section-actuelle=""]) .background {
     bottom: 0;
   }
 
@@ -659,16 +668,16 @@ footer.visible svg #eye {
     padding-inline: 1.2rem;
   }
 
-  html.actif body {
+  body:not([data-section-actuelle=""]) body {
     --hauteur-footer: 2.4rem;
   }
 
-  html.actif footer {
+  body:not([data-section-actuelle=""]) footer {
     padding-top: 0;
     padding-bottom: 0;
   }
 
-  html:not(.actif) footer {
+  body[data-section-actuelle=""] footer {
     justify-content: center;
   }
 
@@ -676,8 +685,8 @@ footer.visible svg #eye {
     grid-template-columns: repeat(2, auto);
   }
 
-  html.actif .groupe-langages,
-  html:not(.actif) .groupe-langages {
+  body:not([data-section-actuelle=""]) .groupe-langages,
+  body[data-section-actuelle=""] .groupe-langages {
     gap: 1.2rem;
   }
 
@@ -698,7 +707,7 @@ footer.visible svg #eye {
     padding-block: 0;
   }
 
-  .actif #intro {
+  body:not([data-section-actuelle=""]) #intro {
     bottom: 0;
   }
 
@@ -758,7 +767,7 @@ nav>a>h3 {
   width: calc(100% - 2rem);
   height: 2px;
   background: white;
-  transform: scaleX(0);
+  transform: scaleX(var(--underline-scale, 0));
   transition: transform .15s ease-out;
   position: absolute;
   left: 1rem;
@@ -767,33 +776,27 @@ nav>a>h3 {
   backface-visibility: hidden;
 }
 
-nav>a.selected {
+body[data-section-actuelle=""] #nav_accueil
+body[data-section-actuelle="bio"] #nav_bio,
+body[data-section-actuelle="portfolio"] #nav_portfolio,
+body[data-section-actuelle="contact"] #nav_contact {
   opacity: 1;
   cursor: auto;
   pointer-events: none;
+  --underline-scale: 1;
 }
 
-.selected>.underline {
-  transform: scaleX(1); 
-}
-
-html:not(.actif) nav>a {
+body[data-section-actuelle=""] nav > a {
   opacity: 1;
 }
 
-body[data-start=bio] #nav_bio>.underline,
-body[data-start=portfolio] #nav_portfolio>.underline,
-body[data-start=contact] #nav_contact>.underline {
-  transform: scaleX(1);
-}
-
-nav>a:hover, nav>a:active {
+nav > a:hover, nav > a:active {
   opacity: 1 !important;
   z-index: 5;
 }
 
-.nav>i,
-#nav_accueil>i {
+.nav > i,
+#nav_accueil > i {
   pointer-events: none;
 }
 
@@ -850,7 +853,7 @@ nav>a:hover, nav>a:active {
   transition: opacity .1s var(--easing-standard);
 }
 
-html:not(.actif) #nav_accueil {
+body[data-section-actuelle=""] #nav_accueil {
   display: none;
 }
 
@@ -898,11 +901,11 @@ html:not(.actif) #nav_accueil {
  */
 
  @media screen and (max-width: 620px) {
-  html.actif #liens_contact>a {
+  body:not([data-section-actuelle=""]) #liens_contact>a {
     opacity: .85;
   }
 
-  html.actif #liens_contact>a.selected {
+  body:not([data-section-actuelle=""]) #liens_contact>a.selected {
     opacity: 1;
   }
 
@@ -1009,7 +1012,7 @@ textarea::selection {
     --decalage: calc(25vh - 2.75rem);
   }
 
-  .actif nav {
+  body:not([data-section-actuelle=""]) nav {
     top: 0;
   }
 
@@ -1062,11 +1065,12 @@ textarea::selection {
     transition: none;
   }
 
-  .actif #nav_bio, .actif #nav_portfolio {
+  body:not([data-section-actuelle=""]) #nav_bio,
+  body:not([data-section-actuelle=""]) #nav_portfolio {
     transform: translate3D(0, 0, 0);
   }
 
-  .actif #nav_portfolio::before {
+  body:not([data-section-actuelle=""]) #nav_portfolio::before {
     transform: scale(1);
   }
 }

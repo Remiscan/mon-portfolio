@@ -16,7 +16,7 @@
       $imageProjet = $imageProjet . '--' . $versionImageProjet . '.webp';
       ?>
 
-      <a href="<?=$projet->lien?>" target="_blank"
+      <a href="/projet/<?=$projet->id?>"
          aria-labelledby="titre-projets-perso projet-titre-<?=$projet->id?>"
          id="projet-preview-<?=$projet->id?>"
          class="projet-conteneur expandable"
