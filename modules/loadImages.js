@@ -198,5 +198,5 @@ export function loadProjetImages() {
 // Chargement de ma photo
 export function loadMaPhoto() {
   const maPhoto = document.getElementById('photo');
-  placeholderNoMore(['/mon-portfolio/images/moi.jpg'], [maPhoto]);
+  placeholderNoMore(['/mon-portfolio/images/moi.webp'], [maPhoto]);
 }
