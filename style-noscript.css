@@ -3,7 +3,6 @@ html {
 }
 
 #loading,
-.groupe-langages,
 #liens_contact>#nav_contact {
   display: none;
 }
@@ -16,53 +15,37 @@ html {
   opacity: 1;
 }
 
-#photosecret {
-  opacity: 1;
+#photo {
   background-image: url(/mon-portfolio/images/moi.jpg);
-  background-position: center center;
 }
 
-.js-warning {
-  position: absolute;
-  width: 50%;
-  left: 25%;
-  z-index: 200;
-  background-color: var(--article-color);
-  padding: 1em;
-}
 
-#liens_contact>span>a {
-  width: 1.7rem;
-  height: 1.7rem;
-  padding: 0.25rem;
-  margin: 0.5rem;
-  --social-color: black;
-  --article-color: var(--social-color);
-  background-color: var(--social-color);
-  background-position: center center;
-  background-repeat: no-repeat;
-  display: block;
-  transition: box-shadow .1s linear, background-color .1s ease-in;
-  backface-visibility: hidden;
-  cursor: pointer;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-}
-
-#liens_contact>span>a.selected, #liens_contact>span>a.selected:hover, #liens_contact>span>a.selected:active {
-  box-shadow: none;
-  transition: none;
-  background-color: transparent;
-  cursor: auto;
-}
-
-#liens_contact>span>a.selected::before {
-  background-color: transparent;
+#photosecret {
+  display: none;
 }
 
 .projet-actual-image {
   background-position: center center;
   background-size: cover;
   background-image: var(--image);
+}
+
+@media screen and (max-width: 620px) {
+  html:not(.actif) nav {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    place-self: center;
+    top: 0;
+    gap: 2.4rem;
+  }
+
+  html:not(.actif) :is(#nav_bio, #nav_portfolio) {
+    transform: none;
+  }
+
+  #photo {
+    --angle: 0px;
+  }
 }
