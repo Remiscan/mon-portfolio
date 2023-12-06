@@ -111,6 +111,8 @@
 
 <p>Le Shinydex utilise <em>Colori</em>, un autre de mes projets, pour générer la palette de couleurs de l'interface.</p>
 
+<p>Pour gérer la langue de l'application, et pouvoir la changer sans devoir relancer l'appli, j'ai testé plusieurs façons de faire et, finalement, j'utilise un "Translation Observer" que j'ai développé. Il s'agit d'un <a href="https://developer.mozilla.org/fr/docs/Web/API/MutationObserver" target="_blank" rel="noopener">Mutation Observer</a> qui observe les changements de langue de la page et auquel chaque <a href="https://developer.mozilla.org/fr/docs/Web/API/Web_components/Using_custom_elements" target="_blank" rel="noopener">élément HTML personnalisé</a> peut souscrire, afin que l'Observer lui communique ces changements en temps réel. Ajouter un tel Translation Observer directement à la spécification HTML est <a href="https://github.com/whatwg/html/issues/9918" target="_blank" rel="noopener">en cours de discussion par le WHATWG</a>.</p>
+
 <hr>
 
 <p>Je considère désormais que le Shinydex est complet et que toutes mes ambitions à son sujet ont été réalisées. Cependant, de nouveaux jeux vidéo Pokémon vont sortir, et je continuerai de maintenir l'application à jour avec les nouveaux Pokémon et méthodes de chasse contenus dans ces jeux. De plus, je suis sûr que j'aurai de nouvelles idées pour continuer de travailler sur ce projet, et qu'il continuera d'évoluer avec le temps.</p>
