@@ -8,7 +8,6 @@
 
     "animations": "./modules/animations.js",
     "changeCouleur": "./modules/changeCouleur.js",
-    "contact": "./modules/contact.js",
     "loadImages": "./modules/loadImages.js",
     "navigation": "./modules/navigation.js",
     "Params": "./modules/Params.js",

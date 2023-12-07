@@ -21,7 +21,7 @@
   $start_article = '';
   if (isset($_GET['onav'])) {
     $onav = preg_replace('/[^A-Za-z0-9-­]/', '', $_GET['onav']);
-    if (in_array($onav, ['competences', 'bio', 'portfolio', 'projet', 'contact'])) {
+    if (in_array($onav, ['competences', 'bio', 'portfolio', 'projet'])) {
       $start_article = $onav;
     }
   }
@@ -63,10 +63,6 @@
         $titre_page = $translation->get('titre-projet') . $translation->get("projet-$start_projet-titre");
         $start_article = 'portfolio';
         break;
-      case 'contact':
-        $start_color = $c_email;
-        $titre_page = $translation->get('nav-contact');
-        break;
     }
   }
   $load_color = Couleur::blend($start_color, $c_topcolor);
@@ -80,7 +76,7 @@
   $styles_critiques = ['global'];
   if ($start_article !== '') $styles_critiques[] = $start_article;
   if ($start_article === 'projet')  $styles_critiques[] = 'portfolio';
-  $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet', 'contact'], $styles_critiques);
+  $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet'], $styles_critiques);
 
   // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
   // (dé/commenter la première ligne pour changer de méthode)
@@ -212,10 +208,6 @@
 
       <article id="portfolio" aria-labelledby="nav_portfolio">
         <?php include './pages/portfolio-page.php'; ?>
-      </article>
-
-      <article id="contact" aria-labelledby="nav_contact">
-        <?php include './pages/contact-page.php'; ?>
       </article>
     </main>
 

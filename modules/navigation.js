@@ -1,4 +1,4 @@
-import { Params } from 'Params';
+import { Params, wait } from 'Params';
 import { anim_competences } from 'animations';
 import { changeCouleur } from 'changeCouleur';
 import { loadMaPhoto, loadProjetImages, placeholderNoMore } from 'loadImages';
@@ -24,6 +24,7 @@ export function* naviguer(pathname) {
   let needAnimations = false;
   let currentScroll = window.scrollY;
 
+  // On détermine vers quelle section et/ou projet on navigue
   let section = '';
   let projet = '';
   const parts = pathname.split('/');
@@ -34,63 +35,74 @@ export function* naviguer(pathname) {
       section = parts[1] ?? '';
   }
 
+  // Si on navigue vers un projet, d'abord naviguer vers la liste des projets avant de l'ouvrir
   if (projet) {
     yield naviguer('/portfolio');
     yield openProjet(projet);
     return;
-  } else if (document.body.getAttribute('data-projet-actuel') !== '') {
+  }
+  // Sinon, si un projet est ouvert, on le ferme avant de poursuivre la navigation
+  else if (document.body.getAttribute('data-projet-actuel') !== '') {
     yield closeProjet();
   }
   
-  const header = document.querySelector('header');
-  const main = document.querySelector('main');
-  const footer = document.querySelector('footer');
-  const nav = document.querySelector(`#nav_${section || 'accueil'}`);
   const ancienneSection = document.body.getAttribute('data-section-actuelle');
+  const article = document.querySelector(`#${section || 'accueil'}`);
 
-  // ÉTAPE 1 : Navigation autorisée ?
   // Ne rien faire si :
-    // - on demande à aller sur l'article déjà ouvert alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
-    // - on demande à aller sur l'article vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
-  if (!navEnCours && ancienneSection === section)
-    return;
-  else if (navEnCours && lastNav === section)
-    return;
+  // - on demande à aller sur l'article déjà ouvert alors qu'aucune navigation n'est en cours (!navEnCours && nav_actuelle == nav.id && !start)
+  // - on demande à aller sur l'article vers laquelle la navigation déjà en cours est en train d'aller (navEnCours && lastNav == nav)
+  // - on demande à aller sur un article qui n'existe pas
+  if (!navEnCours && ancienneSection === section) return;
+  else if (navEnCours && lastNav === section)       return;
+  else if (navs.indexOf(`nav_${section || 'accueil'}`) === -1) throw `Navigation demandée vers un article inexistant: ${section}`;
 
-  // ÉTAPE 2.1 : Animations accueil <==> article + couleur
-  // et ÉTAPE 2.2 en parallèle : Masquer les éléments du viel article
   lastNav = section;
   navEnCours = true;
 
-  // Si aucune condition de rejet n'est remplie, on continue :
+  // On fixe la hauteur de la page pour éviter un janky scroll pendant la navigation
+  const main = document.querySelector('main');
   main.style.height = getComputedStyle(main).height;
-  document.documentElement.style.overflowY = 'hidden';
-  
-  document.body.classList.remove('start');
-  document.body.setAttribute('data-section-actuelle', section);
+
+  // On cache le footer pendant la navigation
+  const footer = document.querySelector('footer');
   footer.classList.add('off');
 
-  document.title = getTitrePage(nav.id.replace('nav_', ''));
+  // On désactive le scroll pendant la navigation
+  document.documentElement.style.overflowY = 'hidden';
+  
+  // On masque l'ancienne section et affiche la nouvelle
+  document.body.classList.remove('start');
+  document.body.setAttribute('data-section-actuelle', section);
 
-  // 2.1 : Préparation des animations de passage accueil <==> article
-  const headerBgMove = Params.owidth > Params.breakpointMobile ? Params.tailleHeader : 0;
+  // On met à jour le titre de la page
+  document.title = getTitrePage(section);
 
-  let e0, e1;
-  let animationSign = '';
-  let animationOppositeSign = '';
+  // Cette promesse sera résolue quand la nouvelle section aura terminé son animation d'apparition
+  // (utilisé plus tard pour attendre avant d'appliquer les side effects de la navigation)
+  const articleAppeared = new Promise(resolve => article ? article.addEventListener('animationend', resolve, { once: true }) : Promise.resolve());
 
+  // 🔽🔽🔽 ANIMATIONS PAGE D'ACCUEIL <==> ARTICLE 🔽🔽🔽
+
+  let k0, k1; // indices des keyframes, utilisés pour inverser l'animation si besoin
+  let animationSign = ''; // + ou -, utilisé pour inverser la direction d'animation si besoin
+  let animationOppositeSign = ''; // + ou -, utilisé pour inverser la direction d'animation si besoin
+
+  // Si on va de la page d'accueil ==vers==> un article
   if (ancienneSection === '' && section !== '') {
     needAnimations = true;
-    e0 = 0; e1 = 1;
+    k0 = 0; k1 = 1;
     animationSign = '+';
     animationOppositeSign = '-';
-    document.getElementById('nav_portfolio').style.setProperty('--diff-scale-navs', 0);
-  } else if (ancienneSection !== '' && section === '') {
+  }
+  // Si on va d'un article ==vers==> la page d'accueil
+  else if (ancienneSection !== '' && section === '') {
     needAnimations = true;
-    e0 = 1; e1 = 0;
+    k0 = 1; k1 = 0;
     animationSign = '-';
     animationOppositeSign = '+';
-    document.getElementById('nav_portfolio').style.setProperty('--diff-scale-navs', Params.diffScaleNavs);
+
+    // On scrolle tout en haut de la page pour éviter un janky scroll pendant l'animation
     window.scrollTo(0, 0);
     currentScroll = 0;
   }
@@ -106,19 +118,18 @@ export function* naviguer(pathname) {
 
     const animations = [];
 
-    // Déplacement du header
-    {
+    { // Déplacement du header
       const keyframes = [
-        { transform: `translate3D(0, ${animationSign}${Params.tailleHeader}px, 0)` },
+        { transform: `translate3D(0, ${animationSign}${Params.decalageHeader}px, 0)` },
         { transform: 'translate3D(0, 0, 0)' },
       ];
-      const element = header;
+      const element = document.querySelector('header');
       const anim = element.animate(keyframes, options);
       animations.push(anim);
     }
 
-    // Compression apparente du fond du header
-    {
+    { // Compression apparente du fond du header
+      const headerBgMove = Params.owidth > Params.breakpointMobile ? Params.decalageHeader : 0;
       const keyframes = [
         { transform: `translate3D(0, ${animationSign}${headerBgMove}px, 0)` },
         { transform: 'translate3D(0, 0, 0)' },
@@ -128,8 +139,7 @@ export function* naviguer(pathname) {
       animations.push(anim);
     }
 
-    // Déplacement de mon nom
-    {
+    { // Déplacement de mon nom
       const keyframes = [
         { transform: `translate3D(0, ${animationOppositeSign}${Params.decalageIntro}px, 0)` },
         { transform: 'translate3D(0, 0, 0)' },
@@ -139,8 +149,7 @@ export function* naviguer(pathname) {
       animations.push(anim);
     }
 
-    // Déplacement des liens de nav
-    {
+    { // Déplacement des liens de nav
       const keyframes = [
         { transform: `translate3D(0, ${animationSign}${Params.decalageNav}px, 0)` },
         { transform: 'translate3D(0, 0, 0)' },
@@ -151,44 +160,36 @@ export function* naviguer(pathname) {
     }
 
     // Horizontalisation / verticalisation des liens de nav sur mobile
-    {
+    const navs = document.querySelectorAll('nav > a');
+    navs.forEach((nav, k) => {
       const keyframes = [
-        { transform: `translate3D(${Params.decalageNav1[0]}px, ${Params.decalageNav1[1]}, 0)` },
+        { transform: `translate3D(${Params.decalageNavLinks[k][0]}px, ${Params.decalageNavLinks[k][1]}, 0)` },
         { transform: 'translate3D(0, 0, 0)' },
       ];
-      const element = document.getElementById('nav_bio');
-      const anim = element.animate([keyframes[e0], keyframes[e1]], options);
+      const anim = nav.animate([keyframes[k0], keyframes[k1]], options);
       animations.push(anim);
-    } {
-      const keyframes = [
-        { transform: `translate3D(${Params.decalageNav2[0]}px, ${Params.decalageNav2[1]}, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const element = document.getElementById('nav_portfolio');
-      const anim = element.animate([keyframes[e0], keyframes[e1]], options);
-      animations.push(anim);
-    }
+    });
   }
 
-  // Si on navigue vers un article qui existe
-  if (navs.indexOf(nav.id) != -1) {
-    if (nav.id == 'nav_bio')
-      anim_competences(false);
-    
-    // Animation de la propagation de la couleur de article choisi
-    yield changeCouleur(event, nav);
-  }
+  // 🔼🔼🔼 ----------- Fin des animations ----------- 🔼🔼🔼
 
-  else throw 'Navigation demandée vers un article inexistant: ' + nav.id;
-  
-  const article_id = nav.id.replace('nav_', '');
+  // On lance l'animation de changement de couleur du fond de page
+  const navLink = document.querySelector(`#nav_${section || 'accueil'}`);
+  yield changeCouleur(navLink);
 
+  // On annule les réglages temporaires dont on avait besoin pendant la navigation
   main.style.height = 'auto';
   footer.classList.remove('off');
+  document.documentElement.style.overflowY = 'auto';
   window.scrollTo(0, currentScroll);
+
   navEnCours = false;
 
-  navigationSideEffects(article_id);
+  // On applique les side effects post-navigation (par exemple des animations propres à la section)
+  // une fois l'animation d'apparition de la section terminée.
+  yield Promise.race([articleAppeared, wait(250)]);
+  navigationSideEffects(section);
+
   return;
 }
 
@@ -244,19 +245,50 @@ export function navigationSideEffects(section) {
     const listeProjets = Array.from(document.getElementsByClassName('projet-actual-image'));
     placeholderNoMore(false, listeProjets);
   }
-  if (section != 'bio' && document.getElementById('bio').querySelector('.actual-image') != null) {
-    const maPhoto = document.getElementById('photo');
-    placeholderNoMore(false, [maPhoto]);
+
+  if (section != 'bio') {
+    anim_competences(false);
+    if (document.getElementById('bio').querySelector('.actual-image') != null) {
+      const maPhoto = document.getElementById('photo');
+      placeholderNoMore(false, [maPhoto]);
+    }
   }
-
-  document.documentElement.style.overflowY = 'auto';
 }
 
 
 
-/////////////////////////////////////////////////////////////////////
-// Récupère le lien de navigation correspondant à la section actuelle
-export function getNavLinkActuel() {
-  const section = document.body.getAttribute('data-section-actuelle');
-  return `nav_${section || 'accueil'}`;
-}
+///////////////////////////////////////////////
+// Déclenche une navigation au changement d'URL
+const pushState = history.pushState;
+const replaceState = history.replaceState;
+
+history.pushState = function() {
+  const val = pushState.apply(this, arguments);
+  window.dispatchEvent(new Event('pushstate'));
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'pushstate' } }));
+  return val;
+};
+
+history.replaceState = function() {
+  const val = replaceState.apply(this, arguments);
+  window.dispatchEvent(new Event('replacestate'));
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'replacestate' } }));
+  return val;
+};
+
+window.addEventListener('popstate', () => {
+  window.dispatchEvent(new CustomEvent('locationchange', { detail: { cause: 'popstate' } }));
+});
+
+window.addEventListener('locationchange', event => {
+  if (!['pushstate', 'popstate'].includes(event.detail?.cause)) return;
+  updateLastNavCheck();
+  naviguer(location.pathname);
+});
+
+document.querySelectorAll('a[href^="/"]').forEach(a => a.addEventListener('click', event => {
+  if (a.href && event.button === 0 && a.origin === document.location.origin) {
+    event.preventDefault();
+    history.pushState({}, '', `${a.pathname}${location.search}`);
+  }
+}));

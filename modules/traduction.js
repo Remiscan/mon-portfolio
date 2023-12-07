@@ -26,8 +26,6 @@ export function getTitrePage(o = false, titre = false) {
     case 'portfolio':
       titreCore = getString('nav-portfolio');
       break;
-    case 'contact':
-      titreCore = getString('nav-contact');
       break;
     case 'projet':
       titreCore = getString('titre-projet') + history.state.oprojet_titre;

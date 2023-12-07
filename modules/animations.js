@@ -2,8 +2,10 @@ import { Params, wait } from 'Params';
 
 
 
-////////////////////////////////////
-// Anime la timeline des compétences
+/**
+ * Anime la timeline des compétences
+ * @param {boolean} t - Direction de l'animation (true = slide-in des couleurs, false = suppression des couleurs)
+ */
 export function anim_competences(t = true) {
   const firstConteneur = document.querySelector('.competence-conteneur');
   const allConteneurs = [...document.getElementsByClassName('competence-conteneur')];
@@ -21,9 +23,11 @@ export function anim_competences(t = true) {
 
 
 
-///////////////////////////////////////////////////
-// Surveille le survol d'un élément par le pointeur
-// et lui passe les coordonnées locales du pointeur
+/**
+ * Surveille le survol d'un élément par le pointeur
+ * et lui passe les coordonnées locales du pointeur.
+ * @param {HTMLElement} element - L'élement surveillé
+ */
 function monitorHoveredElement(element) {
   const callback = (event) => {
     const rect = element.getBoundingClientRect();

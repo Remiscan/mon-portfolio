@@ -782,7 +782,6 @@ body[data-section-actuelle="portfolio"] #nav_portfolio,
 body[data-section-actuelle="contact"] #nav_contact {
   opacity: 1;
   cursor: auto;
-  pointer-events: none;
   --underline-scale: 1;
 }
 
@@ -850,11 +849,13 @@ nav > a:hover, nav > a:active {
   cursor: pointer;
   position: relative;
   z-index: 5;
-  transition: opacity .1s var(--easing-standard);
+  animation: appear .15s linear;
+  animation-fill-mode: backwards;
 }
 
 body[data-section-actuelle=""] #nav_accueil {
   display: none;
+  opacity: 0;
 }
 
 #nav_accueil>i {
@@ -969,31 +970,6 @@ textarea::selection {
   background: black;
 }
 
-/*.focusable:active {
-  outline: none;
-}
-.focusable::moz-focus-inner {
-  border: none;
-}
-.focusable:focus {
-  outline: 2px solid white;
-}
-.focusable:focus:not(:focus-visible) {
-  outline: none;
-}
-#contact button:focus {
-  outline: 2px solid var(--article-color);
-  box-shadow: 0 0 0 4px white;
-}
-#contact button:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
-.mecontacter:focus {
-  outline-offset: 1px;
-  text-decoration: none;
-}*/
-
 
 
 /*
@@ -1016,8 +992,17 @@ textarea::selection {
     top: 0;
   }
 
-  nav>a {
+  nav > a {
     padding: .4rem 1rem;
+  }
+
+  body[data-section-actuelle=""] nav > a {
+    transform: translate3D(var(--decalage-nav-x, 0), var(--decalage-nav-y, 0), 0);
+  }
+
+  body[data-section-actuelle=""] nav > a::before {
+    transform: scaleX(var(--scale-x, 1));
+    transition: none;
   }
 
   .underline {
@@ -1050,19 +1035,6 @@ textarea::selection {
     height: 2.4rem;
     display: grid;
     place-items: center;
-  }
-
-  #nav_bio {
-    transform: translate3D(var(--decalage-nav, 0), calc(-50% - .9rem), 0);
-  }
-
-  #nav_portfolio {
-    transform: translate3D(var(--decalage-nav, 0), calc(50% + .9rem), 0);
-  }
-
-  #nav_portfolio::before {
-    transform: scaleX(var(--diff-scale-navs));
-    transition: none;
   }
 
   body:not([data-section-actuelle=""]) #nav_bio,

@@ -97,7 +97,7 @@ export function* openProjet(projet) {
       };
     };
 
-    const toAnimate = ['.projet-details-top', '.projet-details-images', '.projet-details-longue_description', '.projet-details-ligne', '.projet-details', '.projet-details-pourquoi'];
+    const toAnimate = ['.projet-details-top', '.projet-details-images', '.projet-details-longue_description', '.projet-details-ligne', '.projet-details'];
 
     // On anime chaque sous-section, et on signale quand la dernière a terminé
     yield Promise.all(Array.from(toAnimate.entries()).map(([k, e]) => {

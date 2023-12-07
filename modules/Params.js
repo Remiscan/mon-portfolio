@@ -14,16 +14,10 @@ export const Params = {
   hDiff: 0,
   oblique: 2,
 
-  tailleHeader: null,
+  decalageHeader: null,
   decalageIntro: null,
   decalageNav: null,
-  decalageNav1: null,
-  decalageNav2: null,
-  diffScaleNavs: null,
-
-  startArticle: null,
-  startProjet: null,
-  articleOuvert: null,
+  decalageNavLinks: [],
 
   isMotionReduced: () => window.matchMedia('(prefers-reduced-motion: reduce)').matches
 }
@@ -80,46 +74,58 @@ export function recalcOnResize() {
 ////////////////////////////////////////////////////////////////////////////////////
 // On calcule le décalage entre les deux positions possibles des liens de navigation
 function calcul_pos_nav() {
-  const nav1 = document.getElementById('nav_bio');
-  const nav2 = document.getElementById('nav_portfolio');
-
+  const navs = document.querySelectorAll('nav > a');
   const articleOuvert = document.body.getAttribute('data-section-actuelle') !== '';
 
-  if (Params.owidth > Params.breakpointMobile) {
-    Params.decalageNav1 = [0, 0];
-    Params.decalageNav2 = [0, 0];
-  } else {
-    let preDecalage1 = nav1.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage1) || articleOuvert)
-      preDecalage1 = 0;
-    const nav1Pos = nav1.getBoundingClientRect();
-    Params.decalageNav1 = [
-      Math.ceil(Params.owidth / 2 - (nav1Pos.left + nav1Pos.right - 2 * preDecalage1) / 2),
-      'calc(-50% - .9rem)'
-    ];
+  const kMid = (navs.length - 1) / 2;
+  const decalageNavLinks = [...navs].map(nav => [0, 0]);
 
-    let preDecalage2 = nav2.style.getPropertyValue('--decalage-nav').replace('px', '');
-    if (isNaN(preDecalage2) || articleOuvert)
-      preDecalage2 = 0;
-    const nav2Pos = nav2.getBoundingClientRect();
-    Params.decalageNav2 = [
-      Math.floor(Params.owidth / 2 - (nav2Pos.left + nav2Pos.right - 2 * preDecalage2) / 2),
-      'calc(50% + .9rem)'
-    ];
-  }
+  // Écart entre les liens de navigation en colonne,
+  // égal à l'écart entre mon nom et les liens de contact
+  // spacing row + (liens_contact row - liens_contact height - liens_contact padding) / 2
+  // 1.6rem      + (3rem              - 1.7rem               - 2 * .25rem           ) / 2
+  const gap = '2rem';
+  const gapCoeffs = [...navs].map((n, k) => 1 * (k - kMid));
+  const widths = [];
 
-  Params.diffScaleNavs = nav1.offsetWidth / nav2.offsetWidth;
+  // On calcule le décalage horizontal et vertical nécessaire
+  // pour transformer la liste de liens de navigation en colonne
+  navs.forEach((nav, k) => {
+    const pos = nav.getBoundingClientRect();
+    widths[k] = pos.width;
 
-  nav1.style.setProperty('--decalage-nav', Params.decalageNav1[0] + 'px');
-  nav2.style.setProperty('--decalage-nav',  Params.decalageNav2[0] + 'px');
-  nav2.style.setProperty('--diff-scale-navs', Params.diffScaleNavs);
+    if (Params.owidth > Params.breakpointMobile) {
+      decalageNavLinks[k] = [0, 0];
+    } else {
+      let preDecalage = Number(nav.style.getPropertyValue('--decalage-nav-x').replace('px', ''));
+      if (isNaN(preDecalage) || articleOuvert) preDecalage = 0;
+
+      decalageNavLinks[k] = [
+        Math.ceil(Params.owidth / 2 - (pos.left + pos.right) / 2 + preDecalage),
+        `calc(${gapCoeffs[k]} * 100% + ${gapCoeffs[k]} * ${gap})`
+      ];
+
+      nav.style.setProperty('--decalage-nav-x', `${decalageNavLinks[k][0]}px`);
+      nav.style.setProperty('--decalage-nav-y', `${decalageNavLinks[k][1]}`);
+    }
+  });
+
+  // On calcule par combien multiplier l'échelle du fond coloré de chaque
+  // lien de navigation pour qu'ils soient tous alignés en colonne
+  const maxWidth = Math.max(...widths);
+  navs.forEach((nav, k) => {
+    const scale = maxWidth / widths[k];
+    nav.style.setProperty('--scale-x', scale);
+  });
+
+  Params.decalageNavLinks = decalageNavLinks;
 }
 
 
 
 //////////////////////////////////////////////////////////////////////
 // On calcule le décalage entre les deux positions possibles du header
-// - tailleHeader = distance dont le header bouge vers le haut
+// - decalageHeader = distance dont le header bouge vers le haut
 // - decalageIntro = distance dont mon nom + job bougent vers le bas
 // - decalageNav = distance dont les boutons de navigation bougent
 function calcul_taille_header()
@@ -133,14 +139,14 @@ function calcul_taille_header()
     const hauteurHeaderText = 1.2 * mod * mod * (mod * mod * fontsize + fontsize);
     const hauteurHeaderSocials = 1.7 * fontsize + 2 * .25 * fontsize + .5 * fontsize;
     const hauteurHeader = hauteurHeaderText + hauteurHeaderSocials + (2 * 2.4 + 1.2) * fontsize;
-    Params.tailleHeader = Math.ceil(0.5 * oheight - 0.5 * hauteurHeader);
+    Params.decalageHeader = Math.ceil(0.5 * oheight - 0.5 * hauteurHeader);
     Params.decalageIntro = 0;
     Params.decalageNav = 0;
   }
   else
   {
     let oheight = window.innerHeight; // on utilise '100%' au lieu de '100vh' pour tenir compte des barres des navigateurs mobiles
-    Params.tailleHeader = Math.ceil(
+    Params.decalageHeader = Math.ceil(
       (oheight - 3 * fontsize) / 2 // taille de la partie supérieure du header
       - 3.4 * fontsize/*mesInfosHeight*/ - 5 * fontsize // on enlève la taille de mon nom + job + marge en-dessous avec liens de contact
       - 2.4 * fontsize // on ajoute une marge de sécurité au-dessus du nom
@@ -151,7 +157,7 @@ function calcul_taille_header()
     document.querySelector('nav').style.setProperty('--decalage', Params.decalageNav + 'px');
   }
 
-  document.body.style.setProperty('--decalage-header', Params.tailleHeader);
+  document.body.style.setProperty('--decalage-header', Params.decalageHeader);
   document.body.style.setProperty('--decalage-intro', Params.decalageIntro);
   document.body.style.setProperty('--decalage-nav', Params.decalageNav);
 }
