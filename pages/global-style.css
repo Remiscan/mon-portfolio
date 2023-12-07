@@ -205,8 +205,7 @@ main > article {
 
 body[data-section-actuelle=""] #accueil,
 body[data-section-actuelle="bio"] #bio,
-body[data-section-actuelle="portfolio"] #portfolio,
-body[data-section-actuelle="contact"] #contact {
+body[data-section-actuelle="portfolio"] #portfolio {
   display: grid;
   animation: article-appears 150ms var(--easing-decelerate);
   animation-fill-mode: backwards;
@@ -776,10 +775,9 @@ nav>a>h3 {
   backface-visibility: hidden;
 }
 
-body[data-section-actuelle=""] #nav_accueil
+body[data-section-actuelle=""] #nav_accueil,
 body[data-section-actuelle="bio"] #nav_bio,
-body[data-section-actuelle="portfolio"] #nav_portfolio,
-body[data-section-actuelle="contact"] #nav_contact {
+body[data-section-actuelle="portfolio"] #nav_portfolio {
   opacity: 1;
   cursor: auto;
   --underline-scale: 1;
@@ -976,6 +974,18 @@ textarea::selection {
  * Mobile
  */
 
+@media (hover: none) {
+  /* Boutons expansibles */
+
+  .expandable:hover::before {
+    transform: scale(1);
+  }
+
+  .expandable:not(.nav):active::before {
+    transform: scale(1);
+  }
+}
+
 @media screen and (max-width: 620px) {
   nav {
     grid-column: 1 / 2;
@@ -1001,7 +1011,8 @@ textarea::selection {
   }
 
   body[data-section-actuelle=""] nav > a::before {
-    transform: scaleX(var(--scale-x, 1));
+    width: calc(var(--scale-x, 1) * 100%);
+    left: calc(.5 * (1 - var(--scale-x, 1)) * 100%);
     transition: none;
   }
 
@@ -1011,16 +1022,6 @@ textarea::selection {
 
   #nav_contact>.underline {
     bottom: 0;
-  }
-
-  /* Boutons expansibles */
-
-  .expandable:hover::before {
-    transform: scale(1);
-  }
-
-  .expandable:not(.nav):active::before {
-    transform: scale(1);
   }
 
   /* Boutons de navigation */
