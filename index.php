@@ -62,11 +62,14 @@
         $start_color = $c_article_portfolio;
         $titre_page = $translation->get('titre-projet') . $translation->get("projet-$start_projet-titre");
         $start_article = 'portfolio';
+        try {
+          $start_meta_color = $projets[array_search($start_projet, array_map(fn($p) => $p->id, $projets))]->couleur;
+        } catch (\Throwable $e) {}
         break;
     }
   }
   $load_color = Couleur::blend($start_color, $c_topcolor);
-  $start_meta_color = $load_color;
+  $start_meta_color = $start_meta_color ?? $load_color;
 
   //// Donne le titre de la page
   $titre = 'Rémi S., ' . $translation->get('job');

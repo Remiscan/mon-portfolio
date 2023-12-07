@@ -137,9 +137,11 @@ export async function closeProjet() {
   document.querySelector('header').removeAttribute('inert');
 
   window.removeEventListener('keydown', window.cp);
-  changeThemeColor(document.body.style.getPropertyValue('--theme-color'));
   projetContenu.classList.remove('on');
   projetDetailsImages.scrollTo(0, 0);
+
+  const themeColor = document.querySelector(`#nav_${document.body.getAttribute('data-section-actuelle')}`).style.getPropertyValue('--theme-color');
+  changeThemeColor(themeColor);
 
   await animProjet(false, true);
 
