@@ -253,6 +253,8 @@ export function navigationSideEffects(section) {
       placeholderNoMore(false, [maPhoto]);
     }
   }
+
+  document.documentElement.style.overflowY = 'auto'; // ici pour que ce soit exécuté au lancement
 }
 
 
