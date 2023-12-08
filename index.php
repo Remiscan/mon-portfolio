@@ -120,8 +120,8 @@
     <link rel="manifest" href="/mon-portfolio/manifest.json">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" media="print" onload="this.media='all'">
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway%7CRoboto&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway%7CRoboto&display=swap" media="print" onload="this.media='all'">
 
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php versionizeStart(); ?>-->
@@ -164,8 +164,20 @@
     <!-- CSS non-critique (préchargé) -->
     <?php foreach($styles_non_critiques as $article) { ?>
       <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$article?>-style.css"
-            onload="this.onload=null; this.rel='stylesheet'">
+            onload="this.onload=null; this.rel='stylesheet'; this.removeAttribute('as');">
     <?php } ?>
+
+    <style>
+      <?php foreach ($projets as $projet) { ?>
+        body:not([data-projet-actuel="<?=$projet->id?>"]) #projet_<?=$projet->id?> {
+          display: none;
+        }
+
+        body[data-projet-actuel="<?=$projet->id?>"] #projet-preview-<?=$projet->id?> {
+          opacity: 0;
+        }
+      <?php } ?>
+    </style>
 
     <!-- Scripts -->
     <script type="module" src="/mon-portfolio/modules/main.js"></script>
@@ -214,7 +226,7 @@
       </article>
     </main>
 
-    <div id="projet" aria-label="<?=$translation->get('nav-projet')?>" <?=$start_projet ? 'data-current-projet="'.$start_projet.'"' : 'aria-hidden="true" hidden inert'?> style="
+    <div id="projet" <?=$start_projet ? 'data-current-projet="'.$start_projet.'"' : 'aria-hidden="true" hidden inert'?> style="
       <?= $projet_couleur ? '--projet-color: '.$projet_couleur.';' : '' ?>
     ">
       <?php include './pages/projet-page.php'; ?>

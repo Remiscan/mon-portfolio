@@ -12,16 +12,6 @@ foreach($projets as $n => $projet) {
   $idProjet = $projet->id;
   ?>
 
-  <style>
-    body:not([data-projet-actuel="<?=$projet->id?>"]) #projet_<?=$projet->id?> {
-      display: none;
-    }
-
-    body[data-projet-actuel="<?=$projet->id?>"] #projet-preview-<?=$projet->id?> {
-      opacity: 0;
-    }
-  </style>
-
   <article id="projet_<?=$idProjet?>" <?=$start_projet === $idProjet ? '' : 'aria-hidden="true" hidden'?> style="
     --projet-color: <?=$projet->couleur->hsl()?>;
   ">
@@ -35,8 +25,9 @@ foreach($projets as $n => $projet) {
         <div class="projet-details-icone">
           <?php
           $iconeProjet = "/" . ($projet->id === "colori" ? "colori/demo" : $projet->id) . "/icons/icon.svg";
+          $altIcone = str_replace('{p}', $translation->get("projet-$idProjet-titre"), $translation->get('projet-preview-icon-alt'));
           ?>
-          <img src="<?=$iconeProjet?>">
+          <img src="<?=$iconeProjet?>" alt="<?=$altIcone?>" loading="lazy">
         </div>
         <div class="projet-details-intro">
           <h1 class="h3 projet-details-titre"><?=$translation->get("projet-$idProjet-titre")?></h1>
@@ -44,7 +35,7 @@ foreach($projets as $n => $projet) {
         </div>
         <?php if ($projet->lien) { ?>
         <a href="<?=$projet->lien?>" target="_blank" rel="noopener"
-           class="projet-details-lien expandable" role="link"
+           class="projet-details-lien expandable"
            aria-label="<?=$translation->get('projet-bouton-visiter')?>">
           <span><?=$translation->get('projet-bouton-visiter')?></span>
         </a>
