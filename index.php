@@ -118,6 +118,7 @@
     <link rel="icon" type="image/svg" href="/mon-portfolio/icons/icon.svg">
     <link rel="apple-touch-icon" href="/mon-portfolio/icons/apple-touch-icon.png">
     <link rel="manifest" href="/mon-portfolio/manifest.json">
+    <link rel="canonical" href="https://remiscan.fr">
 
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway%7CRoboto&display=swap">
