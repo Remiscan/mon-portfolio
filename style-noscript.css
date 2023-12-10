@@ -6,6 +6,10 @@ html:has(body:not([data-projet-actuel=""])) {
   overflow-y: hidden;
 }
 
+#nav_accueil {
+  animation: none;
+}
+
 #loading,
 #liens_contact>#nav_contact {
   display: none;
@@ -23,7 +27,6 @@ html:has(body:not([data-projet-actuel=""])) {
   background-image: url(/mon-portfolio/images/moi.webp);
 }
 
-
 #photosecret {
   display: none;
 }
@@ -35,20 +38,6 @@ html:has(body:not([data-projet-actuel=""])) {
 }
 
 @media screen and (max-width: 620px) {
-  body[data-section-actuelle=""] nav {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    place-self: center;
-    top: 0;
-    gap: 2.4rem;
-  }
-
-  body[data-section-actuelle=""] :is(#nav_bio, #nav_portfolio) {
-    transform: none;
-  }
-
   #photo {
     --angle: 0px;
   }

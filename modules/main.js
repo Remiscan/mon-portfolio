@@ -17,6 +17,8 @@ if (projetActuel !== '') {
   history.replaceState({ onav: `nav_${sectionActuelle}` }, '', `/${sectionActuelle}${location.search}`);
 }
 
+if (!document.startViewTransition) document.documentElement.classList.add('no-view-transitions');
+
 recalcOnResize();
-setTimeout(() => document.getElementById('loading')?.remove(), 100); // Supprime l'écran de chargement du DOM
 navigationSideEffects(sectionActuelle);
+setTimeout(() => document.getElementById('loading')?.remove(), 150); // Supprime l'écran de chargement du DOM

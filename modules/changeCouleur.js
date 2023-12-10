@@ -15,32 +15,34 @@ export async function changeCouleur(element) {
   let scaleY = 0;
   let angle = 0;
   let elPos = { left: posX, top: posY, right: posX + 1, bottom: posY + 1 };
-  const startScaleYAccueil = (Params.owidth > Params.breakpointMobile)
-    ? (Params.oheight - 2 * Params.decalageHeader) / Params.oheight
-    : 0;
+  const isPC = Params.owidth > Params.breakpointMobile;
   
-  let isAccueil = false;
+  let isAccueil = element && element.id === 'nav_accueil';
   couleurEnCours = true;
 
   if (element) {
     couleur = element.style.getPropertyValue('--article-color') || getComputedStyle(element).getPropertyValue('--article-color');
     themeCouleur = element.style.getPropertyValue('--theme-color') || getComputedStyle(element).getPropertyValue('--theme-color');
 
-    if (element.id === 'nav_accueil') isAccueil = true;
+    if (isAccueil) {
+      isAccueil = true;
+      scaleX = 1;
+      scaleY = isPC ? document.querySelector('header > .background').offsetHeight / Params.oheight : 0;
+    } else {
+      // J'essaye de placer le Fond avec la même taille et position que l'élément sur lequel on a cliqué
+      const elRect = element.getBoundingClientRect();
+      const rotation = element.style.transform.match(/rotate\((.+)\)/);
+      angle = (rotation != null) ? rotation[1] : 0;
 
-    // J'essaye de placer le Fond avec la même taille et position que l'élément sur lequel on a cliqué
-    const elRect = element.getBoundingClientRect();
-    const rotation = element.style.transform.match(/rotate\((.+)\)/);
-    angle = (rotation != null) ? rotation[1] : 0;
+      if (elRect.left > 0 || elRect.top > 0 || isAccueil) {
+        elPos = elRect;
+      }
 
-    if (elRect.left > 0 || elRect.top > 0 || isAccueil) {
-      elPos = elRect;
+      const elWidth = elPos.right - elPos.left;
+      const elHeight = elPos.bottom - elPos.top;
+      scaleX = elWidth / Params.owidth;
+      scaleY = elHeight / Params.oheight;
     }
-
-    const elWidth = elPos.right - elPos.left;
-    const elHeight = elPos.bottom - elPos.top;
-    scaleX = isAccueil ? 1 : elWidth / Params.owidth;
-    scaleY = isAccueil ? startScaleYAccueil : elHeight / Params.oheight;
   }
 
   // On choisit une couleur aléatoire si aucun élément n'a été passé en argument
@@ -55,7 +57,7 @@ export async function changeCouleur(element) {
   ];
 
   const isMotionReduced = Params.isMotionReduced();
-  const isAccueilPCAnimation = isAccueil && startScaleYAccueil > 0;
+  const isAccueilPCAnimation = isAccueil && isPC;
 
   const Fond = document.getElementById('couleur');
   Fond.style.backgroundColor = couleur;

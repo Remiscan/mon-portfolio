@@ -70,10 +70,6 @@ export function* naviguer(pathname) {
 
   // On désactive le scroll pendant la navigation
   document.documentElement.style.overflowY = 'hidden';
-  
-  // On masque l'ancienne section et affiche la nouvelle
-  document.body.classList.remove('start');
-  document.body.setAttribute('data-section-actuelle', section);
 
   // On met à jour le titre de la page
   document.title = getTitrePage(section);
@@ -107,69 +103,10 @@ export function* naviguer(pathname) {
     currentScroll = 0;
   }
 
-  if (needAnimations) {
-    // Paramètres des animations
-    const isMotionReduced = Params.isMotionReduced();
-    const options = {
-      easing: Params.easingStandard,
-      duration: isMotionReduced ? 0 : 300,
-      fill: 'backwards'
-    };
-
-    const animations = [];
-
-    { // Déplacement du header
-      const keyframes = [
-        { transform: `translate3D(0, ${animationSign}${Params.decalageHeader}px, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const element = document.querySelector('header');
-      const anim = element.animate(keyframes, options);
-      animations.push(anim);
-    }
-
-    { // Compression apparente du fond du header
-      const headerBgMove = Params.owidth > Params.breakpointMobile ? Params.decalageHeader : 0;
-      const keyframes = [
-        { transform: `translate3D(0, ${animationSign}${headerBgMove}px, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const element = document.querySelector('header .background');
-      const anim = element.animate(keyframes, options);
-      animations.push(anim);
-    }
-
-    { // Déplacement de mon nom
-      const keyframes = [
-        { transform: `translate3D(0, ${animationOppositeSign}${Params.decalageIntro}px, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const element = document.getElementById('intro');
-      const anim = element.animate(keyframes, options);
-      animations.push(anim);
-    }
-
-    { // Déplacement des liens de nav
-      const keyframes = [
-        { transform: `translate3D(0, ${animationSign}${Params.decalageNav}px, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const element = document.querySelector('nav');
-      const anim = element.animate(keyframes, options);
-      animations.push(anim);
-    }
-
-    // Horizontalisation / verticalisation des liens de nav sur mobile
-    const navs = document.querySelectorAll('nav > a');
-    navs.forEach((nav, k) => {
-      const keyframes = [
-        { transform: `translate3D(${Params.decalageNavLinks[k][0]}px, ${Params.decalageNavLinks[k][1]}, 0)` },
-        { transform: 'translate3D(0, 0, 0)' },
-      ];
-      const anim = nav.animate([keyframes[k0], keyframes[k1]], options);
-      animations.push(anim);
-    });
-  }
+  // On masque l'ancienne section et affiche la nouvelle
+  document.body.classList.remove('start');
+  if (!document.startViewTransition || !needAnimations) document.body.setAttribute('data-section-actuelle', section);
+  else document.startViewTransition(() => document.body.setAttribute('data-section-actuelle', section));
 
   // 🔼🔼🔼 ----------- Fin des animations ----------- 🔼🔼🔼
 
