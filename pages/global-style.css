@@ -811,10 +811,18 @@ nav > a:hover, nav > a:active {
 }
 
 .expandable:hover::before {
-  transform: scale(1.1, 1.2);
+  transform: scale(1.2, 1.2);
 }
 
 .expandable:not(.nav):active::before {
+  transform: scale(1.1, 1.1);
+}
+
+nav .expandable:hover::before {
+  transform: scale(1.1, 1.2);
+}
+
+nav .expandable:not(.nav):active::before {
   transform: scale(1.05, 1.1);
 }
 
