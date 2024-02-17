@@ -3,5 +3,5 @@
 .gitignore
 .vscode
 .rsyncignore
-.deploy
+deploy
 projets/mon-portfolio/originales
