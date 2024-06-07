@@ -127,23 +127,6 @@
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php versionizeStart(); ?>-->
 
-    <!-- Import map et polyfills -->
-    <script defer src="../_common/polyfills/inert.min.js"></script>
-    <script defer src="../_common/polyfills/adoptedStyleSheets.min.js"></script>
-    <script>window.esmsInitOptions = { polyfillEnable: ['css-modules', 'json-modules'] }</script>
-    <script defer src="../_common/polyfills/es-module-shims.js"></script>
-    <script type="importmap"><?php include __DIR__.'/import-map.json'; ?></script>
-
-    <!-- Préchargement des modules -->
-    <link rel="modulepreload" href="/_common/js/cancelable-async/mod.js">
-    <?php
-    $mods = preg_filter('/(.+)\.js$/', '$1', scandir(__DIR__.'/modules'));
-    foreach($mods as $mod) {
-      ?>
-      <link rel="modulepreload" href="/mon-portfolio/modules/<?=$mod?>.js">
-      <?php
-    } ?>
-
     <?php if ($css_critique_methode == 'push') { ?>
 
       <!-- CSS critique (pushed) -->
@@ -162,12 +145,6 @@
 
     <?php } ?>
 
-    <!-- CSS non-critique (préchargé) -->
-    <?php foreach($styles_non_critiques as $article) { ?>
-      <link rel="preload" as="style" href="/mon-portfolio/pages/<?=$article?>-style.css"
-            onload="this.onload=null; this.rel='stylesheet'; this.removeAttribute('as');">
-    <?php } ?>
-
     <style>
       <?php foreach ($projets as $projet) { ?>
         body:not([data-projet-actuel="<?=$projet->id?>"]) #projet_<?=$projet->id?> {
@@ -180,15 +157,7 @@
       <?php } ?>
     </style>
 
-    <!-- Scripts -->
-    <script type="module" src="/mon-portfolio/modules/main.js"></script>
-
-    <noscript>
-      <?php foreach($styles_non_critiques as $article) { ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$article?>-style.css">
-      <?php } ?>
-      <link rel="stylesheet" href="/mon-portfolio/style-noscript.css">
-    </noscript>
+    <link rel="stylesheet" href="/mon-portfolio/style-noscript.css">
 
     <!--<?php versionizeEnd(__DIR__); ?>-->
   </head>
