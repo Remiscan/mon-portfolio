@@ -194,6 +194,12 @@
           ::view-transition-old(couleur-vers-<?=$section?>) {
             animation: none;
           }
+
+          <?php if ($start_article === '') { ?>::after
+            ::view-transition-old(couleur-vers-<?=$section?>) {
+              display: none;
+            }
+          <?php } ?>
           
           ::view-transition-new(couleur-vers-<?=$section?>) {
             display: none;
