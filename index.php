@@ -126,6 +126,17 @@
     <link rel="preload" as="style" href="https://fonts.googleapis.com/css?family=Raleway%7CRoboto&display=swap">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway%7CRoboto&display=swap" media="print" onload="this.media='all'">
 
+    <script type="speculationrules">
+    {
+      "prerender": [{
+        "where": {
+          "href_matches": "/*"
+        },
+        "eagerness": "moderate"
+      }]
+    }
+    </script>
+
     <!-- ▼ Fichiers cache-busted grâce à PHP -->
     <!--<?php versionizeStart(); ?>-->
 
@@ -133,7 +144,7 @@
 
       <!-- CSS critique (pushed) -->
       <?php foreach($styles_critiques as $article) { ?>
-        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$article?>-style.css">
+        <link rel="stylesheet" href="/mon-portfolio/pages/<?=$article?>-style.css" blocking="render">
       <?php } ?>
 
     <?php } else { ?>
@@ -156,10 +167,73 @@
         body[data-projet-actuel="<?=$projet->id?>"] #projet-preview-<?=$projet->id?> {
           opacity: 0;
         }
+      <?php }
+      
+      $viewTransitionTypes = [];
+      if ($isAccueil) $viewTransitionTypes[] = 'vers-accueil';
+      else {
+        $viewTransitionTypes[] = 'vers-page';
+      }
+
+      $sections = ['bio', 'portfolio'];
+      ?>
+
+      @view-transition {
+        navigation: auto;
+        types: <?=join(', ', $viewTransitionTypes)?>;
+      }
+
+      <?php foreach ($sections as $section) {
+        if ($section !== $start_article) { ?>
+          ::view-transition-group(couleur-vers-<?=$section?>) {
+            z-index: 1;
+            animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
+            animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
+          }
+
+          ::view-transition-old(couleur-vers-<?=$section?>) {
+            animation: none;
+          }
+          
+          ::view-transition-new(couleur-vers-<?=$section?>) {
+            display: none;
+          }
+
+          ::view-transition-old(nav-link-<?=$section?>-underline) {
+            animation: horizontal-shrink 150ms var(--easing-decelerate);
+            animation-fill-mode: both;
+          }
+        <?php } else { ?>
+          ::view-transition-group(couleur-vers-<?=$section?>) {
+            z-index: 2;
+            background: green;
+          }
+
+          ::view-transition-old(couleur-vers-<?=$section?>) {
+            animation: none;
+          }
+
+          ::view-transition-new(couleur-vers-<?=$section?>) {
+            animation: none;
+            width: 100%;
+            height: 100%;
+          }
+
+          ::view-transition-new(nav-link-<?=$section?>-underline) {
+            animation: horizontal-grow 150ms var(--easing-decelerate);
+            animation-delay: 400ms;
+            animation-fill-mode: both;
+          }
+        <?php } ?>
+
+        ::view-transition-group(nav-link-<?=$section?>-underline) {
+          z-index: 6;
+        }
       <?php } ?>
     </style>
 
-    <link rel="stylesheet" href="/mon-portfolio/style-noscript.css">
+    <link rel="stylesheet" href="/mon-portfolio/style-noscript.css" blocking="render">
+    <link rel="expect" blocking="render" href="#hauteurpage">
 
     <!--<?php versionizeEnd(__DIR__); ?>-->
   </head>
@@ -178,8 +252,9 @@
     <?php include __DIR__.'/images/social.svg' ?>
 
     <!-- ÉCRANS DE TRANSITION -->
-    <div id="loading" aria-hidden="true"></div>
-    <div id="couleur" aria-hidden="true"></div>
+    <div id="couleur" aria-hidden="true" style="
+      view-transition-name: couleur-vers-<?=$start_article?>;
+    "></div>
 
     <!-- CONTENU DU SITE -->
     <header <?=$start_projet ? 'inert' : ''?>>
@@ -209,8 +284,8 @@
         <?php include dirname(__DIR__, 1) . '/_common/components/remiscan-logo/logo.svg'; ?>
       </div>
       <div class="groupe-langages">
-        <a href="?lang=fr" class="bouton-langage h6" data-lang="fr">Français</a>
-        <a href="?lang=en" class="bouton-langage h6" data-lang="en">English</a>
+        <a href="?lang=fr" class="bouton-langage h6" style="view-transition-name: bouton-lang-fr;" data-lang="fr">Français</a>
+        <a href="?lang=en" class="bouton-langage h6" style="view-transition-name: bouton-lang-en;" data-lang="en">English</a>
       </div>
     </footer>
 

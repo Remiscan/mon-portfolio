@@ -152,6 +152,8 @@ body {
   top: 0;
   left: 0;
   transform-origin: top left;
+  background-color: inherit;
+  view-transition-class: couleur;
 }
 
 
@@ -172,6 +174,7 @@ main {
   pointer-events: none;
   width: 100vw;
   max-width: var(--max-width);
+  view-transition-name: main;
 }
 
 @media screen and (max-width: 620px) {
@@ -207,13 +210,13 @@ body[data-section-actuelle=""] #accueil,
 body[data-section-actuelle="bio"] #bio,
 body[data-section-actuelle="portfolio"] #portfolio {
   display: grid;
-  animation: article-appears 150ms var(--easing-decelerate);
+  /*animation: article-appears 150ms var(--easing-decelerate);
   animation-fill-mode: backwards;
-  animation-delay: 400ms;
+  animation-delay: 400ms;*/
 }
 
 body.start main > article {
-  animation: none !important;
+  /*animation: none !important;*/
 }
 
 section {
@@ -297,15 +300,18 @@ header {
   display: grid;
   grid-template-columns: [bg-start intro-start] 1fr [intro-end bg-end navlinks-start] 1fr [navlinks-end];
   grid-template-rows: [bg-start] var(--intro-margin, 1fr) [intro-start navlinks-start] var(--hauteur-header) [navlinks-end intro-end] var(--intro-margin, 1fr) [bg-end] var(--article-margin, 0fr);
-  backface-visibility: hidden;
-  transition-property: grid-template-rows;
-  transition-duration: .3s;
-  transition-timing-function: var(--easing-standard);
+  background-color: inherit;
 }
 
 body:not([data-section-actuelle=""]) header {
   --intro-margin: 0fr;
   --article-margin: 1fr;
+}
+
+header > .background-color {
+  background-color: inherit;
+  grid-row: bg-start / bg-end;
+  grid-column: 1 / -1;
 }
 
 header > .background {
@@ -314,6 +320,7 @@ header > .background {
   backface-visibility: hidden;
   transform-origin: top center;
   position: relative;
+  view-transition-name: header-background;
 }
 
 
@@ -330,6 +337,7 @@ header > .background {
   gap: 1.2rem;
   padding-block: calc(2.4rem - 1.2rem); /* <main> padding-top - #intro gap */
   grid-template-columns: 100%;
+  view-transition-name: header-intro;
 }
 
 .moi {
@@ -480,8 +488,9 @@ footer {
   height: var(--hauteur-footer);
   box-sizing: border-box;
   padding-inline: 2.4rem;
-  animation: appear .2s var(--easing-decelerate);
+  /*animation: appear .2s var(--easing-decelerate);*/
   --easing-enthusiastic: cubic-bezier(.4, 0, .1, 1.6);
+  view-transition-name: footer;
 }
 
 .groupe-langages {
@@ -512,6 +521,7 @@ body:not([data-section-actuelle=""]) .groupe-langages {
   text-decoration-skip-ink: auto;
   position: relative;
   justify-self: start;
+  view-transition-class: bouton-langage;
 }
 
 .bouton-langage:first-child {
@@ -721,6 +731,7 @@ nav {
   align-items: center;
   grid-area: navlinks;
   width: 100%;
+  view-transition-name: nav;
 }
 
 @supports not (clip-path: circle(1%)) {
@@ -742,6 +753,8 @@ nav>a {
   opacity: .85;
   cursor: pointer;
   flex-shrink: 0;
+  view-transition-class: nav-link;
+  view-transition-name: var(--unique-name);
 }
 
 nav>a>h3 {
@@ -751,24 +764,20 @@ nav>a>h3 {
 .underline {
   display: inline-block;
   content: "";
-  width: calc(100% - 2rem);
+  width: 0px;
   height: 2px;
   background: white;
-  transform: scaleX(var(--underline-scale, 0));
-  transition: transform .15s ease-out;
   position: absolute;
-  left: 1rem;
+  left: 50%;
   bottom: 0;
   z-index: 0;
   backface-visibility: hidden;
 }
 
-body[data-section-actuelle=""] #nav_accueil,
-body[data-section-actuelle="bio"] #nav_bio,
-body[data-section-actuelle="portfolio"] #nav_portfolio {
-  opacity: 1;
+[aria-current="page"] .underline {
   cursor: auto;
-  --underline-scale: 1;
+  width: calc(100% - 2rem);
+  left: 1rem;
 }
 
 body[data-section-actuelle=""] nav > a {
@@ -794,36 +803,44 @@ nav > a:hover, nav > a:active {
 .expandable {
   position: relative;
   --couleur: var(--article-color);
-}
 
-.expandable::before {
-  content: '';
-  display: block;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: var(--couleur);
-  transform-origin: center center;
-  transform: scale(1);
-  transition: transform .12s ease-out;
-}
+  & > .background-color,
+  &:not(:has(> .background-color))::before {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: var(--couleur);
+    transform-origin: center center;
+    transform: scale(1);
+    transition: transform .12s ease-out;
+    view-transition-class: couleur;
+  }
 
-.expandable:hover::before {
-  transform: scale(1.2, 1.2);
-}
+  &:hover {
+    & > .background-color,
+    &:not(:has(> .background-color))::before {
+      transform: scale(1.2, 1.2);
+    }
+  }
 
-.expandable:not(.nav):active::before {
-  transform: scale(1.1, 1.1);
-}
+  &:not(.nav):active {
+    & > .background-color,
+    &:not(:has(> .background-color))::before {
+      transform: scale(1.1, 1.1);
+    }
+  }
 
-nav .expandable:hover::before {
-  transform: scale(1.1, 1.2);
-}
-
-nav .expandable:not(.nav):active::before {
-  transform: scale(1.05, 1.1);
+  nav &:hover,
+  nav &:not(.nav):active {
+    & > .background-color,
+    &:not(:has(> .background-color))::before {
+      transform: scale(1.05, 1.1);
+    }
+  }
 }
 
 
@@ -843,9 +860,9 @@ nav .expandable:not(.nav):active::before {
   cursor: pointer;
   position: relative;
   z-index: 5;
-  animation: appear .15s linear;
+  /*animation: appear .15s linear;
   animation-fill-mode: backwards;
-  animation-delay: .3s;
+  animation-delay: .3s;*/
 }
 
 body[data-section-actuelle=""] #nav_accueil {
@@ -898,11 +915,6 @@ body[data-section-actuelle=""] #nav_accueil {
   }
 }
 
-::view-transition-old(root),
-::view-transition-new(root) {
-  animation: none;
-}
-
 @media screen and (max-width: 620px) {
   :root {
     --easing-navlinks: var(--easing-standard);
@@ -940,7 +952,7 @@ body[data-section-actuelle=""] #nav_accueil {
     view-transition-name: nav_portfolio;
   }
 
-  @keyframes view-transition-new-visible {
+  /*@keyframes view-transition-new-visible {
     from { opacity: 1; }
   }
 
@@ -953,7 +965,7 @@ body[data-section-actuelle=""] #nav_accueil {
   ::view-transition-new(nav_bio),
   ::view-transition-new(nav_portfolio) {
     animation-name: view-transition-new-visible;
-  }
+  }*/
 
   nav > a {
     padding: .4rem 1rem;
@@ -1040,6 +1052,109 @@ body[data-section-actuelle=""] #nav_accueil {
 
 
 
+/* VIEW TRANSITIONS */
+
+@property --couleur-unique-name {
+  syntax: '*';
+  inherits: false;
+}
+
+@keyframes horizontal-shrink {
+  to { transform: scaleX(0); }
+}
+
+@keyframes horizontal-grow {
+  from { transform: scaleX(0); }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
+:active-view-transition-type(vers-accueil) {
+  &::view-transition-group(*) {
+    animation-timing-function: var(--easing-standard);
+    animation-duration: 300ms;
+  }
+
+  &::view-transition-group(.couleur) {
+    display: none;
+  }
+
+  &::view-transition-group(main) {
+    display: none;
+  }
+}
+
+:active-view-transition-type(vers-page) {
+  &::view-transition-group(*) {
+    animation-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
+    animation-duration: 400ms;
+  }
+}
+
+::view-transition-old(couleur-vers-) {
+  animation: none;
+}
+
+::view-transition-group(header-background) {
+  z-index: 3;
+}
+
+::view-transition-old(header-background),
+::view-transition-new(header-background) {
+  height: 100%;
+}
+
+::view-transition-group(header-intro) {
+  z-index: 4;
+}
+
+::view-transition-group(nav),
+::view-transition-group(.nav-link) {
+  z-index: 5;
+}
+
+::view-transition-old(.nav-link) {
+  display: none;
+}
+
+::view-transition-new(.nav-link) {
+  animation: none;
+}
+
+&::view-transition-group(main) {
+  animation: none;
+  z-index: 7;
+}
+
+&::view-transition-old(main) {
+  display: none;
+}
+
+&::view-transition-new(main) {
+  animation: article-appears 150ms var(--easing-decelerate);
+  animation-delay: 400ms;
+  animation-fill-mode: backwards;
+}
+
+/*::view-transition-group(footer) {
+  animation: none;
+  z-index: 7;
+}
+
+::view-transition-old(footer) {
+  display: none;
+}*/
+
+::view-transition-group(.bouton-langage) {
+  z-index: 8;
+}
+
+
+
+
 
 /*!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!!!! ACCESSIBILITÉ !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -1073,18 +1188,7 @@ textarea::selection {
     animation: none !important;
     transition: none !important;
   }
-}
 
-
-
-
-/* VIEW TRANSITIONS */
-
-@view-transition {
-  navigation: auto;
-}
-
-@media (prefers-reduced-motion) {
   @view-transition {
     navigation: none;
   }

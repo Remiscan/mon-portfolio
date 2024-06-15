@@ -1,3 +1,4 @@
+<div class="background-color" aria-hidden="true"></div>
 <div class="background" aria-hidden="true"></div>
 
 <section id="intro">
@@ -67,22 +68,28 @@
 
 <nav>
   <a id="nav_bio" href="/bio<?=$searchParams?>" aria-label="<?=$translation->get('nav-bio')?>"
+     <?=($start_article === 'bio') ? 'aria-current="page"' : ''?>
      class="expandable nav"
      style="
       --article-color: <?=$c_article_parcours->hsl()?>;
       --theme-color: <?=Couleur::blend($c_article_parcours, $c_topcolor)->rgb()?>;
+      --unique-name: nav-link-bio;
      ">
+    <div class="background-color" style="<?=($start_article !== 'bio') ? 'view-transition-name: couleur-vers-bio;' : ''?>"></div>
     <h3><?=$translation->get('nav-bio')?></h3>
-    <div class="underline"></div>
+    <div class="underline" style="view-transition-name: nav-link-bio-underline;"></div>
   </a>
 
   <a id="nav_portfolio" href="/portfolio<?=$searchParams?>" aria-label="<?=$translation->get('nav-portfolio')?>"
+     <?=($start_article === 'portfolio') ? 'aria-current="page"' : ''?>
      class="expandable nav"
      style="
       --article-color: <?=$c_article_portfolio->hsl()?>;
       --theme-color: <?=Couleur::blend($c_article_portfolio, $c_topcolor)->rgb()?>;
+      --unique-name: nav-link-portfolio;
      ">
+    <div class="background-color" style="<?=($start_article !== 'portfolio') ? 'view-transition-name: couleur-vers-portfolio;' : ''?>"></div>
     <h3><?=$translation->get('nav-portfolio')?></h3>
-    <div class="underline"></div>
+    <div class="underline" style="view-transition-name: nav-link-portfolio-underline;"></div>
   </a>
 </nav>
