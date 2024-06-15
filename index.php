@@ -96,6 +96,8 @@
     }
     header($linkHeader);
   }
+
+  $searchParams = isset($_GET['lang']) ? '?lang=' . $_GET['lang'] : '';
 ?>
 <!doctype html>
 <html data-version="<?=version([__DIR__])?>" lang="<?=$lang?>">

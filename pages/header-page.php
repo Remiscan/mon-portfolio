@@ -2,7 +2,7 @@
 
 <section id="intro">
 
-  <a id="nav_accueil" href="/" aria-label="<?=$translation->get('nav-accueil')?>"
+  <a id="nav_accueil" href="/<?=$searchParams?>" aria-label="<?=$translation->get('nav-accueil')?>"
      style="
       --article-color: <?=$c_default_bgcolor->hsl()?>;
       --theme-color: <?=Couleur::blend($c_default_bgcolor, $c_topcolor)->rgb()?>;
@@ -66,7 +66,7 @@
 </section>
 
 <nav>
-  <a id="nav_bio" href="/bio" aria-label="<?=$translation->get('nav-bio')?>"
+  <a id="nav_bio" href="/bio<?=$searchParams?>" aria-label="<?=$translation->get('nav-bio')?>"
      class="expandable nav"
      style="
       --article-color: <?=$c_article_parcours->hsl()?>;
@@ -76,7 +76,7 @@
     <div class="underline"></div>
   </a>
 
-  <a id="nav_portfolio" href="/portfolio" aria-label="<?=$translation->get('nav-portfolio')?>"
+  <a id="nav_portfolio" href="/portfolio<?=$searchParams?>" aria-label="<?=$translation->get('nav-portfolio')?>"
      class="expandable nav"
      style="
       --article-color: <?=$c_article_portfolio->hsl()?>;
