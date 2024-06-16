@@ -176,6 +176,10 @@
       }
 
       $sections = ['bio', 'portfolio'];
+
+      // Utile pour détecter de quelle section on vient
+      $section_precedente = $_COOKIE['section-actuelle'] ?? '';
+      setcookie('section-actuelle', $start_article);
       ?>
 
       @view-transition {
@@ -195,7 +199,7 @@
             animation: none;
           }
 
-          <?php if ($start_article === '') { ?>::after
+          <?php if ($start_article === '' || $section_precedente === '') { ?>
             ::view-transition-old(couleur-vers-<?=$section?>) {
               display: none;
             }
