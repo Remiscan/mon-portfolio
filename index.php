@@ -178,7 +178,7 @@
       $sections = ['bio', 'portfolio'];
 
       // Utile pour détecter de quelle section on vient
-      $section_precedente = $_COOKIE['section-actuelle'] ?? '';
+      $section_precedente = $_COOKIE['section-actuelle'] ?? null;
       setcookie('section-actuelle', $start_article);
       ?>
 
@@ -200,7 +200,7 @@
             animation: none;
           }
 
-          <?php if ($start_article === '' || $section_precedente === '') { ?>
+          <?php if ($start_article === '' || !$section_precedente) { ?>
             ::view-transition-old(couleur-vers-<?=$section?>) {
               display: none;
             }
@@ -208,6 +208,10 @@
           
           ::view-transition-new(couleur-vers-<?=$section?>) {
             display: none;
+          }
+
+          ::view-transition-new(nav-link-<?=$section?>-titre) {
+            opacity: .85;
           }
 
           ::view-transition-old(nav-link-<?=$section?>-underline) {
@@ -241,6 +245,23 @@
           z-index: 6;
         }
       <?php } ?>
+
+      <?php switch ($start_article) {
+        case 'portfolio':
+          for ($k = 10; $k > 0; $k--) {
+            ?>
+              @container (width <= calc(<?=$k * 24?>rem + <?=$k - 1?> * 1.2rem)) {
+                .projet-conteneur {
+                  --columns: <?=$k - 1?>;
+                }
+              }
+            <?php
+          }
+          ?>
+
+          <?php
+          break;
+      } ?>
     </style>
 
     <link rel="stylesheet" href="/mon-portfolio/style-noscript.css" blocking="render">

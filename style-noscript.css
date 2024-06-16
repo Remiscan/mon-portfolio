@@ -15,13 +15,13 @@ html:has(body:not([data-projet-actuel=""])) {
   display: none;
 }
 
-.competence-background {
+/*.competence-background {
   transform: none;
 }
 
 .competence-texte {
   opacity: 1;
-}
+}*/
 
 #photo {
   background-image: url(/mon-portfolio/images/moi.webp);
@@ -31,11 +31,11 @@ html:has(body:not([data-projet-actuel=""])) {
   display: none;
 }
 
-.projet-actual-image {
+/*.projet-actual-image {
   background-position: center center;
   background-size: cover;
   background-image: var(--image);
-}
+}*/
 
 @media screen and (max-width: 620px) {
   #photo {

@@ -348,6 +348,7 @@ header > .background {
   grid-template-columns: 1rem 1fr 1rem;
   grid-template-rows: 1fr;
   position: relative;
+  view-transition-name: header-moi;
 }
 
 .vraiment-moi {
@@ -377,6 +378,7 @@ header > .background {
   justify-content: center;
   align-items: flex-end;
   margin-bottom: -.5rem; /* - #liens_contact>a margin-bottom */
+  view-transition-name: liens-contact;
 }
 
 #liens_contact>h3 {
@@ -758,8 +760,13 @@ nav>a {
   view-transition-name: var(--unique-name);
 }
 
+nav > a[aria-current="page"] {
+  opacity: 1;
+}
+
 nav>a>h3 {
   z-index: 1;
+  view-transition-class: nav-link-titre;
 }
 
 .underline {
@@ -775,7 +782,7 @@ nav>a>h3 {
   backface-visibility: hidden;
 }
 
-[aria-current="page"] .underline {
+nav > a[aria-current="page"] .underline {
   cursor: auto;
   width: calc(100% - 2rem);
   left: 1rem;
@@ -1060,16 +1067,21 @@ body[data-section-actuelle=""] #nav_accueil {
   inherits: false;
 }
 
+:root {
+  --view-transition-duration: 400ms;
+  --view-transition-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
+  --view-transition-section-translation-duration: 150ms;
+}
+
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;
 }
 
 :active-view-transition-type(vers-accueil) {
-  &::view-transition-group(*) {
-    animation-timing-function: var(--easing-standard);
-    animation-duration: 300ms;
-  }
+  --view-transition-duration: 300ms;
+  --view-transition-timing-function: var(--easing-standard);
+  --view-transition-section-translation-duration: 0ms;
 
   &::view-transition-group(couleur-vers-) {
     display: none;
@@ -1095,14 +1107,18 @@ body[data-section-actuelle=""] #nav_accueil {
 }
 
 :active-view-transition-type(vers-page) {
-  &::view-transition-group(*) {
-    animation-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
-    animation-duration: 400ms;
-  }
+  --view-transition-duration: 400ms;
+  --view-transition-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
+  --view-transition-section-translation-duration: 150ms;
 
   &::view-transition-group(header-background-color) {
     display: none;
   }
+}
+
+&::view-transition-group(*) {
+  animation-timing-function: var(--view-transition-timing-function);
+  animation-duration: var(--view-transition-duration);
 }
 
 ::view-transition-old(couleur-vers-) {
@@ -1118,6 +1134,8 @@ body[data-section-actuelle=""] #nav_accueil {
   height: 100%;
 }
 
+::view-transition-group(header-moi),
+::view-transition-group(liens-contact),
 ::view-transition-group(header-intro) {
   z-index: 4;
 }
@@ -1135,6 +1153,18 @@ body[data-section-actuelle=""] #nav_accueil {
   animation: none;
 }
 
+::view-transition-group(.nav-link-titre) {
+  z-index: 5;
+}
+
+::view-transition-old(.nav-link-titre) {
+  display: none;
+}
+
+::view-transition-new(.nav-link-titre) {
+  animation: none;
+}
+
 &::view-transition-group(main) {
   animation: none;
   z-index: 7;
@@ -1145,8 +1175,8 @@ body[data-section-actuelle=""] #nav_accueil {
 }
 
 &::view-transition-new(main) {
-  animation: article-appears 150ms var(--easing-decelerate);
-  animation-delay: 400ms;
+  animation: article-appears var(--view-transition-section-translation-duration) var(--easing-decelerate);
+  animation-delay: var(--view-transition-duration);
   animation-fill-mode: backwards;
 }
 

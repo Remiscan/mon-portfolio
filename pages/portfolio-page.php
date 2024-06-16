@@ -35,8 +35,10 @@
         <div class="projet-conteneur-enfant">
           <div class="projet-image">
             <div class="projet-actual-image"
-                 data-image="<?='/mon-portfolio/' . $imageProjet?>"
-                 style="--n: <?=$n?>; --image: url('<?='/mon-portfolio/' . $imageProjet?>');">
+                 style="--n: <?=$n?>;">
+                <img class="actual-image"
+                  src="<?='/mon-portfolio/' . $imageProjet?>"
+                >
             </div>
           </div>
 

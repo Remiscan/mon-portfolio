@@ -76,7 +76,7 @@
       --unique-name: nav-link-bio;
      ">
     <div class="background-color" style="<?=($start_article !== 'bio') ? 'view-transition-name: couleur-vers-bio;' : ''?>"></div>
-    <h3><?=$translation->get('nav-bio')?></h3>
+    <h3 style="view-transition-name: nav-link-bio-titre;"><?=$translation->get('nav-bio')?></h3>
     <div class="underline" style="view-transition-name: nav-link-bio-underline;"></div>
   </a>
 
@@ -89,7 +89,7 @@
       --unique-name: nav-link-portfolio;
      ">
     <div class="background-color" style="<?=($start_article !== 'portfolio') ? 'view-transition-name: couleur-vers-portfolio;' : ''?>"></div>
-    <h3><?=$translation->get('nav-portfolio')?></h3>
+    <h3 style="view-transition-name: nav-link-portfolio-titre;"><?=$translation->get('nav-portfolio')?></h3>
     <div class="underline" style="view-transition-name: nav-link-portfolio-underline;"></div>
   </a>
 </nav>
