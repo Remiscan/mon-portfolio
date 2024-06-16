@@ -1060,14 +1060,6 @@ body[data-section-actuelle=""] #nav_accueil {
   inherits: false;
 }
 
-@keyframes horizontal-shrink {
-  to { transform: scaleX(0); }
-}
-
-@keyframes horizontal-grow {
-  from { transform: scaleX(0); }
-}
-
 ::view-transition-old(root),
 ::view-transition-new(root) {
   animation: none;

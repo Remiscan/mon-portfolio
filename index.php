@@ -193,6 +193,7 @@
             z-index: 1;
             animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
             animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
+            animation-fill-mode: forwards;
           }
 
           ::view-transition-old(couleur-vers-<?=$section?>) {
@@ -210,8 +211,8 @@
           }
 
           ::view-transition-old(nav-link-<?=$section?>-underline) {
-            animation: horizontal-shrink 150ms var(--easing-decelerate);
-            animation-fill-mode: both;
+            height: 100%;
+            animation: none;
           }
         <?php } else { ?>
           ::view-transition-group(couleur-vers-<?=$section?>) {
@@ -230,13 +231,13 @@
           }
 
           ::view-transition-new(nav-link-<?=$section?>-underline) {
-            animation: horizontal-grow 150ms var(--easing-decelerate);
-            animation-delay: 400ms;
-            animation-fill-mode: both;
+            height: 100%;
+            animation: none;
           }
         <?php } ?>
 
         ::view-transition-group(nav-link-<?=$section?>-underline) {
+          animation-fill-mode: both;
           z-index: 6;
         }
       <?php } ?>
