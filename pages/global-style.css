@@ -312,6 +312,7 @@ header > .background-color {
   background-color: inherit;
   grid-row: bg-start / bg-end;
   grid-column: 1 / -1;
+  view-transition-name: header-background-color;
 }
 
 header > .background {
@@ -1078,8 +1079,22 @@ body[data-section-actuelle=""] #nav_accueil {
     animation-duration: 300ms;
   }
 
-  &::view-transition-group(.couleur) {
+  &::view-transition-group(couleur-vers-) {
     display: none;
+  }
+
+  &::view-transition-old(header-background-color) {
+    animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
+    animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
+    animation-fill-mode: forwards;
+    height: 100vh;
+    z-index: 1;
+  }
+
+  &::view-transition-new(header-background-color) {
+    animation: none;
+    height: 100%;
+    z-index: 2;
   }
 
   &::view-transition-group(main) {
@@ -1091,6 +1106,10 @@ body[data-section-actuelle=""] #nav_accueil {
   &::view-transition-group(*) {
     animation-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
     animation-duration: 400ms;
+  }
+
+  &::view-transition-group(header-background-color) {
+    display: none;
   }
 }
 
