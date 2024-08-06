@@ -17,6 +17,7 @@
     <div class="vraiment-moi">
       <h1 class="nom">Rémi Scandella</h1>
       <h2 class="h3 job"><?=$translation->get('job')?></h2>
+      <div class="when-no-vt"></div>
     </div>
   </div>
 

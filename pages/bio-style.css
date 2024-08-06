@@ -290,6 +290,7 @@
   position: relative;
   margin-bottom: -1px;
   z-index: calc(2 + var(--max-competences) - var(--ligne));
+  --delai: calc(var(--n) * 100ms);
 }
 
 .competence-conteneur.mini {
@@ -307,11 +308,11 @@
   transform-origin: left center;
   transform: scaleX(1) translateZ(0);
   transition: transform var(--competence-anim-bg-duree) cubic-bezier(0.55, 0.055, 0.675, 0.19);
-  transition-delay: calc(
-    var(--view-transition-duration) +
-    var(--view-transition-section-translation-duration) +
-    var(--delai)
-  );
+  transition-delay: var(--delai);
+
+  :active-view-transition & {
+    transform: scaleX(0) translateZ(0);
+  }
 
   @starting-style {
     transform: scaleX(0) translateZ(0);
@@ -337,13 +338,18 @@
   box-sizing: border-box;
   position: relative;
   --transition-delay: calc(
-    var(--view-transition-duration) +
-    var(--view-transition-section-translation-duration) +
     var(--competence-anim-bg-duree) +
-    var(--delai)
+    var(--delai) -
+    .1s
   );
-  transition: opacity var(--competence-anim-texte-duree) ease-out var(--transition-delay),
-              transform var(--competence-anim-texte-duree) ease-out var(--transition-delay);
+  transition:
+    opacity var(--competence-anim-texte-duree) ease-out var(--transition-delay),
+    transform var(--competence-anim-texte-duree) ease-out var(--transition-delay);
+
+  :active-view-transition & {
+    transform: translateX(-1rem);
+    opacity: 0;
+  }
 
   @starting-style {
     transform: translateX(-1rem);

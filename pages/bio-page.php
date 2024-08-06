@@ -57,7 +57,8 @@ function agepro() {
           style="--competence-color:<?=$competence->couleur->improveContrast('white', 80, as: 'background')->hsl()?>;
                  --colonne: <?=$competence->colonne?>;
                  --ligne: <?=$n + 2?>;
-                 --delai: <?=$n * .1?>s">
+                 --n: <?=$n?>;
+      ">
 
         <div class="competence-background"></div>
 

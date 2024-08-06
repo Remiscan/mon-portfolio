@@ -67,8 +67,11 @@
   cursor: pointer;
 }
 
-.projet-conteneur.expandable:hover::before {
-  transform: scale(1.025, 1.05);
+.projet-conteneur.expandable:hover {
+  & > .background-color,
+  &:not(:has(> .background-color))::before {
+    transform: scale(1.025, 1.05);
+  }
 }
 
 .projet-conteneur-enfant {
@@ -117,11 +120,11 @@
   --col: mod(var(--n), var(--columns));
   --row: calc(round(down, var(--n) / var(--columns)));
   --delai: calc(.1s * (var(--row) + var(--col)));
-  transition-delay: calc(
-    var(--view-transition-duration) +
-    var(--view-transition-section-translation-duration) +
-    var(--delai)
-  );
+  transition-delay: calc(.1s * (var(--row) + var(--col)));
+
+  :active-view-transition & {
+    opacity: 0;
+  }
 
   @starting-style {
     opacity: 0;
@@ -150,6 +153,13 @@
   text-align: center;
   margin: auto;
   display: none;
+}
+
+/* Empêche clignotement de la couleur de fond en quittant la section portfolio */
+:active-view-transition:not(:active-view-transition-type(vers-projet)):not(:active-view-transition-type(depuis-projet)) {
+  & .projet-conteneur .background-color {
+    opacity: 0;
+  }
 }
 
 

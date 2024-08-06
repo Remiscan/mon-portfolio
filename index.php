@@ -78,7 +78,7 @@
   //// Liste des fichiers style-*.css critiques ou non
   $styles_critiques = ['global'];
   if ($start_article !== '') $styles_critiques[] = $start_article;
-  if ($start_article === 'projet')  $styles_critiques[] = 'portfolio';
+  if ($start_projet !== '')  $styles_critiques[] = 'projet';
   $styles_non_critiques = array_diff(['bio', 'portfolio', 'projet'], $styles_critiques);
 
   // Détermine la méthode de chargement du CSS critique : 'push' ou 'inline'
@@ -167,86 +167,13 @@
         body[data-projet-actuel="<?=$projet->id?>"] #projet-preview-<?=$projet->id?> {
           opacity: 0;
         }
-      <?php }
-      
-      $viewTransitionTypes = [];
-      if ($isAccueil) $viewTransitionTypes[] = 'vers-accueil';
-      else {
-        $viewTransitionTypes[] = 'vers-page';
-      }
 
-      $sections = ['bio', 'portfolio'];
-
-      // Utile pour détecter de quelle section on vient
-      $section_precedente = $_COOKIE['section-actuelle'] ?? null;
-      setcookie('section-actuelle', $start_article);
-      ?>
-
-      @view-transition {
-        navigation: auto;
-        types: <?=join(', ', $viewTransitionTypes)?>;
-      }
-
-      <?php foreach ($sections as $section) {
-        if ($section !== $start_article) { ?>
-          ::view-transition-group(couleur-vers-<?=$section?>) {
-            z-index: 1;
-            animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
-            animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
-            animation-fill-mode: forwards;
-          }
-
-          ::view-transition-old(couleur-vers-<?=$section?>) {
-            animation: none;
-          }
-
-          <?php if ($start_article === '' || !$section_precedente) { ?>
-            ::view-transition-old(couleur-vers-<?=$section?>) {
-              display: none;
-            }
-          <?php } ?>
-          
-          ::view-transition-new(couleur-vers-<?=$section?>) {
-            display: none;
-          }
-
-          ::view-transition-new(nav-link-<?=$section?>-titre) {
-            opacity: .85;
-          }
-
-          ::view-transition-old(nav-link-<?=$section?>-underline) {
-            height: 100%;
-            animation: none;
-          }
-        <?php } else { ?>
-          ::view-transition-group(couleur-vers-<?=$section?>) {
-            z-index: 2;
-            background: green;
-          }
-
-          ::view-transition-old(couleur-vers-<?=$section?>) {
-            animation: none;
-          }
-
-          ::view-transition-new(couleur-vers-<?=$section?>) {
-            animation: none;
-            width: 100%;
-            height: 100%;
-          }
-
-          ::view-transition-new(nav-link-<?=$section?>-underline) {
-            height: 100%;
-            animation: none;
-          }
-        <?php } ?>
-
-        ::view-transition-group(nav-link-<?=$section?>-underline) {
-          animation-fill-mode: both;
-          z-index: 6;
+        html:not(:has(#view-transition-styles[data-from-projet="<?=$projet->id?>"], #view-transition-styles[data-to-projet="<?=$projet->id?>"])) #projet-preview-<?=$projet->id?> .background-color {
+          opacity: 0;
         }
-      <?php } ?>
+      <?php }
 
-      <?php switch ($start_article) {
+      switch ($start_article) {
         case 'portfolio':
           for ($k = 10; $k > 0; $k--) {
             ?>
@@ -261,7 +188,38 @@
 
           <?php
           break;
-      } ?>
+      }
+      ?>
+    </style>
+
+    <?php
+    $sections = ['bio', 'portfolio'];
+
+    // Utile pour détecter de quelle section on vient
+    $section_precedente = $_COOKIE['section-actuelle'] ?? null;
+    setcookie('section-actuelle', $start_article, path: '/');
+    $projet_precedent = $_COOKIE['projet-actuel'] ?? null;
+    setcookie('projet-actuel', $start_projet, path: '/');
+    
+    $viewTransitionTypes = [];
+    if ($isAccueil) $viewTransitionTypes[] = 'vers-accueil';
+    //else if ($section_precedente === '') $viewTransitionTypes[] = 'depuis-accueil';
+    
+    if ($start_projet) $viewTransitionTypes[] = 'vers-projet';
+    else if ($projet_precedent) $viewTransitionTypes[] = 'depuis-projet';
+    
+    if (!$isAccueil && !$start_projet && !$projet_precedent) $viewTransitionTypes[] = 'vers-page';
+    ?>
+
+    <style
+      id="view-transition-styles"
+      data-view-transition-types="<?=join(' ', $viewTransitionTypes)?>"
+      data-from-projet="<?=$projet_precedent?>"
+      data-to-projet="<?=$start_projet?>"
+      data-from-page="<?=$section_precedente?>"
+      data-to-page="<?$start_article?>"
+    >
+      <?php include __DIR__.'/view-transitions.php'; ?>
     </style>
 
     <link rel="stylesheet" href="/mon-portfolio/style-noscript.css" blocking="render">
@@ -305,9 +263,13 @@
       </article>
     </main>
 
-    <div id="projet" <?=$start_projet ? 'data-current-projet="'.$start_projet.'"' : 'aria-hidden="true" hidden inert'?> style="
-      <?= $projet_couleur ? '--projet-color: '.$projet_couleur.';' : '' ?>
-    ">
+    <div
+      id="projet"
+      <?=$start_projet ? 'data-current-projet="'.$start_projet.'"' : 'aria-hidden="true" hidden inert'?>
+      style="
+        <?= $projet_couleur ? '--projet-color: '.$projet_couleur.';' : '' ?>
+      "
+    >
       <?php include './pages/projet-page.php'; ?>
     </div>
 

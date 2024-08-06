@@ -780,6 +780,7 @@ nav>a>h3 {
   bottom: 0;
   z-index: 0;
   backface-visibility: hidden;
+  view-transition-class: nav-link-underline;
 }
 
 nav > a[aria-current="page"] .underline {
@@ -1078,44 +1079,6 @@ body[data-section-actuelle=""] #nav_accueil {
   animation: none;
 }
 
-:active-view-transition-type(vers-accueil) {
-  --view-transition-duration: 300ms;
-  --view-transition-timing-function: var(--easing-standard);
-  --view-transition-section-translation-duration: 0ms;
-
-  &::view-transition-group(couleur-vers-) {
-    display: none;
-  }
-
-  &::view-transition-old(header-background-color) {
-    animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
-    animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
-    animation-fill-mode: forwards;
-    height: 100vh;
-    z-index: 1;
-  }
-
-  &::view-transition-new(header-background-color) {
-    animation: none;
-    height: 100%;
-    z-index: 2;
-  }
-
-  &::view-transition-group(main) {
-    display: none;
-  }
-}
-
-:active-view-transition-type(vers-page) {
-  --view-transition-duration: 400ms;
-  --view-transition-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
-  --view-transition-section-translation-duration: 150ms;
-
-  &::view-transition-group(header-background-color) {
-    display: none;
-  }
-}
-
 &::view-transition-group(*) {
   animation-timing-function: var(--view-transition-timing-function);
   animation-duration: var(--view-transition-duration);
@@ -1165,21 +1128,6 @@ body[data-section-actuelle=""] #nav_accueil {
   animation: none;
 }
 
-&::view-transition-group(main) {
-  animation: none;
-  z-index: 7;
-}
-
-&::view-transition-old(main) {
-  display: none;
-}
-
-&::view-transition-new(main) {
-  animation: article-appears var(--view-transition-section-translation-duration) var(--easing-decelerate);
-  animation-delay: var(--view-transition-duration);
-  animation-fill-mode: backwards;
-}
-
 /*::view-transition-group(footer) {
   animation: none;
   z-index: 7;
@@ -1191,6 +1139,109 @@ body[data-section-actuelle=""] #nav_accueil {
 
 ::view-transition-group(.bouton-langage) {
   z-index: 8;
+}
+
+:active-view-transition-type(vers-accueil) {
+  --view-transition-duration: 300ms;
+  --view-transition-timing-function: var(--easing-standard);
+  --view-transition-section-translation-duration: 0ms;
+
+  &::view-transition-group(couleur-vers-) {
+    display: none;
+  }
+
+  &::view-transition-old(header-background-color) {
+    animation-direction: reverse; /* pour que l'élément reste grand à la fin de son animation, plutôt que de rétrécir */
+    animation-delay: -1s; /* pour que l'animation soit déjà "finie" dès son début, pour que la couleur prenne tout l'écran tout du long */
+    animation-fill-mode: forwards;
+    height: 100vh;
+    z-index: 1;
+  }
+
+  &::view-transition-new(header-background-color) {
+    animation: none;
+    height: 100%;
+    z-index: 2;
+  }
+
+  &::view-transition-group(.nav-link-underline) {
+    display: none;
+  }
+
+  &::view-transition-group(main) {
+    display: none;
+  }
+}
+
+:active-view-transition-type(vers-page) {
+  --view-transition-duration: 400ms;
+  --view-transition-timing-function: cubic-bezier(0.2, 0.45, 0.3, 1);
+  --view-transition-section-translation-duration: 150ms;
+
+  &::view-transition-group(header-background-color) {
+    display: none;
+  }
+
+  &::view-transition-group(main) {
+    animation: none;
+    z-index: 7;
+  }
+  
+  &::view-transition-old(main) {
+    display: none;
+  }
+
+  &::view-transition-new(main) {
+    animation: article-appears var(--view-transition-section-translation-duration) var(--easing-decelerate);
+    animation-delay: var(--view-transition-duration);
+    animation-fill-mode: backwards;
+  }
+}
+
+:active-view-transition-type(vers-projet) {
+  &::view-transition-group(projet-obfuscator) {
+    z-index: 10;
+  }
+
+  &::view-transition-group(.projet-contenu) {
+    z-index: 11;
+  }
+
+  &::view-transition-old(.projet-contenu) {
+    animation: none;
+    width: 100%;
+    height: 100%;
+  }
+
+  &::view-transition-new(.projet-contenu) {
+    animation: none;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+:active-view-transition-type(vers-projet),
+:active-view-transition-type(depuis-projet) {
+  &::view-transition-group(main) {
+    z-index: 3;
+  }
+
+  &::view-transition-old(main) {
+    animation-direction: reverse;
+    animation-delay: -1s;
+    animation-fill-mode: both;
+  }
+
+  &::view-transition-new(main) {
+    display: none;
+  }
+}
+
+:not(:active-view-transition-type(vers-projet)),
+:not(:active-view-transition-type(depuis-projet)) {
+  &::view-transition-group(.projet-contenu) {
+    display: none;
+  }
 }
 
 

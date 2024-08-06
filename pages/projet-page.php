@@ -9,19 +9,24 @@
 
 <?php
 foreach($projets as $n => $projet) {
+  if ($projet->id !== $start_projet) continue;
   $idProjet = $projet->id;
   ?>
 
   <article id="projet_<?=$idProjet?>" <?=$start_projet === $idProjet ? '' : 'aria-hidden="true" hidden'?> style="
     --projet-color: <?=$projet->couleur->hsl()?>;
   ">
-    <div class="projet-contenu <?=$start_projet === $idProjet ? 'on' : ''?>">
+    <div
+      class="projet-contenu <?=$start_projet === $idProjet ? 'on' : ''?>"
+      style="view-transition-name: conteneur-projet-<?=$projet->id?>;"
+    >
       <a class="projet-close" href="/portfolio"
+         style="--k: 0;"
          aria-label="<?=$translation->get('projet-bouton-fermer')?>">
         <i class="svg"><svg viewBox="0 0 24 24"><use href="#close" /></svg></i>
       </a>
 
-      <div class="projet-details-top">
+      <div class="projet-details-top" style="--k: 0;">
         <div class="projet-details-icone">
           <?php
           $iconeProjet = "/" . ($projet->id === "colori" ? "colori/demo" : $projet->id) . "/icons/icon.svg";
@@ -42,7 +47,7 @@ foreach($projets as $n => $projet) {
         <?php } ?>
       </div>
 
-      <div class="projet-details-images">
+      <div class="projet-details-images" style="--k: 1;">
         <?php /*
           Image captured on my phone at 1075 * 2393,
           then converted to oxiPNG with Squoosh to preserve colors,
@@ -69,14 +74,14 @@ foreach($projets as $n => $projet) {
         </div>
       </div>
 
-      <p class="projet-details-longue_description ignore-scrollbar h5"><?=$translation->get("projet-$idProjet-longue-description")?></p>
+      <p class="projet-details-longue_description ignore-scrollbar h5" style="--k: 2;"><?=$translation->get("projet-$idProjet-longue-description")?></p>
 
-      <div class="projet-details-ligne ignore-scrollbar">
+      <div class="projet-details-ligne ignore-scrollbar" style="--k: 3;">
         <div class="ligne"></div>
         <span><?=$translation->get('projet-etude-details')?></span>
       </div>
 
-      <div class="projet-details ignore-scrollbar">
+      <div class="projet-details ignore-scrollbar" style="--k: 4;">
         <div class="projet-details-pourquoi h5">
           <?php
           $lienEtude = dirname(__DIR__, 1) . "/projets/$idProjet/etude-$lang.htm";

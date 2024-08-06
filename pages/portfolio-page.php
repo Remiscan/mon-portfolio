@@ -32,6 +32,10 @@
          data-version-image-pc="<?=version([__DIR__.'/../projets/'.$projet->id.'/preview-pc.webp'])?>"
       >
 
+        <div
+          class="background-color"
+          style="<?=($start_projet !== $projet->id) ? 'view-transition-name: conteneur-projet-'.$projet->id.';' : ''?>"
+        ></div>
         <div class="projet-conteneur-enfant">
           <div class="projet-image">
             <div class="projet-actual-image"
