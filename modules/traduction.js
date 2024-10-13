@@ -1,4 +1,4 @@
-import strings from 'strings' assert { type: 'json' };
+import strings from 'strings' with { type: 'json' };
 
 
 
